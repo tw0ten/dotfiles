@@ -1,0 +1,3 @@
+set nu
+set ls=2
+syntax on

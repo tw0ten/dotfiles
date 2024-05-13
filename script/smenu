@@ -1,0 +1,5 @@
+#!/bin/bash
+
+IN=$( ls "$DOTARCH/script/bash" | tr " " "\n" | dmenu -p "~" )
+
+sh "$DOTARCH/script/bash/$IN"

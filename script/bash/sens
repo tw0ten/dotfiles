@@ -1,0 +1,11 @@
+#!/bin/bash
+
+function getsens(){
+	L=$( xinput list-props 'Glorious Model O' | grep 'libinput Accel Speed (' |  awk '{split($0,a,":"); print a[2]}' )
+	echo $L
+}
+
+read SENS <<< $( dmenu -p "sens: $(getsens)" & )
+
+xinput set-prop 'Glorious Model O' 'libinput Accel Speed' $SENS
+notify-send "sensitivity" "set to $(getsens)"

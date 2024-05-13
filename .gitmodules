@@ -1,0 +1,12 @@
+[submodule "program/dwm"]
+	path = program/dwm
+	url = https://github.com/tw0ten/dwm
+[submodule "program/st"]
+	path = program/st
+	url = https://github.com/tw0ten/st
+[submodule "program/dmenu"]
+	path = program/dmenu
+	url = https://github.com/tw0ten/dmenu
+[submodule "program/systat"]
+	path = program/systat
+	url = https://github.com/tw0ten/systat

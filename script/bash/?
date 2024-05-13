@@ -1,0 +1,9 @@
+#!/bin/bash
+IN=$(echo "~" | dmenu -p "?")
+
+if [[ "$IN" = "~" ]];
+then
+	smenu
+	exit
+fi
+firefox --search "$IN"

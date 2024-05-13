@@ -1,0 +1,8 @@
+#!/bin/bash
+
+read STATE <<< $( echo -e "confirm\ncancel" | dmenu -p "$1" -ps 1 -noif )
+
+case $STATE in
+	"confirm") exec $2 ;;
+	*) ;;
+esac

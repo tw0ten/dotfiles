@@ -1,0 +1,52 @@
+#!/bin/bash
+
+SP_DEST="org.mpris.MediaPlayer2.spotify"
+SP_PATH="/org/mpris/MediaPlayer2"
+SP_MEMB="org.mpris.MediaPlayer2.Player"
+DB_INTF="org.freedesktop.DBus.Properties"
+
+function dbus {
+	dbus-send --print-reply --dest=$SP_DEST $SP_PATH $SP_MEMB.$1 ${*:2} > /dev/null
+}
+function qdbusget {
+	qdbus6 $SP_DEST $SP_PATH $DB_INTF.Get $SP_MEMB $1
+}
+function qdbusset {
+	qdbus6 $SP_DEST $SP_PATH $DB_INTF.Set $SP_MEMB $1 $2
+}
+
+function nowplaying {
+	OUT=$( dbus-send --print-reply --session --dest=$SP_DEST $SP_PATH $DB_INTF.Get string:$SP_MEMB string:Metadata | grep -A 1 xesam:title | grep -v xesam:title )
+	OUT="${OUT//[$'\t\r\n']}"
+	SONG=$( echo $OUT | sed 's/variant string//g')
+	echo $SONG
+}
+
+function reopen {
+	sh "$DESKENV/scripts/bash/spotify"
+}
+
+PROMPTS="󰐎"
+PBSTATUS=$( qdbusget 'PlaybackStatus' )
+
+if [ "$PBSTATUS" = "Playing" ];
+then
+	PROMPTS="󰒮\n\n󰒭"
+fi
+
+if [ "$PBSTATUS" = "Paused" ];
+then
+	PROMPTS="󰒮\n\n󰒭"
+fi
+
+NOWPLAYING=$(nowplaying)
+read STATUS <<< $( echo -e $PROMPTS | dmenu -p "󰓇 $NOWPLAYING" -ps 1 -c -noif -sb '#1DB954' -nb '#191414' -sf '#000000' )
+
+case $STATUS in
+	"󰒮") dbus "Previous"; sleep 0.1; reopen ;;
+	"󰒭") dbus "Next"; while [ "$NOWPLAYING" = "$(nowplaying)" ]; do sleep 0.1; done; reopen ;;
+	"") dbus "Pause" ;;
+	"") dbus "Play" ;;
+	"󰐎") spotify ;;
+	*)  exit 0 ;;
+esac

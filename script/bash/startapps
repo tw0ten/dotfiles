@@ -1,0 +1,6 @@
+#!/bin/bash
+nice -5 firefox &
+nice -5 discord &
+nice -5 telegram-desktop &
+nice -10 spotify &
+#steam &

@@ -1,0 +1,8 @@
+#!/bin/bash
+cd $DOTARCH/temp
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install tendo
+python -m pip install pypresence
+python $DOTARCH/script/drpc/drpc.py > /dev/null

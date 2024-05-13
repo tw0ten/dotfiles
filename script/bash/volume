@@ -1,0 +1,12 @@
+#!/bin/bash
+
+function getvol {
+	amixer sget Master | awk -F"[][]" '/Left:/ { print $2; }'
+}
+
+read VOL <<< $( dmenu -p "volume: $(getvol)" & )
+
+amixer sset Master $VOL%
+
+notify-send "volume" "set to $(getvol)"
+pkill -RTMIN+2 dwmblocks

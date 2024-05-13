@@ -1,0 +1,14 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+STARTDIR=$(pwd)
+cd ~
+export DOTARCH="$(pwd)/dotarch"
+cd $STARTDIR
+source "$DOTARCH/config/bash/bash"

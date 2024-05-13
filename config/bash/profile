@@ -1,0 +1,24 @@
+#
+# ~/.bash_profile
+#
+
+[[ -f ~/.bashrc ]] && . ~/.bashrc
+
+neofetch
+pacman -V
+lsblk
+ls -la /
+
+cd ~
+
+LOOP="true"
+while [[ $LOOP = "true" ]]; do
+	echo -e "\n$cyan x to startx\n$yellow y to update\n$grey c to cancel\n$reset"
+	read -s -n1 opt
+	case $opt in
+		"y") yay || sudo pacman -Syu ;;
+		"x") LOOP="false"; startx ;;
+		"c") LOOP="false" ;;
+		*) ;;
+	esac
+done

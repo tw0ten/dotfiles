@@ -1,0 +1,6 @@
+#!/bin/bash
+
+IN=$( echo -e "$(xkb-switch -l)" | dmenu -p "keyboard" )
+
+xkb-switch -s $IN
+pkill -RTMIN+3 dwmblocks

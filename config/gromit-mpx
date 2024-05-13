@@ -1,0 +1,16 @@
+# Default gromit-mpx configuration 
+# taken from  Totem's telestrator mode config
+# added default entries
+
+# Uncomment to set Hot key and/or Undo key to a custom value. Note that you can only specify single keysyms, not key combos.
+HOTKEY = "F9";
+UNDOKEY = "F8";
+
+"pen0" = PEN (size=5 color="rgba(0, 0, 0, 0.9)");
+"pen1" = "pen0" (color="rgba(255, 255, 255, 0.9)");
+"eraser" = ERASER (size = 75);
+									
+"default" = "pen0";
+"default"[Button3] = "pen1";
+"default"[SHIFT] = "eraser";
+

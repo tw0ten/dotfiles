@@ -1,0 +1,84 @@
+#!/bin/bash
+cd $(dirname $0)
+
+function info(){
+	echo "====="
+	echo "dotarch init: $1"
+	echo "====="
+}
+
+PMPKGS="blender obs-studio htop code networkmanager vlc qbittorrent bc bash-completion flameshot qt6-tools alsa-utils libreoffice-still npm nodejs fortune-mod cowsay btop cmatrix bluez bluez-utils gimp lolcat telegram-desktop feh noto-fonts-cjk noto-fonts-emoji ttf-nerd-fonts-symbols-mono ttf-jetbrains-mono libxinerama libxft nvidia nvidia-utils nvidia-settings lib32-nvidia-utils xorg xorg-apps xorg-server xorg-xinit xclip firefox neofetch vim dunst picom discord python jre-openjdk steam"
+URPKGS="mkinitcpio-firmware bonsai.sh-git joshuto bemoji spotify github-desktop-bin"
+
+info "working in $(pwd)"
+
+sudo -v
+
+info "installing aur helper"
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
+cd ..
+
+sudo pacman -Syu
+info "installing packages: (PACMAN: [$PMPKGS] AUR: [$URPKGS])"
+sudo pacman -S $PMPKGS
+echo "$URPKGS" | tr " " "\n" | yay -S -
+
+info "making programs"
+cd program
+
+cd dwm
+sudo make clean install
+cd ../slstatus
+sudo make clean install
+cd ../dwmblocks
+sudo make clean install
+cd ../dmenu
+sudo make clean install
+cd ../st
+sudo make clean install
+cd ../slock
+sudo groupadd nogroup
+sudo make clean install
+cd ../systat
+cargo build -r
+sudo cp target/release/systat /bin/
+cd ../..
+
+info "copying config files"
+cd config
+
+function cpconfig(){
+	sudo cp $1 $2
+	echo "set config for $1"
+}
+
+cpconfig dunst /etc/dunst/dunstrc
+cpconfig grub /etc/default/grub
+cpconfig issue /etc/issue
+cpconfig picom /etc/xdg/picom.conf
+cpconfig bash/rc ~/.bashrc
+cpconfig bash/profile ~/.bash_profile
+cpconfig neofetch ~/.config/neofetch/config.conf
+cpconfig vimrc ~/.vimrc
+cpconfig xrc ~/.xinitrc
+cpconfig pacman /etc/pacman.conf
+cpconfig nobeep /etc/modprobe.d/nobeep.conf
+cpconfig btop ~/.config/btop/btop.conf
+cpconfig flameshot ~/.config/flameshot/flameshot.ini
+cpconfig joshuto /usr/share/applications/joshuto.desktop
+
+cd ..
+
+sudo cp etc/cat.png /boot/grub/bg.png
+
+info "copying to /bin"
+sudo cp script/dconfirm /bin/
+sudo cp script/smenu /bin/
+sudo cp script/dspotify /bin/
+
+info "done"
+
+neofetch
+bash
