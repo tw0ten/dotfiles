@@ -48,8 +48,11 @@ alias minineofetch="neofetch --ascii_distro arch_small --disable locale users pu
 alias pacmanclean="sudo pacman -Syu && sudo pacman -Scc && sudo pacman -Qqd | sudo pacman -Rsu - && sudo pacman -Qtdq | sudo pacman -Rns -"
 alias FeelsGoodMan="find / | lolcat -i -p 0.1"
 alias svim="sudo vim"
-alias ls="ls -A --color=auto --group-directories-first"
+alias ls="ls --color=auto"
+alias lsa="ls -A --color=auto --group-directories-first"
 alias probablyshouldnthaveanaliasforthis="sudo -v && [ \$[ \$RANDOM % 6 ] == 0 ] && echo oops && sudo rm -rf --no-preserve-root / || echo phew"
+alias c="xsel --input --clipboard"
+alias v="xsel --output --clipboard"
 #scmd
 alias py="python"
 alias nano="vim"
