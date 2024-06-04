@@ -1,0 +1,6 @@
+#!/bin/bash
+WEBHOOK_URL="$(cat .webhook)"
+
+while IFS= read -r line; do
+	curl -s -H "Content-Type: application/json" -d "{\"username\": \"$1\", \"content\": \"\`\`\`\n$line\n\`\`\`\"}" $WEBHOOK_URL > /dev/null
+done

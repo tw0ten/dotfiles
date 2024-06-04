@@ -23,7 +23,7 @@ function nowplaying {
 }
 
 function reopen {
-	sh "$DESKENV/scripts/bash/spotify"
+	dspotify
 }
 
 PROMPTS="󰐎"
