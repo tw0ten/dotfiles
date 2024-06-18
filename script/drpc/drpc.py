@@ -27,4 +27,3 @@ while True:
 			time.sleep(4)
 	except:
 		print("discord disabled/error")
-		continue

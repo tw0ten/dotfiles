@@ -6,4 +6,6 @@ systat &
 picom &
 dunst &
 xbacklight -set 75 -time 0 -steps 1
+gromit-mpx &
+flameshot &
 exec dwm
