@@ -7,7 +7,7 @@ function info(){
 	echo "====="
 }
 
-PMPKGS="xsel blender obs-studio htop code networkmanager vlc qbittorrent bc bash-completion flameshot qt6-tools alsa-utils libreoffice-still npm nodejs fortune-mod cowsay btop cmatrix bluez bluez-utils gimp lolcat telegram-desktop feh noto-fonts-cjk noto-fonts-emoji ttf-nerd-fonts-symbols-mono ttf-jetbrains-mono libxinerama libxft nvidia nvidia-utils nvidia-settings lib32-nvidia-utils xorg xorg-apps xorg-server xorg-xinit xclip firefox neofetch vim dunst picom discord python jre-openjdk steam"
+PMPKGS="xdotool xsel blender obs-studio htop code networkmanager vlc qbittorrent bc bash-completion flameshot qt6-tools alsa-utils libreoffice-still npm nodejs fortune-mod cowsay btop cmatrix bluez bluez-utils gimp lolcat telegram-desktop feh noto-fonts-cjk noto-fonts-emoji ttf-nerd-fonts-symbols-mono ttf-jetbrains-mono libxinerama libxft nvidia nvidia-utils nvidia-settings lib32-nvidia-utils xorg xorg-apps xorg-server xorg-xinit xclip firefox neofetch vim dunst picom discord python jre-openjdk steam"
 URPKGS="mkinitcpio-firmware bonsai.sh-git joshuto bemoji spotify github-desktop-bin"
 
 info "working in $(pwd)"
