@@ -31,4 +31,4 @@ done
 
 wait
 dunstify -r $ID "brightness" "set to $(getbr)"
-pkill -RTMIN+1 dwmblocks
+pkill -f systat-subprocess-2
