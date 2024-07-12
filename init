@@ -15,12 +15,12 @@ info "working in $(pwd)"
 sudo -v
 
 mkdir temp
-
+cd temp
 info "installing aur helper"
 git clone https://aur.archlinux.org/paru.git
 cd paru
 makepkg -si
-cd ..
+cd ../..
 
 sudo pacman -Syu
 info "installing packages: (PACMAN: [$PMPKGS] AUR: [$URPKGS])"
@@ -70,6 +70,7 @@ cpconfig nobeep /etc/modprobe.d/nobeep.conf
 cpconfig btop ~/.config/btop/btop.conf
 cpconfig flameshot ~/.config/flameshot/flameshot.ini
 cpconfig joshuto /usr/share/applications/joshuto.desktop
+cpconfig paru /etc/paru.conf
 
 cd ..
 
