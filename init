@@ -1,33 +1,22 @@
 #!/bin/bash
 cd $(dirname $0)
+mkdir temp 2> /dev/null
 
-function info(){
-	echo "====="
-	echo "dotarch init: $1"
-	echo "====="
-}
+sudo paman -Syu
+sudo pacman -S base-devel
+sudo pacman -S git neovim bash-completion
+sudo pacman -S vlc qbittorrent libreoffice-still gimp firefox
+sudo pacman -S nvidia nvidia-utils nvidia-settings lib32-nvidia-utils xorg xorg-apps xorg-server xorg-xinit alsa-utils
+sudo pacman -S blender obs-studio xdotool xsel obs-studio htop code networkmanager bc flameshot qt6-tools fortune-mod cowsay btop cmatrix bluez bluez-utils lolcat telegram-desktop feh noto-fonts-cjk noto-fonts-emoji ttf-nerd-fonts-symbols-mono ttf-jetbrains-mono libxinerama libxft xclip neofetch dunst picom discord python jdk-openjdk steam
 
-PMPKGS="base-devel xdotool xsel blender obs-studio htop code networkmanager vlc qbittorrent bc bash-completion flameshot qt6-tools alsa-utils libreoffice-still npm nodejs fortune-mod cowsay btop cmatrix bluez bluez-utils gimp lolcat telegram-desktop feh noto-fonts-cjk noto-fonts-emoji ttf-nerd-fonts-symbols-mono ttf-jetbrains-mono libxinerama libxft nvidia nvidia-utils nvidia-settings lib32-nvidia-utils xorg xorg-apps xorg-server xorg-xinit xclip firefox neofetch vim dunst picom discord python jre-openjdk steam"
-URPKGS="mkinitcpio-firmware bonsai.sh-git joshuto bemoji spotify github-desktop-bin"
-
-info "working in $(pwd)"
-
-sudo -v
-
-mkdir temp
 cd temp
-info "installing aur helper"
 git clone https://aur.archlinux.org/paru.git
 cd paru
 makepkg -si
 cd ../..
 
-sudo pacman -Syu
-info "installing packages: (PACMAN: [$PMPKGS] AUR: [$URPKGS])"
-sudo pacman -S $PMPKGS
-echo "$URPKGS" | tr " " "\n" | paru --aur -S -
+echo "mkinitcpio-firmware bonsai.sh-git joshuto bemoji spotify github-desktop-bin" | tr " " "\n" | paru --aur -S -
 
-info "making programs"
 cd program
 
 cd dwm
@@ -44,44 +33,35 @@ cd ../slock
 sudo groupadd nogroup
 sudo make clean install
 cd ../systat
-cargo build -r
-sudo cp target/release/systat /bin/
+./build
 cd ../..
 
-info "copying config files"
 cd config
 
-function cpconfig(){
-	sudo cp $1 $2
-	echo "set config for $1"
-}
-
-cpconfig dunst /etc/dunst/dunstrc
-cpconfig grub /etc/default/grub
-cpconfig issue /etc/issue
-cpconfig picom /etc/xdg/picom.conf
-cpconfig bash/rc ~/.bashrc
-cpconfig bash/profile ~/.bash_profile
-cpconfig neofetch ~/.config/neofetch/config.conf
-cpconfig vimrc ~/.vimrc
-cpconfig xrc ~/.xinitrc
-cpconfig pacman /etc/pacman.conf
-cpconfig nobeep /etc/modprobe.d/nobeep.conf
-cpconfig btop ~/.config/btop/btop.conf
-cpconfig flameshot ~/.config/flameshot/flameshot.ini
-cpconfig joshuto /usr/share/applications/joshuto.desktop
-cpconfig paru /etc/paru.conf
+sudo cp dunst /etc/dunst/dunstrc
+sudo cp grub /etc/default/grub
+sudo cp issue /etc/issue
+sudo cp picom /etc/xdg/picom.conf
+sudo cp bash/rc ~/.bashrc
+sudo cp bash/profile ~/.bash_profile
+sudo cp neofetch ~/.config/neofetch/config.conf
+sudo cp xrc ~/.xinitrc
+sudo cp pacman /etc/pacman.conf
+sudo cp nobeep /etc/modprobe.d/nobeep.conf
+sudo cp btop ~/.config/btop/btop.conf
+sudo cp flameshot ~/.config/flameshot/flameshot.ini
+sudo cp joshuto /usr/share/applications/joshuto.desktop
+sudo cp paru /etc/paru.conf
+sudo cp -r nvim ~/.config
 
 cd ..
 
 sudo cp etc/cat.png /boot/grub/bg.png
 
-info "copying to /bin"
-sudo cp script/dconfirm /bin/
-sudo cp script/smenu /bin/
-sudo cp script/dspotify /bin/
-
-info "done"
+sudo cp script/dconfirm /bin
+sudo cp script/smenu /bin
+sudo cp script/dspotify /bin
 
 neofetch
 bash
+

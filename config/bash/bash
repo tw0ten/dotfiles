@@ -1,8 +1,5 @@
 #!/bin/bash
 
-
-##util
-#color
 export normal="0"
 export bold="1"
 export underline="4"
@@ -17,30 +14,28 @@ export cyan="\033[1;36m"
 export grey="\033[1;37m"
 export reset="\033[m"
 
-function randcol {
+randcol() {
 	echo $(echo -e "$red\n$green\n$yellow\n$blue\n$purple\n$cyan\n$grey\n$reset" | shuf -n1)
 }
 
-function randcow {
+randcow() {
 	echo $(cowsay -l | grep "/" -v | tr "\n" " " | tr " " "\n" | shuf -n1)
 }
 
-##SUDO
 export SUDO_PROMPT=`echo -e "[${cyan}sudo$reset] password for$cyan %p$reset #>"`
-
-##PS1
-#export PS1="\u\[$cyan\]@\[$reset\]\h \[$cyan\]\w\[$reset\]]\n$(tty)-\[$cyan\]$\[$reset\]>"
+export PS1="\u\[$cyan\]@\[$reset\]\h \[$cyan\]\w\[$reset\]]\n$(tty)-\[$cyan\]$\[$reset\]>"
 export PS1="\[$reset\]\u\[$cyan\]@\[$reset\]\h \[$cyan\]\w\[$reset\]\[$cyan\]$\[$reset\]>"
+export HISTTIMEFORMAT=`echo -e "%F %T $cyan$>$reset"`
+export HISTFILESIZE=69420
+export HISTSIZE=69420
+export GIT_EDITOR=nvim
 
-##alias
-##sudo !!
 alias fuck='sudo $(history -p \!\!)'
 alias kurwa='sudo $(history -p \!\!)'
 alias fitta='sudo $(history -p \!\!)'
 alias perkele='sudo $(history -p \!\!)'
 alias scheiße='sudo $(history -p \!\!)'
 alias ,kznm='sudo $(history -p \!\!)'
-#mcmd
 alias fixkeyring="dbus-update-activation-environment --all"
 alias mhm='echo -e "$(fortune | cowsay -n -f $(randcow))" | lolcat'
 alias slmake="sudo make clean install"
@@ -52,13 +47,8 @@ alias lsa="ls -A --color=auto --group-directories-first"
 alias probablyshouldnthaveanaliasforthis="sudo -v && [ \$[ \$RANDOM % 6 ] == 0 ] && echo oops && sudo rm -rf --no-preserve-root / || echo phew"
 alias c="xsel --input --clipboard"
 alias v="xsel --output --clipboard"
-#scmd
 alias py="python"
-alias nano="vim"
-
-##history
-export HISTFILESIZE=69420
-export HISTSIZE=69420
-export HISTTIMEFORMAT=`echo -e "%F %T $cyan$>$reset"`
+alias nano="nvim"
+alias vim="nvim"
 
 minineofetch

@@ -1,6 +1,4 @@
-#
-# ~/.bash_profile
-#
+#!/bin/bash
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
