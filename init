@@ -38,12 +38,12 @@ cd ../..
 
 cd config
 
+sudo cp bash/rc ~/.bashrc
+sudo cp bash/profile ~/.bash_profile
 sudo cp dunst /etc/dunst/dunstrc
 sudo cp grub /etc/default/grub
 sudo cp issue /etc/issue
 sudo cp picom /etc/xdg/picom.conf
-sudo cp bash/rc ~/.bashrc
-sudo cp bash/profile ~/.bash_profile
 sudo cp neofetch ~/.config/neofetch/config.conf
 sudo cp xrc ~/.xinitrc
 sudo cp pacman /etc/pacman.conf
@@ -62,6 +62,4 @@ sudo cp script/dconfirm /bin
 sudo cp script/smenu /bin
 sudo cp script/dspotify /bin
 
-neofetch
 bash
-
