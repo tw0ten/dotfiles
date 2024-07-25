@@ -18,7 +18,6 @@ cd ../..
 echo "mkinitcpio-firmware bonsai.sh-git joshuto bemoji spotify github-desktop-bin" | tr " " "\n" | paru --aur -S -
 
 cd program
-
 cd dwm
 sudo make clean install
 cd ../slstatus
@@ -34,10 +33,10 @@ sudo groupadd nogroup
 sudo make clean install
 cd ../systat
 ./build
-cd ../..
+cd ../
+cd ..
 
 cd config
-
 sudo cp bash/rc ~/.bashrc
 sudo cp bash/profile ~/.bash_profile
 sudo cp dunst /etc/dunst/dunstrc
@@ -53,7 +52,6 @@ sudo cp flameshot ~/.config/flameshot/flameshot.ini
 sudo cp joshuto /usr/share/applications/joshuto.desktop
 sudo cp paru /etc/paru.conf
 sudo cp -r nvim ~/.config
-
 cd ..
 
 sudo cp etc/cat.png /boot/grub/bg.png

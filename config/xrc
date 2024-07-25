@@ -1,10 +1,10 @@
 #!/bin/bash
-xset m 1/1 1
-java -jar "$DOTARCH/script/fehfetch.jar" --path $DOTARCH/temp &
-sh $DOTARCH/script/drpc/run &
+java -jar "$DOTARCH/script/fehfetch.jar" --path "$DOTARCH/temp" &
+bash "$DOTARCH/script/drpc/run" &
 systat &
 picom &
 dunst &
-xbacklight -set 75 -time 0 -steps 1
 flameshot &
+xbacklight -set 75 -time 0 -steps 1
+xset m 1/1 1
 exec dwm

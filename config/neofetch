@@ -22,16 +22,16 @@ print_info() {
     info "cpu" cpu
     info "gpu" gpu
     info "memory" memory
-    info "gpu driver" gpu_driver  # Linux/macOS only
+    info "gpu driver" gpu_driver
     info "cpu usage" cpu_usage
     info "disk" disk
     info "bat" battery
     info "font" font
-    info "song" song
+    #info "song" song
     [[ "$player" ]] && prin "music player" "$player"
     #info "local ip" local_ip
     info "users" users
-    info "locale" locale  # This only works on glibc systems.
+    info "locale" locale
     wait
     info cols
 }

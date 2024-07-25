@@ -25,13 +25,14 @@ randcow() {
 	echo $(cowsay -l | grep "/" -v | tr "\n" " " | tr " " "\n" | shuf -n1)
 }
 
-export SUDO_PROMPT=`echo -e "[${cyan}sudo$reset] password for$cyan %p$reset #>"`
-export PS1="\u\[$cyan\]@\[$reset\]\h \[$cyan\]\w\[$reset\]]\n$(tty)-\[$cyan\]$\[$reset\]>"
+export SUDO_PROMPT=`echo -e "[${cyan}sudo$reset] password for $cyan%p$reset #>"`
 export PS1="\[$reset\]\u\[$cyan\]@\[$reset\]\h \[$cyan\]\w\[$reset\]\[$cyan\]$\[$reset\]>"
 [[ "$(id -u)" -eq 0 ]] && export PS1="\[$reset\]\h \[$cyan\]\w\[$reset\]\[$cyan\]#\[$reset\]>"
-export HISTTIMEFORMAT=`echo -e "%F %T $cyan$>$reset"`
-export HISTFILESIZE=69420
-export HISTSIZE=69420
+export HISTTIMEFORMAT=`echo -e "[%Y|%w.%d/%m|%H:%M:%S] $cyan\\$$reset>"`
+export HISTCONTROL=ignorespace:ignoredups
+export HISTIGNORE=ls
+export HISTFILESIZE=-1
+export HISTSIZE=-1
 export GIT_EDITOR=nvim
 
 alias fuck='sudo $(history -p \!\!)'
