@@ -37,21 +37,21 @@ cd ../
 cd ..
 
 cd config
-sudo cp bash/rc ~/.bashrc
-sudo cp bash/profile ~/.bash_profile
+ln -sf $(pwd)/bash/rc ~/.bashrc
+ln -sf $(pwd)/bash/profile ~/.bash_profile
+ln -sf $(pwd)/xrc ~/.xinitrc
+ln -sf $(pwd)/nvim ~/.config/nvim
 sudo cp dunst /etc/dunst/dunstrc
 sudo cp grub /etc/default/grub
 sudo cp issue /etc/issue
 sudo cp picom /etc/xdg/picom.conf
 sudo cp neofetch ~/.config/neofetch/config.conf
-sudo cp xrc ~/.xinitrc
 sudo cp pacman /etc/pacman.conf
 sudo cp nobeep /etc/modprobe.d/nobeep.conf
 sudo cp btop ~/.config/btop/btop.conf
 sudo cp flameshot ~/.config/flameshot/flameshot.ini
 sudo cp joshuto /usr/share/applications/joshuto.desktop
 sudo cp paru /etc/paru.conf
-sudo cp -r nvim ~/.config
 cd ..
 
 sudo cp etc/cat.png /boot/grub/bg.png

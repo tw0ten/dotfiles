@@ -1,5 +1,0 @@
-#!/bin/bash
-
-pkill -f picom
-sleep 1
-picom -b
