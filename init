@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 cd $(dirname $0)
 mkdir temp 2> /dev/null
 
@@ -7,7 +7,7 @@ sudo pacman -S base-devel
 sudo pacman -S git neovim bash-completion
 sudo pacman -S vlc qbittorrent libreoffice-still gimp firefox
 sudo pacman -S nvidia nvidia-utils nvidia-settings lib32-nvidia-utils xorg xorg-apps xorg-server xorg-xinit alsa-utils
-sudo pacman -S blender obs-studio xdotool xsel obs-studio htop code networkmanager bc flameshot qt6-tools fortune-mod cowsay btop cmatrix bluez bluez-utils lolcat telegram-desktop feh noto-fonts-cjk noto-fonts-emoji ttf-nerd-fonts-symbols-mono ttf-jetbrains-mono libxinerama libxft xclip neofetch dunst picom discord python jdk-openjdk steam
+sudo pacman -S blender obs-studio xdotool xsel obs-studio htop code networkmanager bc flameshot qt6-tools fortune-mod cowsay btop cmatrix bluez bluez-utils lolcat telegram-desktop feh libxinerama libxft xclip neofetch dunst picom discord python jdk-openjdk steam
 
 cd temp
 git clone https://aur.archlinux.org/paru.git
@@ -15,7 +15,7 @@ cd paru
 makepkg -si
 cd ../..
 
-echo "mkinitcpio-firmware bonsai.sh-git joshuto bemoji spotify github-desktop-bin" | tr " " "\n" | paru --aur -S -
+echo "mkinitcpio-firmware bemoji spotify github-desktop-bin" | tr " " "\n" | paru --aur -S -
 
 cd program
 cd dwm
@@ -38,9 +38,13 @@ cd ..
 
 cd config
 ln -sf $(pwd)/bash/rc ~/.bashrc
+sudo ln -sf ~/.bashrc /root/.bashrc
 ln -sf $(pwd)/bash/profile ~/.bash_profile
-ln -sf $(pwd)/xrc ~/.xinitrc
+sudo ln -sf ~/.bash_profile /root/.bash_profile
 ln -sf $(pwd)/nvim ~/.config/nvim
+sudo mkdir /root/.config
+sudo ln -sf ~/.config/nvim /root/.config/nvim
+ln -sf $(pwd)/xrc ~/.xinitrc
 sudo cp dunst /etc/dunst/dunstrc
 sudo cp grub /etc/default/grub
 sudo cp issue /etc/issue
@@ -50,7 +54,7 @@ sudo cp pacman /etc/pacman.conf
 sudo cp nobeep /etc/modprobe.d/nobeep.conf
 sudo cp btop ~/.config/btop/btop.conf
 sudo cp flameshot ~/.config/flameshot/flameshot.ini
-sudo cp joshuto /usr/share/applications/joshuto.desktop
+sudo cp nvim/desktop /usr/share/applications/nvim.desktop
 sudo cp paru /etc/paru.conf
 cd ..
 

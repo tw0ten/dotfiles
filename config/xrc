@@ -1,8 +1,8 @@
-#!/bin/bash
+#!/bin/sh
 java -jar "$DOTARCH/script/fehfetch.jar" --path "$DOTARCH/temp" &
-bash "$DOTARCH/script/drpc/run" &
+sh "$DOTARCH/script/drpc/run" &
 systat &
-picom &
+picom -b &
 dunst &
 flameshot &
 xbacklight -set 75 -time 0 -steps 1
