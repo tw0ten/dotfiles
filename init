@@ -1,6 +1,6 @@
 #!/bin/sh
 cd $(dirname $0)
-mkdir temp 2> /dev/null
+PWD=$(pwd)
 
 sudo paman -Syu
 sudo pacman -S base-devel
@@ -9,11 +9,11 @@ sudo pacman -S vlc qbittorrent libreoffice-still gimp firefox
 sudo pacman -S nvidia nvidia-utils nvidia-settings lib32-nvidia-utils xorg xorg-apps xorg-server xorg-xinit alsa-utils
 sudo pacman -S blender obs-studio xdotool xsel obs-studio htop code networkmanager bc flameshot qt6-tools fortune-mod cowsay btop cmatrix bluez bluez-utils lolcat telegram-desktop feh libxinerama libxft xclip neofetch dunst picom discord python jdk-openjdk steam
 
-cd temp
+cd $(mktemp -d)
 git clone https://aur.archlinux.org/paru.git
 cd paru
 makepkg -si
-cd ../..
+cd $PWD
 
 echo "mkinitcpio-firmware bemoji spotify github-desktop-bin" | tr " " "\n" | paru --aur -S -
 

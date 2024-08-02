@@ -1,4 +1,5 @@
 #!/bin/bash
-ID=$( dunstify -p -i "$DOTARCH/etc/me.png" "ping" "request sent" )
+ICON="$DOTARCH/etc/me.png"
+ID=$( dunstify -p -i "$ICON" "ping" "request sent" )
 START=$(date +%s.%3N)
-dunstify -r $ID -i "$DOTARCH/etc/me.png" "pong" "$(curl -s -o /dev/null https://tw0ten.github.io && echo ok || echo err), $(echo "$(date +%s.%3N) - $START" | bc | tr "." "\0")ms"
+dunstify -r $ID -i "$ICON" "pong" "$(curl -s -o /dev/null https://tw0ten.github.io && echo ok || echo err), $(echo "$(date +%s.3N) - $START" | bc | tr "." "\0")ms"

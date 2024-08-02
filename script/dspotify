@@ -23,7 +23,9 @@ nowplaying() {
 
 PROMPTS="󰐎"
 PBSTATUS=$( qdbusget 'PlaybackStatus' )
-[[ "$PBSTATUS" = "Playing" ]] && PROMPTS="󰒮\n\n󰒭" || [[ "$PBSTATUS" = "Paused" ]] && PROMPTS="󰒮\n\n󰒭"
+
+[[ "$PBSTATUS" = "Playing" ]] && PROMPTS="󰒮\n\n󰒭"
+[[ "$PBSTATUS" = "Paused" ]] && PROMPTS="󰒮\n\n󰒭"
 
 NOWPLAYING=$(nowplaying)
 read STATUS <<< $( echo -e $PROMPTS | dmenu -p "󰓇 $NOWPLAYING" -ps 1 -c -noif -sb '#1DB954' -nb '#191414' -sf '#000000' )

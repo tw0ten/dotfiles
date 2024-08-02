@@ -4,6 +4,6 @@ IN=$(echo "~" | dmenu -p "?")
 if [[ "$IN" = "~" ]];
 then
 	smenu
-	exit
+	return
 fi
-firefox --search "$IN"
+nice -5 firefox --search "$IN"

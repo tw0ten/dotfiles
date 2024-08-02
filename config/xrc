@@ -1,5 +1,5 @@
 #!/bin/sh
-java -jar "$DOTARCH/script/fehfetch.jar" --path "$DOTARCH/temp" &
+java -jar "$DOTARCH/script/fehfetch.jar" --path $(mktemp -d) &
 sh "$DOTARCH/script/drpc/run" &
 systat &
 picom -b &

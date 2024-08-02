@@ -11,7 +11,7 @@ vim.opt.smartindent = true
 
 vim.opt.wrap = true
 
-vim.opt.hlsearch = false
+vim.opt.hlsearch = true
 vim.opt.incsearch = true
 
 vim.opt.scrolloff = 8
@@ -23,7 +23,17 @@ vim.opt.colorcolumn = ""
 
 vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
+vim.g.netrw_preview = 1
 
 vim.opt.showmode = false
-vim.opt.statusline=" %{&readonly?'-':(&modified?'+':'=')} {%{mode()}} %f %#Normal#%=%* <%l,%c> (%{&fileformat}|%{&fileencoding}|%Y) "
-vim.opt.laststatus=2
+vim.opt.statusline =
+" %{&readonly?'-':(&modified?'+':'=')} {%{mode()}} [%{expand('%f')}] %#Normal#%=%* <%l,%c> (%{&fileformat}|%{&fileencoding}|%Y) "
+vim.opt.laststatus = 2
+
+vim.opt.shortmess:append({ a = true, s = true, I = true })
+
+vim.api.nvim_create_autocmd({ "FileType" }, {
+	callback = function()
+		vim.wo.fillchars = "eob: "
+	end
+})
