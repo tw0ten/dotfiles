@@ -27,8 +27,9 @@ xbacklight -set $BR -time $(($STEPS*10)) -steps $STEPS &
 PID=$!
 while kill -0 $PID 2> /dev/null; do
 	dunstify -r $ID "brightness" "$(getbr)"
+	sleep 0.01
 done
-
 wait
+
 dunstify -r $ID "brightness" "set to $(getbr)"
 pkill -f systat-subprocess-2

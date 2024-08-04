@@ -45,15 +45,15 @@ ln -sf $(pwd)/nvim ~/.config/nvim
 sudo mkdir /root/.config
 sudo ln -sf ~/.config/nvim /root/.config/nvim
 ln -sf $(pwd)/xrc ~/.xinitrc
+cp neofetch ~/.config/neofetch/config.conf
+cp btop ~/.config/btop/btop.conf
+cp flameshot ~/.config/flameshot/flameshot.ini
 sudo cp dunst /etc/dunst/dunstrc
 sudo cp grub /etc/default/grub
 sudo cp issue /etc/issue
 sudo cp picom /etc/xdg/picom.conf
-sudo cp neofetch ~/.config/neofetch/config.conf
 sudo cp pacman /etc/pacman.conf
 sudo cp nobeep /etc/modprobe.d/nobeep.conf
-sudo cp btop ~/.config/btop/btop.conf
-sudo cp flameshot ~/.config/flameshot/flameshot.ini
 sudo cp nvim/desktop /usr/share/applications/nvim.desktop
 sudo cp paru /etc/paru.conf
 cd ..

@@ -7,7 +7,7 @@ lsblk
 ls -la /
 
 while true; do
-	echo -e "\n${cyan}start[x]\n${yellow}[u]pdate\n${grey}[c]ancel\n$reset"
+	echo -e "$bold$cyan\nstart[x]$yellow\n[u]pdate$normal\n[c]ancel\n"
 	read -s -n1 opt
 	case $opt in
 		"u") paru || sudo pacman -Syu ;;

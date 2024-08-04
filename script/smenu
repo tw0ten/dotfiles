@@ -2,4 +2,4 @@
 
 IN=$( ls "$DOTARCH/script/bash" | tr " " "\n" | dmenu -p "~" )
 
-bash "$DOTARCH/script/bash/$IN"
+exec "$DOTARCH/script/bash/$IN"

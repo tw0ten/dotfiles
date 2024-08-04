@@ -1,39 +1,48 @@
 # See this wiki page for more info:
 # https://github.com/dylanaraps/neofetch/wiki/Customizing-Info
 print_info() {
-    info title
-    info underline
-    info "os" distro
-    info "kernel" kernel
-    info "packages" packages
-    info "shell" shell
-    prin "tty" "$(tty)"
-    #info "public ip" public_ip &
-    info "host" model
-    info "uptime" uptime
-    info "res" resolution
-    info "de" de
-    info "wm" wm
-    info "wm theme" wm_theme
-    info "theme" theme
-    info "icons" icons
-    info "term" term
-    info "term font" term_font
-    info "cpu" cpu
-    info "gpu" gpu
-    info "memory" memory
-    info "gpu driver" gpu_driver
-    info "cpu usage" cpu_usage
-    info "disk" disk
-    info "bat" battery
-    info "font" font
-    #info "song" song
-    [[ "$player" ]] && prin "music player" "$player"
-    #info "local ip" local_ip
-    info "users" users
-    info "locale" locale
-    wait
-    info cols
+	info title
+	info underline
+	info "os" distro
+	info "kernel" kernel
+	prin "tty" $(tty)
+	info "shell" shell
+	info "packages" packages
+
+	info "users" users
+	info "uptime" uptime
+
+	info "res" resolution
+	info "de" de 
+	info "wm" wm
+	info "wm theme" wm_theme
+
+	info "theme" theme
+	info "icons" icons
+	info "font" font
+
+	info "locale" locale
+	info "term" term
+	info "term font" term_font
+
+	info "host" model
+	info "bat" battery
+	info "cpu" cpu
+	info "cpu usage" cpu_usage
+	info "gpu" gpu
+	info "gpu driver" gpu_driver
+	#prin "gpu usage" "$(nvidia-smi --format=csv,noheader,nounits --query-gpu=utilization.gpu)% $(nvidia-smi --format=csv,noheader,nounits --query-gpu=temperature.gpu)°"
+	info "disk" disk
+	info "memory" memory
+
+	#[[ "$player" ]] && prin "music player" "$player"
+	#info "song" song
+
+	#info "local ip" local_ip
+	#info "public ip" public_ip &
+
+	wait
+	info cols
 }
 
 # Title
@@ -100,7 +109,7 @@ os_arch="on"
 # on:   '2 days, 10 hours, 3 mins'
 # tiny: '2d 10h 3m'
 # off:  '2 days, 10 hours, 3 minutes'
-uptime_shorthand="off"
+uptime_shorthand="tiny"
 
 
 # Memory
@@ -194,7 +203,7 @@ speed_type="bios_limit"
 # Example:
 # on:    'i7-6500U (4) @ 3.1GHz'
 # off:   'i7-6500U (4) @ 3.100GHz'
-speed_shorthand="off"
+speed_shorthand="on"
 
 # Enable/Disable CPU brand in output.
 #
@@ -386,7 +395,7 @@ de_version="on"
 # disk_show=('/'):
 #      'Disk (/): 74G / 118G (66%)'
 #
-disk_show=('/' '/home' '/boot')
+disk_show=('/boot' '/' '/home')
 
 # Disk subtitle.
 # What to append to the Disk subtitle.
@@ -550,7 +559,7 @@ underline_enabled="on"
 # Default:  '-'
 # Values:   'string'
 # Flag:     --underline_char
-underline_char="~"
+underline_char="-"
 
 
 # Info Separator
@@ -850,7 +859,7 @@ xoffset=0
 # Default: ''
 # Values:  'color', 'blue'
 # Flag:    --bg_color
-background_color=
+background_color=""
 
 
 # Misc Options
