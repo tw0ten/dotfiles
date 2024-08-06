@@ -36,13 +36,6 @@ export HISTSIZE=-1
 
 export GIT_EDITOR=nvim
 
-#alias fuck='sudo $(history -p \!\!)'
-#alias kurwa='sudo $(history -p \!\!)'
-#alias fitta='sudo $(history -p \!\!)'
-#alias perkele='sudo $(history -p \!\!)'
-#alias scheiße='sudo $(history -p \!\!)'
-#alias ,kznm='sudo $(history -p \!\!)'
-
 alias mhm='echo -e "$(fortune | cowsay -n -f $(randcow))" | lolcat'
 alias minineofetch="neofetch --ascii_distro arch_small --disable locale users public_ip local_ip song font battery disk cpu_usage gpu_driver cpu gpu memory uptime resolution wm theme icons term term_font model --underline_char ' ' --color_blocks off --os_arch off --separator ''"
 alias FeelsGoodMan="find / | lolcat -i -p 0.1"
@@ -62,13 +55,23 @@ alias nano="nvim"
 alias py="python"
 
 mklc() {
-	[[ $1 ]] || (echo "mklc {NAME}"; return)
-	cp $DOTARCH/etc/lc LICENSE
-	sed -i "s/{YEAR}/$(command date +%Y)/" LICENSE
-	sed -i "s/{NAME}/$1/" LICENSE
+	[[ $1 ]] || { command ls $DOTARCH/etc/lc; return 1; }
+	cp -i $DOTARCH/etc/lc/$1 LICENSE || return 1
+	case $1 in
+		"GPL") ;;
+		"MIT"|"APACHE")
+			sed -i "0,/{YEAR}/s//$(command date +%Y)/" LICENSE
+			sed -i "0,/{NAME}/s//$(git config --list | grep user.name | sed "s/.*=//")/" LICENSE
+			sed -i "0,/{EMAIL}/s//$(git config --list | grep user.email | sed "s/.*=//")/" LICENSE
+		;;
+		*) return 1 ;;
+	esac
+	head -n 5 LICENSE
+	[[ $(wc -l < LICENSE) -gt 5 ]] && echo "..."
+	echo "$1 -> 'LICENSE'"
 }
 export -f mklc
 
-. "$HOME/.tmprc"
+[[ -f "$HOME/.tmprc" ]] && . "$HOME/.tmprc"
 
 minineofetch
