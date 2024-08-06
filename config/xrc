@@ -1,10 +1,12 @@
 #!/bin/sh
-java -jar "$DOTARCH/script/fehfetch.jar" --path $(mktemp -d) &
+java -jar "$DOTARCH/script/fehfetch.jar" --font /usr/share/fonts/TTF/art.ttf --path $(mktemp -d) &
 sh "$DOTARCH/script/rpc/run" &
 systat &
 picom -b &
 dunst &
 flameshot &
-xbacklight -set 75 -time 0 -steps 1
-xset m 1/1 1
+xbacklight -set 75 -time 0 -steps 1 &
+xset m 1/1 1 &
 exec dwm
+
+pkill -f systat

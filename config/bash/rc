@@ -30,22 +30,24 @@ export PS1="\[$normal\]\u\[$bold$cyan\]@\[$normal\]\h \[$bold$cyan\]\w\[$normal\
 
 export HISTTIMEFORMAT=`echo -e "[%Y|%w.%d/%m|%H:%M:%S] $bold$cyan\\$$normal>"`
 export HISTCONTROL=ignoredups
-export HISTIGNORE=ls
+export HISTIGNORE="ls*:history*"
 export HISTFILESIZE=-1
 export HISTSIZE=-1
 
 export GIT_EDITOR=nvim
 
-alias fuck='sudo $(history -p \!\!)'
-alias kurwa='sudo $(history -p \!\!)'
-alias fitta='sudo $(history -p \!\!)'
-alias perkele='sudo $(history -p \!\!)'
-alias scheiße='sudo $(history -p \!\!)'
-alias ,kznm='sudo $(history -p \!\!)'
+#alias fuck='sudo $(history -p \!\!)'
+#alias kurwa='sudo $(history -p \!\!)'
+#alias fitta='sudo $(history -p \!\!)'
+#alias perkele='sudo $(history -p \!\!)'
+#alias scheiße='sudo $(history -p \!\!)'
+#alias ,kznm='sudo $(history -p \!\!)'
 
 alias mhm='echo -e "$(fortune | cowsay -n -f $(randcow))" | lolcat'
 alias minineofetch="neofetch --ascii_distro arch_small --disable locale users public_ip local_ip song font battery disk cpu_usage gpu_driver cpu gpu memory uptime resolution wm theme icons term term_font model --underline_char ' ' --color_blocks off --os_arch off --separator ''"
 alias FeelsGoodMan="find / | lolcat -i -p 0.1"
+
+alias date="date +'[%w.%d/%m|%H:%M]'"
 
 alias c="xsel --input --clipboard"
 alias v="xsel --output --clipboard"
@@ -59,6 +61,14 @@ alias nano="nvim"
 
 alias py="python"
 
-[[ -f "~/.tmprc" ]] && . "~/.tmprc"
+mklc() {
+	[[ $1 ]] || (echo "mklc {NAME}"; return)
+	cp $DOTARCH/etc/lc LICENSE
+	sed -i "s/{YEAR}/$(command date +%Y)/" LICENSE
+	sed -i "s/{NAME}/$1/" LICENSE
+}
+export -f mklc
+
+. "$HOME/.tmprc"
 
 minineofetch

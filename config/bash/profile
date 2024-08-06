@@ -1,17 +1,21 @@
 #!/bin/bash
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
+echo -e "+ $(date) $(whoami)" >> ~/.auth
+
 neofetch
 pacman -V
 lsblk
 ls -la /
+date
 
 while true; do
-	echo -e "$bold$cyan\nstart[x]$yellow\n[u]pdate$normal\n[c]ancel\n"
+	echo -e "$bold$cyan\nstart[x]$yellow\n[p]acman -Syu$red\n[l]ogout$normal\n[c]ancel\n"
 	read -s -n1 opt
 	case $opt in
-		"u") paru || sudo pacman -Syu ;;
 		"x") startx; break ;;
+		"p") sudo pacman -Syu ;;
+		"l") logout ;;
 		"c") break ;;
 		*) ;;
 	esac

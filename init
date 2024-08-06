@@ -41,6 +41,8 @@ ln -sf $(pwd)/bash/rc ~/.bashrc
 sudo ln -sf ~/.bashrc /root/.bashrc
 ln -sf $(pwd)/bash/profile ~/.bash_profile
 sudo ln -sf ~/.bash_profile /root/.bash_profile
+ln -sf $(pwd)/bash/logout ~/.bash_logout
+sudo ln -sf ~/.bash_logout /root/.bash_logout
 ln -sf $(pwd)/nvim ~/.config/nvim
 sudo mkdir /root/.config
 sudo ln -sf ~/.config/nvim /root/.config/nvim
