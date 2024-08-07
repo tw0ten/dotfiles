@@ -1,22 +1,6 @@
 #!/bin/bash
 [[ $- != *i* ]] && return
 
-export DOTARCH="$HOME/dotarch"
-
-export normal=$(tput sgr0)
-export bold=$(tput bold)
-export underline=$(tput smul)
-export blink=$(tput blink)
-export black=$(tput setaf 0)
-export red=$(tput setaf 1)
-export green=$(tput setaf 2)
-export yellow=$(tput setaf 3)
-export blue=$(tput setaf 4)
-export magenta=$(tput setaf 5)
-export cyan=$(tput setaf 6)
-export white=$(tput setaf 7)
-export reverse=$(tput rev)
-
 randcol() {
 	echo $(echo -e "$black\n$red\n$green\n$yellow\n$blue\n$magenta\n$cyan\n$white" | shuf -n1)
 }
@@ -24,17 +8,8 @@ randcow() {
 	echo $(cowsay -l | grep "/" -v | tr "\n" " " | tr " " "\n" | shuf -n1)
 }
 
-export SUDO_PROMPT=`echo -e "$normal[$bold${cyan}sudo$normal] password for $bold$cyan%p$normal #>"`
-export PS1="\[$normal\]\u\[$bold$cyan\]@\[$normal\]\h \[$bold$cyan\]\w\[$normal\]\[$bold$cyan\]$\[$normal\]>"
-[[ "$(id -u)" -eq 0 ]] && export PS1="\[$normal\]\h \[$bold$cyan\]\w\[$normal\]\[$bold$cyan\]#\[$normal\]>"
-
-export HISTTIMEFORMAT=`echo -e "[%Y|%w.%d/%m|%H:%M:%S] $bold$cyan\\$$normal>"`
-export HISTCONTROL=ignoredups
-export HISTIGNORE="ls*:history*"
-export HISTFILESIZE=-1
-export HISTSIZE=-1
-
-export GIT_EDITOR=nvim
+PS1="\[$normal\]\u\[$bold$cyan\]@\[$normal\]\h \[$bold$cyan\]\w\[$normal\]\[$bold$cyan\]$\[$normal\]>"
+[[ "$(id -u)" -eq 0 ]] && PS1="\[$normal\]\h \[$bold$cyan\]\w\[$normal\]\[$bold$cyan\]#\[$normal\]>"
 
 alias mhm='echo -e "$(fortune | cowsay -n -f $(randcow))" | lolcat'
 alias minineofetch="neofetch --ascii_distro arch_small --disable locale users public_ip local_ip song font battery disk cpu_usage gpu_driver cpu gpu memory uptime resolution wm theme icons term term_font model --underline_char ' ' --color_blocks off --os_arch off --separator ''"
@@ -53,24 +28,6 @@ alias svim="sudo nvim"
 alias nano="nvim"
 
 alias py="python"
-
-mklc() {
-	[[ $1 ]] || { command ls $DOTARCH/etc/lc; return 1; }
-	cp -i $DOTARCH/etc/lc/$1 LICENSE || return 1
-	case $1 in
-		"GPL") ;;
-		"MIT"|"APACHE")
-			sed -i "0,/{YEAR}/s//$(command date +%Y)/" LICENSE
-			sed -i "0,/{NAME}/s//$(git config --list | grep user.name | sed "s/.*=//")/" LICENSE
-			sed -i "0,/{EMAIL}/s//$(git config --list | grep user.email | sed "s/.*=//")/" LICENSE
-		;;
-		*) return 1 ;;
-	esac
-	head -n 5 LICENSE
-	[[ $(wc -l < LICENSE) -gt 5 ]] && echo "..."
-	echo "$1 -> 'LICENSE'"
-}
-export -f mklc
 
 [[ -f "$HOME/.tmprc" ]] && . "$HOME/.tmprc"
 
