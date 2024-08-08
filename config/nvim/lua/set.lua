@@ -27,7 +27,7 @@ vim.g.netrw_preview = 1
 
 vim.opt.showmode = false
 vim.opt.statusline =
-" %{&readonly?'-':(&modified?'+':'=')} {%{mode()}} [%{expand('%:~:.')}] %#Normal#%=%* <%l,%c> (%{&fileformat}|%{&fileencoding}|%Y) "
+" %{&readonly?'-':(&modified?'+':'=')} {%{mode()}} [%{expand('%:~:.')}] %#Normal#%=%* <%l,%c> (%{&fileformat}|%{&fileencoding}|%{&filetype}) "
 vim.opt.laststatus = 2
 
 vim.opt.shortmess:append({ a = true, s = true, I = true })

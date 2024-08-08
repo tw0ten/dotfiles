@@ -1,4 +1,0 @@
-#!/bin/bash
-while IFS= read -r line; do
-	curl -s -H "Content-Type: application/json" -d "{\"username\": \"$1\", \"content\": \"\`\`\`\n$line\n\`\`\`\"}" $2 > /dev/null
-done

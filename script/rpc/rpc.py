@@ -12,13 +12,13 @@ while True:
         while True:
             uptime = run("uptime -p", shell=True, capture_output=True, check=True).stdout.decode('utf-8')
             rpc.update(
-                state = uptime,
-                details = user+"@"+host,
-                large_image = "arch",
-                small_image = "linux",
-                small_text = "linux"
+                state=uptime,
+                details=user+"@"+host,
+                large_image="arch",
+                small_image="linux",
+                small_text="linux"
             )
             sleep(4)
-    except:
+    except Exception:
         print("discord disabled/error")
     sleep(4)
