@@ -1,0 +1,59 @@
+unbindall
+bind = exec config
+bind w +forward
+bind a +left
+bind s +back
+bind d +right
+bind shift +sprint
+bind ctrl +duck
+bind mwheeldown +jump
+bind e +use
+bind mouse1 +attack
+bind mouse2 +attack2
+bind r +reload
+bind q drop
+bind g buymenu
+bind mouse5 slot1
+bind mouse4 slot2
+bind 3 slot3
+bind c slot4
+bind 4 slot5
+bind t +spray_menu
+bind ` toggleconsole
+bind tab +showscores
+bind v player_ping
+bind [ messagemode
+bind ] messagemode2
+bind x +voicerecord
+
+sensitivity 1.69
+zoom_sensitivity_ratio 1
+
+viewmodel_fov 68
+viewmodel_presetpos 0
+viewmodel_offset_x 2.5
+viewmodel_offset_y 2
+viewmodel_offset_z -2
+
+cl_crosshairstyle 4
+cl_crosshair_recoil true
+cl_crosshairdot false
+cl_crosshairsize 1
+cl_crosshairthickness 0.1
+cl_crosshairgap -2.5
+cl_crosshair_drawoutline true
+cl_crosshair_outlinethickness 1
+cl_crosshaircolor 5
+cl_crosshaircolor_r 255
+cl_crosshaircolor_g 255
+cl_crosshaircolor_b 255
+cl_crosshairusealpha false
+cl_crosshairalpha 255
+cl_crosshair_t true
+cl_crosshairgap_useweaponvalue false
+cl_show_observer_crosshair 2
+cl_observed_bot_crosshair 1
+bind MOUSE_X yaw
+bind MOUSE_Y pitch 
+
+say sourced
