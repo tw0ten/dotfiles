@@ -4,7 +4,7 @@ function getvol {
 	amixer sget Master | awk -F"[][]" '/Left:/ { print $2; }'
 }
 
-read VOL <<< $( dmenu -p "volume: $(getvol)" & )
+VOL=$( dmenu -p "volume: $(getvol)" & )
 
 amixer sset Master $VOL%
 

@@ -1,19 +1,15 @@
 #!/bin/bash
 
-read OPERATION <<< $(echo -e "device\nwifi station" | dmenu -p "nm" -c -l 2)
+OPERATION=$(echo -e "device\nwifi station" | dmenu -p "nm" -c -l 2)
 
-if [[ $OPERATION = "device" ]];
-then
-read DEVICE <<< $(nmcli device | awk '{split($0,a," "); print a[1]}' | dmenu -p "nm" -c -l "$(nmcli device | wc -l)")
-
-ID=$(dunstify -p "netmng" "connecting to $DEVICE")
-nmcli device connect $DEVICE && dunstify -r $ID "netmng" "connected to $DEVICE" || dunstify -r $ID "netmng" "couldnt connect to $DEVICE"
+if [ "$OPERATION" = "device" ]; then
+	DEVICE=$(nmcli device | awk '{split($0,a," "); print a[1]}' | dmenu -p "nm" -c -l "$(nmcli device | wc -l)")
+	ID=$(dunstify -p "netmng" "connecting to $DEVICE")
+	nmcli device connect $DEVICE && dunstify -r $ID "netmng" "connected to device $DEVICE" || dunstify -r $ID "netmng" "couldnt connect to device $DEVICE"
 fi
 
-if [[ $OPERATION = "wifi station" ]];
-then
-read STATION <<< $( nmcli device wifi list | awk '{split($0,a," "); print a[2]}' | dmenu -p "nm" -c -l "$(nmcli device wifi list | wc -l)")
-
-ID=$(dunstify -p "netmng" "connecting wifi to $STATION")
-nmcli device wifi connect $STATION && dunstify -r $ID "netmng" "connected wifi to $STATION" || dunstify -r $ID "netmng" "couldnt connect wifi to $STATION" 
+if [ "$OPERATION" = "wifi station" ]; then
+	STATION=$( nmcli device wifi list | awk '{split($0,a," "); print a[2]}' | dmenu -p "nm" -c -l "$(nmcli device wifi list | wc -l)")
+	ID=$(dunstify -p "netmng" "connecting wifi to $STATION")
+	nmcli device wifi connect $STATION && dunstify -r $ID "netmng" "connected to station $STATION" || dunstify -r $ID "netmng" "couldnt connect to station $STATION" 
 fi

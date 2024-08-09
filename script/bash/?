@@ -1,8 +1,8 @@
 #!/bin/bash
+
 IN=$(echo "~" | dmenu -p "?")
 
-if [[ "$IN" = "~" ]];
-then
+if [ "$IN" = "~" ]; then
 	smenu
 	return
 fi

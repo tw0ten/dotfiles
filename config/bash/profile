@@ -5,7 +5,7 @@ clear
 
 echo -e "+ $(date) $(whoami)" >> ~/.auth
 
-export DOTARCH="$HOME/dotarch"
+export DOTFILES="$HOME/dotfiles"
 
 export normal=$(tput sgr0)
 export bold=$(tput bold)
@@ -34,8 +34,8 @@ export HISTSIZE=-1
 export EDITOR=nvim
 
 mklc() {
-	[[ $1 ]] || { command ls $DOTARCH/etc/lc; return 1; }
-	cp -i $DOTARCH/etc/lc/$1 LICENSE || return 1
+	[[ $1 ]] || { command ls $DOTFILES/etc/lc; return 1; }
+	cp -i $DOTFILES/etc/lc/$1 LICENSE || return 1
 	case $1 in
 		"GPL") ;;
 		"MIT"|"APACHE")
@@ -54,8 +54,8 @@ export -f mklc
 mktl() {
 	mkdir $1 || return 1
 	cd $1
-	cp -r $DOTARCH/etc/tl/.[^.]* .
-	cp -r $DOTARCH/etc/tl/* .
+	cp -r $DOTFILES/etc/tl/.[^.]* .
+	cp -r $DOTFILES/etc/tl/* .
 	git init
 	mkdir src
 	mkdir lib

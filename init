@@ -37,21 +37,25 @@ cd ../
 cd ..
 
 cd config
-ln -sf $(pwd)/bash/rc ~/.bashrc
+ls
+lncfg() {
+	ln -sf "$(pwd)/$1" "$2"
+	echo $1
+}
+lncfg bash/rc ~/.bashrc
 sudo ln -sf ~/.bashrc /root/.bashrc
-ln -sf $(pwd)/bash/profile ~/.bash_profile
+lncfg bash/profile ~/.bash_profile
 sudo ln -sf ~/.bash_profile /root/.bash_profile
-ln -sf $(pwd)/bash/logout ~/.bash_logout
+lncfg bash/logout ~/.bash_logout
 sudo ln -sf ~/.bash_logout /root/.bash_logout
-ln -sf $(pwd)/tmux ~/.tmux.conf
+lncfg tmux ~/.tmux.conf
 sudo ln -sf ~/.tmux.conf /root/.tmux.conf
-ln -sf $(pwd)/nvim ~/.config/nvim
-sudo mkdir /root/.config
+lncfg nvim ~/.config/nvim
+sudo mkdir /root/.config 2> /dev/null
 sudo ln -sf ~/.config/nvim /root/.config/nvim
-ln -sf $(pwd)/xrc ~/.xinitrc
-cp neofetch ~/.config/neofetch/config.conf
-cp btop ~/.config/btop/btop.conf
-cp flameshot ~/.config/flameshot/flameshot.ini
+lncfg xrc ~/.xinitrc
+lncfg neofetch ~/.config/neofetch/config.conf
+lncfg flameshot ~/.config/flameshot/flameshot.ini
 sudo cp dunst /etc/dunst/dunstrc
 sudo cp grub /etc/default/grub
 sudo cp issue /etc/issue
@@ -64,8 +68,10 @@ cd ..
 
 sudo cp etc/cat.png /boot/grub/bg.png
 
-sudo cp script/dconfirm /bin
-sudo cp script/smenu /bin
-sudo cp script/dspotify /bin
+cd script
+sudo cp dconfirm /bin
+sudo cp smenu /bin
+sudo cp dspotify /bin
+cd ..
 
-bash
+. ~/.bash_profile

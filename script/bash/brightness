@@ -9,7 +9,7 @@ min(){
 }
 
 getbr(){
-	echo $( xbacklight -get | cut -f1 -d'.' )
+	echo $( xbacklight -get | cut -f1 -d '.' )
 }
 
 BR1=$(getbr)
@@ -29,7 +29,6 @@ while kill -0 $PID 2> /dev/null; do
 	dunstify -r $ID "brightness" "$(getbr)"
 	sleep 0.01
 done
-wait
 
 dunstify -r $ID "brightness" "set to $(getbr)"
 pkill -f systat-subprocess-2

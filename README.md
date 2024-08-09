@@ -1,2 +1,2 @@
-# dotarch
-arch linux config
+# dotfiles
+etc
