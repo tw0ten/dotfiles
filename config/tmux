@@ -1,0 +1,51 @@
+unbind C-b
+bind-key C-w send-prefix
+set-option -g prefix C-w
+
+unbind '%'
+bind '|' split-window -h
+unbind '"'
+bind '_' split-window -v
+
+bind -n M-Left select-pane -L
+bind -n M-Right select-pane -R
+bind -n M-Up select-pane -U
+bind -n M-Down select-pane -D
+
+set-option -g allow-rename off
+
+set -g base-index 1
+
+set -g mouse on
+
+set -g message-style fg=black,bold,bg=white
+
+set -g status on
+set -g status-position bottom
+set -g status-interval 15
+set -g status-keys vi
+set -g status-style fg=black,bg=default
+
+set -g status-left-length 0
+set -g status-right-length 0
+set -g status-left "#[bg=white] "
+set -g status-right "#[bg=white] "
+set -ag status-left "{#F} [#T]"
+set -ag status-right "<#I,#P> (#S)"
+set -ag status-left " "
+set -ag status-right " "
+
+set -g status-justify centre
+setw -g window-status-style bg=white
+setw -g window-status-format "#I#(printf %%1s #F)#W"
+setw -g window-status-current-style bold,bg=cyan
+setw -g window-status-current-format "#W"
+setw -g window-status-separator " "
+setw -g window-status-last-style fg=black,bold
+setw -g window-status-bell-style fg=cyan
+
+set -g pane-border-style fg=white
+set -g pane-active-border-style fg=cyan
+
+set -g clock-mode-style 24
+set -g clock-mode-color white

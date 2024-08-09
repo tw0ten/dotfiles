@@ -1,6 +1,8 @@
 #!/bin/bash
 clear
 [[ -f ~/.bashrc ]] && . ~/.bashrc
+[[ $(who | grep -cw "^$(whoami)") = 1 ]] || return
+
 echo -e "+ $(date) $(whoami)" >> ~/.auth
 
 export DOTARCH="$HOME/dotarch"
@@ -68,7 +70,7 @@ mktl() {
 export -f mktl
 
 while true; do
-	echo -e "$bold$cyan\nstart[x]$yellow\n[p]acman -Syu$red\n[l]ogout$normal\n[c]ancel\n"
+	echo -e "$bold$cyan\nstart[x]$yellow\n[p]acman -Syu$red\n[l]ogout$normal\n[c]ancel"
 	read -s -n1 opt
 	case $opt in
 		"x") startx; break ;;

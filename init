@@ -1,21 +1,21 @@
 #!/bin/sh
 cd $(dirname $0)
-PWD=$(pwd)
 
 sudo paman -Syu
-sudo pacman -S base-devel
-sudo pacman -S git neovim bash-completion
-sudo pacman -S vlc qbittorrent libreoffice-still gimp firefox
-sudo pacman -S nvidia nvidia-utils nvidia-settings lib32-nvidia-utils xorg xorg-apps xorg-server xorg-xinit alsa-utils
-sudo pacman -S blender obs-studio xdotool xsel obs-studio htop code networkmanager bc flameshot qt6-tools fortune-mod cowsay btop cmatrix bluez bluez-utils lolcat telegram-desktop feh libxinerama libxft xclip neofetch dunst picom discord python jdk-openjdk steam
+sudo pacman -S base-devel networkmanager 
+sudo pacman -S git tmux neovim bash-completion
+sudo pacman -S vlc qbittorrent libreoffice-still gimp firefox feh
+sudo pacman -S nvidia nvidia-utils nvidia-settings lib32-nvidia-utils xorg xorg-apps xorg-server xorg-xinit pipewire
+sudo pacman -S blender obs-studio xdotool xsel xclip bc flameshot qt6-tools fortune-mod cowsay btop cmatrix bluez bluez-utils lolcat telegram-desktop libxinerama libxft neofetch dunst picom discord python jdk-openjdk steam
 
-cd $(mktemp -d)
-git clone https://aur.archlinux.org/paru.git
-cd paru
-makepkg -si
-cd $PWD
+(
+	cd $(mktemp -d)
+	git clone https://aur.archlinux.org/paru.git
+	cd paru
+	makepkg -si
+)
 
-echo "mkinitcpio-firmware bemoji spotify github-desktop-bin" | tr " " "\n" | paru --aur -S -
+paru --aur -S mkinitcpio-firmware bemoji spotify github-desktop-bin
 
 cd program
 cd dwm
@@ -43,6 +43,8 @@ ln -sf $(pwd)/bash/profile ~/.bash_profile
 sudo ln -sf ~/.bash_profile /root/.bash_profile
 ln -sf $(pwd)/bash/logout ~/.bash_logout
 sudo ln -sf ~/.bash_logout /root/.bash_logout
+ln -sf $(pwd)/tmux ~/.tmux.conf
+sudo ln -sf ~/.tmux.conf /root/.tmux.conf
 ln -sf $(pwd)/nvim ~/.config/nvim
 sudo mkdir /root/.config
 sudo ln -sf ~/.config/nvim /root/.config/nvim
