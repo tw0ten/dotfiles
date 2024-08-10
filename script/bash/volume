@@ -9,4 +9,4 @@ VOL=$( dmenu -p "volume: $(getvol)" & )
 amixer sset Master $VOL%
 
 notify-send "volume" "set to $(getvol)"
-pkill -f systat-subprocess-1
+pkill -f systat-1

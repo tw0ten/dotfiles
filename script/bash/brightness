@@ -31,4 +31,4 @@ while kill -0 $PID 2> /dev/null; do
 done
 
 dunstify -r $ID "brightness" "set to $(getbr)"
-pkill -f systat-subprocess-2
+pkill -f systat-2
