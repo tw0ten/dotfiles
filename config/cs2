@@ -13,7 +13,9 @@ bind mouse2 +attack2
 bind r +reload
 bind q drop
 bind g buymenu
+bind 1 slot1
 bind mouse5 slot1
+bind 2 slot2
 bind mouse4 slot2
 bind 3 slot3
 bind c slot4

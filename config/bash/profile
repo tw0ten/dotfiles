@@ -1,9 +1,5 @@
 #!/bin/bash
 clear
-[[ -f ~/.bashrc ]] && . ~/.bashrc
-[[ $(who | grep -cw "^$(whoami)") = 1 ]] || return
-
-echo -e "+ $(date) $(whoami)" >> ~/.auth
 
 export DOTFILES="$HOME/dotfiles"
 
@@ -20,12 +16,16 @@ export magenta=$(tput setaf 5)
 export cyan=$(tput setaf 6)
 export white=$(tput setaf 7)
 export reverse=$(tput rev)
+export bell=$(tput bel)
 
-eval $(dircolors) && export LS_COLORS
+eval $(dircolors)
 
-export SUDO_PROMPT=`echo -e "$normal[$bold${cyan}sudo$normal] password for $bold$cyan%p$normal #>"`
+export SUDO_PROMPT=$(echo -e "$normal[$bold${cyan}sudo$normal] password for $bold$cyan%p$normal #>")
+export PS2="> "
+export PS3="? "
+export PS4="+ "
 
-export HISTTIMEFORMAT=`echo -e "[%Y|%w.%d/%m|%H:%M:%S] $bold$cyan\\$$normal>"`
+export HISTTIMEFORMAT=$(echo -e "[%Y|%w.%d/%m|%H:%M:%S] $bold$cyan\\$$normal>")
 export HISTCONTROL=ignoredups
 export HISTIGNORE="ls*:history*"
 export HISTFILESIZE=-1
@@ -69,6 +69,11 @@ mktl() {
 }
 export -f mktl
 
+[[ -f ~/.bashrc ]] && . ~/.bashrc
+
+[[ $(who | grep -cw "^$(whoami)") = 1 ]] || return
+echo -e "+ $(date) $(whoami)" >> ~/.auth
+
 while true; do
 	echo -e "$bold$cyan\nstart[x]$yellow\n[p]acman -Syu$red\n[l]ogout$normal\n[c]ancel"
 	read -s -n1 opt
@@ -80,3 +85,4 @@ while true; do
 		*) ;;
 	esac
 done
+

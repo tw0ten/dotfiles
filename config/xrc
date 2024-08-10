@@ -21,15 +21,21 @@ if [ -f "$usermodmap" ]; then
 	xmodmap "$usermodmap"
 fi
 
-if [ -d /etc/X11/xinit/xinitrc.d ] ; then
-	for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
+if [ -d /etc/X11/xinit/xinitrc.d ]; then
+	for f in /etc/X11/xinit/xinitrc.d/?*.sh; do
 		[ -x "$f" ] && . "$f"
 	done
 	unset f
 fi
 
+if [ $(xkb-switch -l | wc -l) -eq 1 ]; then
+	localectl set-x11-keymap us,ru
+	localectl set-keymap --no-convert us
+fi
+
 (
-	java -jar $DOTFILES/script/fehfetch.jar --font /usr/share/fonts/TTF/art.ttf --path $(mktemp -d) &
+	cd $DOTFILES
+	java -jar script/fehfetch.jar --font /usr/share/fonts/TTF/art.ttf --path $(mktemp -d) &
 	(
 		cd $(mktemp -d)
 		python -m venv .venv
@@ -44,7 +50,7 @@ fi
 	flameshot &
 	dunst &
 	systat &
-	picom -b &
-) &
+	picom &
+) > /dev/null 2>&1 &
 
 exec dwm

@@ -10,6 +10,7 @@ randcow() {
 
 PS1="\[$normal\]\u\[$bold$cyan\]@\[$normal\]\h \[$bold$cyan\]\w\[$normal\]\[$bold$cyan\]$\[$normal\]>"
 [[ "$(id -u)" -eq 0 ]] && PS1="\[$normal\]\h \[$bold$cyan\]\w\[$normal\]\[$bold$cyan\]#\[$normal\]>"
+[[ "$SSH_CONNECTION" ]] && PS1="ssh:$PS1"
 
 alias mhm='echo -e "$(fortune | cowsay -n -f $(randcow))" | lolcat'
 alias minineofetch="neofetch --ascii_distro arch_small --disable locale users public_ip local_ip song font battery disk cpu_usage gpu_driver cpu gpu memory uptime resolution wm theme icons term term_font model --underline_char ' ' --color_blocks off --os_arch off --separator ''"

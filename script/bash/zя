@@ -1,4 +1,4 @@
 #!/bin/bash
 
-xkb-switch -s $( echo -e "$(xkb-switch -l)" | dmenu -p "keyboard" )
+xkb-switch -s $( xkb-switch -l | dmenu -p "keyboard" )
 pkill -f systat-subprocess-3
