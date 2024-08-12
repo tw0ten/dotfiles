@@ -1,19 +1,20 @@
 #!/bin/bash
-[[ $- != *i* ]] && return
+[[ $- = *i* ]] || return
 
 randcol() {
-	echo $(echo -e "$black\n$red\n$green\n$yellow\n$blue\n$magenta\n$cyan\n$white" | shuf -n1)
+	tput setaf $(($RANDOM % 8))
 }
 randcow() {
-	echo $(cowsay -l | grep "/" -v | tr "\n" " " | tr " " "\n" | shuf -n1)
+	cowsay -l | grep "/" -v | tr "\n" " " | tr " " "\n" | shuf -n1
 }
 
-PS1="\[$normal\]\u\[$bold$cyan\]@\[$normal\]\h \[$bold$cyan\]\w\[$normal\]\[$bold$cyan\]$\[$normal\]>"
-[[ "$(id -u)" -eq 0 ]] && PS1="\[$normal\]\h \[$bold$cyan\]\w\[$normal\]\[$bold$cyan\]#\[$normal\]>"
+PS1="\u\[$bold$cyan\]@\[$normal\]\h \[$bold$cyan\]\w\[$normal\]\[$bold$cyan\]$\[$normal\]>"
+[[ "$(id -u)" -eq 0 ]] && PS1="\h \[$bold$cyan\]\w\[$normal\]\[$bold$cyan\]#\[$normal\]>"
 [[ "$SSH_CONNECTION" ]] && PS1="ssh:$PS1"
+PS1="\[$normal\]\$([[ \$? = 0 ]] && echo + || echo -) $PS1"
 
 alias mhm='echo -e "$(fortune | cowsay -n -f $(randcow))" | lolcat'
-alias minineofetch="neofetch --ascii_distro arch_small --disable locale users public_ip local_ip song font battery disk cpu_usage gpu_driver cpu gpu memory uptime resolution wm theme icons term term_font model --underline_char ' ' --color_blocks off --os_arch off --separator ''"
+alias minineofetch="neofetch --ascii_distro arch_small --disable locale users public_ip local_ip song font battery disk cpu_usage gpu_driver cpu gpu memory uptime resolution wm theme icons term term_font model --underline_char ' ' --color_blocks off --separator ''"
 alias FeelsGoodMan="find / | lolcat -i -p 0.1"
 
 alias date="date +'[%w.%d/%m|%H:%M]'"

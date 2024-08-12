@@ -3,7 +3,6 @@
 IN=$(echo "~" | dmenu -p "?")
 
 if [ "$IN" = "~" ]; then
-	smenu
-	return
+	exec smenu
 fi
-nice -5 firefox --search "$IN"
+exec nice -5 firefox --search "$IN"

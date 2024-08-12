@@ -5,6 +5,10 @@ export DOTFILES="$HOME/dotfiles"
 
 export normal=$(tput sgr0)
 export bold=$(tput bold)
+export dim=$(tput dim)
+export reverse=$(tput rev)
+export italic=$(tput sitm)
+export highlight=$(tput smso)
 export underline=$(tput smul)
 export blink=$(tput blink)
 export black=$(tput setaf 0)
@@ -15,17 +19,17 @@ export blue=$(tput setaf 4)
 export magenta=$(tput setaf 5)
 export cyan=$(tput setaf 6)
 export white=$(tput setaf 7)
-export reverse=$(tput rev)
 export bell=$(tput bel)
 
 eval $(dircolors)
 
-export SUDO_PROMPT=$(echo -e "$normal[$bold${cyan}sudo$normal] password for $bold$cyan%p$normal #>")
+export SUDO_PROMPT="$normal[$bold${cyan}sudo$normal] password for $bold$cyan%p$normal #>"
+export PS0=""
 export PS2="> "
 export PS3="? "
 export PS4="+ "
 
-export HISTTIMEFORMAT=$(echo -e "[%Y|%w.%d/%m|%H:%M:%S] $bold$cyan\\$$normal>")
+export HISTTIMEFORMAT="$normal[%Y|%w.%d/%m|%H:%M:%S] $bold$cyan\$$normal>"
 export HISTCONTROL=ignoredups
 export HISTIGNORE="ls*:history*"
 export HISTFILESIZE=-1
