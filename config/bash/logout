@@ -1,4 +1,4 @@
 #!/bin/bash
 [[ $(who | grep -cw "^$(whoami)") = 1 ]] || return
 
-echo -e "- $(date) $(whoami)" >> ~/.auth
+echo "- $(date) $(whoami)" >> ~/.auth

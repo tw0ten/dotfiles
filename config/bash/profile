@@ -44,8 +44,8 @@ mklc() {
 		"GPL") ;;
 		"MIT"|"APACHE")
 			sed -i "0,/{YEAR}/s//$(command date +%Y)/" LICENSE
-			sed -i "0,/{NAME}/s//$(git config --list | grep user.name | sed "s/.*=//")/" LICENSE
-			sed -i "0,/{EMAIL}/s//$(git config --list | grep user.email | sed "s/.*=//")/" LICENSE
+			sed -i "0,/{NAME}/s//$(git config --get user.name)/" LICENSE
+			sed -i "0,/{EMAIL}/s//$(git config --get user.email)/" LICENSE
 		;;
 		*) return 1 ;;
 	esac
@@ -75,18 +75,20 @@ export -f mktl
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
+[[ -z $PROFILE ]] && return
+export PROFILE=$(true)
 [[ $(who | grep -cw "^$(whoami)") = 1 ]] || return
-echo -e "+ $(date) $(whoami)" >> ~/.auth
+
+echo "+ $(date) $(whoami)" >> ~/.auth
 
 while true; do
-	echo -e "$bold$cyan\nstart[x]$yellow\n[p]acman -Syu$red\n[l]ogout$normal\n[c]ancel"
+	echo -e "$bold$cyan\nstart[x]$yellow\n[p]acman -Syu$red\n[e]xit$normal\n[c]ancel"
 	read -s -n1 opt
 	case $opt in
-		"x") startx; break ;;
+		"x") startx ;;
 		"p") sudo pacman -Syu ;;
-		"l") logout ;;
+		"e") exit ;;
 		"c") break ;;
 		*) ;;
 	esac
 done
-

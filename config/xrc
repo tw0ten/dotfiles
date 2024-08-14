@@ -46,7 +46,6 @@ fi
 		python $DOTFILES/script/rpc.py
 	) &
 	xbacklight -set 75 -time 0 -steps 1 &
-	xset m 1/1 1 &
 	flameshot &
 	dunst &
 	systat &

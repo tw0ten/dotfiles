@@ -1,17 +1,44 @@
 unbindall
 
-alias source exec config
+alias source "exec config"
+
+alias +desubtick_forward "+forward;+forward"
+alias -desubtick_forward "-forward;-forward;-forward"
+alias +desubtick_left "+left;+left"
+alias -desubtick_left "-left;-left;-left"
+alias +desubtick_back "+back;+back"
+alias -desubtick_back "-back;-back;-back"
+alias +desubtick_right "+right;+right"
+alias -desubtick_right "-right;-right;-right"
+alias nullforward ""
+alias nullback ""
+alias nullleft ""
+alias nullright ""
+alias +nullforward "-desubtick_back; +desubtick_forward; alias nullforward +desubtick_forward"
+alias +nullback "-desubtick_forward; +desubtick_back; alias nullback +desubtick_back"
+alias +nullleft "-desubtick_right; +desubtick_left; alias nullleft +desubtick_left"
+alias +nullright "-desubtick_left; +desubtick_right; alias nullright +desubtick_right"
+alias -nullforward "-desubtick_forward; -desubtick_back; nullback; alias nullforward"
+alias -nullback "-desubtick_back; -desubtick_forward; nullforward; alias nullback"
+alias -nullleft "-desubtick_left; -desubtick_right; nullright; alias nullleft"
+alias -nullright "-desubtick_right; -desubtick_left; nullleft; alias nullright"
+
+alias +m1 "+attack; cl_crosshairalpha 255; cl_crosshair_recoil true"
+alias -m1 "-attack; cl_crosshairalpha 128; cl_crosshair_recoil false"
+
+alias +listen "snd_headphone_eq 1; volume 0.5"
+alias -listen "snd_headphone_eq 0; volume 0.2"
 
 bind = source
-bind w +forward
-bind a +left
-bind s +back
-bind d +right
+bind w +nullforward
+bind a +nullleft
+bind s +nullback
+bind d +nullright
 bind shift +sprint
 bind ctrl +duck
 bind mwheeldown +jump
 bind e +use
-bind mouse1 +attack
+bind mouse1 +m1
 bind mouse2 +attack2
 bind r +reload
 bind q drop
@@ -24,17 +51,18 @@ bind space slot3
 bind c slot4
 bind 3 slot5
 bind t +spray_menu
-bind ` toggleconsole
 bind tab +showscores
 bind v player_ping
 bind [ messagemode
 bind ] messagemode2
 bind x +voicerecord
 bind f switchhands
+bind alt +listen
 bind mouse_x yaw
 bind mouse_y pitch 
+bind ` toggleconsole
 
-sensitivity 1.69
+sensitivity 1.569
 zoom_sensitivity_ratio 1
 
 viewmodel_fov 68
@@ -46,20 +74,20 @@ viewmodel_offset_z -2
 cl_crosshairstyle 4
 cl_crosshair_recoil true
 cl_crosshairdot false
-cl_crosshairsize 1
-cl_crosshairthickness 0.1
-cl_crosshairgap -2.5
+cl_crosshairsize 1.5
+cl_crosshairthickness 0.5
+cl_crosshairgap -2
 cl_crosshair_drawoutline true
 cl_crosshair_outlinethickness 1
 cl_crosshaircolor 5
 cl_crosshaircolor_r 255
 cl_crosshaircolor_g 255
 cl_crosshaircolor_b 255
-cl_crosshairusealpha false
+cl_crosshairusealpha true
 cl_crosshairalpha 255
 cl_crosshair_t true
 cl_crosshairgap_useweaponvalue false
 cl_show_observer_crosshair 2
 cl_observed_bot_crosshair 1
 
-say sourced
+echo "sourced"
