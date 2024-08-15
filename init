@@ -1,77 +1,72 @@
 #!/bin/sh
+echo "init"
 cd $(dirname $0)
-
-sudo paman -Syu
-sudo pacman -S base-devel networkmanager 
-sudo pacman -S git tmux neovim bash-completion
-sudo pacman -S vlc qbittorrent libreoffice-still gimp firefox feh
-sudo pacman -S nvidia nvidia-utils nvidia-settings lib32-nvidia-utils xorg xorg-apps xorg-server xorg-xinit pipewire
-sudo pacman -S blender obs-studio xdotool xsel xclip bc flameshot qt6-tools fortune-mod cowsay btop cmatrix bluez bluez-utils lolcat telegram-desktop libxinerama libxft neofetch dunst picom discord python jdk-openjdk steam
-
 (
+	echo "packages"
+	sudo pacman -Syu
+	sudo pacman -S base-devel networkmanager 
+	sudo pacman -S git tmux neovim
+	sudo pacman -S vlc qbittorrent libreoffice-still gimp firefox feh
+	sudo pacman -S nvidia nvidia-utils nvidia-settings lib32-nvidia-utils xorg xorg-apps xorg-server xorg-xinit pipewire dunst picom flameshot 
+	sudo pacman -S xdotool xsel xclip bc qt6-tools bluez bluez-utils libxinerama libxft bash-completion
+)
+(
+	echo "AUR"
 	cd $(mktemp -d)
 	git clone https://aur.archlinux.org/paru.git
 	cd paru
 	makepkg -si
+	paru --aur -S mkinitcpio-firmware bemoji spotify github-desktop-bin
 )
-
-paru --aur -S mkinitcpio-firmware bemoji spotify github-desktop-bin
-
-cd program
-cd dwm
-sudo make clean install
-cd ../slstatus
-sudo make clean install
-cd ../dwmblocks
-sudo make clean install
-cd ../dmenu
-sudo make clean install
-cd ../st
-sudo make clean install
-cd ../slock
-sudo groupadd nogroup
-sudo make clean install
-cd ../systat
-./build
-cd ../
-cd ..
-
-cd config
-ls
-lncfg() {
-	ln -sf "$(pwd)/$1" "$2"
-	echo $1
-}
-lncfg bash/rc ~/.bashrc
-sudo ln -sf ~/.bashrc /root/.bashrc
-lncfg bash/profile ~/.bash_profile
-sudo ln -sf ~/.bash_profile /root/.bash_profile
-lncfg bash/logout ~/.bash_logout
-sudo ln -sf ~/.bash_logout /root/.bash_logout
-lncfg tmux ~/.tmux.conf
-sudo ln -sf ~/.tmux.conf /root/.tmux.conf
-lncfg nvim ~/.config/nvim
-sudo mkdir /root/.config 2> /dev/null
-sudo ln -sf ~/.config/nvim /root/.config/nvim
-lncfg xrc ~/.xinitrc
-lncfg neofetch ~/.config/neofetch/config.conf
-lncfg flameshot ~/.config/flameshot/flameshot.ini
-sudo cp dunst /etc/dunst/dunstrc
-sudo cp grub /etc/default/grub
-sudo cp issue /etc/issue
-sudo cp picom /etc/xdg/picom.conf
-sudo cp pacman /etc/pacman.conf
-sudo cp nobeep /etc/modprobe.d/nobeep.conf
-sudo cp nvim/desktop /usr/share/applications/nvim.desktop
-sudo cp paru /etc/paru.conf
-cd ..
-
-sudo cp etc/cat.png /boot/grub/bg.png
-
-cd script
-sudo cp dconfirm /bin
-sudo cp smenu /bin
-sudo cp dspotify /bin
-cd ..
-
+(
+	echo "program/"
+	cd program	
+	for dir in */; do
+		(
+			echo -e "\t${dir}build"
+			cd $dir
+			. ./build
+		)
+	done
+)
+(
+	echo "config/"
+	cd config
+	lncfg() {
+		ln -sf "$(pwd)/$1" "$2"
+		echo -e "\t$1"
+	}
+	lncfg bash/rc ~/.bashrc
+	sudo ln -sf ~/.bashrc /root/.bashrc
+	lncfg bash/profile ~/.bash_profile
+	sudo ln -sf ~/.bash_profile /root/.bash_profile
+	lncfg bash/logout ~/.bash_logout
+	sudo ln -sf ~/.bash_logout /root/.bash_logout
+	lncfg tmux ~/.tmux.conf
+	sudo ln -sf ~/.tmux.conf /root/.tmux.conf
+	lncfg nvim ~/.config/nvim
+	sudo mkdir /root/.config 2> /dev/null
+	sudo ln -sf ~/.config/nvim /root/.config/nvim
+	lncfg xrc ~/.xinitrc
+	lncfg neofetch ~/.config/neofetch/config.conf
+	lncfg flameshot ~/.config/flameshot/flameshot.ini
+	sudo cp dunst /etc/dunst/dunstrc
+	sudo cp grub /etc/default/grub
+	sudo cp issue /etc/issue
+	sudo cp picom /etc/xdg/picom.conf
+	sudo cp pacman /etc/pacman.conf
+	sudo cp nobeep /etc/modprobe.d/nobeep.conf
+	sudo cp nvim/desktop /usr/share/applications/nvim.desktop
+	sudo cp paru /etc/paru.conf
+)
+(
+	echo "script/"
+	cd script
+	sudo cp dconfirm /bin
+	sudo cp smenu /bin
+	sudo cp dspotify /bin
+)
+(
+	sudo cp etc/cat.png /boot/grub/bg.png
+)
 . ~/.bash_profile
