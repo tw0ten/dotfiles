@@ -1,4 +1,5 @@
 #!/bin/bash
 nice -10 vesktop &
 nice -10 telegram-desktop &
-nice -10 spotify &
+cd ~/music
+nice -10 st mousikes &

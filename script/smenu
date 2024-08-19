@@ -1,2 +1,3 @@
 #!/bin/bash
-. "$DOTFILES/script/bash/$(command ls "$DOTFILES/script/bash" | tr " " "\n" | dmenu -p "~")"
+cd $DOTFILES/script/bash
+. "$(command ls | tr " " "\n" | dmenu -p "~")"

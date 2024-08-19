@@ -3,9 +3,8 @@ local function unmap(mode, key)
 end
 
 unmap('n', "K")
-unmap('n', "<C-r>")
 
-vim.keymap.set('n', "r", vim.cmd.redo)
+vim.keymap.set('n', "U", vim.cmd.redo)
 
 vim.keymap.set('n', "<leader>ex", vim.cmd.Ex)
 vim.keymap.set('n', "<leader>wx", function()

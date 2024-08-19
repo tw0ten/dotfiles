@@ -62,9 +62,8 @@ cd $(dirname $0)
 (
 	echo "script/"
 	cd script
-	sudo cp dconfirm /bin
-	sudo cp smenu /bin
-	sudo cp dspotify /bin
+	sudo cp dconfirm /usr/bin
+	sudo cp smenu /usr/bin
 )
 (
 	sudo cp etc/cat.png /boot/grub/bg.png

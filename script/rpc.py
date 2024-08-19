@@ -2,6 +2,7 @@ from pypresence import Presence
 from time import sleep
 from subprocess import run
 
+interval = 10
 user = run("whoami", shell=True, capture_output=True, check=True).stdout.decode('utf-8').strip()
 host = run("uname -n", shell=True, capture_output=True, check=True).stdout.decode('utf-8')
 
@@ -18,7 +19,7 @@ while True:
                 small_image="linux",
                 small_text="linux"
             )
-            sleep(4)
+            sleep(interval)
     except Exception:
         print("discord disabled/error")
-    sleep(4)
+    sleep(interval)

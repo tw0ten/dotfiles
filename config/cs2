@@ -2,38 +2,17 @@ unbindall
 
 alias source "exec config"
 
-alias +desubtick_forward "+forward;+forward"
-alias -desubtick_forward "-forward;-forward;-forward"
-alias +desubtick_left "+left;+left"
-alias -desubtick_left "-left;-left;-left"
-alias +desubtick_back "+back;+back"
-alias -desubtick_back "-back;-back;-back"
-alias +desubtick_right "+right;+right"
-alias -desubtick_right "-right;-right;-right"
-alias nullforward ""
-alias nullback ""
-alias nullleft ""
-alias nullright ""
-alias +nullforward "-desubtick_back; +desubtick_forward; alias nullforward +desubtick_forward"
-alias +nullback "-desubtick_forward; +desubtick_back; alias nullback +desubtick_back"
-alias +nullleft "-desubtick_right; +desubtick_left; alias nullleft +desubtick_left"
-alias +nullright "-desubtick_left; +desubtick_right; alias nullright +desubtick_right"
-alias -nullforward "-desubtick_forward; -desubtick_back; nullback; alias nullforward"
-alias -nullback "-desubtick_back; -desubtick_forward; nullforward; alias nullback"
-alias -nullleft "-desubtick_left; -desubtick_right; nullright; alias nullleft"
-alias -nullright "-desubtick_right; -desubtick_left; nullleft; alias nullright"
-
 alias +m1 "+attack; cl_crosshairalpha 255; cl_crosshair_recoil true"
 alias -m1 "-attack; cl_crosshairalpha 128; cl_crosshair_recoil false"
 
 alias +listen "snd_headphone_eq 1; volume 0.5"
-alias -listen "snd_headphone_eq 0; volume 0.2"
+alias -listen "snd_headphone_eq 0; volume 0.3"
 
 bind = source
-bind w +nullforward
-bind a +nullleft
-bind s +nullback
-bind d +nullright
+bind w +forward
+bind a +left
+bind s +back
+bind d +right
 bind shift +sprint
 bind ctrl +duck
 bind mwheeldown +jump
@@ -62,11 +41,11 @@ bind mouse_x yaw
 bind mouse_y pitch 
 bind ` toggleconsole
 
-sensitivity 1.569
+sensitivity 1.5
 zoom_sensitivity_ratio 1
 
-viewmodel_fov 68
 viewmodel_presetpos 0
+viewmodel_fov 68
 viewmodel_offset_x 2.5
 viewmodel_offset_y 2
 viewmodel_offset_z -2

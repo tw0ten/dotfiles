@@ -1,3 +1,5 @@
+vim.opt.mouse = ''
+
 vim.g.mapleader = ' '
 
 vim.opt.nu = true
@@ -26,12 +28,13 @@ vim.g.netrw_banner = 0
 vim.g.netrw_preview = 1
 
 vim.opt.showmode = false
-vim.opt.statusline = " %{&readonly?'-':(&modified?'+':'=')} {%{mode()}} [%{expand('%:~:.')}] %#Normal#%=%* <%l,%c> (%{&fileformat}|%{&fileencoding}|%{&filetype}) "
+vim.opt.statusline =
+" %{&readonly?'-':(&modified?'+':'=')} {%{mode()}} [%{expand('%:~:.')}] %#Normal#%=%* <%l,%c> (%{&fileformat}|%{&fileencoding}|%{&filetype}) "
 vim.opt.laststatus = 2
 
 vim.opt.shortmess = "lmrwoOstTAIcCFS"
 
-vim.api.nvim_create_autocmd({ "FileType" }, {
+vim.api.nvim_create_autocmd("FileType", {
 	callback = function()
 		vim.wo.fillchars = "eob: "
 	end
