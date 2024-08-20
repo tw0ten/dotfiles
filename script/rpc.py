@@ -17,7 +17,6 @@ while True:
                 details=user+"@"+host,
                 large_image="arch",
                 small_image="linux",
-                small_text="linux"
             )
             sleep(interval)
     except Exception:

@@ -1,6 +1,5 @@
 #!/bin/sh
 echo "init"
-cd $(dirname $0)
 (
 	echo "packages"
 	sudo pacman -Syu

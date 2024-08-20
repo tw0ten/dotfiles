@@ -2,8 +2,8 @@ unbindall
 
 alias source "exec config"
 
-alias +m1 "+attack; cl_crosshairalpha 255; cl_crosshair_recoil true"
-alias -m1 "-attack; cl_crosshairalpha 128; cl_crosshair_recoil false"
+alias +m1 "+attack; cl_crosshair_recoil true"
+alias -m1 "-attack; cl_crosshair_recoil false"
 
 alias +listen "snd_headphone_eq 1; volume 0.5"
 alias -listen "snd_headphone_eq 0; volume 0.3"
@@ -44,18 +44,23 @@ bind ` toggleconsole
 sensitivity 1.5
 zoom_sensitivity_ratio 1
 
+cl_radar_rotate false
+cl_radar_scale 0.5
+cl_radar_always_centered false
+
 viewmodel_presetpos 0
 viewmodel_fov 68
 viewmodel_offset_x 2.5
 viewmodel_offset_y 2
 viewmodel_offset_z -2
 
-cl_crosshairstyle 4
+cl_crosshair_sniper_width 1
+cl_crosshairstyle 2
 cl_crosshair_recoil true
-cl_crosshairdot false
+cl_crosshairdot true
 cl_crosshairsize 1.5
 cl_crosshairthickness 0.5
-cl_crosshairgap -2
+cl_crosshairgap 0
 cl_crosshair_drawoutline true
 cl_crosshair_outlinethickness 1
 cl_crosshaircolor 5
@@ -68,5 +73,9 @@ cl_crosshair_t true
 cl_crosshairgap_useweaponvalue false
 cl_show_observer_crosshair 2
 cl_observed_bot_crosshair 1
+cl_crosshair_dynamic_maxdist_splitratio 0.5
+cl_crosshair_dynamic_splitdist 0
+cl_crosshair_dynamic_splitalpha_outermod 1
+cl_crosshair_dynamic_splitalpha_innermod 1
 
 echo "sourced"

@@ -10,7 +10,6 @@ randcow() {
 
 alias mhm='echo -e "$(fortune | cowsay -n -f $(randcow))" | lolcat'
 alias minineofetch="neofetch --ascii_distro arch_small --os_arch off --kernel_shorthand on --shell_version off --package_managers off --disable locale users public_ip local_ip song font battery disk cpu_usage gpu_driver cpu gpu memory uptime resolution wm theme icons term term_font model packages --underline_char ' ' --color_blocks off --separator '\0'"
-alias FeelsGoodMan="find / | lolcat -i -p 0.1"
 
 alias date="date +'[%w.%d/%m|%H:%M]'"
 
@@ -22,14 +21,13 @@ alias lsa="ls -A --group-directories-first"
 
 alias vim="nvim"
 alias svim="sudo nvim"
-alias nano="nvim"
 
 alias py="python"
 
-PS1="\u\[$bold$cyan\]@\[$normal\]\h \[$bold$cyan\]\w\[$normal\]\[$bold$cyan\]$\[$normal\]>"
-[[ "$(id -u)" = 0 ]] && PS1="\h \[$bold$cyan\]\w\[$normal\]\[$bold$cyan\]#\[$normal\]>"
-[[ "$SSH_CONNECTION" ]] && PS1="ssh:$PS1"
-PS1="\[$normal\]\$([[ \$? = 0 ]] && echo + || echo -) $PS1"
+PS1="\u$bold$cyan@$normal\h $bold$cyan\w\$$normal>"
+[[ "$(id -u)" = 0 ]] && PS1="\h $bold$cyan\w#$normal>"
+[[ "$SSH_CONNECTION" ]] && PS1="ssh$cyan:$normal$PS1"
+PS1="$normal$cyan\$([[ \$? = 0 ]] && echo + || echo -)$normal $PS1"
 
 [[ -f "$HOME/.tmprc" ]] && . "$HOME/.tmprc"
 

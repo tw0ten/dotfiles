@@ -38,8 +38,8 @@ export HISTSIZE=-1
 export EDITOR=nvim
 
 mklc() {
-	[[ $1 ]] || { command ls $DOTFILES/etc/lc; return 1; }
-	cp -i $DOTFILES/etc/lc/$1 LICENSE || return 1
+	[[ $1 ]] || { command ls $DOTFILES/etc/lc; return $(false); }
+	cp -i $DOTFILES/etc/lc/$1 LICENSE || return
 	case $1 in
 		"GPL") ;;
 		"MIT"|"APACHE")
@@ -47,7 +47,7 @@ mklc() {
 			sed -i "0,/{NAME}/s//$(git config --get user.name)/" LICENSE
 			sed -i "0,/{EMAIL}/s//$(git config --get user.email)/" LICENSE
 		;;
-		*) return 1 ;;
+		*) return $(false) ;;
 	esac
 	head -n 5 LICENSE
 	[[ $(wc -l < LICENSE) -gt 5 ]] && echo "..."
@@ -56,16 +56,13 @@ mklc() {
 export -f mklc
 
 mktl() {
-	mkdir $1 || return 1
+	mkdir $1 || return
 	cd $1
 	cp -r $DOTFILES/etc/tl/.[^.]* .
 	cp -r $DOTFILES/etc/tl/* .
 	git init
-	mkdir src
-	mkdir lib
-	mkdir io
-	mkdir io/i
-	mkdir io/o
+	mkdir src lib
+	mkdir io io/i io/o
 	sed -i "\$s/\$/$1\n/" README.md
 	$EDITOR README.md +2
 	echo "tl -> '$1'"
@@ -75,9 +72,9 @@ export -f mktl
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
-[[ -z $PROFILE ]] || return 0
+[[ -z $PROFILE ]] || return $(true)
 export PROFILE='sourced'
-[[ $(who | grep -cw "^$(whoami)") = 1 ]] || return 0
+[[ $(who | grep -cw "^$(whoami)") = 1 ]] || return $(true)
 
 echo "+ $(date) $(whoami)" >> ~/.auth
 
