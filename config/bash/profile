@@ -1,5 +1,4 @@
 #!/bin/bash
-clear
 
 export DOTFILES="$HOME/dotfiles"
 
@@ -23,8 +22,8 @@ export bell=$(tput bel)
 
 eval $(dircolors)
 
-export SUDO_PROMPT="$normal[$bold${cyan}sudo$normal] password for $bold$cyan%p$normal #>"
-export PS0=""
+export SUDO_PROMPT="$normal$bold$cyan%p#$normal>"
+export PS0="$normal"
 export PS2="> "
 export PS3="? "
 export PS4="+ "
@@ -53,7 +52,6 @@ mklc() {
 	[[ $(wc -l < LICENSE) -gt 5 ]] && echo "..."
 	echo "$1 -> 'LICENSE'"
 }
-export -f mklc
 
 mktl() {
 	mkdir $1 || return
@@ -68,15 +66,12 @@ mktl() {
 	echo "tl -> '$1'"
 	ls
 }
-export -f mktl
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
-[[ -z $PROFILE ]] || return $(true)
-export PROFILE='sourced'
-[[ $(who | grep -cw "^$(whoami)") = 1 ]] || return $(true)
+echo "+ $(date) $(whoami) $(tty)" >> ~/.auth
 
-echo "+ $(date) $(whoami)" >> ~/.auth
+[[ $(who | grep -cw "^$(whoami)") = 1 ]] || return $(true)
 
 while true; do
 	echo -e "$bold$cyan\nstart[x]$yellow\n[p]acman -Syu$red\n[e]xit$normal\n[c]ancel"
