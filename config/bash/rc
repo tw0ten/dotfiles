@@ -10,20 +10,12 @@ PS1=$(
 	[[ $(id -u) = 0 ]] && PS1="\h $b\w#"
 	[[ -n "$SSH_CONNECTION" ]] && PS1="ssh$c:$r$PS1"
 	PS1="$c\$([[ \$? = 0 ]] && echo + || echo -)$r $PS1"
-	echo "$r$PS1$r>"
+	echo "$r$PS1$r"
 )
 
 mhm() {
 	randcow() { cowsay -l | grep "/" -v | tr " " "\n" | shuf -n1; }
 	fortune | cowsay -n -f $(randcow) | lolcat
-}
-
-minineofetch() {
-	neofetch \
-		--ascii_distro arch_small \
-		--os_arch off --kernel_shorthand on --shell_version off --package_managers off \
-		--disable locale users public_ip local_ip song font battery disk cpu_usage gpu_driver cpu gpu memory uptime resolution wm theme icons term term_font model packages --color_blocks off \
-		--underline_char ' ' --separator '\0'
 }
 
 alias date="date +'[%w.%d/%m|%H:%M]'"
@@ -41,4 +33,8 @@ alias py="python"
 
 [[ -f ~/.tmprc ]] && . ~/.tmprc
 
-minineofetch
+neofetch \
+	--ascii_distro arch_small \
+	--os_arch off --kernel_shorthand on --shell_version off --package_managers off \
+	--disable locale users public_ip local_ip song font battery disk cpu_usage gpu_driver cpu gpu memory uptime resolution wm theme icons term term_font model packages --color_blocks off \
+	--underline_char ' ' --separator '\0' --gap 2

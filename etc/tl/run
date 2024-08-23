@@ -1,6 +1,0 @@
-#!/bin/sh
-
-rm -rf io/o
-mkdir io/o
-
-cd io

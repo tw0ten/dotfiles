@@ -20,5 +20,4 @@ while True:
             )
             sleep(interval)
     except Exception:
-        print("discord disabled/error")
-    sleep(interval)
+        sleep(interval)

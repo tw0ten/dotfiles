@@ -38,10 +38,8 @@ fi
 	java -jar script/fehfetch.jar --font /usr/share/fonts/TTF/art.ttf --path $(mktemp -d) &
 	(
 		cd $(mktemp -d)
-		python -m venv .venv
-		source .venv/bin/activate
-		python -m pip install --upgrade pip
-		python -m pip install tendo
+		python -m venv venv
+		source venv/bin/activate
 		python -m pip install pypresence
 		python $DOTFILES/script/rpc.py
 	) &

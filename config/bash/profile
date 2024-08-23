@@ -19,16 +19,18 @@ export magenta=$(tput setaf 5)
 export cyan=$(tput setaf 6)
 export white=$(tput setaf 7)
 export bell=$(tput bel)
-
 eval $(dircolors)
 
-export SUDO_PROMPT="$normal$bold$cyan%p#$normal>"
+export PROMPT_COMMAND=''
 export PS0="$normal"
-export PS2="> "
-export PS3="? "
-export PS4="+ "
+export PS1='$ '
+export PS2='| '
+export PS3='? '
+export PS4='$ '
 
-export HISTTIMEFORMAT="$normal[%Y|%w.%d/%m|%H:%M:%S] $bold$cyan\$$normal>"
+export SUDO_PROMPT="$normal$bold$cyan%p#$normal"
+
+export HISTTIMEFORMAT="[%Y|%w.%d/%m|%H:%M:%S] "
 export HISTCONTROL=ignoredups
 export HISTIGNORE="ls*:history*"
 export HISTFILESIZE=-1
@@ -49,27 +51,24 @@ mklc() {
 		*) return $(false) ;;
 	esac
 	head -n 5 LICENSE
-	[[ $(wc -l < LICENSE) -gt 5 ]] && echo "..."
-	echo "$1 -> 'LICENSE'"
 }
 
 mktl() {
 	mkdir $1 || return
 	cd $1
-	cp -r $DOTFILES/etc/tl/.[^.]* .
-	cp -r $DOTFILES/etc/tl/* .
 	git init
 	mkdir src lib
-	mkdir io io/i io/o
-	sed -i "\$s/\$/$1\n/" README.md
-	$EDITOR README.md +2
-	echo "tl -> '$1'"
+	mkdir io io/i
+	echo "io/o" > .gitignore
+	echo "# $1" >> README.md
+	echo -e "#!/bin/sh\nrm -rf io/o\nmkdir io/o\n\ncd io\ncd o" > run
+	chmod +x run
 	ls
 }
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
-echo "+ $(date) $(whoami) $(tty)" >> ~/.auth
+echo "$(date) $(whoami) $(tty) ${SHLVL}" >> ~/.auth 
 
 [[ $(who | grep -cw "^$(whoami)") = 1 ]] || return $(true)
 

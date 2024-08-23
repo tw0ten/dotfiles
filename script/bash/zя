@@ -1,4 +1,4 @@
 #!/bin/bash
 
 xkb-switch -s $( xkb-switch -l | dmenu -p "keyboard" )
-pkill -f systat-3
+pkill systat-3

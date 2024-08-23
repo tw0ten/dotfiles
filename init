@@ -3,8 +3,8 @@ echo "init"
 (
 	echo "packages"
 	sudo pacman -Syu
-	sudo pacman -S base-devel networkmanager 
-	sudo pacman -S git tmux neovim
+	sudo pacman -S git base-devel networkmanager 
+	sudo pacman -S tmux neovim
 	sudo pacman -S vlc qbittorrent libreoffice-still gimp firefox feh
 	sudo pacman -S nvidia nvidia-utils nvidia-settings lib32-nvidia-utils xorg xorg-apps xorg-server xorg-xinit pipewire dunst picom flameshot 
 	sudo pacman -S xdotool xsel xclip bc qt6-tools bluez bluez-utils libxinerama libxft bash-completion
@@ -39,8 +39,6 @@ echo "init"
 	sudo ln -sf ~/.bashrc /root/.bashrc
 	lncfg bash/profile ~/.bash_profile
 	sudo ln -sf ~/.bash_profile /root/.bash_profile
-	lncfg bash/logout ~/.bash_logout
-	sudo ln -sf ~/.bash_logout /root/.bash_logout
 	lncfg tmux ~/.tmux.conf
 	sudo ln -sf ~/.tmux.conf /root/.tmux.conf
 	lncfg nvim ~/.config/nvim

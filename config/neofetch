@@ -3,10 +3,10 @@
 print_info() {
 	info title
 	info underline
-	info "os" distro
+	info "distro" distro
 	info "kernel" kernel
-	prin "tty" $(tty)
 	info "shell" shell
+	prin "tty" "$(tty)"
 	info "packages" packages
 
 	info "users" users
