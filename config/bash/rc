@@ -6,7 +6,7 @@ PS1=$(
 	r=$(esc $normal)
 	c=$(esc $cyan)
 	b=$(esc $bold$cyan)
-	PS1="\u$b@$r\h $b\w\$"
+	PS1="\u$b@$r\h $b\w="
 	[[ $(id -u) = 0 ]] && PS1="\h $b\w#"
 	[[ -n "$SSH_CONNECTION" ]] && PS1="ssh$c:$r$PS1"
 	PS1="$c\$([[ \$? = 0 ]] && echo + || echo -)$r $PS1"
