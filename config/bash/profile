@@ -32,7 +32,7 @@ export SUDO_PROMPT="$normal$bold$cyan%p#$normal"
 
 export HISTTIMEFORMAT="[%Y|%w.%d/%m|%H:%M:%S] "
 export HISTCONTROL=ignoredups
-export HISTIGNORE="ls*:history*"
+export HISTIGNORE="ls:lsa:history*"
 export HISTFILESIZE=-1
 export HISTSIZE=-1
 

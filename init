@@ -1,32 +1,25 @@
-#!/bin/sh
+#!/usr/bin/env sh
 echo "init"
+sudo -v
 (
 	echo "packages"
 	sudo pacman -Syu
 	sudo pacman -S git base-devel networkmanager 
-	sudo pacman -S tmux neovim
+	sudo pacman -S tmux neovim ranger
 	sudo pacman -S vlc qbittorrent libreoffice-still gimp firefox feh
 	sudo pacman -S nvidia nvidia-utils nvidia-settings lib32-nvidia-utils xorg xorg-apps xorg-server xorg-xinit pipewire dunst picom flameshot 
 	sudo pacman -S xdotool xsel xclip bc qt6-tools bluez bluez-utils libxinerama libxft bash-completion
-)
-(
-	echo "AUR"
-	cd $(mktemp -d)
-	git clone https://aur.archlinux.org/paru.git
-	cd paru
-	makepkg -si
-	paru --aur -S mkinitcpio-firmware bemoji spotify github-desktop-bin
+	( cd $(mktemp -d); git clone "https://aur.archlinux.org/paru.git" .; makepkg -si )
+	paru --aur -S mkinitcpio-firmware bemoji github-desktop-bin
 )
 (
 	echo "program/"
 	cd program	
-	for dir in */; do
-		(
-			echo -e "\t${dir}build"
-			cd $dir
-			. ./build
-		)
-	done
+	for dir in */; do (
+		echo -e "\t${dir}build"
+		cd $dir
+		. ./build
+	) done
 )
 (
 	echo "config/"
@@ -57,12 +50,11 @@ echo "init"
 	sudo cp paru /etc/paru.conf
 )
 (
-	echo "script/"
-	cd script
+	echo "etc/"
+	cd etc
+	( cd fehfetch && ./build )
 	sudo cp dconfirm /usr/bin
 	sudo cp smenu /usr/bin
-)
-(
-	sudo cp etc/cat.png /boot/grub/bg.png
+	sudo cp cat.png /boot/grub/bg.png
 )
 . ~/.bash_profile

@@ -1,4 +1,4 @@
 #!/bin/bash
-ID=$( dunstify -p -i "$ICON" "ping" "request sent" )
+ID=$(dunstify -p -i "$ICON" "ping" "request sent")
 START=$(date +%s.%3N)
 dunstify -r $ID "pong" "$(curl -s -o /dev/null https://tw0ten.github.io && echo ok || echo err), $(echo "$(date +%s.3N) - $START" | bc | tr "." "\0")ms"

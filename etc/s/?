@@ -2,7 +2,5 @@
 
 IN=$(echo "~" | dmenu -p "?")
 
-if [ "$IN" = "~" ]; then
-	exec smenu
-fi
+[[ "$IN" = "~" ]] && exec smenu
 exec nice -5 firefox --search "$IN"

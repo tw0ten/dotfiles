@@ -1,0 +1,9 @@
+#!/bin/bash
+
+getvol(){ amixer sget Master | awk -F"[][]" '/Left:/ { print $2; }'; }
+
+VOL=$(dmenu -p "volume: $(getvol)" &)
+amixer sset Master "$VOL%"
+
+notify-send "volume" "set to $(getvol)"
+pkill systat-1

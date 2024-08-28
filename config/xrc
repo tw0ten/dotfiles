@@ -34,14 +34,14 @@ if [ $(xkb-switch -l | wc -l) -eq 1 ]; then
 fi
 
 (
-	cd $DOTFILES
-	java -jar script/fehfetch.jar --font /usr/share/fonts/TTF/art.ttf --path $(mktemp -d) &
+	cd "$DOTFILES/etc"
+	( cd fehfetch && ./run --font "/usr/share/fonts/TTF/art.ttf" --path $(mktemp -d) ) &
 	(
-		cd $(mktemp -d)
-		python -m venv venv
-		source venv/bin/activate
+		VENV=$(mktemp -d)
+		python -m venv $VENV
+		source $VENV/bin/activate
 		python -m pip install pypresence
-		python $DOTFILES/script/rpc.py
+		python rpc.py
 	) &
 	xbacklight -set 75 -time 0 -steps 1 &
 	flameshot &
