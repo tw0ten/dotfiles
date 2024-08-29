@@ -1,60 +1,67 @@
 #!/usr/bin/env sh
 echo "init"
-sudo -v
-(
-	echo "packages"
+
+true && ( echo "packages"
 	sudo pacman -Syu
+
 	sudo pacman -S git base-devel networkmanager 
 	sudo pacman -S tmux neovim ranger
 	sudo pacman -S vlc qbittorrent libreoffice-still gimp firefox feh
 	sudo pacman -S nvidia nvidia-utils nvidia-settings lib32-nvidia-utils xorg xorg-apps xorg-server xorg-xinit pipewire dunst picom flameshot 
 	sudo pacman -S xdotool xsel xclip bc qt6-tools bluez bluez-utils libxinerama libxft bash-completion
-	( cd $(mktemp -d); git clone "https://aur.archlinux.org/paru.git" .; makepkg -si )
-	paru --aur -S mkinitcpio-firmware bemoji github-desktop-bin
-)
-(
-	echo "program/"
-	cd program	
-	for dir in */; do (
-		echo -e "\t${dir}build"
-		cd $dir
-		. ./build
-	) done
-)
-(
-	echo "config/"
-	cd config
+
+	AUR_HELPER=paru
+	sudo pacman -S $AUR_HELPER || ( cd $(mktemp -d) && git clone "https://aur.archlinux.org/$AUR_HELPER" . && makepkg -si )
+	$AUR_HELPER -S mkinitcpio-firmware bemoji github-desktop-bin
+echo )
+
+true && ( echo "config/" && cd config
+	mkdir ~/.config
+	sudo mkdir /root/.config
+
 	lncfg() {
-		ln -sf "$(pwd)/$1" "$2"
+		ln -sf "$(pwd)/$1" $2
 		echo -e "\t$1"
 	}
-	lncfg bash/rc ~/.bashrc
-	sudo ln -sf ~/.bashrc /root/.bashrc
-	lncfg bash/profile ~/.bash_profile
-	sudo ln -sf ~/.bash_profile /root/.bash_profile
-	lncfg tmux ~/.tmux.conf
-	sudo ln -sf ~/.tmux.conf /root/.tmux.conf
-	lncfg nvim ~/.config/nvim
-	sudo mkdir /root/.config 2> /dev/null
-	sudo ln -sf ~/.config/nvim /root/.config/nvim
+	slncfg() {
+		lncfg $1 "$HOME/$2"
+		sudo ln -sf "$HOME/$2" "/root/$2"
+	}
+
+	slncfg bash/rc .bashrc
+	slncfg bash/profile .bash_profile
+	slncfg tmux .tmux.conf
+	slncfg nvim .config/nvim
+
 	lncfg xrc ~/.xinitrc
 	lncfg neofetch ~/.config/neofetch/config.conf
 	lncfg flameshot ~/.config/flameshot/flameshot.ini
+
+	cp git ~/.gitconfig
+	sudo cp *.desktop /usr/share/applications
 	sudo cp dunst /etc/dunst/dunstrc
 	sudo cp grub /etc/default/grub
 	sudo cp issue /etc/issue
 	sudo cp picom /etc/xdg/picom.conf
 	sudo cp pacman /etc/pacman.conf
 	sudo cp nobeep /etc/modprobe.d/nobeep.conf
-	sudo cp nvim/desktop /usr/share/applications/nvim.desktop
 	sudo cp paru /etc/paru.conf
-)
-(
-	echo "etc/"
-	cd etc
+echo )
+
+true && (
+( echo "program/" && cd program
+	for dir in */; do (
+		echo -e "\t${dir}build"
+		cd $dir
+		. ./build
+	) done
+echo )
+( echo "etc/" && cd etc
 	( cd fehfetch && ./build )
 	sudo cp dconfirm /usr/bin
 	sudo cp smenu /usr/bin
 	sudo cp cat.png /boot/grub/bg.png
+echo )
 )
+
 . ~/.bash_profile

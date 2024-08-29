@@ -37,19 +37,15 @@ export HISTFILESIZE=-1
 export HISTSIZE=-1
 
 export EDITOR=nvim
+export PAGER=less
+export BROWSER=firefox
 
 mklc() {
-	[[ $1 ]] || { command ls $DOTFILES/etc/lc; return $(false); }
-	cp -i $DOTFILES/etc/lc/$1 LICENSE || return
-	case $1 in
-		"GPL") ;;
-		"MIT"|"APACHE")
-			sed -i "0,/{YEAR}/s//$(command date +%Y)/" LICENSE
-			sed -i "0,/{NAME}/s//$(git config --get user.name)/" LICENSE
-			sed -i "0,/{EMAIL}/s//$(git config --get user.email)/" LICENSE
-		;;
-		*) return $(false) ;;
-	esac
+	local dir="$DOTFILES/etc/lc"
+	cp -i "$dir/$1" LICENSE || { command ls $dir; return $(false); }
+	sed -i "0,/{YEAR}/s//$(command date +%Y)/" LICENSE
+	sed -i "0,/{NAME}/s//$(git config --get user.name)/" LICENSE
+	sed -i "0,/{EMAIL}/s//$(git config --get user.email)/" LICENSE
 	head -n 5 LICENSE
 }
 
@@ -76,10 +72,10 @@ while true; do
 	echo -e "$bold$cyan\nstart[x]$yellow\n[p]acman -Syu$red\n[e]xit$normal\n[c]ancel"
 	read -s -n1 opt
 	case $opt in
-		"x") startx ;;
-		"p") sudo pacman -Syu ;;
-		"e") exit ;;
-		"c") break ;;
+		'x') startx ;;
+		'p') sudo pacman -Syu ;;
+		'e') exit ;;
+		'c') break ;;
 		*) ;;
 	esac
 done

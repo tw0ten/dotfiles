@@ -1,0 +1,6 @@
+[init]
+	defaultBranch = main
+[alias]
+	aa = add --all
+	ca = commit --amend
+	l = log --decorate --numstat --graph

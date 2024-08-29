@@ -5,8 +5,8 @@ alias source "exec config"
 alias +m1 "+attack; cl_crosshair_recoil true"
 alias -m1 "-attack; cl_crosshair_recoil false"
 
-alias +listen "snd_headphone_eq 1; volume 0.6"
-alias -listen "snd_headphone_eq 0; volume 0.4"
+alias +listen "snd_headphone_eq 1; volume 0.5"
+alias -listen "snd_headphone_eq 0; volume 0.2"
 
 bind = source
 bind w +forward

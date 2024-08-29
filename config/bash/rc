@@ -18,6 +18,8 @@ mhm() {
 	fortune | cowsay -n -f $(randcow) | lolcat
 }
 
+alias gitc="git clone --depth 1"
+
 alias date="date +'[%w.%d/%m|%H:%M]'"
 
 alias c="xsel --input --clipboard"
