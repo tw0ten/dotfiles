@@ -1,23 +1,26 @@
 from pypresence import Presence
+import subprocess
 from time import sleep
-from subprocess import run
 
-interval = 10
-user = run("whoami", shell=True, capture_output=True, check=True).stdout.decode('utf-8').strip()
-host = run("uname -n", shell=True, capture_output=True, check=True).stdout.decode('utf-8')
+def run(cmd):
+    return subprocess.run(cmd, capture_output=True).stdout.decode("utf-8").strip()
+
+user = run(["whoami"])
+host = run(["uname", "-n"])
+rpc = Presence("1133070138602700810")
 
 while True:
     try:
-        rpc = Presence("1133070138602700810")
         rpc.connect()
         while True:
-            uptime = run("uptime -p", shell=True, capture_output=True, check=True).stdout.decode('utf-8')
+            uptime = run(["uptime", "-p"])
             rpc.update(
                 state=uptime,
-                details=user+"@"+host,
+                details=user + "@" + host,
                 large_image="arch",
                 small_image="linux",
             )
-            sleep(interval)
-    except Exception:
-        sleep(interval)
+            sleep(10)
+    except Exception as e:
+        print(e)
+        sleep(10)

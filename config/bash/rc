@@ -18,6 +18,28 @@ mhm() {
 	fortune | cowsay -n -f $(randcow) | lolcat
 }
 
+mklc() {
+	local dir="$DOTFILES/etc/lc"
+	cp -i "$dir/$1" LICENSE || { command ls $dir; return $(false); }
+	sed -i "0,/{YEAR}/s//$(command date +%Y)/" LICENSE
+	sed -i "0,/{NAME}/s//$(git config --get user.name)/" LICENSE
+	sed -i "0,/{EMAIL}/s//$(git config --get user.email)/" LICENSE
+	head -n 5 LICENSE
+}
+
+mktl() {
+	mkdir $1 || return
+	cd $1
+	git init
+	mkdir src lib
+	mkdir io io/i
+	echo "io/o" > .gitignore
+	echo "# $1" >> README.md
+	echo -e "#!/bin/sh\nrm -rf io/o\nmkdir io/o\n\ncd io\ncd o" > run
+	chmod +x run
+	ls
+}
+
 alias gitc="git clone --depth 1"
 
 alias date="date +'[%w.%d/%m|%H:%M]'"
