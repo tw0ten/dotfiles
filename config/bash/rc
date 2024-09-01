@@ -40,19 +40,15 @@ mktl() {
 	ls
 }
 
-alias gitc="git clone --depth 1"
-
 alias date="date +'[%w.%d/%m|%H:%M]'"
-
+alias uptime="uptime -p"
 alias c="xsel --input --clipboard"
 alias v="xsel --output --clipboard"
-
 alias ls="ls --color=tty"
 alias lsa="ls -A --group-directories-first"
-
+alias gitc="git clone --depth 1"
 alias vim="nvim"
 alias svim="sudo nvim"
-
 alias py="python"
 
 [[ -f ~/.tmprc ]] && . ~/.tmprc
