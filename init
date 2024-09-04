@@ -1,5 +1,6 @@
 #!/usr/bin/env sh
 echo "init"
+git submodule update --init --recursive
 
 true && ( echo "packages"
 	sudo pacman -Syu
@@ -57,6 +58,7 @@ true && (
 	) done
 echo )
 ( echo "etc/" && cd etc
+	mkdir ~/.secret
 	( cd fehfetch && ./build )
 	sudo cp dconfirm /usr/bin
 	sudo cp smenu /usr/bin
