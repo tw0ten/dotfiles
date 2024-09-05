@@ -37,8 +37,14 @@ vim.opt.laststatus = 2
 
 vim.opt.shortmess = "lmrwoOstTAIcCFS"
 
-vim.api.nvim_create_autocmd("FileType", {
+vim.api.nvim_create_autocmd({"BufEnter", "FileType"}, {
 	callback = function()
 		vim.wo.fillchars = "eob: "
+	end
+})
+vim.api.nvim_create_autocmd("FileChangedRO", {
+	callback = function()
+		vim.opt.ro = false
+		print("- > =")
 	end
 })
