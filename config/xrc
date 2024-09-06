@@ -33,13 +33,17 @@ if [ $(xkb-switch -l | wc -l) -eq 1 ]; then
 	localectl set-keymap --no-convert us
 fi
 
-(
-	cd "$DOTFILES/etc"
-	( cd fehfetch && ./run --font "/usr/share/fonts/TTF/art.ttf" --path $(mktemp -d) ) &
+( cd $DOTFILES/etc
+	( cd fehfetch
+		dir=$(mktemp -d)
+		fastfetch --pipe -s ":" | sed "s/\x1b.*//g" | \
+			./run -f "/usr/share/fonts/TTF/art.ttf" -p $dir
+		feh --bg-scale $dir
+	) &
 	(
-		VENV=$(mktemp -d)
-		python -m venv $VENV
-		source $VENV/bin/activate
+		dir=$(mktemp -d)
+		python -m venv $dir
+		source $dir/bin/activate
 		python -m pip install pypresence
 		python rpc.py
 	) &

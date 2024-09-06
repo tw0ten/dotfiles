@@ -1,8 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Neovim
-Exec=nvim %F
-Icon=nvim
-StartupNotify=false
-Terminal=true
-MimeType=inode/directory;

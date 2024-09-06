@@ -24,18 +24,20 @@ true && ( echo "config/" && cd config
 		ln -sf "$(pwd)/$1" $2
 		echo -e "\t$1"
 	}
-	slncfg() {
-		lncfg $1 "$HOME/$2"
-		sudo ln -sf "$HOME/$2" "/root/$2"
-	}
 
-	slncfg bash/rc .bashrc
-	slncfg bash/profile .bash_profile
-	slncfg tmux .tmux.conf
-	slncfg nvim .config/nvim
+	true && (
+		slncfg() {
+			lncfg $1 "$HOME/$2"
+			sudo ln -sf "$HOME/$2" "/root/$2"
+		}
+		slncfg bash/rc .bashrc
+		slncfg bash/profile .bash_profile
+		slncfg tmux .tmux.conf
+		slncfg nvim .config/nvim
+	)
 
 	lncfg xrc ~/.xinitrc
-	lncfg neofetch ~/.config/neofetch/config.conf
+	lncfg fastfetch ~/.config/fastfetch
 	lncfg flameshot ~/.config/flameshot/flameshot.ini
 
 	cp git ~/.gitconfig
