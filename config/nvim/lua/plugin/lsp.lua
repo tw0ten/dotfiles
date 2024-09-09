@@ -21,12 +21,6 @@ return {
 		)
 		require("fidget").setup({})
 		require("mason").setup({})
-		vim.filetype.add({
-			extension = {
-				HC = "HolyC",
-				HH = "HolyC",
-			},
-		})
 		local on_attach = function(e)
 			local opts = { buffer = e.buf }
 			vim.keymap.set('n', "gd", vim.lsp.buf.definition, opts)

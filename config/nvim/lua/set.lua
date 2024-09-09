@@ -48,3 +48,11 @@ vim.api.nvim_create_autocmd("FileChangedRO", {
 		print("- > =")
 	end
 })
+
+vim.filetype.add({
+	extension = {
+		['HC'] = "HolyC",
+		['HH'] = "HolyC",
+		['k'] = "komp"
+	},
+})

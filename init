@@ -2,7 +2,7 @@
 echo "init"
 git submodule update --init --recursive
 
-true && ( echo "packages"
+( echo "packages"
 	sudo pacman -Syu
 
 	sudo pacman -S git base-devel networkmanager 
@@ -16,29 +16,24 @@ true && ( echo "packages"
 	$AUR_HELPER -S mkinitcpio-firmware bemoji github-desktop-bin
 echo )
 
-true && ( echo "config/" && cd config
+( echo "config/" && cd config
 	mkdir ~/.config
 	sudo mkdir /root/.config
 
 	lncfg() {
-		ln -sf "$(pwd)/$1" $2
 		echo -e "\t$1"
+		ln -sf "$PWD/$1" $2
+		true || sudo ln -sf "$HOME/$2" "/root/$2"
 	}
 
-	true && (
-		slncfg() {
-			lncfg $1 "$HOME/$2"
-			sudo ln -sf "$HOME/$2" "/root/$2"
-		}
-		slncfg bash/rc .bashrc
-		slncfg bash/profile .bash_profile
-		slncfg tmux .tmux.conf
-		slncfg nvim .config/nvim
-	)
-
-	lncfg xrc ~/.xinitrc
-	lncfg fastfetch ~/.config/fastfetch
-	lncfg flameshot ~/.config/flameshot/flameshot.ini
+	lncfg bash/rc .bashrc
+	lncfg bash/profile .bash_profile
+	lncfg tmux .tmux.conf
+	lncfg nvim .config/nvim
+	lncfg xrc .xinitrc
+	lncfg input .inputrc
+	lncfg fastfetch .config/fastfetch
+	lncfg flameshot .config/flameshot/flameshot.ini
 
 	cp git ~/.gitconfig
 	sudo cp *.desktop /usr/share/applications
@@ -51,7 +46,6 @@ true && ( echo "config/" && cd config
 	sudo cp paru /etc/paru.conf
 echo )
 
-true && (
 ( echo "program/" && cd program
 	for dir in */; do (
 		echo -e "\t${dir}build"
@@ -59,6 +53,7 @@ true && (
 		. ./build
 	) done
 echo )
+
 ( echo "etc/" && cd etc
 	mkdir ~/.secret
 	( cd fehfetch && ./build )
@@ -66,6 +61,5 @@ echo )
 	sudo cp smenu /usr/bin
 	sudo cp cat.png /boot/grub/bg.png
 echo )
-)
 
 . ~/.bash_profile
