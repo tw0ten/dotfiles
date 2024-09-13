@@ -1,5 +1,5 @@
 #!/bin/sh
-journalctl -u sshd -f -n 1 | { while IFS= read -r line; do
+journalctl -u sshd -f -n 1 | while IFS= read -r line; do
 	CONTENT=$(echo $line \
 		| sed 's/Accepted publickey for .*/Accepted publickey for [REDACTED]/'
 	)
@@ -7,4 +7,4 @@ journalctl -u sshd -f -n 1 | { while IFS= read -r line; do
 	curl --retry 3 -s -H "Content-Type: application/json" -d \
 		"{\"username\": \"sshd\", \"content\": \"$CONTENT\"}" "$1"
 	sleep 5
-done }
+done

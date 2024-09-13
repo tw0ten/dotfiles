@@ -34,24 +34,25 @@ if [ $(xkb-switch -l | wc -l) -eq 1 ]; then
 fi
 
 ( cd $DOTFILES/etc
-	( cd fehfetch
-		dir=$(mktemp -d)
+	( cd fehfetch; dir=$(mktemp -d)
 		fastfetch --pipe -s ":" | sed "s/\x1b.*//g" \
 			| ./run -f "/usr/share/fonts/TTF/art.ttf" -p $dir
 		feh --no-fehbg --bg-scale $dir
 	) &
-	(
-		dir=$(mktemp -d)
+	( dir=$(mktemp -d)
 		python -m venv $dir
 		source $dir/bin/activate
 		python -m pip install pypresence
 		python rpc.py
 	) &
-	xbacklight -set 75 -time 0 -steps 1 &
-	flameshot &
-	dunst &
 	systat &
 	picom &
+	dunst &
+	flameshot &
 ) > /dev/null 2>&1 &
 
+
+xbacklight -set 75 -time 0 -steps 1
+xset r rate 200 25 
+xset m 0 0
 exec dwm

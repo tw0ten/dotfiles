@@ -20,7 +20,7 @@ mhm() {
 
 mklc() {
 	local dir="$DOTFILES/etc/lc"
-	cp -i "$dir/$1" LICENSE || { command ls $dir; return $(false); }
+	cp -i "$dir/$1" LICENSE || { dir $dir; return $(false); }
 	sed -i "0,/{YEAR}/s//$(command date +%Y)/" LICENSE
 	sed -i "0,/{NAME}/s//$(git config --get user.name)/" LICENSE
 	sed -i "0,/{EMAIL}/s//$(git config --get user.email)/" LICENSE

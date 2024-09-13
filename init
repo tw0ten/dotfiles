@@ -34,6 +34,7 @@ echo )
 	lncfg input .inputrc
 	lncfg fastfetch .config/fastfetch
 	lncfg flameshot .config/flameshot/flameshot.ini
+	lncfg paru .config/paru/paru.conf
 
 	cp git ~/.gitconfig
 	sudo cp *.desktop /usr/share/applications
@@ -43,7 +44,6 @@ echo )
 	sudo cp picom /etc/xdg/picom.conf
 	sudo cp pacman /etc/pacman.conf
 	sudo cp nobeep /etc/modprobe.d/nobeep.conf
-	sudo cp paru /etc/paru.conf
 echo )
 
 ( echo "program/" && cd program
