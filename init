@@ -5,25 +5,22 @@ git submodule update --init --recursive
 ( echo "packages"
 	sudo pacman -Syu
 
-	sudo pacman -S git base-devel networkmanager 
-	sudo pacman -S tmux neovim ranger
-	sudo pacman -S vlc qbittorrent libreoffice-still gimp firefox feh
-	sudo pacman -S nvidia nvidia-utils nvidia-settings lib32-nvidia-utils xorg xorg-apps xorg-server xorg-xinit pipewire dunst picom flameshot 
-	sudo pacman -S xdotool xsel xclip bc qt6-tools bluez bluez-utils libxinerama libxft bash-completion
-
 	AUR_HELPER=paru
+	i() { $AUR_HELPER -S $*; }
 	sudo pacman -S $AUR_HELPER || ( cd $(mktemp -d) && git clone "https://aur.archlinux.org/$AUR_HELPER" . && makepkg -si )
-	$AUR_HELPER -S mkinitcpio-firmware bemoji github-desktop-bin
+
+	i neovim tmux
+	i ranger openssh btop fastfetch
+	i jdk-openjdk rust python npm
+	i nvidia nvidia-utils nvidia-settings xorg xorg-xinit xkb-switch pipewire libnotify ttf-jetbrains-mono ttf-nerd-fonts-symbols-mono noto-fonts-emoji noto-fonts-cjk
+	i vlc qbittorrent libreoffice-still gimp firefox steam vesktop telegram-desktop bemoji github-desktop dunst picom flameshot feh
 echo )
 
 ( echo "config/" && cd config
-	mkdir ~/.config
-	sudo mkdir /root/.config
-
 	lncfg() {
 		echo -e "\t$1"
-		ln -sf "$PWD/$1" $2
-		true || sudo ln -sf "$HOME/$2" "/root/$2"
+		mkdir -p $(dirname "$HOME/$2")
+		ln -sf "$PWD/$1" "$HOME/$2"
 	}
 
 	lncfg bash/rc .bashrc
@@ -35,6 +32,7 @@ echo )
 	lncfg fastfetch .config/fastfetch
 	lncfg flameshot .config/flameshot/flameshot.ini
 	lncfg paru .config/paru/paru.conf
+	lncfg btop .config/btop/btop.conf
 
 	cp git ~/.gitconfig
 	sudo cp *.desktop /usr/share/applications
@@ -55,11 +53,18 @@ echo )
 echo )
 
 ( echo "etc/" && cd etc
-	mkdir ~/.secret
+	mkdir -p ~/.secret
+
 	( cd fehfetch && ./build )
+
 	sudo cp dconfirm /usr/bin
 	sudo cp smenu /usr/bin
+
 	sudo cp cat.png /boot/grub/bg.png
+	sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+	localectl set-x11-keymap us,ru
+	localectl set-keymap --no-convert us
 echo )
 
 . ~/.bash_profile

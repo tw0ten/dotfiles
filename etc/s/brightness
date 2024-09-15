@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 max(){ [[ $1 -gt $2 ]] && echo $1 || echo $2; }
 min(){ [[ $1 -lt $2 ]] && echo $1 || echo $2; }

@@ -1,6 +1,4 @@
-#!/bin/bash
-
+#!/bin/sh
 IN=$(echo "~" | dmenu -p "?")
-
 [[ "$IN" = "~" ]] && exec smenu
-exec nice -5 firefox --search "$IN"
+nice -5 firefox --search "$IN"

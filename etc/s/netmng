@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 OPERATION=$(echo -e "device\nwifi station" | dmenu -p "nm" -c -l 2)
 

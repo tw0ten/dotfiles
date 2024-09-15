@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 SP_DEST="org.mpris.MediaPlayer2.spotify"
 SP_PATH="/org/mpris/MediaPlayer2"

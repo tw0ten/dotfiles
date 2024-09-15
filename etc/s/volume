@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 getvol(){ amixer sget Master | awk -F"[][]" '/Left:/ { print $2; }'; }
 
