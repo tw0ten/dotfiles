@@ -1,9 +1,4 @@
 #!/bin/sh
-
-getvol(){ amixer sget Master | awk -F"[][]" '/Left:/ { print $2; }'; }
-
-VOL=$(dmenu -p "volume: $(getvol)" &)
-amixer sset Master "$VOL%"
-
-notify-send "volume" "set to $(getvol)"
+pamixer -u --set-volume $(dmenu -p "volume: $(pamixer --get-volume-human)" &)
+notify-send "volume" "set to $(pamixer --get-volume)"
 pkill systat-1

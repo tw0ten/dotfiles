@@ -11,7 +11,7 @@ git submodule update --init --recursive
 
 	i neovim tmux
 	i ranger openssh btop fastfetch
-	i jdk-openjdk rust python npm
+	i jdk-openjdk rust python npm nasm
 	i nvidia nvidia-utils nvidia-settings xorg xorg-xinit xkb-switch pipewire libnotify ttf-jetbrains-mono ttf-nerd-fonts-symbols-mono noto-fonts-emoji noto-fonts-cjk
 	i vlc qbittorrent libreoffice-still gimp firefox steam vesktop telegram-desktop bemoji github-desktop dunst picom flameshot feh
 echo )
@@ -48,7 +48,7 @@ echo )
 	for dir in */; do (
 		echo -e "\t${dir}build"
 		cd $dir
-		. ./build
+		./build
 	) done
 echo )
 
