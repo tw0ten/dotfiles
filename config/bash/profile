@@ -19,7 +19,7 @@ export magenta=$(tput setaf 5)
 export cyan=$(tput setaf 6)
 export white=$(tput setaf 7)
 export bell=$(tput bel)
-eval $(dircolors)
+eval "$(dircolors)"
 
 export PROMPT_COMMAND=''
 export PS0="$normal"
@@ -48,7 +48,7 @@ echo "$(date) $(whoami) $(tty) ${SHLVL}" >> ~/.auth
 
 while true; do
 	echo -e "$bold$cyan\nstart[x]$yellow\n[p]acman -Syu$red\n[e]xit$normal\n[c]ancel"
-	read -s -n1 opt
+	read -rs -n1 opt
 	case $opt in
 		'x') startx ;;
 		'p') sudo pacman -Syu ;;
