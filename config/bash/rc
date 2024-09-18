@@ -15,16 +15,15 @@ PS1=$(
 
 mklc() {
 	local dir="$DOTFILES/etc/lc"
-	cp -i "$dir/$1" LICENSE || { dir $dir; return $(false); }
+	cp -i "$dir/$1" LICENSE || { dir "$dir"; return $(false); }
 	sed -i "0,/{YEAR}/s//$(command date +%Y)/" LICENSE
 	sed -i "0,/{NAME}/s//$(git config --get user.name)/" LICENSE
 	sed -i "0,/{EMAIL}/s//$(git config --get user.email)/" LICENSE
 	head -n 5 LICENSE
 }
-
+ff() { find / -name "*$**" 2> /dev/null | $PAGER; }
 mktl() {
-	mkdir $1 || return
-	cd $1
+	mkdir "$1" && cd "$1" || return
 	git init
 	mkdir src lib
 	mkdir io io/i
@@ -34,9 +33,10 @@ mktl() {
 	chmod +x run
 	ls
 }
+mhm() { fortune | cowsay -n -f "$(cowsay -l | grep "/" -v | tr " " "\n" | shuf -n1)" | lolcat; }
 
-alias mhm="fortune | cowsay -n -f $(cowsay -l | grep "/" -v | tr " " "\n" | shuf -n1) | lolcat"
-alias sshs="eval $(ssh-agent -s)"
+
+alias sshs="eval \$(ssh-agent -s)"
 alias date="date +'[%w.%d/%m|%H:%M]'"
 alias uptime="uptime -p"
 alias c="xsel --input --clipboard"

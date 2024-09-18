@@ -6,20 +6,20 @@ git submodule update --init --recursive
 	sudo pacman -Syu
 
 	AUR_HELPER=paru
-	i() { $AUR_HELPER -S $*; }
-	( cd $(mktemp -d) && git clone "https://aur.archlinux.org/$AUR_HELPER" . && makepkg -si )
+	i() { $AUR_HELPER -S "$@"; }
+	( cd "$(mktemp -d)" && git clone "https://aur.archlinux.org/$AUR_HELPER" . && makepkg -si )
 
 	i neovim tmux
-	i ranger openssh btop fastfetch
+	i ranger openssh btop fastfetch ripgrep
 	i jdk-openjdk rust python npm nasm
 	i nvidia nvidia-utils nvidia-settings xorg xorg-xinit xkb-switch pipewire libnotify ttf-jetbrains-mono ttf-nerd-fonts-symbols-mono noto-fonts-emoji noto-fonts-cjk
 	i vlc qbittorrent libreoffice-still gimp firefox steam vesktop telegram-desktop bemoji dunst picom flameshot feh
 echo )
 
-( echo "config/" && cd config
+( echo "config/" && cd config || return
 	lncfg() {
-		echo -e "\t$1"
-		mkdir -p $(dirname "$HOME/$2")
+		echo "$1"
+		mkdir -p "$(dirname "$HOME/$2")"
 		ln -sf "$PWD/$1" "$HOME/$2"
 	}
 
@@ -35,7 +35,7 @@ echo )
 	lncfg btop .config/btop/btop.conf
 
 	cp git ~/.gitconfig
-	sudo cp *.desktop /usr/share/applications
+	sudo cp ./*.desktop /usr/share/applications
 	sudo cp dunst /etc/dunst/dunstrc
 	sudo cp grub /etc/default/grub
 	sudo cp issue /etc/issue
@@ -44,15 +44,14 @@ echo )
 	sudo cp nobeep /etc/modprobe.d/nobeep.conf
 echo )
 
-( echo "program/" && cd program
+( echo "program/" && cd program || return
 	for dir in */; do (
-		echo -e "\t${dir}build"
-		cd $dir
-		./build
+		echo "${dir}build"
+		cd "$dir" && ./build
 	) done
 echo )
 
-( echo "etc/" && cd etc
+( echo "etc/" && cd etc || return
 	mkdir -p ~/.secret
 
 	( cd fehfetch && ./build )

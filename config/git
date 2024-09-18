@@ -2,5 +2,8 @@
 	defaultBranch = main
 [alias]
 	aa = add --all
+	c = commit
 	ca = commit --amend
 	l = log --decorate --numstat --graph
+	s = status
+	d = diff
