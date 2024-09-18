@@ -7,13 +7,13 @@ git submodule update --init --recursive
 
 	AUR_HELPER=paru
 	i() { $AUR_HELPER -S $*; }
-	sudo pacman -S $AUR_HELPER || ( cd $(mktemp -d) && git clone "https://aur.archlinux.org/$AUR_HELPER" . && makepkg -si )
+	( cd $(mktemp -d) && git clone "https://aur.archlinux.org/$AUR_HELPER" . && makepkg -si )
 
 	i neovim tmux
 	i ranger openssh btop fastfetch
 	i jdk-openjdk rust python npm nasm
 	i nvidia nvidia-utils nvidia-settings xorg xorg-xinit xkb-switch pipewire libnotify ttf-jetbrains-mono ttf-nerd-fonts-symbols-mono noto-fonts-emoji noto-fonts-cjk
-	i vlc qbittorrent libreoffice-still gimp firefox steam vesktop telegram-desktop bemoji github-desktop dunst picom flameshot feh
+	i vlc qbittorrent libreoffice-still gimp firefox steam vesktop telegram-desktop bemoji dunst picom flameshot feh
 echo )
 
 ( echo "config/" && cd config

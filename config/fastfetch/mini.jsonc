@@ -32,8 +32,8 @@
 		},
 		{
 			"type": "command",
-			"key": "tty",
-			"text": "tty"
+			"key": " ",
+			"text": "echo $SHINFO"
 		}
 	]
 }

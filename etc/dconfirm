@@ -1,6 +1,2 @@
 #!/bin/bash
-
-case $( echo -e "confirm\ncancel" | dmenu -p "$1" -ps 1 -noif ) in
-	"confirm") $2 ;;
-	*) ;;
-esac
+[[ $(echo -e "confirm\ncancel" | dmenu -p "$1" -ps 1 -noif) = "confirm" ]] && $2

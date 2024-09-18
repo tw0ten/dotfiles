@@ -13,11 +13,6 @@ PS1=$(
 	echo "$r$PS1$r"
 )
 
-mhm() {
-	randcow() { cowsay -l | grep "/" -v | tr " " "\n" | shuf -n1; }
-	fortune | cowsay -n -f $(randcow) | lolcat
-}
-
 mklc() {
 	local dir="$DOTFILES/etc/lc"
 	cp -i "$dir/$1" LICENSE || { dir $dir; return $(false); }
@@ -40,6 +35,8 @@ mktl() {
 	ls
 }
 
+alias mhm="fortune | cowsay -n -f $(cowsay -l | grep "/" -v | tr " " "\n" | shuf -n1) | lolcat"
+alias sshs="eval $(ssh-agent -s)"
 alias date="date +'[%w.%d/%m|%H:%M]'"
 alias uptime="uptime -p"
 alias c="xsel --input --clipboard"
@@ -53,4 +50,6 @@ alias py="python"
 
 [[ -f ~/.tmprc ]] && . ~/.tmprc
 
+export SHINFO="$(tty):$SHLVL '$-'"
 fastfetch -C ~/.config/fastfetch/mini.jsonc
+unset SHINFO
