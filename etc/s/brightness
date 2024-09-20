@@ -1,27 +1,20 @@
 #!/bin/sh
-
-max(){ [[ $1 -gt $2 ]] && echo $1 || echo $2; }
-min(){ [[ $1 -lt $2 ]] && echo $1 || echo $2; }
-
+max(){ echo $(($1>$2 ? $1 : $2 )); }
+min(){ echo $(($1<$2 ? $1 : $2 )); }
 getbr(){ xbacklight -get | cut -f1 -d '.'; }
 
 BR1=$(getbr)
 MAX=$(cat /sys/class/backlight/nvidia_0/max_brightness)
-
-BR=$( dmenu -p "brightness: $BR1/$MAX" & )
-
+BR=$(dmenu -p "brightness: $BR1/$MAX" &)
 STEPS=$(($(max $BR1 $BR) - $(min $BR1 $BR)))
 STEPS=$(min $(max $STEPS 0) 100)
 
-ID=$( dunstify -p "brightness" "$(getbr)" )
-
+ID=$(dunstify -p "brightness" "$(getbr)")
 xbacklight -set $BR -time $(($STEPS*10)) -steps $STEPS &
-
 PID=$!
-while kill -0 $PID 2> /dev/null; do
+while kill -0 $PID; do
 	dunstify -r $ID "brightness" "$(getbr)"
 	sleep 0.01
 done
-
 dunstify -r $ID "brightness" "set to $(getbr)"
 pkill systat-2

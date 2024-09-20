@@ -42,7 +42,7 @@ export BROWSER="firefox"
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
-echo "$(date) $(whoami) $(tty) ${SHLVL}" >> ~/.auth 
+echo "$(date) $(whoami) $(tty) ${SHLVL}" >> ~/.auth
 
 [[ $(who | grep -cw "^$(whoami)") = 1 ]] || return $(true)
 

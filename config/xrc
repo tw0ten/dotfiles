@@ -29,14 +29,14 @@ if [ -d /etc/X11/xinit/xinitrc.d ]; then
 fi
 
 ( cd $DOTFILES/etc
-	( cd fehfetch; dir=$(mktemp -d)
+	( cd fehfetch; dir="$(mktemp -d)"
 		fastfetch --pipe -s ":" | sed "s/\x1b.*//g" \
-			| ./run -f "/usr/share/fonts/TTF/art.ttf" -p $dir
-		feh --no-fehbg --bg-scale $dir
+			| ./run -f "/usr/share/fonts/TTF/art.ttf" -p "$dir"
+		feh --no-fehbg --bg-scale "$dir"
 	) &
-	( dir=$(mktemp -d)
-		python -m venv $dir
-		source $dir/bin/activate
+	( dir="$(mktemp -d)"
+		python -m venv "$dir"
+		source "$dir/bin/activate"
 		python -m pip install pypresence
 		python rpc.py
 	) &
