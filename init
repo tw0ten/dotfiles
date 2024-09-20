@@ -33,9 +33,10 @@ echo )
 	lncfg flameshot .config/flameshot/flameshot.ini
 	lncfg paru .config/paru/paru.conf
 	lncfg btop .config/btop/btop.conf
+	lncfg git .gitconfig
 
-	cp git ~/.gitconfig
-	sudo cp ./*.desktop /usr/share/applications
+	sudo cp ssh/config /etc/ssh/ssh_config
+	sudo cp ssh/d /etc/ssh/sshd_config
 	sudo cp dunst /etc/dunst/dunstrc
 	sudo cp grub /etc/default/grub
 	sudo cp issue /etc/issue
@@ -58,12 +59,12 @@ echo )
 
 	sudo cp dconfirm /usr/bin
 	sudo cp smenu /usr/bin
-
+	sudo cp ./*.desktop /usr/share/applications
 	sudo cp cat.png /boot/grub/bg.png
-	sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 	localectl set-x11-keymap us,ru
 	localectl set-keymap --no-convert us
+	sudo grub-mkconfig -o /boot/grub/grub.cfg
 echo )
 
 . ~/.bash_profile

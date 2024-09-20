@@ -7,3 +7,11 @@
 	l = log --decorate --numstat --graph
 	s = status
 	d = diff
+[user]
+	name = tw0ten
+	email = twoten.eq@gmail.com
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

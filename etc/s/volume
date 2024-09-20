@@ -1,4 +1,4 @@
 #!/bin/sh
 pamixer -u --set-volume $(dmenu -p "volume: $(pamixer --get-volume-human)" &)
-notify-send "volume" "set to $(pamixer --get-volume)"
+notify-send "volume" "set to $(pamixer --get-volume-human)"
 pkill systat-1
