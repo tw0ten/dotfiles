@@ -35,7 +35,6 @@ mktl() {
 }
 mhm() { fortune | cowsay -n -f "$(cowsay -l | grep "/" -v | tr " " "\n" | shuf -n1)" | lolcat; }
 
-
 alias sshs="eval \$(ssh-agent -s)"
 alias date="date +'[%w.%d/%m|%H:%M]'"
 alias uptime="uptime -p"

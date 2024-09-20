@@ -16,7 +16,7 @@ git submodule update --init --recursive
 	i vlc qbittorrent libreoffice-still gimp firefox steam vesktop telegram-desktop bemoji dunst picom flameshot feh
 echo )
 
-( echo "config/" && cd config || return
+( cd config || return; echo "config/"
 	lncfg() {
 		echo "$1"
 		mkdir -p "$(dirname "$HOME/$2")"
@@ -44,14 +44,14 @@ echo )
 	sudo cp nobeep /etc/modprobe.d/nobeep.conf
 echo )
 
-( echo "program/" && cd program || return
+( cd program || return; echo "program/"
 	for dir in */; do (
 		echo "${dir}build"
 		cd "$dir" && ./build
 	) done
 echo )
 
-( echo "etc/" && cd etc || return
+( cd etc || return; echo "etc/"
 	mkdir -p ~/.secret
 
 	( cd fehfetch && ./build )
