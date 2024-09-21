@@ -37,7 +37,7 @@ vim.opt.laststatus = 2
 
 vim.opt.shortmess = "lmrwoOstTAIcCFS"
 
-vim.api.nvim_create_autocmd({"BufEnter", "FileType"}, {
+vim.api.nvim_create_autocmd({ "BufEnter", "FileType" }, {
 	callback = function()
 		vim.wo.fillchars = "eob: "
 	end
@@ -53,6 +53,6 @@ vim.filetype.add({
 	extension = {
 		['HC'] = "HolyC",
 		['HH'] = "HolyC",
-		['k'] = "komp"
+		['k'] = "komp",
 	},
 })

@@ -54,9 +54,7 @@ echo )
 
 ( cd etc || return; echo "etc/"
 	mkdir -p ~/.secret
-
 	( cd fehfetch && ./build )
-
 	sudo cp dconfirm /usr/bin
 	sudo cp smenu /usr/bin
 	sudo cp ./*.desktop /usr/share/applications

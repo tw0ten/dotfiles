@@ -36,6 +36,7 @@ export HISTIGNORE="ls:lsa:history*"
 export HISTFILESIZE=-1
 export HISTSIZE=-1
 
+export TERMINAL="st"
 export EDITOR="nvim"
 export PAGER="less -F"
 export BROWSER="firefox"
