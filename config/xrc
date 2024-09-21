@@ -31,7 +31,7 @@ fi
 ( cd $DOTFILES/etc
 	( cd fehfetch; dir="$(mktemp -d)"
 		fastfetch --pipe -s ":" | sed "s/\x1b.*//g" \
-			| ./run -f "/usr/share/fonts/TTF/art.ttf" -p "$dir"
+			| ./run -f "/usr/share/fonts/TTF/art.ttf" -d "$dir"
 		feh --no-fehbg --bg-scale "$dir"
 	) &
 	( dir="$(mktemp -d)"

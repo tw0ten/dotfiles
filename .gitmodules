@@ -10,6 +10,3 @@
 [submodule "program/systat"]
 	path = program/systat
 	url = https://github.com/tw0ten/systat
-[submodule "etc/fehfetch"]
-	path = etc/fehfetch
-	url = https://github.com/tw0ten/fehfetch
