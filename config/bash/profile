@@ -54,6 +54,6 @@ while true; do
 		'p') sudo pacman -Syu ;;
 		'e') exit ;;
 		'c') break ;;
-		*) ;;
+		*) mhm ;;
 	esac
 done

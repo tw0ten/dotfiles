@@ -10,10 +10,10 @@ git submodule update --init --recursive
 	( cd "$(mktemp -d)" && git clone "https://aur.archlinux.org/$AUR_HELPER" . && makepkg -si )
 
 	i neovim tmux
-	i ranger openssh btop fastfetch ripgrep
-	i jdk-openjdk rust python npm nasm
+	i ranger openssh btop fastfetch ripgrep ffmpeg
+	i jdk-openjdk rust python npm nasm gcc
 	i nvidia nvidia-utils nvidia-settings xorg xorg-xinit xkb-switch pipewire libnotify ttf-jetbrains-mono ttf-nerd-fonts-symbols-mono noto-fonts-emoji noto-fonts-cjk
-	i vlc qbittorrent libreoffice-still gimp firefox steam vesktop telegram-desktop bemoji dunst picom flameshot feh
+	i vlc qbittorrent libreoffice-still gimp firefox bemoji dunst picom flameshot feh
 echo )
 
 ( cd config || return; echo "config/"
