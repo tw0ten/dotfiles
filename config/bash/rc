@@ -4,8 +4,8 @@
 PS1=$(
 	esc() { echo "\[$1\]"; }
 	r=$(esc $normal)
-	c=$(esc $cyan)
-	b=$(esc $bold$cyan)
+	c=$(esc $accent)
+	b=$(esc $bold$accent)
 	PS1="\u$b@$r\h $b\w="
 	[[ $(id -u) = 0 ]] && PS1="\h $b\w#"
 	[[ -n "$SSH_CONNECTION" ]] && PS1="ssh$c:$r$PS1"
