@@ -1,27 +1,31 @@
 #!/bin/bash
 [[ $- = *i* ]] || return $(true)
 
-PS1=$(
+PS1="$(
 	esc() { echo "\[$1\]"; }
-	r=$(esc $normal)
-	c=$(esc $accent)
-	b=$(esc $bold$accent)
-	PS1="\u$b@$r\h $b\w="
-	[[ $(id -u) = 0 ]] && PS1="\h $b\w#"
+	b="$(esc $bold)"
+	r="$(esc $normal)"
+	c="$(esc $accent)"
+	unset PS1
+
+	PS1="$b$c\w"
+	#PS1="\$(git rev-parse --is-inside-work-tree >/dev/null 2>&1 && echo "git$c:$r")$PS1"
+	PS1="\h $PS1$r"
+	[[ "$(id -u)" = 0 ]] && PS1="$PS1#" || PS1="\u$b$c@$r$PS1="
 	[[ -n "$SSH_CONNECTION" ]] && PS1="ssh$c:$r$PS1"
-	PS1="$c\$([[ \$? = 0 ]] && echo + || echo -)$r $PS1"
-	echo "$r$PS1$r"
-)
+	PS1="$c\$([ \$? = 0 ] && echo + || echo -)$r $PS1"
+	echo "$r$PS1"
+)"
 
 mklc() {
 	local dir="$DOTFILES/etc/lc"
 	cp -i "$dir/$1" LICENSE || { dir "$dir"; return $(false); }
-	sed -i "0,/{YEAR}/s//$(command date +%Y)/" LICENSE
+	sed -i "0,/{YEAR}/s//$(\date +'%Y')/" LICENSE
 	sed -i "0,/{NAME}/s//$(git config --get user.name)/" LICENSE
 	sed -i "0,/{EMAIL}/s//$(git config --get user.email)/" LICENSE
 	head -n 5 LICENSE
 }
-ff() { find / -name "*$**" 2> /dev/null | $PAGER; }
+ff() { find ./ -name "*$**" 2>/dev/null | $PAGER; }
 mktl() {
 	mkdir "$1" && cd "$1" || return
 	git init
@@ -33,9 +37,10 @@ mktl() {
 	chmod +x run
 	ls
 }
-mhm() { fortune | cowsay -n -f "$(cowsay -l | grep "/" -v | tr " " "\n" | shuf -n1)" | lolcat; }
+mhm() { fortune | cowsay -n -f "$(cowsay -l | grep / -v | tr " " "\n" | shuf -n1)" | lolcat; }
+sign() { $EDITOR "$1" && echo " - $(whoami), $(\date)" | tee -a "$1"; }
 
-alias clone="($TERMINAL &)"
+alias clone="($TERMINAL >/dev/null 2>&1 &)"
 alias sshs="eval \$(ssh-agent -s)"
 alias date="date +'[%w.%d/%m|%H:%M]'"
 alias uptime="uptime -p"
