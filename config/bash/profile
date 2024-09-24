@@ -29,7 +29,7 @@ export PS2='| '
 export PS3='? '
 export PS4=$PS1
 
-export SUDO_PROMPT="$normal$bold$accent%p#$normal"
+export SUDO_PROMPT="$normal$bold$accent%p$normal#"
 
 export HISTTIMEFORMAT="[%Y|%w.%d/%m|%H:%M:%S] "
 export HISTCONTROL="ignoredups"
