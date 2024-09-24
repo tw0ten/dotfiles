@@ -27,6 +27,7 @@ echo )
 	lncfg bash/profile .bash_profile
 	lncfg tmux .tmux.conf
 	lncfg nvim .config/nvim
+	lncfg ranger .config/ranger
 	lncfg xrc .xinitrc
 	lncfg input .inputrc
 	lncfg fastfetch .config/fastfetch

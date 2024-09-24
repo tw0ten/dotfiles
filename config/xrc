@@ -34,9 +34,8 @@ fi
 			| ./run -f "/usr/share/fonts/TTF/art.ttf" -d "$dir"
 		feh --no-fehbg --bg-scale "$dir"
 	) &
-	( dir="$(mktemp -d)"
-		python -m venv "$dir"
-		source "$dir/bin/activate"
+	( python -m venv "$(mktemp -d)"
+		source "$_/bin/activate"
 		python -m pip install pypresence
 		python rpc.py
 	) &
@@ -44,7 +43,7 @@ fi
 	picom &
 	dunst &
 	flameshot &
-) > /dev/null 2>&1 &
+) >/dev/null 2>&1 &
 
 
 xbacklight -set 75 -time 0 -steps 1

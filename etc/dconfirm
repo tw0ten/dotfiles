@@ -1,2 +1,2 @@
 #!/bin/bash
-[[ $(echo -e "confirm\ncancel" | dmenu -p "$1" -ps 1 -noif) = "confirm" ]] && $2
+[[ "$(echo -e "confirm\ncancel" | dmenu -p "$1" -ps 1 -noif)" = "confirm" ]] && "$2"
