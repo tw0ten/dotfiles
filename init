@@ -12,7 +12,7 @@ git submodule update --init --recursive
 	i neovim tmux
 	i ranger openssh btop fastfetch ripgrep ffmpeg
 	i jdk-openjdk rust python npm nasm
-	i nvidia nvidia-utils nvidia-settings xorg xorg-xinit xkb-switch pipewire libnotify ttf-jetbrains-mono ttf-nerd-fonts-symbols-mono noto-fonts-emoji noto-fonts-cjk
+	i nvidia-open nvidia-utils nvidia-settings xorg xorg-xinit xkb-switch pipewire libnotify ttf-jetbrains-mono ttf-nerd-fonts-symbols-mono noto-fonts-emoji noto-fonts-cjk
 	i obs-studio vlc qbittorrent libreoffice-still gimp firefox bemoji dunst picom flameshot feh
 echo )
 
