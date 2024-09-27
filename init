@@ -56,13 +56,14 @@ echo )
 ( cd etc || return; echo "etc/"
 	mkdir -p ~/.secret
 	( cd fehfetch && ./build )
-	sudo cp dconfirm /usr/bin
-	sudo cp smenu /usr/bin
+	sudo cp dconfirm /usr/local/bin
+	sudo cp smenu /usr/local/bin
 	sudo cp ./*.desktop /usr/share/applications
-	sudo cp cat.png /boot/grub/bg.png
 
 	localectl set-x11-keymap us,ru
 	localectl set-keymap --no-convert us
+
+	sudo cp cat.png /boot/grub/bg.png
 	sudo grub-mkconfig -o /boot/grub/grub.cfg
 echo )
 
