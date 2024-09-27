@@ -44,9 +44,9 @@ export BROWSER="firefox"
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
-echo "$(date) $(whoami) $(tty) ${SHLVL}" >> ~/.auth
+echo "$(date) $USER $(tty) $SHLVL" >> ~/.auth
 
-[[ $(who | grep -cw "^$(whoami)") = 1 ]] || return $(true)
+[[ $(who | grep -cw "^$USER") = 1 ]] || return $(true)
 
 while true; do
 	echo -e "$bold$cyan\nstart[x]$yellow\n[p]acman -Syu$red\n[e]xit$normal\n[c]ancel"

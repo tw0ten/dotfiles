@@ -1,12 +1,14 @@
 [init]
 	defaultBranch = main
 [alias]
-	aa = add --all
+	a = add
+	aa = a --all
 	c = commit
-	ca = commit --amend
-	l = log --decorate --numstat --graph
-	s = status
+	ca = c --amend
 	d = diff
+	dh = d HEAD
+	s = status
+	l = log --decorate --numstat --graph
 [user]
 	name = tw0ten
 	email = twoten.eq@gmail.com
