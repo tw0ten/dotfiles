@@ -52,6 +52,8 @@ alias gitc="git clone --depth 1"
 alias vim="nvim"
 alias svim="sudo nvim"
 alias py="python"
+alias forsenCD="cd"
+alias z="cd .."
 
 [[ -f ~/.tmprc ]] && . ~/.tmprc
 

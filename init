@@ -1,49 +1,56 @@
 #!/usr/bin/env sh
-echo "init"
 git submodule update --init --recursive
 
 ( echo "packages"
+	sudo cp config/pacman /etc/pacman.conf
 	sudo pacman -Syu
 
 	AUR_HELPER=paru
 	i() { $AUR_HELPER -S "$@"; }
 	( cd "$(mktemp -d)" && git clone "https://aur.archlinux.org/$AUR_HELPER" . && makepkg -si )
 
-	i neovim tmux
-	i ranger openssh btop fastfetch ripgrep ffmpeg
-	i jdk-openjdk rust python npm nasm
+	i reflector
+	sudo systemctl start reflector
+	sudo systemctl enable reflector.timer
+
+	i neovim tmux openssh
+	i ranger btop fastfetch ripgrep
+	i jdk-openjdk rust python deno nasm
 	i nvidia-open nvidia-utils nvidia-settings xorg xorg-xinit xkb-switch pipewire libnotify ttf-jetbrains-mono ttf-nerd-fonts-symbols-mono noto-fonts-emoji noto-fonts-cjk
-	i obs-studio vlc qbittorrent libreoffice-still gimp firefox bemoji dunst picom flameshot feh
+	i obs-studio vlc qbittorrent libreoffice-still gimp firefox torbrowser-launcher bemoji dunst picom flameshot feh
 echo )
 
 ( cd config || exit; echo "config/"
-	lncfg() {
+	i() {
 		echo "$1"
-		mkdir -p "$(dirname "$HOME/$2")"
-		ln -sf "$PWD/$1" "$HOME/$2"
+		mkdir -p "$(dirname "$2")"
+		ln -sfT "$PWD/$1" "$2"
 	}
+	i bash/rc ~/.bashrc
+	i bash/profile ~/.bash_profile
+	i tmux ~/.tmux.conf
+	i nvim ~/.config/nvim
+	i ranger ~/.config/ranger
+	i xrc ~/.xinitrc
+	i input ~/.inputrc
+	i fastfetch ~/.config/fastfetch
+	i flameshot ~/.config/flameshot/flameshot.ini
+	i paru ~/.config/paru/paru.conf
+	i btop ~/.config/btop/btop.conf
+	i git ~/.gitconfig
+	i ssh/config ~/.ssh/ssh_config
+	i picom ~/.config/picom/picom.conf
+	i dunst ~/.config/dunst/dunstrc
 
-	lncfg bash/rc .bashrc
-	lncfg bash/profile .bash_profile
-	lncfg tmux .tmux.conf
-	lncfg nvim .config/nvim
-	lncfg ranger .config/ranger
-	lncfg xrc .xinitrc
-	lncfg input .inputrc
-	lncfg fastfetch .config/fastfetch
-	lncfg flameshot .config/flameshot/flameshot.ini
-	lncfg paru .config/paru/paru.conf
-	lncfg btop .config/btop/btop.conf
-	lncfg git .gitconfig
-
-	sudo cp ssh/config /etc/ssh/ssh_config
-	sudo cp ssh/d /etc/ssh/sshd_config
-	sudo cp dunst /etc/dunst/dunstrc
-	sudo cp grub /etc/default/grub
-	sudo cp issue /etc/issue
-	sudo cp picom /etc/xdg/picom.conf
-	sudo cp pacman /etc/pacman.conf
-	sudo cp nobeep /etc/modprobe.d/nobeep.conf
+	i() {
+		echo "$1"
+		sudo mkdir -p "$(dirname "$2")"
+		sudo cp "$1" "$2"
+	}
+	i ssh/d /etc/ssh/sshd_config
+	i grub /etc/default/grub
+	i issue /etc/issue
+	i nobeep /etc/modprobe.d/nobeep.conf
 echo )
 
 ( cd program || exit; echo "program/"
@@ -54,14 +61,12 @@ echo )
 echo )
 
 ( cd etc || exit; echo "etc/"
-	mkdir -p ~/.secret
 	( cd fehfetch && ./build )
 	sudo cp dconfirm /usr/local/bin
 	sudo cp smenu /usr/local/bin
-	sudo cp ./*.desktop /usr/share/applications
 
-	localectl set-x11-keymap us,ru
-	localectl set-keymap --no-convert us
+	sudo localectl set-x11-keymap us,ru
+	sudo localectl set-keymap --no-convert us
 
 	sudo cp cat.png /boot/grub/bg.png
 	sudo grub-mkconfig -o /boot/grub/grub.cfg

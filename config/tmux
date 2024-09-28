@@ -1,5 +1,5 @@
-unbind C-b
-bind-key C-w send-prefix
+bind -n C-b 'source-file ~/.tmux.conf; display-message "sourced ~/.tmux.conf"'
+bind -n C-w send-prefix
 set-option -g prefix C-w
 
 unbind '%'
@@ -7,10 +7,10 @@ bind '|' split-window -h
 unbind '"'
 bind '_' split-window -v
 
-bind -n M-Left select-pane -L
-bind -n M-Right select-pane -R
-bind -n M-Up select-pane -U
-bind -n M-Down select-pane -D
+bind Left select-pane -L
+bind Right select-pane -R
+bind Up select-pane -U
+bind Down select-pane -D
 
 set-option -g allow-rename off
 
@@ -29,10 +29,10 @@ set -g status-style fg=black,bg=default
 set -g status-left-length 0
 set -g status-right-length 0
 set -g status-left "#[bg=white] "
-set -g status-right "#[bg=white] "
+set -g status-right " #[bg=white] "
 set -ag status-left "{#F} [#T]"
 set -ag status-right "<#I,#P> (#S)"
-set -ag status-left " "
+set -ag status-left " #[bg=default] "
 set -ag status-right " "
 
 set -g status-justify centre
@@ -49,3 +49,5 @@ set -g pane-active-border-style fg=cyan
 
 set -g clock-mode-style 24
 set -g clock-mode-color white
+
+set -g default-terminal "st-256color"
