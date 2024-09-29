@@ -27,20 +27,20 @@ export PS0="$normal"
 export PS1='= '
 export PS2='| '
 export PS3='? '
-export PS4=$PS1
+export PS4="$PS1"
 
 export SUDO_PROMPT="$normal%p$bold$accent#$normal"
 
-export HISTTIMEFORMAT="[%Y|%w.%d/%m|%H:%M:%S] "
-export HISTCONTROL="ignoredups"
-export HISTIGNORE="ls:lsa:history*"
+export HISTTIMEFORMAT='[%Y|%w.%d/%m|%H:%M:%S] '
+export HISTCONTROL='ignoredups'
+export HISTIGNORE='ls:lsa:history*'
 export HISTFILESIZE=-1
 export HISTSIZE=-1
 
-export TERMINAL="st"
-export EDITOR="nvim"
-export PAGER="less -FXR"
-export BROWSER="firefox"
+export TERMINAL='st'
+export EDITOR='nvim'
+export PAGER='less -FXR'
+export BROWSER='firefox'
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
@@ -51,7 +51,7 @@ echo "$(date) $USER $(tty) $SHLVL" >> ~/.auth
 while true; do
 	echo -e "$bold$cyan\nstart[x]$yellow\n[p]acman -Syu$red\n[e]xit$normal\n[c]ancel"
 	read -rs -n1 opt || break
-	case $opt in
+	case "$opt" in
 		'x') startx ;;
 		'p') sudo pacman -Syu ;;
 		'e') exit ;;

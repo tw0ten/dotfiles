@@ -35,7 +35,7 @@ fi
 			| ./run -f "/usr/share/fonts/TTF/art.ttf" -d "$dir"
 		feh --bg-scale "$dir"
 	) &
-	( dir="$dir/discord-rpc"
+	( dir="$dir/pypresence"
 		[ -d "$dir" ] || {
 			python -m venv "$dir"
 			. "$dir/bin/activate"

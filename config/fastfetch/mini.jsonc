@@ -33,7 +33,7 @@
 		{
 			"type": "command",
 			"key": " ",
-			"text": "echo $SHINFO"
+			"text": "cat"
 		}
 	]
 }
