@@ -14,9 +14,8 @@ public class Main {
 	public static void main(final String[] args) throws Exception {
 		final Args a = new Args(args);
 		if (a.has("--help") || a.has("-h")) {
-			System.out.println("usage:");
-			System.out.println("\t--font | -f <font>");
-			System.out.println("\t--dir | -d <dir>");
+			System.out.println("\t-f <font>");
+			System.out.println("\t-d <dir>");
 			return;
 		}
 		new Main(a);
@@ -26,21 +25,27 @@ public class Main {
 	private final int textWidth;
 	private Font font = null;
 
-	private String or(final String... s) {
+	private String or(final String d, final String... s) {
 		for (final String a : s) {
 			if (a == null)
 				continue;
 			return a;
 		}
-		return new String();
+		return d;
 	}
 
 	private Main(final Args args) throws Exception {
-		final Path path = Path.of(or(args.get("--dir"), args.get("-d"), "."));
+		final Path path = Path.of(or(".", args.get("-d")));
 		{
 			final Scanner scanner = new Scanner(System.in);
-			this.text = scanner.useDelimiter("\\Z").next().split("\n");
+			final StringBuilder sb = new StringBuilder();
+			while (scanner.hasNextLine()) {
+				sb.append(scanner.nextLine()).append("\n");
+			}
 			scanner.close();
+			this.text = sb.toString().split("\n");
+		}
+		{
 			int w = 0;
 			for (final String s : text)
 				w = Math.max(w, s.length());
@@ -48,11 +53,10 @@ public class Main {
 		}
 		try {
 			this.font = Font
-					.createFont(Font.TRUETYPE_FONT,
-							new FileInputStream(or(args.get("--font"), args.get("-f"))))
-					.deriveFont(16.0f);
-		} catch (Exception e) {
-		}
+				.createFont(Font.TRUETYPE_FONT,
+					new FileInputStream(args.get("-f")))
+				.deriveFont(16.0f);
+		} catch (Exception e) {}
 		final GraphicsDevice[] devices = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices();
 		for (int i = 0; i < devices.length; i++)
 			ImageIO.write(getImage(devices[i]), "png", path.resolve(String.valueOf(i)).toFile());

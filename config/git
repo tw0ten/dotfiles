@@ -7,6 +7,7 @@
 	ca = c --amend
 	d = diff
 	dh = d HEAD
+	do = d origin
 	s = status
 	l = log --decorate --numstat --graph
 [user]

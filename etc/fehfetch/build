@@ -1,7 +1,0 @@
-#!/bin/sh
-rm -rf o
-cp -r src o
-cd o
-javac -d . Main.java
-rm $(find -type f -name "*.java")
-jar cvfm fehfetch.jar ../MANIFEST.MF -C . .

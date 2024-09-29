@@ -36,7 +36,7 @@ mktl() {
 	chmod +x run
 	ls
 }
-ff() { find ./ -name "*$**" 2>/dev/null | $PAGER; }
+ff() { find . -name "*$**" 2>/dev/null | $PAGER; }
 mhm() { fortune | cowsay -n -f "$(cowsay -l | grep / -v | tr " " "\n" | shuf -n1)" | lolcat; }
 sign() { $EDITOR "$1" && echo " - $USER, $(\date)" | tee -a "$1"; }
 

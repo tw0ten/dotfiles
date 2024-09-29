@@ -1,3 +1,10 @@
 #!/bin/sh
-cd o
-java -jar ./*.jar $*
+set -e
+cd o || {
+	cp -r src o
+	cd o
+	javac -d . Main.java
+	rm $(find . -type f -name "*.java")
+	jar cvfm fehfetch.jar META-INF/MANIFEST.MF -C . .
+}
+java -jar ./*.jar "$*"

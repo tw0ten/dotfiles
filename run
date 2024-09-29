@@ -7,7 +7,7 @@ git submodule update --init --recursive
 
 	AUR_HELPER=paru
 	i() { $AUR_HELPER -S "$@"; }
-	( cd "$(mktemp -d)" && git clone "https://aur.archlinux.org/$AUR_HELPER" . && makepkg -si )
+	( cd "$(mktemp -d)" && git clone "https://aur.archlinux.org/$AUR_HELPER" .; makepkg -si )
 
 	i reflector
 	sudo systemctl start reflector
@@ -54,14 +54,13 @@ echo )
 echo )
 
 ( cd program || exit; echo "program/"
-	for dir in */; do (
-		echo "${dir}build"
-		cd "$dir" && ./build
+	for i in */; do (
+		echo "$i"
+		cd "$i" && ./build
 	) done
 echo )
 
 ( cd etc || exit; echo "etc/"
-	( cd fehfetch && ./build )
 	sudo cp dconfirm /usr/local/bin
 	sudo cp smenu /usr/local/bin
 
