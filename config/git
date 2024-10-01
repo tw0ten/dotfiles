@@ -5,6 +5,8 @@
 	aa = a --all
 	c = commit
 	ca = c --amend
+	g = clone
+	gd = g --depth 1
 	d = diff
 	dh = d HEAD
 	do = d origin

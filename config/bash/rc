@@ -43,6 +43,7 @@ minifetch() {
 ff() { find . -name "*$**" 2>/dev/null | $PAGER; }
 mhm() { fortune | cowsay -n -f "$(cowsay -l | grep / -v | tr " " "\n" | shuf -n1)" | lolcat; }
 sign() { $EDITOR "$1" && echo " - $USER, $(\date)" | tee -a "$1"; }
+gitg() { git clone git@github.com:$(git config get user.name)/$*; }
 
 alias clone="($TERMINAL >/dev/null 2>&1 &)"
 alias sshs='eval $(ssh-agent -s)'
@@ -52,7 +53,6 @@ alias c='xsel --input --clipboard'
 alias v='xsel --output --clipboard'
 alias ls='ls --color=auto --group-directories-first'
 alias lsa='ls -A'
-alias gitc='git clone --depth 1'
 alias vim='nvim'
 alias svim='sudo nvim'
 alias py='python'

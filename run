@@ -22,7 +22,7 @@ echo )
 
 ( cd config || exit; echo "config/"
 	i() {
-		echo "$1"
+		echo "$2 -> $1"
 		mkdir -p "$(dirname "$2")"
 		ln -sfT "$PWD/$1" "$2"
 	}
@@ -31,7 +31,8 @@ echo )
 	i tmux ~/.tmux.conf
 	i nvim ~/.config/nvim
 	i ranger ~/.config/ranger
-	i xrc ~/.xinitrc
+	i x/rc ~/.xinitrc
+	i x/resources ~/.Xresources
 	i input ~/.inputrc
 	i fastfetch ~/.config/fastfetch
 	i flameshot ~/.config/flameshot/flameshot.ini
@@ -43,7 +44,7 @@ echo )
 	i dunst ~/.config/dunst/dunstrc
 
 	i() {
-		echo "$1"
+		echo "$1 -> $2"
 		sudo mkdir -p "$(dirname "$2")"
 		sudo cp "$1" "$2"
 	}
