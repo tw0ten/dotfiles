@@ -1,3 +1,3 @@
-#!/bin/bash
+#!/bin/sh
 cd "$DOTFILES/etc/s"
-exec "./$(ls | dmenu -p "~")"
+. "./$(ls | dmenu -p "~")"

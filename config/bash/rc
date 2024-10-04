@@ -18,8 +18,8 @@ PS1="$(
 )"
 
 mklc() {
-	local dir="$DOTFILES/etc/lc"
-	cp -i "$dir/$1" LICENSE || { dir "$dir"; return $(false); }
+	local d="$DOTFILES/etc/lc"
+	cp -i "$d/$1" LICENSE || { ls "$d"; return $(false); }
 	sed -i "0,/{YEAR}/s//$(\date +'%Y')/" LICENSE
 	sed -i "0,/{NAME}/s//$(git config --get user.name)/" LICENSE
 	sed -i "0,/{EMAIL}/s//$(git config --get user.email)/" LICENSE
@@ -27,26 +27,30 @@ mklc() {
 }
 mktl() {
 	mkdir "$1" && cd "$1" || return
-	git init
-	mkdir src lib
-	mkdir io io/i
+	mkdir src lib io io/i
 	echo 'io/o' > .gitignore
-	echo "# $1" >> README.md
+	echo "# $1" > README.md
 	echo -e '#!/bin/sh\nrm -rf io/o\nmkdir io/o\n\ncd io\ncd o' > run
-	chmod +x run
-	ls
+	chmod +x run && ./run
+	git init
 }
-minifetch() {
-	echo "$(tty):$SHLVL '$-'" \
-		| fastfetch -C ~/.config/fastfetch/mini.jsonc
-}
+minifetch() { echo "$(tty):$SHLVL '$-'" | fastfetch -C ~/.config/fastfetch/mini.jsonc; }
 ff() { find . -name "*$**" 2>/dev/null | $PAGER; }
 mhm() { fortune | cowsay -n -f "$(cowsay -l | grep / -v | tr " " "\n" | shuf -n1)" | lolcat; }
 sign() { $EDITOR "$1" && echo " - $USER, $(\date)" | tee -a "$1"; }
 gitg() { git clone git@github.com:$(git config get user.name)/$*; }
+todir() {
+	local d="$(mktemp -d)"
+	for f in "$@"; do
+		mv "$f" "$d"
+		mv "$d" "$f"
+	done
+}
 
+alias +x="chmod +x"
+alias ..=". ~/.bashrc"
 alias clone="($TERMINAL >/dev/null 2>&1 &)"
-alias sshs='eval $(ssh-agent -s)'
+alias sshs='eval "$(ssh-agent -s)"'
 alias date='date +"[%w.%d/%m|%H:%M]"'
 alias uptime='uptime -p'
 alias c='xsel --input --clipboard'

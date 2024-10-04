@@ -1,36 +1,17 @@
 #!/usr/bin/env sh
-git submodule update --init --recursive
+git submodule update --init --recursive || exit
 
-( echo "packages"
-	sudo cp config/pacman /etc/pacman.conf
-	sudo pacman -Syu
-
-	AUR_HELPER=paru
-	i() { $AUR_HELPER -S "$@"; }
-	( cd "$(mktemp -d)" && git clone "https://aur.archlinux.org/$AUR_HELPER" .; makepkg -si )
-
-	i reflector
-	sudo systemctl start reflector
-	sudo systemctl enable reflector.timer
-
-	i neovim tmux openssh
-	i ranger btop fastfetch ripgrep
-	i jdk-openjdk rust python deno nasm
-	i nvidia-open nvidia-utils nvidia-settings xorg xorg-xinit xkb-switch pipewire libnotify ttf-jetbrains-mono ttf-nerd-fonts-symbols-mono noto-fonts-emoji noto-fonts-cjk
-	i obs-studio vlc qbittorrent libreoffice-still gimp firefox torbrowser-launcher bemoji dunst picom flameshot feh
-echo )
-
-( cd config || exit; echo "config/"
+( cd config; echo 'config/'
 	i() {
 		echo "$2 -> $1"
 		mkdir -p "$(dirname "$2")"
 		ln -sfT "$PWD/$1" "$2"
-	}
+	}; echo 'ln'
 	i bash/rc ~/.bashrc
 	i bash/profile ~/.bash_profile
 	i tmux ~/.tmux.conf
 	i nvim ~/.config/nvim
-	i ranger ~/.config/ranger
+	i ranger ~/.config/ranger/rc.conf
 	i x/rc ~/.xinitrc
 	i x/resources ~/.Xresources
 	i input ~/.inputrc
@@ -42,31 +23,45 @@ echo )
 	i ssh/config ~/.ssh/ssh_config
 	i picom ~/.config/picom/picom.conf
 	i dunst ~/.config/dunst/dunstrc
-
 	i() {
 		echo "$1 -> $2"
 		sudo mkdir -p "$(dirname "$2")"
 		sudo cp "$1" "$2"
-	}
+	}; echo 'cp'
+	i pacman /etc/pacman.conf
 	i ssh/d /etc/ssh/sshd_config
 	i grub /etc/default/grub
 	i issue /etc/issue
 	i nobeep /etc/modprobe.d/nobeep.conf
 echo )
 
-( cd program || exit; echo "program/"
+( sudo pacman -Syu
+	AUR_HELPER='paru'
+	i() { "$AUR_HELPER" -S "$@"; }
+	which "$AUR_HELPER" || ( cd "$(mktemp -d)" && git clone "https://aur.archlinux.org/$AUR_HELPER" . && makepkg -si )
+	i neovim tmux openssh
+	i ranger btop fastfetch ripgrep reflector
+	i jdk-openjdk rust python deno nasm
+	i nvidia-open nvidia-utils nvidia-settings xorg xorg-xinit xkb-switch pipewire libnotify ttf-jetbrains-mono ttf-nerd-fonts-symbols-mono noto-fonts-emoji noto-fonts-cjk
+	i obs-studio vlc qbittorrent libreoffice-still gimp firefox torbrowser-launcher bemoji dunst picom flameshot feh
+echo )
+
+( cd program; echo 'program/'
 	for i in */; do (
 		echo "$i"
 		cd "$i" && ./build
 	) done
 echo )
 
-( cd etc || exit; echo "etc/"
+( cd etc; echo 'etc/'
 	sudo cp dconfirm /usr/local/bin
 	sudo cp smenu /usr/local/bin
 
 	sudo localectl set-x11-keymap us,ru
 	sudo localectl set-keymap --no-convert us
+
+	sudo systemctl start reflector
+	sudo systemctl enable reflector.timer
 
 	sudo cp cat.png /boot/grub/bg.png
 	sudo grub-mkconfig -o /boot/grub/grub.cfg

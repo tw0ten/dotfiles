@@ -9,37 +9,35 @@ usermodmap="$HOME/.Xmodmap"
 [ -f $sysmodmap ] && xmodmap $sysmodmap
 [ -f "$userresources" ] && xrdb -merge "$userresources"
 [ -f "$usermodmap" ] && xmodmap "$usermodmap"
-[ -d /etc/X11/xinit/xinitrc.d ] && {
-	for f in /etc/X11/xinit/xinitrc.d/?*.sh; do
-		[ -x "$f" ] && . "$f"
-	done
-	unset f
-}
+for i in /etc/X11/xinit/xinitrc.d/*; do
+	[ -x "$i" ] && . "$i"
+done; unset i
 
-( cd "$DOTFILES/etc"; dir="$(systemd-path temporary-large)"
-	~/.fehbg || ( cd fehfetch; dir="$dir/fehbg/$USER"
-		rm -rf "$dir"; mkdir -p "$dir"
-		fastfetch --pipe -s ":" | sed "s/\x1b.*//g" \
-			| ./run -f "/usr/share/fonts/TTF/art.ttf" -d "$dir"
+( cd "$DOTFILES/etc"
+	dir="$(systemd-path temporary-large)"
+	~/.fehbg || ( cd fehfetch
+		dir="$dir/fehbg/$USER"
+		mkdir -p "$dir"
+		fastfetch --pipe -s : \
+			| sed 's/\x1b.*//' \
+			| ./run -d "$dir" -f '/usr/share/fonts/TTF/art.ttf'
 		feh --bg-scale "$dir"
 	) &
-	( dir="$dir/pypresence"
-		[ -d "$dir" ] || {
+	( dir="$dir/python/pypresence"
+		cd "$dir" && . bin/activate || {
 			python -m venv "$dir"
-			. "$dir/bin/activate"
+			cd "$dir"
+			. bin/activate
 			python -m pip install pypresence
-			deactivate
-		}
-		. "$dir/bin/activate"
-		python rpc.py
+		}; python "$OLDPWD/rpc.py"
 	) &
 	systat &
 	picom &
 	dunst &
 	flameshot &
+	xbacklight -set 75 -time 0 -steps 1 &
+	xset r rate 200 25 &
+	xset m 0 0 &
 ) &
 
-xbacklight -set 75 -time 0 -steps 1
-xset r rate 200 25 
-xset m 0 0
 exec dwm
