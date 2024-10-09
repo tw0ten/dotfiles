@@ -10,6 +10,8 @@
 	d = diff
 	dh = d HEAD
 	do = d origin
+	r = restore
+	rs = r --staged
 	s = status
 	l = log --decorate --numstat --graph
 [user]

@@ -2,10 +2,9 @@
 [[ $- = *i* ]] || return $(true)
 
 PS1="$(
-	esc() { echo "\[$1\]"; }
-	b="$(esc "$bold")"
-	r="$(esc "$normal")"
-	c="$(esc "$accent")"
+	b="\[$bold\]"
+	r="\[$normal\]"
+	c="\[$accent\]"
 
 	PS1="$b$c\w"
 	#PS1="\$(git rev-parse --is-inside-work-tree >/dev/null 2>&1 && echo "git$c:$r")$PS1"
@@ -37,24 +36,37 @@ minifetch() { echo "$(tty):$SHLVL '$-'" | fastfetch -C ~/.config/fastfetch/mini.
 ff() { find . -name "*$**" 2>/dev/null | $PAGER; }
 mhm() { fortune | cowsay -n -f "$(cowsay -l | grep / -v | tr " " "\n" | shuf -n1)" | lolcat; }
 sign() { $EDITOR "$1" && echo " - $USER, $(\date)" | tee -a "$1"; }
-gitg() { git clone git@github.com:$(git config get user.name)/$*; }
 
-alias e="$EDITOR"
-alias se="sudo $EDITOR"
+alias \
+	e="$EDITOR" \
+	se="sudo $EDITOR"
+alias \
+	date='date +"[%w.%d/%m|%H:%M]"' \
+	uptime='uptime -p'
+alias \
+	c='xsel --clipboard --input' \
+	v='xsel --clipboard --output'
+alias \
+	ls='ls --color=auto --group-directories-first' \
+	lsa='ls -A'
+alias \
+	z='cd ..' \
+	zz='cd ../..' \
+	zzz='cd ../../..' \
+	x='cd "$OLDPWD"'
+alias \
+	cp="cp -iv" \
+	mv="mv -iv" \
+	rm="rm -v"
+alias \
+	..='. ~/.bashrc' \
+	...='. ~/.bash_profile' \
+	....="exec '$SHELL'"
+alias \
+	grep='grep --color=auto'
 alias +x='chmod +x'
-alias ..='. ~/.bashrc'
 alias s="($TERMINAL >/dev/null 2>&1 &)"
 alias sshs='eval "$(ssh-agent -s)"'
-alias date='date +"[%w.%d/%m|%H:%M]"'
-alias uptime='uptime -p'
-alias c='xsel --input --clipboard'
-alias v='xsel --output --clipboard'
-alias ls='ls --color=auto --group-directories-first'
-alias lsa='ls -A'
-alias py='python'
-alias forsenCD='cd'
-alias z='cd ..'
-alias x='cd "$OLDPWD"'
 
 [[ -f ~/.tmprc ]] && . ~/.tmprc
 

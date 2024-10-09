@@ -23,6 +23,7 @@ git submodule update --init --recursive || exit
 	i ssh/config ~/.ssh/ssh_config
 	i picom ~/.config/picom/picom.conf
 	i dunst ~/.config/dunst/dunstrc
+	i user-dirs ~/.config/user-dirs.dirs
 	i() {
 		echo "$1 -> $2"
 		sudo mkdir -p "$(dirname "$2")"
@@ -71,4 +72,4 @@ echo )
 	sudo ufw enable
 echo )
 
-. ~/.bash_profile
+exec "$SHELL"

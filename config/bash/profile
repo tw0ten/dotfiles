@@ -38,12 +38,11 @@ export HISTSIZE=-1
 
 export TERMINAL='st'
 export EDITOR='nvim'
+export VISUAL="$EDITOR"
 export PAGER='less -FXR'
 export BROWSER='firefox'
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
-
-echo "$(date) $USER $(tty) $SHLVL" >> ~/.auth
 
 [[ $(who | grep -cw "^$USER") = 1 ]] || return $(true)
 

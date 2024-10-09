@@ -1,0 +1,30 @@
+#!/usr/bin/env sh
+ext='wav'
+dir="$HOME/music"
+
+venv="$(systemd-path temporary-large)/python/yt-dlp"
+[ -d "$venv" ] || (
+	python -m venv "$venv"
+	. "$venv/bin/activate"
+	python -m pip install yt-dlp
+) && . "$venv/bin/activate"
+cd "$(mktemp -d)" || exit
+while IFS= read -r line; do
+	eval "set -- $line"
+	file="$dir/$1.$ext"
+	echo "$file"
+	[ -f "$file" ] && continue
+	link="${2:-$(basename "$1")}"
+	echo "$link"
+	case "$link" in
+		https://*) curl -O "$link" ;;
+		*) python -m yt_dlp \
+			--audio-quality 0 \
+			-x --audio-format best \
+			--default-search ytsearch \
+			-- "$link" ;;
+	esac
+	mkdir -p "$(dirname "$file")"
+	ffmpeg -i ./* "$file" -hide_banner -nostdin
+	rm -rf ./*
+done
