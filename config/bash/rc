@@ -1,20 +1,7 @@
 #!/bin/bash
 [[ $- = *i* ]] || return $(true)
 
-PS1="$(
-	b="\[$bold\]"
-	r="\[$normal\]"
-	c="\[$accent\]"
-
-	PS1="$b$c\w"
-	#PS1="\$(git rev-parse --is-inside-work-tree >/dev/null 2>&1 && echo "git$c:$r")$PS1"
-	PS1="\h $PS1$r"
-	[[ "$(id -u)" = 0 ]] && PS1="$PS1#" || PS1="\u$b$c@$r$PS1="
-	[[ -n "$SSH_CONNECTION" ]] && PS1="ssh$c:$r$PS1"
-	PS1="$c\$([ \$? = 0 ] && echo + || echo -)$r $PS1"
-	echo "$r$PS1"
-)"
-
+caret() { echo -ne "\e[$* q"; }
 mklc() {
 	local d="$DOTFILES/etc/lc"
 	cp -i "$d/$1" LICENSE || { ls "$d"; return $(false); }
@@ -36,37 +23,65 @@ minifetch() { echo "$(tty):$SHLVL '$-'" | fastfetch -C ~/.config/fastfetch/mini.
 ff() { find . -name "*$**" 2>/dev/null | $PAGER; }
 mhm() { fortune | cowsay -n -f "$(cowsay -l | grep / -v | tr " " "\n" | shuf -n1)" | lolcat; }
 sign() { $EDITOR "$1" && echo " - $USER, $(\date)" | tee -a "$1"; }
+cd() {
+	command cd "$@" || return
+	git rev-parse --is-inside-work-tree >/dev/null 2>&1 \
+		&& __git_ps1='git' || unset __git_ps1
+}
 
 alias \
 	e="$EDITOR" \
-	se="sudo $EDITOR"
-alias \
+	se="sudo $EDITOR" \
+	p="$PAGER" \
+\
 	date='date +"[%w.%d/%m|%H:%M]"' \
-	uptime='uptime -p'
-alias \
+	uptime='uptime -p' \
+\
 	c='xsel --clipboard --input' \
-	v='xsel --clipboard --output'
-alias \
-	ls='ls --color=auto --group-directories-first' \
-	lsa='ls -A'
-alias \
+	v='xsel --clipboard --output' \
+\
+	ls='ls --color=auto' \
+	l='ls --group-directories-first' \
+	la='l -A' \
+	ll='la -lh' \
+\
 	z='cd ..' \
 	zz='cd ../..' \
 	zzz='cd ../../..' \
-	x='cd "$OLDPWD"'
-alias \
-	cp="cp -iv" \
-	mv="mv -iv" \
-	rm="rm -v"
-alias \
+	x='cd "$OLDPWD"' \
+	prwd='realpath .' \
+\
+	cp='cp -iv' \
+	mv='mv -iv' \
+	rm='rm -v' \
+	mkdir='mkdir -pv' \
+\
 	..='. ~/.bashrc' \
 	...='. ~/.bash_profile' \
-	....="exec '$SHELL'"
-alias \
-	grep='grep --color=auto'
-alias +x='chmod +x'
-alias s="($TERMINAL >/dev/null 2>&1 &)"
-alias sshs='eval "$(ssh-agent -s)"'
+	....="exec '$SHELL'" \
+\
+	grep='grep --color=always' \
+	rg='rg --color=always' \
+	diff='diff --color=always' \
+\
+	cl='clear' \
+	+x='chmod +x' \
+	s="($TERMINAL >/dev/null 2>&1 &)" \
+	sshs='eval "$(ssh-agent -s)"' \
+;
+
+PS1="$(
+	b="\[$bold\]"
+	r="\[$normal\]"
+	c="\[$accent\]"
+
+	PS1="$b$c\w"
+	PS1="\${__git_ps1+\$__git_ps1$c:$r}$PS1"
+	PS1="\h $PS1$r"
+	[[ "$(id -u)" = 0 ]] && PS1="$PS1#" || PS1="\u$b$c@$r$PS1="
+	[[ -n "$SSH_CONNECTION" ]] && PS1="ssh$c:$r$PS1"
+	PS1="$c\$([ \$? = 0 ] && echo + || echo -)$r $PS1"
+echo "$r$PS1")"
 
 [[ -f ~/.tmprc ]] && . ~/.tmprc
 

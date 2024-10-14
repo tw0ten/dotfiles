@@ -21,8 +21,8 @@ export accent="$cyan"
 export bell=$(tput bel)
 eval "$(dircolors)"
 
-export PROMPT_COMMAND=''
-export PS0="$normal"
+export PS0=
+export PROMPT_COMMAND=
 export PS1='= '
 export PS2='| '
 export PS3='? '
@@ -33,8 +33,8 @@ export SUDO_PROMPT="$normal%p$bold$accent#$normal"
 export HISTTIMEFORMAT='[%Y|%w.%d/%m|%H:%M:%S] '
 export HISTCONTROL='ignoredups'
 export HISTIGNORE='ls:lsa:history*'
-export HISTFILESIZE=-1
-export HISTSIZE=-1
+export HISTFILESIZE=
+export HISTSIZE=
 
 export TERMINAL='st'
 export EDITOR='nvim'
