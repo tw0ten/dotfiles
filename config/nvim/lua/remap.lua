@@ -4,6 +4,10 @@ end
 
 unmap('n', "K")
 
+vim.api.nvim_create_user_command("Sw", function()
+	vim.cmd("w !sudo tee %")
+end, { nargs = 0 })
+
 vim.keymap.set('n', "U", vim.cmd.redo)
 
 vim.keymap.set('n', "<leader>ex", vim.cmd.Ex)

@@ -27,14 +27,14 @@ export PS1='= '
 export PS2='| '
 export PS3='? '
 export PS4="$PS1"
-
 export SUDO_PROMPT="$normal%p$bold$accent#$normal"
 
+export HISTSIZE=
+export HISTFILESIZE=
+export HISTFILE="$HOME/.local/share/.bash_history"
 export HISTTIMEFORMAT='[%Y|%w.%d/%m|%H:%M:%S] '
 export HISTCONTROL='ignoredups'
-export HISTIGNORE='ls:lsa:history*'
-export HISTFILESIZE=
-export HISTSIZE=
+export HISTIGNORE='mhm'
 
 export TERMINAL='st'
 export EDITOR='nvim'
@@ -44,9 +44,7 @@ export BROWSER='firefox'
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
-[[ $(who | grep -cw "^$USER") = 1 ]] || return $(true)
-
-while true; do
+[[ "$(who | grep -cw "^$USER")" = 1 ]] && while true; do
 	echo -e "$bold$cyan\nstart[x]$yellow\n[p]acman -Syu$red\n[e]xit$normal\n[c]ancel"
 	read -rs -n1 opt || break
 	case "$opt" in

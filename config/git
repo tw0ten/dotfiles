@@ -13,6 +13,9 @@
 	r = restore
 	rs = r --staged
 	s = status
+	sw = switch
+	cf = config
+	cfl = cf --list
 	l = log --decorate --numstat --graph
 [user]
 	name = tw0ten
@@ -22,3 +25,5 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[pull]
+	rebase = false

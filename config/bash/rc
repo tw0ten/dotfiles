@@ -28,45 +28,45 @@ cd() {
 	git rev-parse --is-inside-work-tree >/dev/null 2>&1 \
 		&& __git_ps1='git' || unset __git_ps1
 }
+gg() { git clone "git@github.com:$(git config --get user.name)/$1"; }
 
 alias \
+	s='sudo' \
 	e="$EDITOR" \
-	se="sudo $EDITOR" \
+	se="s $EDITOR" \
 	p="$PAGER" \
-\
-	date='date +"[%w.%d/%m|%H:%M]"' \
-	uptime='uptime -p' \
-\
+	g='git' \
+	t="($TERMINAL >/dev/null 2>&1 &)" \
 	c='xsel --clipboard --input' \
 	v='xsel --clipboard --output' \
+	cl='clear' \
 \
+	d='cd' \
 	ls='ls --color=auto' \
 	l='ls --group-directories-first' \
 	la='l -A' \
-	ll='la -lh' \
-\
+	ll='la -lh --color=always' \
+	le='ranger' \
+	lc='. ranger' \
 	z='cd ..' \
 	zz='cd ../..' \
 	zzz='cd ../../..' \
 	x='cd "$OLDPWD"' \
 	prwd='realpath .' \
-\
 	cp='cp -iv' \
 	mv='mv -iv' \
 	rm='rm -v' \
 	mkdir='mkdir -pv' \
 \
+	date='date +"[%w.%d/%m|%H:%M]"' \
+	uptime='uptime -p' \
 	..='. ~/.bashrc' \
 	...='. ~/.bash_profile' \
 	....="exec '$SHELL'" \
-\
 	grep='grep --color=always' \
 	rg='rg --color=always' \
 	diff='diff --color=always' \
-\
-	cl='clear' \
 	+x='chmod +x' \
-	s="($TERMINAL >/dev/null 2>&1 &)" \
 	sshs='eval "$(ssh-agent -s)"' \
 ;
 
@@ -74,13 +74,15 @@ PS1="$(
 	b="\[$bold\]"
 	r="\[$normal\]"
 	c="\[$accent\]"
+	i() { PS1="$1$PS1$2"; }
+	unset PS1
 
-	PS1="$b$c\w"
-	PS1="\${__git_ps1+\$__git_ps1$c:$r}$PS1"
-	PS1="\h $PS1$r"
-	[[ "$(id -u)" = 0 ]] && PS1="$PS1#" || PS1="\u$b$c@$r$PS1="
-	[[ -n "$SSH_CONNECTION" ]] && PS1="ssh$c:$r$PS1"
-	PS1="$c\$([ \$? = 0 ] && echo + || echo -)$r $PS1"
+	i "$b$c\w"
+	i "\${__git_ps1+\$__git_ps1$c:$r}"
+	i '\h ' "$r"
+	[[ "$(id -u)" = 0 ]] && i '' '#' || i "\u$b$c@$r" '='
+	[[ -n "$SSH_CONNECTION" ]] && i "ssh$c:$r"
+	i "$c\$([ \$? = 0 ] && echo + || echo -)$r "
 echo "$r$PS1")"
 
 [[ -f ~/.tmprc ]] && . ~/.tmprc

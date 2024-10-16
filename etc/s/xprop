@@ -1,2 +1,2 @@
 #!/bin/sh
-notify-send "xprop" "$(xprop)"
+notify-send 'xprop' "$(xprop)" -t 0
