@@ -1,3 +1,0 @@
-#!/bin/sh
-sudo groupadd nogroup
-sudo make clean install

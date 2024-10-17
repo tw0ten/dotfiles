@@ -1,24 +1,16 @@
 #!/bin/bash
 export DOTFILES="$HOME/dotfiles"
 
-export normal=$(tput sgr0)
-export bold=$(tput bold)
-export dim=$(tput dim)
-export reverse=$(tput rev)
-export italic=$(tput sitm)
-export highlight=$(tput smso)
-export underline=$(tput smul)
-export blink=$(tput blink)
-export black=$(tput setaf 0)
-export red=$(tput setaf 1)
-export green=$(tput setaf 2)
-export yellow=$(tput setaf 3)
-export blue=$(tput setaf 4)
-export magenta=$(tput setaf 5)
-export cyan=$(tput setaf 6)
-export white=$(tput setaf 7)
-export accent="$cyan"
-export bell=$(tput bel)
+export normal="$(tput sgr0)"
+export bold="$(tput bold)"
+export dim="$(tput dim)"
+export reverse="$(tput rev)"
+export italic="$(tput sitm)"
+export highlight="$(tput smso)"
+export underline="$(tput smul)"
+export blink="$(tput blink)"
+export bell="$(tput bel)"
+export accent="$(tput setaf 6)"
 eval "$(dircolors)"
 
 export PS0=
@@ -31,7 +23,7 @@ export SUDO_PROMPT="$normal%p$bold$accent#$normal"
 
 export HISTSIZE=
 export HISTFILESIZE=
-export HISTFILE="$HOME/.local/share/.bash_history"
+export HISTFILE="$(systemd-path user-shared)/.bash_history"
 export HISTTIMEFORMAT='[%Y|%w.%d/%m|%H:%M:%S] '
 export HISTCONTROL='ignoredups'
 export HISTIGNORE='mhm'
@@ -44,8 +36,8 @@ export BROWSER='firefox'
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
-[[ "$(who | grep -cw "^$USER")" = 1 ]] && while true; do
-	echo -e "$bold$cyan\nstart[x]$yellow\n[p]acman -Syu$red\n[e]xit$normal\n[c]ancel"
+while [[ "$(who | grep -cw "^$USER")" = 1 ]]; do
+	echo -e "$bold$(tput setaf 6)\nstart[x]$(tput setaf 3)\n[p]acman -Syu$(tput setaf 1)\n[e]xit$normal\n[c]ancel"
 	read -rs -n1 opt || break
 	case "$opt" in
 		'x') startx ;;

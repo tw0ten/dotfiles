@@ -14,16 +14,7 @@ for i in /etc/X11/xinit/xinitrc.d/*; do
 done; unset i
 
 ( cd "$DOTFILES/etc"
-	dir="$(systemd-path temporary-large)"
-	~/.fehbg || ( cd fehfetch
-		dir="$dir/fehbg/$USER"
-		mkdir -p "$dir"
-		fastfetch --pipe -s : \
-			| sed 's/\x1b.*//' \
-			| ./run -d "$dir" -f '/usr/share/fonts/TTF/art.ttf'
-		feh --bg-scale "$dir"
-	) &
-	( dir="$dir/python/pypresence"
+	( dir="$(systemd-path user-shared)/python/pypresence"
 		cd "$dir" && . bin/activate || {
 			python -m venv "$dir"
 			cd "$dir"
@@ -31,6 +22,7 @@ done; unset i
 			python -m pip install pypresence
 		}; python "$OLDPWD/rpc.py"
 	) &
+	~/.fehbg &
 	systat &
 	picom &
 	dunst &

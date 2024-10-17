@@ -40,6 +40,7 @@ alias \
 	c='xsel --clipboard --input' \
 	v='xsel --clipboard --output' \
 	cl='clear' \
+	o='curl -O' \
 \
 	d='cd' \
 	ls='ls --color=auto' \

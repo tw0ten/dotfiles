@@ -1,5 +1,5 @@
 rules: ({
-	opacity = 0.75;
+	opacity = 0.95;
 }, {
 	match = "focused";
 	opacity = 1.0;

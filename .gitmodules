@@ -10,3 +10,6 @@
 [submodule "program/systat"]
 	path = program/systat
 	url = https://github.com/tw0ten/systat
+[submodule "program/slock"]
+	path = program/slock
+	url = https://github.com/tw0ten/slock

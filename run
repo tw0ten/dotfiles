@@ -9,17 +9,18 @@ git submodule update --init --recursive || exit
 	}; echo 'ln'
 	i bash/rc ~/.bashrc
 	i bash/profile ~/.bash_profile
-	i tmux ~/.tmux.conf
+	i tmux ~/.config/tmux/tmux.conf
 	i nvim/ ~/.config/nvim
 	i ranger ~/.config/ranger/rc.conf
 	i x/initrc ~/.xinitrc
 	i x/resources ~/.Xresources
+	i x/modmap ~/.Xmodmap
 	i input ~/.inputrc
 	i fastfetch/ ~/.config/fastfetch
 	i flameshot ~/.config/flameshot/flameshot.ini
 	i paru ~/.config/paru/paru.conf
 	i btop ~/.config/btop/btop.conf
-	i git ~/.gitconfig
+	i git ~/.config/git/config
 	i ssh/config ~/.ssh/ssh_config
 	i picom ~/.config/picom/picom.conf
 	i dunst ~/.config/dunst/dunstrc
