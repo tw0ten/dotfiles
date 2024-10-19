@@ -2,7 +2,7 @@
 ext='wav'
 dir="$HOME/music"
 
-venv="$(systemd-path temporary-large)/python/yt-dlp"
+venv="$(systemd-path user-shared)/python/yt-dlp"
 [ -d "$venv" ] || (
 	python -m venv "$venv"
 	. "$venv/bin/activate"

@@ -4,6 +4,9 @@ rules: ({
 	match = "focused";
 	opacity = 1.0;
 }, {
+	match = "class_i = 'Dunst'";
+	opacity = 0.75;
+}, {
 	match = "class_i = 'dwm' || class_i = 'slock'";
 	opacity = 1.0;
 })

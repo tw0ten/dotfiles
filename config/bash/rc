@@ -40,7 +40,7 @@ alias \
 	c='xsel --clipboard --input' \
 	v='xsel --clipboard --output' \
 	cl='clear' \
-	o='curl -O' \
+	o='curl -fsL' \
 \
 	d='cd' \
 	ls='ls --color=auto' \
@@ -57,7 +57,9 @@ alias \
 	cp='cp -iv' \
 	mv='mv -iv' \
 	rm='rm -v' \
+	rmr='rm -r' \
 	mkdir='mkdir -pv' \
+	rmdir='rmdir -v' \
 \
 	date='date +"[%w.%d/%m|%H:%M]"' \
 	uptime='uptime -p' \
@@ -68,6 +70,7 @@ alias \
 	rg='rg --color=always' \
 	diff='diff --color=always' \
 	+x='chmod +x' \
+	filesize='du -shc' \
 	sshs='eval "$(ssh-agent -s)"' \
 ;
 
@@ -75,16 +78,15 @@ PS1="$(
 	b="\[$bold\]"
 	r="\[$normal\]"
 	c="\[$accent\]"
-	i() { PS1="$1$PS1$2"; }
-	unset PS1
+	i() { PS1="$*"; }; i
 
-	i "$b$c\w"
-	i "\${__git_ps1+\$__git_ps1$c:$r}"
-	i '\h ' "$r"
-	[[ "$(id -u)" = 0 ]] && i '' '#' || i "\u$b$c@$r" '='
-	[[ -n "$SSH_CONNECTION" ]] && i "ssh$c:$r"
-	i "$c\$([ \$? = 0 ] && echo + || echo -)$r "
-echo "$r$PS1")"
+	i "$b$c\w$r"
+	i "\${__git_ps1+\$__git_ps1$c:$r}$PS1"
+	i "\h $PS1$c"
+	[[ "$(id -u)" = 0 ]] && i "$PS1#" || i "\u$b$c@$r$PS1="
+	[[ -n "$SSH_CONNECTION" ]] && i "ssh$c:$r$PS1"
+	i "$c\$([ \$? = 0 ] && echo + || echo -)$r $PS1"
+echo "$r$PS1$r")"
 
 [[ -f ~/.tmprc ]] && . ~/.tmprc
 
