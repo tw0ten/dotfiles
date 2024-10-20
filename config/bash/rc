@@ -6,8 +6,8 @@ mklc() {
 	local d="$DOTFILES/etc/lc"
 	cp -i "$d/$1" LICENSE || { ls "$d"; return $(false); }
 	sed -i "0,/{YEAR}/s//$(\date +'%Y')/" LICENSE
-	sed -i "0,/{NAME}/s//$(git config --get user.name)/" LICENSE
-	sed -i "0,/{EMAIL}/s//$(git config --get user.email)/" LICENSE
+	sed -i "0,/{NAME}/s//$(git config get user.name)/" LICENSE
+	sed -i "0,/{EMAIL}/s//$(git config get user.email)/" LICENSE
 	head -n 5 LICENSE
 }
 mktl() {
@@ -22,18 +22,18 @@ mktl() {
 minifetch() { echo "$(tty):$SHLVL '$-'" | fastfetch -C ~/.config/fastfetch/mini.jsonc; }
 ff() { find . -name "*$**" 2>/dev/null | $PAGER; }
 mhm() { fortune | cowsay -n -f "$(cowsay -l | grep / -v | tr " " "\n" | shuf -n1)" | lolcat; }
-sign() { $EDITOR "$1" && echo " - $USER, $(\date)" | tee -a "$1"; }
+sign() { $VISUAL "$1" && echo " - $USER, $(\date)" | tee -a "$1"; }
 cd() {
 	command cd "$@" || return
 	git rev-parse --is-inside-work-tree >/dev/null 2>&1 \
 		&& __git_ps1='git' || unset __git_ps1
-}
-gg() { git clone "git@github.com:$(git config --get user.name)/$1"; }
+}; cd .
+gg() { git clone "git@github.com:$(git config get user.name)/$1"; }
 
 alias \
 	s='sudo' \
-	e="$EDITOR" \
-	se="s $EDITOR" \
+	e="$VISUAL" \
+	se="s $VISUAL" \
 	p="$PAGER" \
 	g='git' \
 	t="($TERMINAL >/dev/null 2>&1 &)" \
@@ -47,8 +47,7 @@ alias \
 	l='ls --group-directories-first' \
 	la='l -A' \
 	ll='la -lh --color=always' \
-	le='ranger' \
-	lc='. ranger' \
+	le="$FILES" \
 	z='cd ..' \
 	zz='cd ../..' \
 	zzz='cd ../../..' \

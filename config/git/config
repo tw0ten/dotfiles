@@ -1,3 +1,6 @@
+[user]
+	name = tw0ten
+	email = twoten.eq@gmail.com
 [init]
 	defaultBranch = main
 [alias]
@@ -5,6 +8,7 @@
 	aa = a --all
 	c = commit
 	ca = c --amend
+	cm = c -m
 	f = fetch
 	pl = pull
 	ps = push
@@ -19,11 +23,8 @@
 	s = status
 	sw = switch
 	cf = config
-	cfl = cf --list
+	cfl = cf list
 	l = log --decorate --numstat --graph
-[user]
-	name = tw0ten
-	email = twoten.eq@gmail.com
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
@@ -31,3 +32,5 @@
 	required = true
 [pull]
 	rebase = false
+[commit]
+	template = ~/.config/git/commit

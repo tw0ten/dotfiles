@@ -1,3 +1,2 @@
 #!/bin/sh
-cd "$DOTFILES/etc/s"
-. "./$(ls | dmenu -p "~")"
+. "$DOTFILES/etc/s/$(ls "$DOTFILES/etc/s" | dmenu -p '~')"

@@ -29,10 +29,11 @@ export HISTCONTROL='ignoredups'
 export HISTIGNORE='mhm'
 
 export TERMINAL='st'
-export EDITOR='nvim'
-export VISUAL="$EDITOR"
+export VISUAL='nvim'
+export EDITOR="$VISUAL"
 export PAGER='less -FXR'
 export BROWSER='firefox'
+export FILES='lf'
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
