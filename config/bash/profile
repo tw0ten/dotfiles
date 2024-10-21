@@ -1,5 +1,6 @@
 #!/bin/bash
 export DOTFILES="$HOME/dotfiles"
+export PATH="$PATH:$(systemd-path user-binaries)"
 
 export normal="$(tput sgr0)"
 export bold="$(tput bold)"

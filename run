@@ -1,11 +1,11 @@
 #!/usr/bin/env sh
 git submodule update --init --recursive || exit
 
-( cd config; echo 'config/'
-	i() { local i="$i/$2"
-		mkdir -p "$(dirname "$i")"
-		ln -sfT "$PWD/$1" "$i" || return
-		echo "	ln -sfT '$i' -> '$1'"; }
+( cd config || exit; echo 'config/'
+	i() { set "$1" "$i/$2"
+		mkdir -p "$(dirname "$2")"
+		ln -sfT "$PWD/$1" "$2" || return
+		echo "	ln -sfT '$2' -> '$1'"; }
 	i="$HOME"
 	i bash/profile .bash_profile
 	i bash/rc .bashrc
@@ -26,10 +26,10 @@ git submodule update --init --recursive || exit
 	i picom picom/picom.conf
 	i dunst dunst/dunstrc
 	i user-dirs user-dirs.dirs
-	i() { local i="$i/$2"
-		sudo mkdir -p "$(dirname "$i")"
-		sudo cp "$1" "$i" || return
-		echo "	sudo cp '$1' -> '$i'"; }
+	i() { set "$1" "$i/$2"
+		sudo mkdir -p "$(dirname "$2")"
+		sudo cp "$1" "$2" || return
+		echo "	sudo cp '$1' -> '$2'"; }
 	i='/etc'
 	i pacman pacman.conf
 	i ssh/d ssh/sshd_config
@@ -40,7 +40,7 @@ echo )
 ( sudo pacman -Syu
 	AUR_HELPER='paru'
 	i() { "$AUR_HELPER" -S "$@"; }
-	which "$AUR_HELPER" || ( cd "$(mktemp -d)" && git clone "https://aur.archlinux.org/$AUR_HELPER" . && makepkg -si )
+	command -v "$AUR_HELPER" || ( cd "$(mktemp -d)" && git clone "https://aur.archlinux.org/$AUR_HELPER" . && makepkg -si )
 	i neovim tmux openssh
 	i lf btop fastfetch ripgrep reflector ufw
 	i jdk-openjdk rust python deno nasm
@@ -48,14 +48,14 @@ echo )
 	i obs-studio vlc qbittorrent libreoffice-still gimp firefox torbrowser-launcher bemoji dunst picom flameshot feh
 echo )
 
-( cd program; echo 'program/'
+( cd program || exit; echo 'program/'
 	for i in */; do (
 		echo "	$i"
 		cd "$i" && ./build
 	) done
 echo )
 
-( cd etc; echo 'etc/'
+( cd etc || exit; echo 'etc/'
 	sudo cp dconfirm /usr/local/bin
 	sudo cp smenu /usr/local/bin
 
