@@ -1,6 +1,10 @@
 #!/usr/bin/env sh
 git submodule update --init --recursive || exit
 
+i() { echo "$1 ($2)" >/dev/tty
+	read -r i
+	echo "${i:-"$2"}"; }
+
 ( cd config || exit; echo 'config/'
 	i() { set "$1" "$i/$2"
 		mkdir -p "$(dirname "$2")"
@@ -56,10 +60,7 @@ echo )
 echo )
 
 ( cd etc || exit; echo 'etc/'
-	sudo cp dconfirm /usr/local/bin
-	sudo cp smenu /usr/local/bin
-
-	sudo localectl set-x11-keymap us,ru
+	sudo localectl set-x11-keymap us
 	sudo localectl set-keymap --no-convert us
 
 	sudo systemctl enable reflector.timer

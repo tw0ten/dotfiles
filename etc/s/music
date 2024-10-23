@@ -1,0 +1,2 @@
+#!/bin/sh
+cd "$HOME/music" && $TERMINAL mousikes -v 0.25

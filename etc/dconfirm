@@ -1,2 +1,0 @@
-#!/bin/sh
-[ "$(echo -e "cancel\nconfirm" | dmenu -p "$1")" = "confirm" ] && $2

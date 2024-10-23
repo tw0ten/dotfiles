@@ -1,0 +1,3 @@
+#!/bin/sh
+[ "$(echo 'cancel
+confirm' | dmenu -p "$1")" = 'confirm' ] && $2 || $3

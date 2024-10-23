@@ -49,10 +49,10 @@ alias \
 	la='l -A' \
 	ll='la -lh --color=always' \
 	le="$FILES" \
-	z='cd ..' \
-	zz='cd ../..' \
-	zzz='cd ../../..' \
-	x='cd "$OLDPWD"' \
+	dz='cd ..' \
+	dzz='cd ../..' \
+	dzzz='cd ../../..' \
+	dx='cd "$OLDPWD"' \
 	prwd='realpath .' \
 	cp='cp -iv' \
 	mv='mv -iv' \
@@ -61,6 +61,7 @@ alias \
 	mkdir='mkdir -pv' \
 	rmdir='rmdir -v' \
 \
+	myip='echo "$(curl -s ipinfo.io/ip)"' \
 	date='date +"[%w.%d/%m|%H:%M]"' \
 	uptime='uptime -p' \
 	..='. ~/.bashrc' \

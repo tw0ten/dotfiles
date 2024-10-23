@@ -1,4 +1,0 @@
-#!/bin/sh
-nice -10 vesktop &
-nice -10 telegram-desktop &
-cd ~/music && nice -10 st mousikes -p -v 0.1 &

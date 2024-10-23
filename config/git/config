@@ -20,6 +20,8 @@
 	du = d upstream
 	r = restore
 	rs = r --staged
+	re = remote
+	rev = re -v
 	s = status
 	sw = switch
 	cf = config

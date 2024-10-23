@@ -1,6 +1,6 @@
 #!/bin/bash
 export DOTFILES="$HOME/dotfiles"
-export PATH="$PATH:$(systemd-path user-binaries)"
+export PATH="$(systemd-path user-binaries):$DOTFILES/etc/bin:$PATH"
 
 export normal="$(tput sgr0)"
 export bold="$(tput bold)"
@@ -20,7 +20,7 @@ export PS1='= '
 export PS2='| '
 export PS3='? '
 export PS4="$PS1"
-export SUDO_PROMPT="$normal%p$bold$accent#$normal"
+export SUDO_PROMPT="%U$bold$accent@$normal%H %p$bold$accent#$normal"
 
 export HISTSIZE=
 export HISTFILESIZE=
@@ -29,7 +29,7 @@ export HISTTIMEFORMAT='[%Y|%w.%d/%m|%H:%M:%S] '
 export HISTCONTROL='ignoredups'
 export HISTIGNORE='mhm'
 
-export TERMINAL='st'
+export TERMINAL='terminal'
 export VISUAL='nvim'
 export EDITOR="$VISUAL"
 export PAGER='less -FXR'

@@ -1,4 +1,4 @@
 #!/bin/sh
-i="$(echo "~" | dmenu -p "?")"
-[ "$i" = "~" ] && exec smenu
-nice -10 firefox --search "$i"
+i="$(echo '~' | dmenu -p '?')"
+[ "$i" = '~' ] && exec smenu
+exec nice -10 $BROWSER --search "$i"

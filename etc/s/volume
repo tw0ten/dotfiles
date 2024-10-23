@@ -1,5 +1,5 @@
 #!/bin/sh
 i="$(dmenu -p "volume: $(pamixer --get-volume-human)" &)"
-[ -n "$i" ] && pamixer -u --set-volume "$i" || pamixer -t
-notify-send "volume" "$(pamixer --get-volume-human)"
+[ "$i" = ' ' ] && pamixer -t || pamixer -u --set-volume "$i"
+notify-send 'volume' "$(pamixer --get-volume-human)"
 pkill systat-1
