@@ -7,7 +7,7 @@ set tabstop 4
 set ratios 2:3:3
 
 set promptfmt "%u\033[32;1m@\033[0m%h \033[34;1m%d\033[0m%f"
-set statfmt "\033[32;1m%p\033[0m |%c	|%u	|%g	|\033[34;1m%S |%t \033[0m|%l "
+set statfmt "\033[32;1m%p\033[0m	|%c	|%u	|%g	|\033[34;1m%S |%t \033[0m|%l "
 set timefmt "2006|02/01|15:04"
 
 map gh

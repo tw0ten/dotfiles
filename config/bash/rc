@@ -44,15 +44,16 @@ alias \
 	oo='o -O' \
 \
 	d='cd' \
-	ls='ls --color=auto' \
+	dd='d "$(mktemp -d)"' \
+	dx='d "$OLDPWD"' \
+	dz='d ..' \
+	dzz='d ../..' \
+	dzzz='d ../../..' \
+	ls='ls --color=always' \
 	l='ls --group-directories-first' \
 	la='l -A' \
-	ll='la -lh --color=always' \
+	ll='la -lh' \
 	le="$FILES" \
-	dz='cd ..' \
-	dzz='cd ../..' \
-	dzzz='cd ../../..' \
-	dx='cd "$OLDPWD"' \
 	prwd='realpath .' \
 	cp='cp -iv' \
 	mv='mv -iv' \
@@ -72,6 +73,7 @@ alias \
 	diff='diff --color=always' \
 	+x='chmod +x' \
 	filesize='du -shc' \
+	filesize.='du -shc ./.* ./*' \
 	sshs='eval "$(ssh-agent -s)"' \
 ;
 
@@ -89,6 +91,6 @@ PS1="$(
 	i "$c\$([ \$? = 0 ] && echo + || echo -)$r $PS1"
 echo "$r$PS1$r")"
 
-[[ -f ~/.tmprc ]] && . ~/.tmprc
+[[ -f ~/.config/bashrc ]] && . ~/.config/bashrc
 
 minifetch

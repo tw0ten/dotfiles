@@ -1,19 +1,18 @@
 #!/bin/sh
-max(){ echo "$(($1>$2 ? $1 : $2 ))"; }
-min(){ echo "$(($1<$2 ? $1 : $2 ))"; }
-getbr(){ xbacklight -get | xbacklight -get | sed "s/\..*//"; }
+i(){ xbacklight -get | sed 's/\..*//'; }
+max(){ echo $(( $1 > $2 ? $1 : $2)); }
+min(){ echo $(( $1 < $2 ? $1 : $2)); }
 
-BR1="$(getbr)"
-MAX="$(cat "/sys/class/backlight/nvidia_0/max_brightness")"
-BR="$(dmenu -p "brightness: $BR1/$MAX" &)"
-STEPS="$(min "$(max "$(("$(max "$BR1" "$BR")" - "$(min "$BR1" "$BR")"))" 0)" 100)"
+i=$(dmenu -p "brightness: $(i)/100" &)
+[ -n "$i" ] || exit
+s=$(min $(max $(($(max $(i) $i)-$(min $(i) $i))) 0) 100)
 
-i="$(dunstify -p "brightness" "$(getbr)")"
-xbacklight -set "$BR" -time "$(("$STEPS"*10))" -steps "$STEPS" &
+xbacklight -set "$i" -time $((s * 10)) -steps $s &
 PID=$!
+i="$(dunstify -p 'brightness' "$(i)")"
 while kill -0 $PID; do
-	dunstify -r "$i" "brightness" "$(getbr)"
+	dunstify -r "$i" 'brightness' "$(i)"
 	sleep 0.01
 done
-dunstify -r "$i" "brightness" "set to $(getbr)"
+dunstify -r "$i" 'brightness' "set to $(i)"
 pkill systat-2

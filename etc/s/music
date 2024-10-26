@@ -1,2 +1,2 @@
 #!/bin/sh
-cd "$HOME/music" && $TERMINAL mousikes -v 0.25
+cd "$HOME/music" && $TERMINAL mousikes -v 0.025 "$@"

@@ -15,14 +15,12 @@ i() { echo "$1 ($2)" >/dev/tty
 	i bash/rc .bashrc
 	i ssh/config .ssh/ssh_config
 	i x/initrc .xinitrc
-	i x/resources .Xresources
-	i x/modmap .Xmodmap
 	i input .inputrc
 	i="$i/.config"
 	i nvim/ nvim
 	i git/ git
 	i tmux tmux/tmux.conf
-	i lf lf/lfrc
+	i lf/ lf
 	i fastfetch/ fastfetch
 	i flameshot flameshot/flameshot.ini
 	i paru paru/paru.conf

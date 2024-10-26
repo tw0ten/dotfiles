@@ -1,2 +1,3 @@
 #!/bin/sh
-. "$DOTFILES/etc/s/$(ls "$DOTFILES/etc/s" | dmenu -p '~')"
+set "$DOTFILES/etc/s/"$(ls "$DOTFILES/etc/s" | dmenu -p '~')
+. "$1"

@@ -1,7 +1,8 @@
 #!/bin/sh
+mute=$(pamixer --get-mute)
 
 pamixer -m
 
 slock
 
-pamixer -u
+$mute || pamixer -u
