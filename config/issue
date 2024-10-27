@@ -1,14 +1,14 @@
-[1;37mbaud:[m \b
-[1;37mdate:[m \d
-[1;37mtime:[m \t
-[1;37musers:[m \u
-[1;37mver:[m \v
-[1;37mrel:[m \r
-[1;37mdomain:[m \o
-[1;37mnode:[m \n
-[1;37march:[m \m
-[1;37mtty:[m \l
-[1;37msys:[m \s
+[1;37mbaud:	[m \b
+[1;37mdate:	[m \d
+[1;37mtime:	[m \t
+[1;37musers:	[m \u
+[1;37mver:	[m \v
+[1;37mrel:	[m \r
+[1;37mdomain:	[m \o
+[1;37mnode:	[m \n
+[1;37march:	[m \m
+[1;37mtty:	[m \l
+[1;37msys:	[m \s
 
 [1;36march [1;37mlinux
 

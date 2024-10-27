@@ -13,7 +13,7 @@ mklc() {
 mktl() {
 	mkdir "$1" && cd "$1" || return
 	mkdir src lib io io/i
-	echo 'io/o' > .gitignore
+	echo '/io/o' > .gitignore
 	echo "# $1" > README.md
 	echo -e '#!/bin/sh\nrm -rf io/o\nmkdir io/o\n\ncd io\ncd o' > run
 	chmod +x run && ./run
@@ -36,6 +36,7 @@ alias \
 	se="s $VISUAL" \
 	p="$PAGER" \
 	g='git' \
+	f='rg --color=always' \
 	t="($TERMINAL >/dev/null 2>&1 &)" \
 	c='xsel --clipboard --input' \
 	v='xsel --clipboard --output' \
@@ -53,7 +54,7 @@ alias \
 	l='ls --group-directories-first' \
 	la='l -A' \
 	ll='la -lh' \
-	le="$FILES" \
+	lf="$FILES" \
 	prwd='realpath .' \
 	cp='cp -iv' \
 	mv='mv -iv' \
@@ -68,8 +69,6 @@ alias \
 	..='. ~/.bashrc' \
 	...='. ~/.bash_profile' \
 	....="exec '$SHELL'" \
-	grep='grep --color=always' \
-	rg='rg --color=always' \
 	diff='diff --color=always' \
 	+x='chmod +x' \
 	filesize='du -shc' \

@@ -39,7 +39,7 @@
     scale = 0
 
     # Maximum number of notification (0 means no limit)
-    notification_limit = 24
+    notification_limit = 0
 
     ### Progress bar ###
 
@@ -73,7 +73,7 @@
     # The transparency of the window.  Range: [0; 100].
     # This option will only work if a compositing window manager is
     # present (e.g. xcompmgr, compiz, etc.). (X11 only)
-    transparency = 20
+    transparency = 75
 
     # Draw a line of "separator_height" pixel height between two
     # notifications.
