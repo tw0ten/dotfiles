@@ -1,48 +1,39 @@
 #!/usr/bin/env sh
 git submodule update --init --recursive || exit
 
-i() { echo "$1 ($2)" >/dev/tty
-	read -r i
-	echo "${i:-"$2"}"; }
+cd() { command cd "$@" && echo "cd $*" || exit; }
 
-( cd config || exit; echo 'config/'
-	i() { set "$1" "$i/$2"
+( cd config
+	i() { set "$1" "$i/${2:-"$1"}"
 		mkdir -p "$(dirname "$2")"
 		ln -sfT "$PWD/$1" "$2" || return
-		echo "	ln -sfT '$2' -> '$1'"; }
-	i="$HOME"
-	i bash/profile .bash_profile
-	i bash/rc .bashrc
-	i ssh/config .ssh/ssh_config
-	i x/initrc .xinitrc
-	i input .inputrc
-	i="$i/.config"
-	i nvim/ nvim
-	i git/ git
-	i tmux tmux/tmux.conf
-	i lf/ lf
-	i fastfetch/ fastfetch
-	i flameshot flameshot/flameshot.ini
-	i paru paru/paru.conf
-	i btop btop/btop.conf
-	i picom picom/picom.conf
-	i dunst dunst/dunstrc
-	i user-dirs user-dirs.dirs
+		echo "	ln '$2' < '$1'"; }
+
+	( cd xdg; i="$HOME/.config"
+		for f in *; do i "$f"; done )
+
+	( cd home; i="$HOME"
+		i bash/profile .bash_profile
+		i bash/rc .bashrc
+		i ssh .ssh/ssh_config
+		i xinitrc .xinitrc
+		i inputrc .inputrc )
+
 	i() { set "$1" "$i/$2"
 		sudo mkdir -p "$(dirname "$2")"
 		sudo cp "$1" "$2" || return
-		echo "	sudo cp '$1' -> '$2'"; }
-	i='/etc'
-	i pacman pacman.conf
-	i ssh/d ssh/sshd_config
-	i grub default/grub
-	i issue issue
+		echo "	sudo cp '$1' > '$2'"; }
+
+	( cd etc; i='/etc'
+		i pacman pacman.conf
+		i ssh ssh/sshd_config
+		i grub default/grub )
 echo )
 
 ( sudo pacman -Syu
 	AUR_HELPER='paru'
 	i() { "$AUR_HELPER" -S "$@"; }
-	command -v "$AUR_HELPER" || ( cd "$(mktemp -d)" && git clone "https://aur.archlinux.org/$AUR_HELPER" . && makepkg -si )
+	command -v "$AUR_HELPER" || ( cd "$(mktemp -d)"; git clone "https://aur.archlinux.org/$AUR_HELPER" . && makepkg -si )
 	i neovim tmux openssh
 	i lf btop fastfetch ripgrep reflector ufw
 	i jdk-openjdk rust python deno nasm
@@ -50,14 +41,14 @@ echo )
 	i obs-studio vlc qbittorrent libreoffice-still gimp firefox torbrowser-launcher bemoji dunst picom flameshot feh
 echo )
 
-( cd program || exit; echo 'program/'
+( cd program
 	for i in */; do (
-		echo "	$i"
-		cd "$i" && ./build
+		cd "$i"
+		./build
 	) done
 echo )
 
-( cd etc || exit; echo 'etc/'
+( cd etc
 	sudo localectl set-x11-keymap us
 	sudo localectl set-keymap --no-convert us
 
