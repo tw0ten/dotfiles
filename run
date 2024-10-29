@@ -45,7 +45,7 @@ sudo -v && ( sudo pacman -Syu
 		obs-studio vlc qbittorrent libreoffice-still gimp firefox torbrowser-launcher bemoji dunst picom flameshot feh
 echo )
 
-sudo -v && ( cd program
+sudo -v && ( cd bin/src
 	for i in */; do (
 		cd "$i"
 		./build

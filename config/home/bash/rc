@@ -53,7 +53,7 @@ alias \
 	ls='ls --color=always' \
 	l='ls --group-directories-first' \
 	la='l -A' \
-	ll='la -lh' \
+	ll='l -a -lh' \
 	lf="$FILES" \
 	prwd='realpath .' \
 	cp='cp -iv' \
@@ -90,6 +90,6 @@ PS1="$(
 	i "$c\$([ \$? = 0 ] && echo + || echo -)$r $PS1"
 echo "$r$PS1$r")"
 
-[[ -f ~/.config/bashrc ]] && . ~/.config/bashrc
-
 minifetch
+
+[[ -f ~/.config/bashrc ]] && . ~/.config/bashrc

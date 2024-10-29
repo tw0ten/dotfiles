@@ -1,18 +1,18 @@
-[submodule "program/dmenu"]
-	path = program/dmenu
+[submodule "bin/src/dmenu"]
+	path = bin/src/dmenu
 	url = https://github.com/tw0ten/dmenu
-[submodule "program/dwm"]
-	path = program/dwm
+[submodule "bin/src/dwm"]
+	path = bin/src/dwm
 	url = https://github.com/tw0ten/dwm
-[submodule "program/mousikes"]
-	path = program/mousikes
+[submodule "bin/src/mousikes"]
+	path = bin/src/mousikes
 	url = https://github.com/tw0ten/mousikes
-[submodule "program/slock"]
-	path = program/slock
+[submodule "bin/src/slock"]
+	path = bin/src/slock
 	url = https://github.com/tw0ten/slock
-[submodule "program/st"]
-	path = program/st
+[submodule "bin/src/st"]
+	path = bin/src/st
 	url = https://github.com/tw0ten/st
-[submodule "program/systat"]
-	path = program/systat
+[submodule "bin/src/systat"]
+	path = bin/src/systat
 	url = https://github.com/tw0ten/systat
