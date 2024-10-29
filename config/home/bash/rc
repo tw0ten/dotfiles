@@ -71,9 +71,9 @@ alias \
 	....="exec '$SHELL'" \
 	diff='diff --color=always' \
 	+x='chmod +x' \
-	filesize='du -shc' \
-	filesize.='du -shc ./.* ./*' \
+	filesize='du -shc ./.* ./* 2>/dev/null' \
 	sshs='eval "$(ssh-agent -s)"' \
+	shellcheck='shellcheck -s sh --color' \
 ;
 
 PS1="$(

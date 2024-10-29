@@ -9,7 +9,7 @@ venv="$(systemd-path user-shared)/python/yt-dlp"
 	python -m pip install yt-dlp
 ) && . "$venv/bin/activate"
 cd "$(mktemp -d)" || exit
-cat -n | while IFS= read -r line; do
+shuf | cat -n | while IFS= read -r line; do
 	echo "$line"
 	eval "set -- $line"
 	file="$dir/$2.$ext"

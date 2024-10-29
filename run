@@ -1,6 +1,7 @@
 #!/usr/bin/env sh
 git submodule update --init --recursive || exit
 
+sudo -v || sudo() { false; }
 cd() { command cd "$@" && echo "cd $*" || exit; }
 
 ( cd config
@@ -19,10 +20,12 @@ cd() { command cd "$@" && echo "cd $*" || exit; }
 		i xinitrc .xinitrc
 		i inputrc .inputrc )
 
+	sudo -v || exit
+
 	i() { set "$1" "$i/$2"
 		sudo mkdir -p "$(dirname "$2")"
 		sudo cp "$1" "$2" || return
-		echo "	sudo cp '$1' > '$2'"; }
+		echo "	cp '$1' > '$2'"; }
 
 	( cd etc; i='/etc'
 		i pacman pacman.conf
@@ -30,25 +33,26 @@ cd() { command cd "$@" && echo "cd $*" || exit; }
 		i grub default/grub )
 echo )
 
-( sudo pacman -Syu
+sudo -v && ( sudo pacman -Syu
 	AUR_HELPER='paru'
-	i() { "$AUR_HELPER" -S "$@"; }
-	command -v "$AUR_HELPER" || ( cd "$(mktemp -d)"; git clone "https://aur.archlinux.org/$AUR_HELPER" . && makepkg -si )
-	i neovim tmux openssh
-	i lf btop fastfetch ripgrep reflector ufw
-	i jdk-openjdk rust python deno nasm
-	i nvidia-open nvidia-utils nvidia-settings xorg xorg-xinit xkb-switch pipewire libnotify ttf-jetbrains-mono ttf-nerd-fonts-symbols-mono noto-fonts-emoji noto-fonts-cjk
-	i obs-studio vlc qbittorrent libreoffice-still gimp firefox torbrowser-launcher bemoji dunst picom flameshot feh
+	i() { $AUR_HELPER -S "$@"; }
+	command -v $AUR_HELPER || ( cd "$(mktemp -d)"; git clone "https://aur.archlinux.org/$AUR_HELPER" . && makepkg -si )
+	i neovim tmux openssh \
+		lf btop fastfetch ripgrep reflector ufw
+	i jdk-openjdk rustup python deno nasm
+	i xorg xorg-xinit xkb-switch pipewire libnotify nvidia-open nvidia-utils nvidia-settings \
+		ttf-jetbrains-mono ttf-nerd-fonts-symbols-mono noto-fonts-emoji noto-fonts-cjk \
+		obs-studio vlc qbittorrent libreoffice-still gimp firefox torbrowser-launcher bemoji dunst picom flameshot feh
 echo )
 
-( cd program
+sudo -v && ( cd program
 	for i in */; do (
 		cd "$i"
 		./build
 	) done
 echo )
 
-( cd etc
+sudo -v && ( cd etc
 	sudo localectl set-x11-keymap us
 	sudo localectl set-keymap --no-convert us
 

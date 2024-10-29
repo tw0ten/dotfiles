@@ -3,7 +3,6 @@ return {
 	config = function()
 		vim.cmd.Ex = vim.cmd["NvimTreeToggle"]
 
-		local dir = { '>', '=' }
 		require("nvim-tree").setup({
 			disable_netrw = true,
 			renderer = {
@@ -27,12 +26,12 @@ return {
 							ignored = '',
 						},
 						folder = {
-							default = dir[1],
-							open = dir[2],
-							empty = dir[1],
-							empty_open = dir[2],
-							symlink = dir[1],
-							symlink_open = dir[2],
+							default = '>',
+							open = '-',
+							empty = '>',
+							empty_open = '-',
+							symlink = '<',
+							symlink_open = '-',
 						},
 					},
 				},
