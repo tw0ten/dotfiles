@@ -1,10 +1,9 @@
 #!/bin/sh
 i(){ xbacklight -get | sed 's/\..*//'; }
-max(){ echo $(( $1 > $2 ? $1 : $2)); }
-min(){ echo $(( $1 < $2 ? $1 : $2)); }
+max(){ echo $(($1 > $2 ? $1 : $2)); }
+min(){ echo $(($1 < $2 ? $1 : $2)); }
 
 i=$(dmenu -p "brightness: $(i)/100" &)
-[ -n "$i" ] || exit
 s=$(min $(max $(($(max $(i) $i)-$(min $(i) $i))) 0) 100)
 
 xbacklight -set "$i" -time $((s * 10)) -steps $s &

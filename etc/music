@@ -9,14 +9,14 @@ venv="$(systemd-path user-shared)/python/yt-dlp"
 	python -m pip install yt-dlp
 ) && . "$venv/bin/activate"
 cd "$(mktemp -d)" || exit
-shuf | cat -n | while IFS= read -r line; do
+while IFS= read -r line; do
 	echo "$line"
 	eval "set -- $line"
-	file="$dir/$2.$ext"
+	file="$dir/$1.$ext"
 	[ -f "$file" ] && continue
-	link="${3:-$(basename "$2")}"
-	echo "$link"
+	link="${2:-$(basename "$1")}"
 	case "$link" in
+		'') continue ;;
 		https://*) curl -O "$link" ;;
 		*) python -m yt_dlp \
 			--audio-quality 0 \

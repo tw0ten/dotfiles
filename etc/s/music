@@ -1,2 +1,3 @@
 #!/bin/sh
-cd "$HOME/music" && exec $TERMINAL mousikes -v 0.025 "$@"
+cd "$HOME/music"
+exec $TERMINAL mousikes -v 0.025 "$@"

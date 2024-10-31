@@ -1,3 +1,8 @@
 #!/bin/sh
-set "$DOTFILES/etc/s/"$(ls "$DOTFILES/etc/s" | dmenu -p '~')
-. "$1"
+set -e
+cd "$DOTFILES/etc/s"
+set -- $(ls | dmenu -p '~')
+i="$(realpath "$1")"
+shift
+cd "$OLDPWD"
+. "$i"
