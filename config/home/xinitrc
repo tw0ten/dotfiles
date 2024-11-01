@@ -6,9 +6,9 @@ sysresources=/etc/X11/xinit/.Xresources
 sysmodmap=/etc/X11/xinit/.Xmodmap
 [ -f $sysmodmap ] && xmodmap $sysmodmap
 
-userresources="$HOME/.config/x/resources"
+userresources=~/.config/x/resources
 [ -f "$userresources" ] && xrdb -merge "$userresources"
-usermodmap="$HOME/.config/x/modmap"
+usermodmap=~/.config/x/modmap
 [ -f "$usermodmap" ] && xmodmap "$usermodmap"
 
 for i in /etc/X11/xinit/xinitrc.d/*; do
@@ -20,17 +20,12 @@ xset m 0 0
 xbacklight -set 75 -time 0 -steps 1
 
 ( cd "$DOTFILES/etc"
-	( dir="$(systemd-path user-shared)/python/pypresence"
-		cd "$dir" && . bin/activate || {
-			python -m venv "$dir"
-			cd "$dir" && . bin/activate
-			python -m pip install pypresence
-		} && exec python "$OLDPWD/rpc.py" ) &
+	~/.fehbg &
+	./discordrpc &
 	systat &
 	picom &
 	dunst &
 	flameshot &
-	~/.fehbg &
 ) &
 
 ~/.config/xinitrc
