@@ -13,7 +13,7 @@ mklc() {
 mktl() {
 	mkdir "$1" && cd "$1" || return
 	mkdir src lib io io/i
-	echo '/io/o' > .gitignore
+	echo -e '.*\n/io/o' > .gitignore
 	echo "# $1" > README.md
 	echo -e '#!/bin/sh\nrm -rf io/o\nmkdir io/o\n\ncd io\ncd o' > run
 	chmod +x run && ./run

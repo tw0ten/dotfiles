@@ -12,7 +12,7 @@ cd "$(mktemp -d)" || exit
 while IFS= read -r line; do
 	echo "$line"
 	eval "set -- $line"
-	file="$dir/$1.$ext"
+	file="$dir/$1"
 	[ -f "$file" ] && continue
 	link="${2:-$(basename "$1")}"
 	case "$link" in
@@ -25,7 +25,8 @@ while IFS= read -r line; do
 			-- "$link" ;;
 	esac
 	mkdir -p "$(dirname "$file")"
-	ffmpeg -i ./* "$file" -hide_banner -nostdin
+	ffmpeg -i ./* -f "$ext" "$file" \
+		-hide_banner -nostdin
 	rm -rf ./*
 done
 cd .. && rm -rf "$OLDPWD"

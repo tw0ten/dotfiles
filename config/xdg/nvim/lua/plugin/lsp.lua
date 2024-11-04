@@ -29,6 +29,7 @@ return {
 			vim.keymap.set('n', "<leader>vca", vim.lsp.buf.code_action, opts)
 			vim.keymap.set('n', "<leader>vrf", vim.lsp.buf.references, opts)
 			vim.keymap.set('n', "<leader>vrn", vim.lsp.buf.rename, opts)
+			vim.keymap.set('n', "<leader>fmt", vim.lsp.buf.format)
 			vim.keymap.set('n', "]d", vim.diagnostic.goto_next, opts)
 			vim.keymap.set('n', "[d", vim.diagnostic.goto_prev, opts)
 		end

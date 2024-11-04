@@ -5,12 +5,9 @@ end
 unmap('n', "K")
 
 vim.keymap.set('n', "U", vim.cmd.redo)
-
 vim.keymap.set('n', "<leader>ex", vim.cmd.Ex)
-vim.keymap.set('n', "<leader>wx", function()
-	vim.cmd.w()
-	vim.cmd.Ex()
-end)
+vim.keymap.set('n', "<leader>w", vim.cmd.w)
+
 vim.keymap.set('n', "<leader>cd", function()
 	vim.cmd.cd([[%:p:h]])
 	print(vim.fn.getcwd())
@@ -21,7 +18,6 @@ vim.keymap.set('n', "<C-_>", function()
 	print("@/ = ''")
 end)
 
-vim.keymap.set('n', "<leader>fmt", vim.lsp.buf.format)
 vim.keymap.set('n', "<leader>sr", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 vim.keymap.set('v', "<C-Down>", [[:m '>+1<CR>gv=gv]])
