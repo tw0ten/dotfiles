@@ -63,6 +63,7 @@ alias \
 	mkdir='mkdir -pv' \
 	rmdir='rmdir -v' \
 \
+	history="history | $PAGER +G" \
 	myip='echo "$(curl -s ipinfo.io/ip)"' \
 	date='date +"[%w.%d/%m|%H:%M]"' \
 	uptime='uptime -p' \

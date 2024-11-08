@@ -1,5 +1,4 @@
 #!/bin/sh
-ext='wav'
 dir="$HOME/music"
 
 venv="$(systemd-path user-shared)/python/yt-dlp"
@@ -19,13 +18,14 @@ while IFS= read -r line; do
 		'') continue ;;
 		https://*) curl -O "$link" ;;
 		*) python -m yt_dlp \
-			--audio-quality 0 \
-			-x --audio-format best \
+			--audio-quality 0 --audio-format best \
 			--default-search ytsearch \
-			-- "$link" ;;
+			-x -- "$link" ;;
 	esac
 	mkdir -p "$(dirname "$file")"
-	ffmpeg -i ./* -f "$ext" "$file" \
+	ffmpeg -i ./* \
+		-c:a flac \
+		-f flac "$file" \
 		-hide_banner -nostdin
 	rm -rf ./*
 done
