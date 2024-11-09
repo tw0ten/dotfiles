@@ -1,0 +1,8 @@
+#!/bin/sh
+[ -z "$*" ] && exec $TERMINAL
+[ "$TERM" = 'linux' ] || unset TERMINAL
+for i in "$@"; do (
+	[ -d "$i" ] && exec $TERMINAL $FILES
+	[ -f "$i" ] || exec $TERMINAL $VISUAL "$i"
+	exec xdg-open "$i"
+) done

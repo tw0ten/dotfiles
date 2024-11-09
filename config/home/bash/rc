@@ -32,6 +32,7 @@ gg() { git clone "git@github.com:$(git config get user.name)/$1" && cd "$1"; }
 
 alias \
 	s='sudo' \
+	x="$OPENER" \
 	e="$VISUAL" \
 	se="s $VISUAL" \
 	p="$PAGER" \
@@ -45,7 +46,8 @@ alias \
 	oo='o -O' \
 \
 	d='cd' \
-	dd='d "$(mktemp -d)"' \
+	dd='mkdir' \
+	ddd='d "$(mktemp -d)"' \
 	dx='d "$OLDPWD"' \
 	dz='d ..' \
 	dzz='d ../..' \
@@ -53,7 +55,7 @@ alias \
 	ls='ls --color=always' \
 	l='ls --group-directories-first' \
 	la='l -A' \
-	ll='l -a -lh' \
+	ll='l -a -lh -p' \
 	lf="$FILES" \
 	prwd='realpath .' \
 	cp='cp -iv' \

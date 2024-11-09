@@ -29,6 +29,7 @@ export HISTTIMEFORMAT='[%Y|%w.%d/%m|%H:%M:%S] '
 export HISTCONTROL='ignoredups'
 export HISTIGNORE='mhm'
 
+export OPENER='open'
 export TERMINAL='terminal'
 export VISUAL='nvim'
 export EDITOR="$VISUAL"
