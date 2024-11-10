@@ -1,2 +1,2 @@
 #!/bin/sh
-flameshot gui
+exec flameshot gui

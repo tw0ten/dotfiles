@@ -52,20 +52,20 @@ sudo -v && ( cd bin/src
 	) done
 echo )
 
-sudo -v && ( cd etc
-	sudo localectl set-x11-keymap us
-	sudo localectl set-keymap --no-convert us
+sudo -v && ( cd etc; i() { sudo "$@"; }
+	i localectl set-x11-keymap us
+	i localectl set-keymap --no-convert us
 
-	sudo systemctl enable reflector.timer
+	i systemctl enable reflector.timer
 
-	sudo cp cat.png /boot/grub/bg.png
-	sudo grub-mkconfig -o /boot/grub/grub.cfg
+	i cp cat.png /boot/grub/bg.png
+	i grub-mkconfig -o /boot/grub/grub.cfg
 
-	sudo ufw reset
-	sudo ufw default deny incoming
-	sudo ufw default allow outgoing
-	sudo ufw allow ssh
-	sudo ufw enable
+	i ufw reset
+	i ufw default deny incoming
+	i ufw default allow outgoing
+	i ufw allow ssh
+	i ufw enable
 echo )
 
 exec "$SHELL"
