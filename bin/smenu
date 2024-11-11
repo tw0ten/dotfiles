@@ -1,6 +1,6 @@
 #!/bin/sh
 set -e
-cd "$DOTFILES/etc/s"
+cd "$DOTFILES/bin/s"
 set -- $(ls | dmenu -p '~')
 i="$(realpath "$1")"
 shift

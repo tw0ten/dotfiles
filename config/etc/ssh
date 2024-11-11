@@ -1,80 +1,31 @@
 Include /etc/ssh/sshd_config.d/*.conf
 
 Port 22
-#AddressFamily any
-#ListenAddress 0.0.0.0
-#ListenAddress ::
+AddressFamily any
 
-#HostKey /etc/ssh/ssh_host_rsa_key
-#HostKey /etc/ssh/ssh_host_ecdsa_key
-#HostKey /etc/ssh/ssh_host_ed25519_key
-
-#RekeyLimit default none
-
-#SyslogFacility AUTH
-#LogLevel INFO
-
-#LoginGraceTime 2m
-#PermitRootLogin prohibit-password
-#StrictModes yes
+LoginGraceTime 20
 MaxAuthTries 3
 MaxSessions 4
 
 PubkeyAuthentication yes
 AuthorizedKeysFile .ssh/authorized_keys
 
-#AuthorizedPrincipalsFile none
-
-#AuthorizedKeysCommand none
-#AuthorizedKeysCommandUser nobody
-
-#HostbasedAuthentication no
-#IgnoreUserKnownHosts no
-#IgnoreRhosts yes
-
 PasswordAuthentication no
 PermitEmptyPasswords yes
 
-#KbdInteractiveAuthentication yes
+UsePAM no
+KbdInteractiveAuthentication no
 
-#KerberosAuthentication no
-#KerberosOrLocalPasswd yes
-#KerberosTicketCleanup yes
-#KerberosGetAFSToken no
+PrintLastLog no
 
-#GSSAPIAuthentication no
-#GSSAPICleanupCredentials yes
+ClientAliveInterval 20
+ClientAliveCountMax 3
 
-#UsePAM no
+PrintMotd yes
+Banner /etc/ssh/banner
 
-#AllowAgentForwarding yes
-#AllowTcpForwarding yes
-#GatewayPorts no
-#X11Forwarding no
-#X11DisplayOffset 10
-#X11UseLocalhost yes
-#PermitTTY yes
-#PrintMotd yes
-#PrintLastLog yes
-#TCPKeepAlive yes
-#PermitUserEnvironment no
-#Compression delayed
-#ClientAliveInterval 0
-#ClientAliveCountMax 3
-#UseDNS no
-#PidFile /run/sshd.pid
-#MaxStartups 10:30:100
-#PermitTunnel no
-#ChrootDirectory none
-#VersionAddendum none
-
-#Banner none
-
-# override default of no subsystems
 Subsystem sftp /usr/lib/ssh/sftp-server
 
-#Match User root
-#	X11Forwarding no
-#	AllowTcpForwarding no
+#Match User x
+#	X11Forwarding yes
 #	PermitTTY no
-#	ForceCommand cvs server

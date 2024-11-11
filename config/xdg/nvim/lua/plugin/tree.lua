@@ -45,7 +45,8 @@ return {
 				sorter = "case_sensitive",
 			},
 			filters = {
-				git_ignored = false,
+				git_ignored = true,
+				dotfiles = true,
 			},
 		})
 	end
