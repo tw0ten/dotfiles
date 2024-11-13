@@ -1,5 +1,4 @@
 #!/bin/sh
-set -e
 mute="$(pamixer --get-mute)"
 kb="$(xkb-switch)"
 

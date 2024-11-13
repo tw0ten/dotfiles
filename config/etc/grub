@@ -1,7 +1,6 @@
 GRUB_DISTRIBUTOR="Arch"
 GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3"
 GRUB_CMDLINE_LINUX="rootfstype=ext4"
-#GRUB_PRELOAD_MODULES="part_gpt part_msdos"
 
 GRUB_DEFAULT="saved"
 GRUB_SAVEDEFAULT="true"
@@ -9,18 +8,12 @@ GRUB_TIMEOUT="-1"
 GRUB_TIMEOUT_STYLE="menu"
 #GRUB_DISABLE_SUBMENU="y"
 
-#GRUB_TERMINAL_INPUT="console"
-#GRUB_TERMINAL_OUTPUT="console"
 GRUB_GFXMODE="auto"
 GRUB_GFXPAYLOAD_LINUX="keep"
 
 GRUB_BACKGROUND="/boot/grub/bg.png"
-#GRUB_THEME="/boot/grub/themes/starfield/theme.txt"
-#GRUB_FONT="/boot/grub/unicode.pf2"
 export GRUB_COLOR_NORMAL="black/black"
 export GRUB_COLOR_HIGHLIGHT="black/white"
-#GRUB_INIT_TUNE="480 440 1"
 
 #GRUB_ENABLE_CRYPTODISK="y"
-#GRUB_DISABLE_RECOVERY="true"
 GRUB_DISABLE_OS_PROBER="false"

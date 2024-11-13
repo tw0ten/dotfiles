@@ -3,6 +3,9 @@ Include /etc/ssh/sshd_config.d/*.conf
 Port 22
 AddressFamily any
 
+ListenAddress 0.0.0.0
+ListenAddress ::
+
 LoginGraceTime 20
 MaxAuthTries 3
 MaxSessions 4

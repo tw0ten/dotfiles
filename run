@@ -5,7 +5,7 @@ sudo -v || sudo() { false; }
 cd() { command cd "$@" && echo "cd $*" || exit; }
 
 ( cd config
-	i() { set "$1" "$i/${2:-"$1"}"
+	i() { set -- "$1" "$i/${2:-"$1"}"
 		mkdir -p "$(dirname "$2")"
 		ln -sfT "$PWD/$1" "$2" || return
 		echo "	ln '$2' < '$1'"; }
@@ -23,7 +23,7 @@ cd() { command cd "$@" && echo "cd $*" || exit; }
 
 	sudo -v || exit
 
-	i() { set "$1" "$i/$2"
+	i() { set -- "$1" "$i/$2"
 		sudo mkdir -p "$(dirname "$2")"
 		sudo cp "$1" "$2" || return
 		echo "	cp '$1' > '$2'"; }

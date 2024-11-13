@@ -2,29 +2,24 @@
 [[ $- = *i* ]] || return $(true)
 
 caret() { echo -ne "\e[$* q"; }
-mklc() {
-	local d="$DOTFILES/etc/lc"
-	cp -i "$d/$1" LICENSE || { ls "$d"; return $(false); }
-	sed -i "0,/{YEAR}/s//$(\date +'%Y')/" LICENSE
-	sed -i "0,/{NAME}/s//$(git config get user.name)/" LICENSE
-	sed -i "0,/{EMAIL}/s//$(git config get user.email)/" LICENSE
-	head -n 5 LICENSE
-}
-mktl() {
-	mkdir "$1" && cd "$1" || return
+mklc() { set -- "$DOTFILES/etc/lc/$1" "${2:-"LICENSE"}"
+	cp -i "$1" "$_" || { ls "$(dirname "$1")"; return $(false); }
+	sed -i "0,/{YEAR}/s//$(command date +'%Y')/" "$_"
+	sed -i "0,/{NAME}/s//$(git config get user.name)/" "$_"
+	sed -i "0,/{EMAIL}/s//$(git config get user.email)/" "$_"
+	head -n 5 "$_"; }
+mktl() { mkdir "$1" && cd "$1" || return
 	mkdir src lib io io/i
-	echo -e '.*\n/io/o' > .gitignore
+	echo '/io/o' > .gitignore
 	echo "# $1" > README.md
 	echo -e '#!/bin/sh\nrm -rf io/o\nmkdir io/o\n\ncd io\ncd o' > run
 	chmod +x run && ./run
-	git init
-}
+	git init; }
 minifetch() { echo "$(tty):$SHLVL '$-'" | fastfetch -C ~/.config/fastfetch/mini.jsonc; }
 ff() { find . -name "*$**" 2>/dev/null | $PAGER; }
 mhm() { fortune | cowsay -n -f "$(cowsay -l | grep / -v | tr " " "\n" | shuf -n1)" | lolcat; }
 sign() { $VISUAL "$1" && echo " - $USER, $(\date)" | tee -a "$1"; }
-cd() {
-	command cd "$@" || return
+cd() { command cd "$@" || return
 	git rev-parse --is-inside-work-tree >/dev/null 2>&1 \
 		&& __git_ps1='git' || unset __git_ps1
 }; cd .
