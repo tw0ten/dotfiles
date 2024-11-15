@@ -12,7 +12,6 @@ Architecture = auto
 CheckSpace
 DisableDownloadTimeout
 #XferCommand = /usr/bin/curl -L -C - -f -o %o %u
-#XferCommand = /usr/bin/wget --passive-ftp -c -O %o %u
 
 SigLevel = Required DatabaseOptional
 LocalFileSigLevel = Optional
@@ -28,6 +27,3 @@ Include = /etc/pacman.d/mirrorlist
 Include = /etc/pacman.d/mirrorlist
 [multilib]
 Include = /etc/pacman.d/mirrorlist
-#[custom]
-#SigLevel = Optional TrustAll
-#Server = file:///home/custompkgs

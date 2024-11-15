@@ -23,7 +23,6 @@ cd() { command cd "$@" || return
 	git rev-parse --is-inside-work-tree >/dev/null 2>&1 \
 		&& __git_ps1='git' || unset __git_ps1
 }; cd .
-gg() { git clone "git@github.com:$(git config get user.name)/$1" && cd "$1"; }
 
 alias \
 	s='sudo' \

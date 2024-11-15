@@ -68,5 +68,3 @@ sudo -v && ( cd etc; i() { sudo "$@"; }
 	i ufw allow ssh
 	i ufw enable
 echo )
-
-exec "$SHELL"

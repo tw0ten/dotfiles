@@ -30,3 +30,6 @@ map z<space> set info
 map i
 map e
 map <enter> e
+
+map G
+map gg
