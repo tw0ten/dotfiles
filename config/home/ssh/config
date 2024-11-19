@@ -1,5 +1,4 @@
 Include /etc/ssh/ssh_config.d/*.conf
 
-Host github.com
-	User git
-	IdentityFile ~/.ssh/github
+Host *
+	IdentityFile ~/.ssh/key/%h/%r

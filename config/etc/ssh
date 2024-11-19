@@ -28,7 +28,3 @@ PrintMotd yes
 Banner /etc/ssh/banner
 
 Subsystem sftp /usr/lib/ssh/sftp-server
-
-#Match User x
-#	X11Forwarding yes
-#	PermitTTY no

@@ -17,7 +17,6 @@ cd() { command cd "$@" && echo "cd $*" || exit; }
 		i bash/profile .bash_profile
 		i bash/rc .bashrc
 		i ssh/config .ssh/config
-		i ssh/rc .ssh/rc
 		i xinitrc .xinitrc
 		i inputrc .inputrc )
 
