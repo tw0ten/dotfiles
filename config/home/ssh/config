@@ -1,4 +1,4 @@
 Include /etc/ssh/ssh_config.d/*.conf
 
 Host *
-	IdentityFile ~/.ssh/key/%h/%r
+	IdentityFile ~/.ssh/key/%h/%r/id

@@ -7,5 +7,5 @@ xkb-switch -s us
 
 slock
 
-$mute || pamixer -u
+"$mute" || pamixer -u
 xkb-switch -s "$kb"

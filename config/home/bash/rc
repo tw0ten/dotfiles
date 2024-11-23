@@ -38,6 +38,7 @@ alias \
 	cl='clear' \
 	o='curl -fsL' \
 	oo='o -O' \
+	r='./build; ./run' \
 \
 	d='cd' \
 	dd='mkdir' \
@@ -59,6 +60,7 @@ alias \
 	mkdir='mkdir -pv' \
 	rmdir='rmdir -v' \
 \
+	cpb='cp -t ~/.local/bin' \
 	history="history | $PAGER +G" \
 	myip='echo "$(curl -s ipinfo.io/ip)"' \
 	date='date +"[%w.%d/%m|%H:%M]"' \

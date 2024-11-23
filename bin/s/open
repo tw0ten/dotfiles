@@ -1,9 +1,9 @@
 #!/bin/sh
 cd "$@"
-while i=$(ls -apL |
-	sed 's/^\.\//./' | sed 's/^\.\.\//../' |
-	dmenu -p "$PWD|")
-do
+while i="$(ls -apL |
+	sed -e 's/^\.\//./' -e 's/^\.\.\//../' |
+	dmenu -p "$PWD"
+)"; do
 	[ -d "$i" ] && [ "$i" != '.' ] ||
 		exec $OPENER "$i"
 	cd "$i" || continue
