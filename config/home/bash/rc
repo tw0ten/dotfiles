@@ -1,5 +1,6 @@
 #!/bin/bash
 [[ $- = *i* ]] || return $(true)
+set -o vi
 
 caret() { echo -ne "\e[$* q"; }
 mklc() { set -- "$DOTFILES/etc/lc/$1" "${2:-"LICENSE"}"

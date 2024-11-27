@@ -9,7 +9,6 @@ for i in /etc/X11/xinit/xinitrc.d/*; do . "$i"; done
 
 xset r rate 200 25
 xset m 0 0
-xbacklight -set 75 -time 0 -steps 1
 
 ( cd "$DOTFILES/etc"
 	~/.fehbg &
