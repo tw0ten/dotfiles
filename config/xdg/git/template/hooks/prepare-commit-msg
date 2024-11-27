@@ -1,0 +1,5 @@
+#!/bin/sh
+set -e
+
+sed -i "0,/{NAME}/s//$(git config get user.name)/" "$1"
+sed -i "0,/{EMAIL}/s//$(git config get user.email)/" "$1"

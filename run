@@ -1,17 +1,15 @@
 #!/usr/bin/env sh
-git submodule update --init --recursive || exit
+git submodule update --init --recursive
+set -ex && export SHELLOPTS
 
-sudo -v || sudo() { false; }
-cd() { command cd "$@" && echo "cd $*" || exit; }
-
-( cd config
-	i() { set -- "$1" "$i/${2:-"$1"}"
+( cd config; set +x
+	i() { set -- "$PWD/$1" "$i/$2"
 		mkdir -p "$(dirname "$2")"
-		ln -sfT "$PWD/$1" "$2" || return
-		echo "	ln '$2' < '$1'"; }
+		ln -sfT "$1" "$2"
+		echo "'$2' < '$1'"; }
 
 	( cd xdg; i="$HOME/.config"
-		for f in *; do i "$f"; done )
+		for f in *; do i "$f" "$f"; done )
 
 	( cd home; i="$HOME"
 		i bash/profile .bash_profile
@@ -20,12 +18,12 @@ cd() { command cd "$@" && echo "cd $*" || exit; }
 		i xinitrc .xinitrc
 		i inputrc .inputrc )
 
-	sudo -v || exit
+	sudo -v
 
-	i() { set -- "$1" "$i/$2"
+	i() { set -- "$PWD/$1" "$i/$2"
 		sudo mkdir -p "$(dirname "$2")"
-		sudo cp "$1" "$2" || return
-		echo "	cp '$1' > '$2'"; }
+		sudo cp "$1" "$2"
+		echo "'$1' > '$2'"; }
 
 	( cd etc; i='/etc'
 		i pacman pacman.conf
@@ -33,26 +31,27 @@ cd() { command cd "$@" && echo "cd $*" || exit; }
 		i grub default/grub )
 echo )
 
-sudo -v && ( sudo pacman -Syu
-	AUR_HELPER='paru'
-	i() { $AUR_HELPER -S "$@"; }
-	command -v $AUR_HELPER || ( cd "$(mktemp -d)"; git clone "https://aur.archlinux.org/$AUR_HELPER" . && makepkg -si )
+( sudo pacman -Syu
+	AUR_HELPER=paru
+	i() { $AUR_HELPER -S "$@" || true; }
+	command -v $AUR_HELPER || ( cd "$(mktemp -d)"; git clone "https://aur.archlinux.org/$AUR_HELPER" .; makepkg -si )
 	i neovim tmux openssh \
-		lf btop fastfetch ripgrep reflector ufw
-	i jdk-openjdk rustup python deno nasm
-	i xorg xorg-xinit xkb-switch pipewire libnotify nvidia-open nvidia-utils nvidia-settings \
-		ttf-jetbrains-mono ttf-nerd-fonts-symbols-mono noto-fonts-emoji noto-fonts-cjk \
-		obs-studio vlc qbittorrent libreoffice-still gimp firefox torbrowser-launcher bemoji dunst picom flameshot feh
-echo )
+		lf btop fastfetch ripgrep reflector ufw \
+		jdk-openjdk rust python deno nasm
+	i xorg xorg-xinit pipewire nvidia-open nvidia-settings \
+		feh dunst libnotify picom flameshot \
+		torbrowser-launcher qbittorrent ffmpeg libreoffice-still gimp obs-studio vlc blender \
+		ttf-jetbrains-mono ttf-nerd-fonts-symbols-mono noto-fonts-emoji noto-fonts-cjk
+exit )
 
-sudo -v && ( cd bin/src
+( cd bin/src
 	for i in */; do (
 		cd "$i"
-		./build
+		sudo ./build
 	) done
-echo )
+exit )
 
-sudo -v && ( cd etc; i() { sudo "$@"; }
+( cd etc; i() { sudo "$@"; }
 	i localectl set-x11-keymap us
 	i localectl set-keymap --no-convert us
 
@@ -66,4 +65,4 @@ sudo -v && ( cd etc; i() { sudo "$@"; }
 	i ufw default allow outgoing
 	i ufw allow ssh
 	i ufw enable
-echo )
+exit )

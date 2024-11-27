@@ -3,6 +3,7 @@
 	email = twoten.eq@gmail.com
 [init]
 	defaultBranch = main
+	templatedir = ~/.config/git/template
 [alias]
 	a = add
 	aa = a --all

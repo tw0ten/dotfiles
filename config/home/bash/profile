@@ -24,7 +24,7 @@ export SUDO_PROMPT="%U$bold$accent@$normal%H %p$bold$accent#$normal"
 
 export HISTSIZE=
 export HISTFILESIZE=
-export HISTFILE="$(systemd-path user-shared)/.bash_history"
+export HISTFILE="$HOME/.local/share/history.bash"
 export HISTTIMEFORMAT='[%Y|%w.%d/%m|%H:%M:%S] '
 export HISTCONTROL='ignoredups'
 export HISTIGNORE='mhm'

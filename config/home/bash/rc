@@ -32,7 +32,7 @@ alias \
 	p="$PAGER" \
 	g='git' \
 	f='rg --color=always' \
-	t="($TERMINAL >/dev/null 2>&1 &)" \
+	t="(exec $TERMINAL >/dev/null 2>&1 &)" \
 	c='xsel --clipboard --input' \
 	v='xsel --clipboard --output' \
 	cl='clear' \
@@ -56,10 +56,10 @@ alias \
 	cp='cp -iv' \
 	mv='mv -iv' \
 	rm='rm -v' \
-	rmr='rm -r' \
 	mkdir='mkdir -pv' \
 	rmdir='rmdir -v' \
 \
+	fehbg='feh --no-fehbg --bg-scale' \
 	cpb='cp -t ~/.local/bin' \
 	history="history | $PAGER +G" \
 	myip='echo "$(curl -s ipinfo.io/ip)"' \
