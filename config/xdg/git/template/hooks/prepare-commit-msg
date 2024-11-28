@@ -1,5 +1,8 @@
 #!/bin/sh
 set -e
+echo "# $*" >> "$1"
+
+sed -i "1i#$(cat /dev/urandom | tr -dc '\x21\x22\x24-\x7E' | head -c 2)" "$1"
 
 sed -i "0,/{NAME}/s//$(git config get user.name)/" "$1"
 sed -i "0,/{EMAIL}/s//$(git config get user.email)/" "$1"

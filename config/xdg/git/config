@@ -4,7 +4,13 @@
 [init]
 	defaultBranch = main
 	templatedir = ~/.config/git/template
+[commit]
+	template = ~/.config/git/commit
+[pull]
+	rebase = false
+
 [alias]
+	i = init
 	a = add
 	aa = a --all
 	c = commit
@@ -29,12 +35,9 @@
 	cf = config
 	cfl = cf list
 	l = log --decorate --numstat --graph
+
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-[pull]
-	rebase = false
-[commit]
-	template = ~/.config/git/commit
