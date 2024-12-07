@@ -8,7 +8,7 @@
 	width = (64,256)
 	height = 256
 
-	offset = 1x1
+	offset = (1,1)
 	origin = top-right
 
 	scale = 0
@@ -19,6 +19,7 @@
 
 	progress_bar = false
 
+	progress_bar_corner_radius = 0
 	icon_corner_radius = 0
 
 	indicate_hidden = yes

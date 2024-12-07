@@ -12,7 +12,6 @@ xset m 0 0
 
 ( cd "$DOTFILES/etc"
 	~/.fehbg &
-	./discordrpc &
 	systat &
 	picom &
 	dunst &

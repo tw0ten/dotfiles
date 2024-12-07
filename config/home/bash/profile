@@ -27,7 +27,7 @@ export HISTFILESIZE=
 export HISTFILE="$HOME/.local/share/history.bash"
 export HISTTIMEFORMAT='[%Y|%w.%d/%m|%H:%M:%S] '
 export HISTCONTROL='ignoredups'
-export HISTIGNORE='mhm'
+export HISTIGNORE='fg:bg'
 
 export OPENER='open'
 export TERMINAL='terminal'
