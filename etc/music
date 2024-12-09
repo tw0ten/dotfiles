@@ -1,13 +1,14 @@
 #!/bin/sh
+set -e
 dir="$HOME/music"
 
-venv="$(systemd-path user-shared)/python/yt-dlp"
+venv="$HOME/.local/share/python/yt-dlp"
 [ -d "$venv" ] || (
 	python -m venv "$venv"
 	. "$venv/bin/activate"
 	python -m pip install yt-dlp
 ) && . "$venv/bin/activate"
-cd "$(mktemp -d)" || exit
+cd "$(mktemp -d)"
 while IFS= read -r line; do
 	echo "$line"
 	eval "set -- $line"
@@ -28,4 +29,5 @@ while IFS= read -r line; do
 		-hide_banner -nostdin
 	rm -rf ./*
 done
-cd .. && rm -rf "$OLDPWD"
+cd ..
+rm -rf "$OLDPWD"

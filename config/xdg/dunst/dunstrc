@@ -5,8 +5,8 @@
 
 
 
-	width = (64,256)
-	height = 256
+	width = (0,256)
+	height = (0,256)
 
 	offset = (1,1)
 	origin = top-right
