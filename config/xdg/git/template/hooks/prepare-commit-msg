@@ -1,15 +1,19 @@
 #!/bin/sh
 set -e
 i="$1"
-echo "## $*" >> "$i"
+echo >> "$i"
+echo >> "$i" "## $*"
 
 i() { sed "$@" -i "$i"; }
 
+i "0,/{NAME}/s//$(git config get user.name)/"
+i "0,/{EMAIL}/s//$(git config get user.email)/"
+
 [ "$3" = 'HEAD' ] ||
-	i "1i# $(cat /dev/urandom |
+	i "1i\# $(cat /dev/urandom |
 		tr -d ' ' |
 		tr -dc '[:alnum:][:punct:]' |
 		head -c 2)"
+git rev-parse HEAD >/dev/null 2>&1 || i '1c\*'
 
-i "0,/{NAME}/s//$(git config get user.name)/"
-i "0,/{EMAIL}/s//$(git config get user.email)/"
+i '/^[^#]/ s/^/#/'

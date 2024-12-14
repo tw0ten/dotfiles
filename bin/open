@@ -1,7 +1,7 @@
 #!/bin/sh
 [ -z "$*" ] && exec $TERMINAL
 [ "$TERM" = 'linux' ] || unset TERMINAL
-for i in "$@"; do (
+for i; do (
 	[ -d "$i" ] && exec $TERMINAL $FILES "$i"
 	case "$i" in
 		*://*) exec $BROWSER "$i" ;;
