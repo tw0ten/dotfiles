@@ -1,9 +1,9 @@
 fi	'-'
-ex	'='
-di	'>'
+ex	'*'
+di	'/'
 
-ln	'<'
-or	'<'
+ln	'@'
+or	'@'
 
 tw	'tw'
 ow	'ow'

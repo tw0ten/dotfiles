@@ -15,7 +15,7 @@ return {
 					},
 					glyphs = {
 						default = '-',
-						symlink = '<',
+						symlink = '@',
 						git = {
 							unstaged = '*',
 							staged = '',
@@ -28,7 +28,7 @@ return {
 						folder = {
 							default = '>',
 							open = '-',
-							empty = '>',
+							empty = ' ',
 							empty_open = '-',
 							symlink = '<',
 							symlink_open = '-',

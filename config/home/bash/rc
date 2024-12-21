@@ -4,11 +4,11 @@ set -o vi
 
 caret() { echo -ne "\e[$* q"; }
 mklc() { set -- "$DOTFILES/etc/lc/$1" "${2:-"LICENSE"}"
-	cp -i "$1" "$_" || { ls "$(dirname "$1")"; return $(false); }
-	sed -i "0,/{YEAR}/s//$(command date +'%Y')/" "$_"
-	sed -i "0,/{NAME}/s//$(git config get user.name)/" "$_"
-	sed -i "0,/{EMAIL}/s//$(git config get user.email)/" "$_"
-	head -n 5 "$_"; }
+	cp -i "$1" "$2" || { ls "$(dirname "$1")"; return $(false); }
+	sed -i "0,/{YEAR}/s//$(command date +'%Y')/" "$2"
+	sed -i "0,/{NAME}/s//$(git config get user.name)/" "$2"
+	sed -i "0,/{EMAIL}/s//$(git config get user.email)/" "$2"
+	head -n 5 "$2"; }
 mktl() { mkdir "$1" && cd "$1" || return
 	mkdir src lib io io/i
 	echo '/io/o' > .gitignore
@@ -39,19 +39,20 @@ alias \
 	cl='clear' \
 	o='curl -fsL' \
 	oo='o -O' \
-	r='./build; ./run' \
+	r='io/build && io/run' \
 \
 	d='cd' \
 	dd='mkdir' \
 	ddd='d "$(mktemp -d)"' \
 	dx='d "$OLDPWD"' \
+	dr='d "$(realpath .)"' \
 	dz='d ..' \
 	dzz='d ../..' \
 	dzzz='d ../../..' \
 	ls='ls --color=always' \
 	l='ls --group-directories-first' \
 	la='l -A' \
-	ll='l -a -lh -p' \
+	ll='l -a -lh -F' \
 	lf="$FILES" \
 	prwd='realpath .' \
 	cp='cp -iv' \
@@ -63,6 +64,7 @@ alias \
 	fehbg='feh --no-fehbg --bg-scale' \
 	cpb='cp -t ~/.local/bin' \
 	history="history | $PAGER +G" \
+	tree="tree -C | $PAGER" \
 	myip='echo "$(curl -s ipinfo.io/ip)"' \
 	date='date +"[%w.%d/%m|%H:%M]"' \
 	uptime='uptime -p' \
