@@ -1,8 +1,6 @@
 [user]
 	name = tw0ten
 	email = twoten.eq@gmail.com
-[core]
-	autocrlf = input
 [init]
 	defaultBranch = main
 	templatedir = ~/.config/git/template

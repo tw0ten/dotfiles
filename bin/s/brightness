@@ -4,14 +4,14 @@ max(){ echo $(($1 > $2 ? $1 : $2)); }
 min(){ echo $(($1 < $2 ? $1 : $2)); }
 
 i=$(dmenu -p "brightness: $(i)/100" &)
-s=$(min $(max $(($(max $(i) $i)-$(min $(i) $i))) 0) 100)
+set $(min $(max $(($(max $(i) $i)-$(min $(i) $i))) 0) 100)
 
-xbacklight -set "$i" -time $((s * 10)) -steps $s &
-PID=$!
-i="$(dunstify -p 'brightness' "$(i)")"
-while kill -0 $PID; do
-	dunstify -r "$i" 'brightness' "$(i)"
+xbacklight -set "$i" -time $(($1 * 10)) -steps $1 &
+set $! $(dunstify -p 'brightness' $(i))
+while kill -0 $1; do
+	dunstify -r $2 'brightness' $(i)
 	sleep 0.01
 done
-dunstify -r "$i" 'brightness' "set to $(i)"
+
+dunstify -r $2 'brightness' "set to $(i)"
 systat-kill 'brightness'

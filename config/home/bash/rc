@@ -22,7 +22,7 @@ mhm() { fortune | cowsay -n -f "$(cowsay -l | grep / -v | tr " " "\n" | shuf -n1
 sign() { $VISUAL "$1" && echo " - $USER, $(\date)" | tee -a "$1"; }
 cd() { command cd "$@" || return
 	git rev-parse --is-inside-work-tree >/dev/null 2>&1 \
-		&& __git_ps1='git' || unset __git_ps1
+		&& __git_ps1='g' || unset __git_ps1
 }; cd .
 
 alias \
@@ -54,7 +54,7 @@ alias \
 	la='l -A' \
 	ll='l -a -lh -F' \
 	lf="$FILES" \
-	prwd='realpath .' \
+	rp='realpath .' \
 	cp='cp -iv' \
 	mv='mv -iv' \
 	rm='rm -v' \
@@ -85,6 +85,7 @@ PS1="$(
 	i() { PS1="$*"; }; i
 
 	i "$b$c\w$r"
+	i "\$([ \"\$(pwd)\" = \"\$(realpath .)\" ] || echo 'r$c:$r')$PS1"
 	i "\${__git_ps1+\$__git_ps1$c:$r}$PS1"
 	i "\h $PS1$c"
 	[[ "$(id -u)" = 0 ]] && i "$PS1#" || i "\u$b$c@$r$PS1="

@@ -1,2 +1,2 @@
 #!/bin/sh
-dunstify -r "$(dunstify -p 'ping')" 'ping' "$(ping 'archlinux.org' -c 2 -q)"
+dunstify -r $(dunstify -p 'ping') 'ping' "$(ping 'archlinux.org' -c 2 -q)"

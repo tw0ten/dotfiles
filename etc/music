@@ -2,12 +2,14 @@
 set -e
 dir="$HOME/music"
 
-venv="$HOME/.local/share/python/yt-dlp"
-[ -d "$venv" ] || (
-	python -m venv "$venv"
-	. "$venv/bin/activate"
+i="$HOME/.local/share/python/yt-dlp"
+cd "$i" || {
+	python -m venv "$i"
+	cd "$i"
+	. bin/activate
 	python -m pip install yt-dlp
-) && . "$venv/bin/activate"
+} && . bin/activate
+
 cd "$(mktemp -d)"
 while IFS= read -r line; do
 	echo "$line"
@@ -29,5 +31,3 @@ while IFS= read -r line; do
 		-hide_banner -nostdin
 	rm -rf ./*
 done
-cd ..
-rm -rf "$OLDPWD"

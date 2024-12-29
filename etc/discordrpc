@@ -1,11 +1,11 @@
 #!/bin/sh
-i="$(systemd-path user-shared)/python/pypresence"
-cd "$i" || (
+i="$HOME/.local/share/python/pypresence"
+cd "$i" || {
 	python -m venv "$i"
 	cd "$i"
 	. bin/activate
 	python -m pip install pypresence
-) && . bin/activate
+} && . bin/activate
 
 exec python <<EOF
 from pypresence import Presence
