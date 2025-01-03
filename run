@@ -22,10 +22,11 @@ set -ex && export SHELLOPTS
 
 	i() { set -- "$PWD/$1" "$i/$2"
 		sudo mkdir -p "$(dirname "$2")"
-		sudo cp "$1" "$2"
+		sudo cp -rT "$1" "$2"
 		echo "'$1' > '$2'"; }
 
 	( cd etc; i='/etc'
+		i sudoers/ sudoers.d
 		i pacman pacman.conf
 		i ssh ssh/sshd_config
 		i grub default/grub )
@@ -42,14 +43,7 @@ echo )
 		feh dunst libnotify picom flameshot \
 		torbrowser-launcher qbittorrent ffmpeg libreoffice-still gimp obs-studio vlc blender \
 		ttf-jetbrains-mono ttf-nerd-fonts-symbols-mono noto-fonts-emoji noto-fonts-cjk
-exit )
-
-( cd bin/src
-	for i in */; do (
-		cd "$i"
-		sudo ./build
-	) done
-exit )
+echo )
 
 ( cd etc; i() { sudo "$@"; }
 	i localectl set-x11-keymap us
@@ -65,4 +59,12 @@ exit )
 	i ufw default allow outgoing
 	i ufw allow ssh
 	i ufw enable
-exit )
+	i ufw reload
+echo )
+
+( cd bin/src
+	for i in */; do (
+		cd "$i"
+		sudo ./build
+	) done
+echo )

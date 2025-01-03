@@ -3,8 +3,9 @@
 set -o vi
 
 caret() { echo -ne "\e[$* q"; }
-mklc() { set -- "$DOTFILES/etc/lc/$1" "${2:-"LICENSE"}"
-	cp -i "$1" "$2" || { ls "$(dirname "$1")"; return $(false); }
+mklc() { set -- "$DOTFILES/etc/lc/${1:-.}" "${2:-LICENSE}"
+	cp -i -P "$1" "$2" ||
+		{ ls "$(dirname "$1")"; return $(false); }
 	sed -i "0,/{YEAR}/s//$(command date +'%Y')/" "$2"
 	sed -i "0,/{NAME}/s//$(git config get user.name)/" "$2"
 	sed -i "0,/{EMAIL}/s//$(git config get user.email)/" "$2"
@@ -18,7 +19,7 @@ mktl() { mkdir "$1" && cd "$1" || return
 	git init; }
 minifetch() { echo "$(tty):$SHLVL '$-'" | fastfetch -C ~/.config/fastfetch/mini.jsonc; }
 ff() { find . -name "*$**" 2>/dev/null | $PAGER; }
-mhm() { fortune | cowsay -n -f "$(cowsay -l | grep / -v | tr " " "\n" | shuf -n1)" | lolcat; }
+mhm() { fortune | cowsay -n -f "$(cowsay -l | grep / -v | sed 's/ /\n/g' | shuf -n1)" | lolcat; }
 sign() { $VISUAL "$1" && echo " - $USER, $(\date)" | tee -a "$1"; }
 cd() { command cd "$@" || return
 	git rev-parse --is-inside-work-tree >/dev/null 2>&1 \
