@@ -6,16 +6,18 @@ caret() { echo -ne "\e[$* q"; }
 mklc() { set -- "$DOTFILES/etc/lc/${1:-.}" "${2:-LICENSE}"
 	cp -i -P "$1" "$2" ||
 		{ ls "$(dirname "$1")"; return $(false); }
-	sed -i "0,/{YEAR}/s//$(command date +'%Y')/" "$2"
-	sed -i "0,/{NAME}/s//$(git config get user.name)/" "$2"
-	sed -i "0,/{EMAIL}/s//$(git config get user.email)/" "$2"
+	sed -i "$2" \
+		-e "0,/{YEAR}/s//$(command date +'%Y')/" \
+		-e "0,/{NAME}/s//$(git config get user.name)/" \
+		-e "0,/{EMAIL}/s//$(git config get user.email)/"
 	head -n 5 "$2"; }
 mktl() { mkdir "$1" && cd "$1" || return
-	mkdir src lib io io/i
+	mkdir src lib io io/i io/o
 	echo '/io/o' > .gitignore
 	echo "# $1" > README.md
-	echo -e '#!/bin/sh\nrm -rf io/o\nmkdir io/o\n\ncd io\ncd o' > run
-	chmod +x run && ./run
+	echo -e > io/build '#!/bin/sh\nset -e'
+	echo -e > io/run '#!/bin/sh\nset -e\n\ncd io'
+	chmod +x io/build io/run
 	git init; }
 minifetch() { echo "$(tty):$SHLVL '$-'" | fastfetch -C ~/.config/fastfetch/mini.jsonc; }
 ff() { find . -name "*$**" 2>/dev/null | $PAGER; }
@@ -40,7 +42,8 @@ alias \
 	cl='clear' \
 	o='curl -fsL' \
 	oo='o -O' \
-	r='io/build && io/run' \
+	r='io/run' \
+	rr='io/build && r' \
 \
 	d='cd' \
 	dd='mkdir' \
