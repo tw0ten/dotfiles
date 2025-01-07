@@ -1,2 +1,4 @@
+Include ~/.ssh/config.d/*.conf
+
 Host *
 	IdentityFile ~/.ssh/key/%h/%r/id

@@ -36,6 +36,7 @@ echo )
 	AUR_HELPER=paru
 	i() { $AUR_HELPER -S "$@" || true; }
 	command -v $AUR_HELPER || ( cd "$(mktemp -d)"; git clone "https://aur.archlinux.org/$AUR_HELPER" .; makepkg -si )
+
 	i neovim tmux openssh \
 		lf btop fastfetch ripgrep reflector ufw \
 		jdk-openjdk rust python deno nasm
@@ -68,3 +69,5 @@ echo )
 		sudo ./build
 	) done
 echo )
+
+git init
