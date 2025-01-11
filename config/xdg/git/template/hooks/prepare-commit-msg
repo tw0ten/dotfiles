@@ -1,6 +1,8 @@
 #!/bin/sh
 set -e
+[ "$2" = 'message' ] && exit
 i="$1"
+
 echo >> "$i"
 echo >> "$i" "## $*"
 
@@ -14,6 +16,5 @@ i "0,/{EMAIL}/s//$(git config get user.email)/"
 		tr -d ' ' |
 		tr -dc '[:alnum:][:punct:]' |
 		head -c 2)"
-git rev-parse HEAD >/dev/null 2>&1 || i '1c\*'
 
 i '/^[^#]/ s/^/#/'

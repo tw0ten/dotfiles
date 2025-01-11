@@ -1,8 +1,6 @@
 Include /etc/ssh/sshd_config.d/*.conf
 
 Port 22
-AddressFamily any
-
 ListenAddress 0.0.0.0
 ListenAddress ::
 
@@ -19,11 +17,10 @@ PermitEmptyPasswords yes
 UsePAM no
 KbdInteractiveAuthentication no
 
-PrintLastLog no
-
 ClientAliveInterval 20
 ClientAliveCountMax 3
 
+PrintLastLog no
 PrintMotd yes
 Banner /etc/ssh/banner
 
