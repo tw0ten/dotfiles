@@ -58,6 +58,7 @@ alias \
 	la='l -A' \
 	ll='l -a -lh -F' \
 	lf="$FILES" \
+	lt="tree -C | $PAGER" \
 	rp='realpath .' \
 	cp='cp -iv' \
 	mv='mv -iv' \
@@ -68,7 +69,6 @@ alias \
 	fehbg='feh --no-fehbg --bg-scale' \
 	cpb='cp -t ~/.local/bin' \
 	history="history | $PAGER +G" \
-	tree="tree -C | $PAGER" \
 	myip='echo "$(curl -s ipinfo.io/ip)"' \
 	date='date +"[%w.%d/%m|%H:%M]"' \
 	uptime='uptime -p' \
