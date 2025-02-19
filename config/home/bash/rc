@@ -35,7 +35,7 @@ alias \
 	se="s $VISUAL" \
 	p="$PAGER" \
 	g='git' \
-	f='rg --color=always' \
+	f='rg 2>/dev/null -uuL --color=always' \
 	t="(exec $TERMINAL >/dev/null 2>&1 &)" \
 	c='xsel --clipboard --input' \
 	v='xsel --clipboard --output' \
