@@ -6,6 +6,7 @@ LogFile = /var/log/pacman.log
 GPGDir = /etc/pacman.d/gnupg/
 HookDir = /etc/pacman.d/hooks/
 
+DownloadUser = alpm
 ParallelDownloads = 4
 CleanMethod = KeepInstalled
 Architecture = auto
@@ -18,8 +19,8 @@ LocalFileSigLevel = Optional
 RemoteFileSigLevel = Required
 
 Color
-VerbosePkgLists
 ILoveCandy
+VerbosePkgLists
 
 [core]
 Include = /etc/pacman.d/mirrorlist

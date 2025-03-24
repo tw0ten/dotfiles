@@ -43,7 +43,8 @@ alias \
 	o='curl -fsL' \
 	oo='o -O' \
 	r='io/run' \
-	rr='io/build && r' \
+	rr='io/build' \
+	rrr='rr && r' \
 \
 	d='cd' \
 	dd='mkdir' \

@@ -1,0 +1,49 @@
+{
+  "automaticallyStart": false,
+  "automaticallyFinish": true,
+  "showRecordingToasts": true,
+  "quicksave": false,
+  "hidePauseMenuControls": true,
+  "markDimensionChanges": true,
+  "recordHotbar": true,
+  "localPlayerUpdatesPerSecond": 20,
+  "recordVoiceChat": false,
+  "openedWindows": [],
+  "nextUnsupportedModLoaderWarning": 0,
+  "flightCameraDirection": false,
+  "flightMomentum": 1.0,
+  "flightLockX": false,
+  "flightLockY": false,
+  "flightLockZ": false,
+  "flightLockYaw": false,
+  "flightLockPitch": false,
+  "recentReplays": [],
+  "defaultExportFilename": "%date%T%time%",
+  "defaultInterpolationType": "SMOOTH",
+  "disableIncreasedFirstPersonUpdates": false,
+  "disableThirdPersonCancel": false,
+  "replaySorting": "CREATED_DATE",
+  "sortDescending": true,
+  "resolution": [
+    1920,
+    1080
+  ],
+  "framerate": [
+    60.0
+  ],
+  "resetRng": false,
+  "ssaa": false,
+  "noGui": false,
+  "selectedVideoEncoder": [
+    0
+  ],
+  "useMaximumBitrate": false,
+  "recordAudio": false,
+  "transparentBackground": false,
+  "audioCodec": "AAC",
+  "stereoAudio": false,
+  "defaultOverrideFov": 70.0,
+  "forceDefaultExportSettings": {},
+  "filterUnnecessaryPackets": true,
+  "signedRenderFilter": false
+}
