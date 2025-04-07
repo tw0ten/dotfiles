@@ -19,6 +19,7 @@ blueprint {
 # Capabilities modify the way the player moves and interacts with the world
 capabilities {
     allowClickingHistoryInEditor=false
+    altMenuToggleInsteadOfHold=false
     # Place blocks in mid-air
     angelPlacement=false
     # Automatically swap to creative when opening the Context Menu
@@ -27,16 +28,16 @@ capabilities {
     # Hold down left-click to break blocks very fast
     bulldozer=true
     # Place blocks very fast in a controlled manner
-    fastPlace=false
+    fastPlace=true
     flightCameraDirection=false
-    flightMomentum=1
+    flightMomentum=0.10632184147834778
     # Bypass block placement restrictions
     forcePlace=false
     # Removes the reach limit
-    infiniteReach=false
-    infiniteReachLimit=-1
+    infiniteReach=true
+    infiniteReachLimit=60
     # Move through blocks while flying
-    noClip=false
+    noClip=true
     # Prevent triggering neighbor updates when placing/breaking
     noUpdates=false
     # Right-click blocks to replace them with the held block

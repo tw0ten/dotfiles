@@ -75,7 +75,7 @@
     "unhideSchematicVCS": false,
     "pasteReplaceBehavior": "none",
     "schematicVcsDeleteMode": "matching_block",
-    "selectionCornersMode": "corners",
+    "selectionCornersMode": "expand",
     "commandFillMaxVolume": 32768,
     "commandLimitPerTick": 8,
     "commandNameClone": "clone",
@@ -348,7 +348,7 @@
     "verifierErrorHilightMaxPositions": 1000
   },
   "Visuals": {
-    "enableRendering": true,
+    "enableRendering": false,
     "enableSchematicRendering": true,
     "enableAreaSelectionBoxesRendering": true,
     "enablePlacementBoxesRendering": true,

@@ -33,14 +33,14 @@ vim.g.netrw_preview = 1
 vim.opt.showmode = false
 vim.opt.laststatus = 2
 vim.opt.statusline =
-	" %{&readonly?'-':(&modified?'+':'=')}" ..
-	" {%{mode()}}" ..
-	" [%{expand('%:~:.')}]" ..
-
-	" %#Normal#%=%* " ..
-
+	" " ..
+	"%{&readonly?'-':(&modified?'+':'=')}"
+	.. " {%{mode()}}"
+	.. " [%{expand('%:~:.')}]"
+	.. " %#where is my highlight group#%=%* " ..
 	"<%l,%c> " ..
-	"(%{&fileformat}|%{&fileencoding}|%{&filetype}) "
+	"(%{&fileformat}|%{&fileencoding}|%{&filetype})"
+	.. " "
 
 vim.opt.shortmess = "lmrwoOstTAIcCFS"
 
