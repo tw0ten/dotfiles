@@ -12,13 +12,9 @@
         "keys": ""
       }
     },
+    "actionbarHudTicks": 60,
+    "inGameMessageTimeout": 5.0,
     "enableConfigSwitcher": {
-      "enabled": true,
-      "hotkey": {
-        "keys": ""
-      }
-    },
-    "enableStatusEffectsShift": {
       "enabled": true,
       "hotkey": {
         "keys": ""

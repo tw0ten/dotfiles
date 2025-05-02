@@ -14,7 +14,7 @@ set timefmt "2006|02/01|15:04"
 cmd e $$EDITOR "$f"
 
 map gh
-map ~ cd ~
+map ~ cd
 
 map sa
 map sc

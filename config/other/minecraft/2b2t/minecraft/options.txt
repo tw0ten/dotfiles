@@ -51,8 +51,8 @@ damageTiltStrength:0.0
 highContrast:false
 highContrastBlockOutline:true
 narratorHotkey:false
-resourcePacks:["vanilla","fabric","file/qol","file/gagaga"]
-incompatibleResourcePacks:["file/gagaga"]
+resourcePacks:["vanilla","fabric","file/qol"]
+incompatibleResourcePacks:[]
 lastServer:
 lang:en_au
 chatVisibility:0
@@ -61,7 +61,7 @@ chatLineSpacing:0.0
 textBackgroundOpacity:0.0
 backgroundForChatOnly:true
 hideServerAddress:false
-advancedItemTooltips:true
+advancedItemTooltips:false
 pauseOnLostFocus:false
 overrideWidth:0
 overrideHeight:0
@@ -144,12 +144,12 @@ key_axiom.keybind.nudge_with_scroll:key.keyboard.unknown
 key_axiom.keybind.nudge_forwards:key.keyboard.unknown
 key_axiom.keybind.nudge_backwards:key.keyboard.unknown
 key_key.modmenu.open_menu:key.keyboard.unknown
-key_key.plasmovoice.settings:key.keyboard.v
+key_key.plasmovoice.settings:key.keyboard.home
 key_iris.keybind.reload:key.keyboard.unknown
 key_iris.keybind.toggleShaders:key.keyboard.right.shift
 key_iris.keybind.shaderPackSelection:key.keyboard.unknown
 key_iris.keybind.wireframe:key.keyboard.unknown
-soundCategory_master:0.15728476821192053
+soundCategory_master:0.2599337748344371
 soundCategory_music:0.0
 soundCategory_record:0.15845070422535212
 soundCategory_weather:0.5070422535211268

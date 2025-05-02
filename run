@@ -43,7 +43,7 @@ echo )
 	i xorg xorg-xinit pipewire nvidia-open nvidia-settings \
 		feh dunst libnotify picom flameshot \
 		torbrowser-launcher qbittorrent ffmpeg libreoffice-still gimp obs-studio vlc blender \
-		ttf-jetbrains-mono ttf-nerd-fonts-symbols-mono noto-fonts-emoji noto-fonts-cjk
+		ttf-jetbrains-mono ttf-nerd-fonts-symbols-mono noto-fonts noto-fonts-emoji noto-fonts-cjk
 echo )
 
 ( cd etc; i() { sudo "$@"; }

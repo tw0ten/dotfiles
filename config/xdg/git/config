@@ -12,6 +12,7 @@
 [alias]
 	i = init
 	a = add
+	au = a --update
 	aa = a --all
 	c = commit
 	ca = c --amend

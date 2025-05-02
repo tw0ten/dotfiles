@@ -44,7 +44,7 @@ capabilities {
     replaceMode=false
     separateEditorAndGameFlightSpeed=false
     # Various useful interactions when right-clicking with your fist
-    tinker=true
+    tinker=false
     typeReplace=false
 }
 keybinds {
