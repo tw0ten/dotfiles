@@ -13,37 +13,11 @@ return {
 		"j-hui/fidget.nvim",
 	},
 	config = function()
-		local capabilities = vim.tbl_deep_extend(
-			"force",
-			{},
-			vim.lsp.protocol.make_client_capabilities(),
-			require("cmp_nvim_lsp").default_capabilities()
-		)
-		require("fidget").setup({})
 		require("mason").setup({})
-		local on_attach = function(e)
-			local opts = { buffer = e.buf }
-			vim.keymap.set('n', "gd", vim.lsp.buf.definition, opts)
-			vim.keymap.set('n', "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
-			vim.keymap.set('n', "<leader>vd", vim.diagnostic.open_float, opts)
-			vim.keymap.set('n', "<leader>vca", vim.lsp.buf.code_action, opts)
-			vim.keymap.set('n', "<leader>vrf", vim.lsp.buf.references, opts)
-			vim.keymap.set('n', "<leader>vrn", vim.lsp.buf.rename, opts)
-			vim.keymap.set('n', "<leader>fmt", vim.lsp.buf.format)
-			vim.keymap.set('n', "]d", vim.diagnostic.goto_next, opts)
-			vim.keymap.set('n', "[d", vim.diagnostic.goto_prev, opts)
-		end
-		require("mason-lspconfig").setup({
-			ensure_installed = {},
-			handlers = {
-				function(server)
-					require("lspconfig")[server].setup({
-						on_attach = on_attach,
-						capabilities = capabilities,
-					})
-				end,
-			}
-		})
+		require("mason-lspconfig").setup({})
+
+		require("fidget").setup({})
+
 		local cmp = require('cmp')
 		cmp.setup({
 			snippet = {
@@ -61,6 +35,7 @@ return {
 				{ name = 'buffer' },
 			})
 		})
+
 		vim.diagnostic.config({
 			float = {
 				focusable = false,
@@ -69,5 +44,36 @@ return {
 				prefix = "",
 			},
 		})
+
+		local capabilities = vim.tbl_deep_extend(
+			"force",
+			{},
+			vim.lsp.protocol.make_client_capabilities(),
+			require("cmp_nvim_lsp").default_capabilities()
+		)
+		local on_attach = function(e)
+			local opts = { buffer = e.buf }
+			vim.keymap.set('n', "<leader>fmt", vim.lsp.buf.format)
+			vim.keymap.set('n', "<leader>vca", vim.lsp.buf.code_action, opts)
+			vim.keymap.set('n', "<leader>vd", vim.diagnostic.open_float, opts)
+			vim.keymap.set('n', "<leader>vrf", vim.lsp.buf.references, opts)
+			vim.keymap.set('n', "<leader>vrn", vim.lsp.buf.rename, opts)
+			vim.keymap.set('n', "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
+			vim.keymap.set('n', "[d", vim.diagnostic.goto_prev, opts)
+			vim.keymap.set('n', "]d", vim.diagnostic.goto_next, opts)
+			vim.keymap.set('n', "gd", vim.lsp.buf.definition, opts)
+		end
+
+		for _, i in ipairs({
+			"lua_ls",
+			"denols",
+			"rust_analyzer",
+			"jdtls",
+		}) do
+			require("lspconfig")[i].setup({
+				on_attach = on_attach,
+				capabilities = capabilities,
+			})
+		end
 	end
 }

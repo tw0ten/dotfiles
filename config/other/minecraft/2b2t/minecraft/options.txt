@@ -23,7 +23,7 @@ narrator:0
 particles:0
 reducedDebugInfo:false
 renderClouds:"true"
-renderDistance:32
+renderDistance:16
 simulationDistance:16
 screenEffectScale:0.0
 soundDevice:""
@@ -52,7 +52,7 @@ highContrast:false
 highContrastBlockOutline:true
 narratorHotkey:false
 resourcePacks:["vanilla","fabric","file/qol"]
-incompatibleResourcePacks:[]
+incompatibleResourcePacks:["appleskin"]
 lastServer:
 lang:en_au
 chatVisibility:0
@@ -61,7 +61,7 @@ chatLineSpacing:0.0
 textBackgroundOpacity:0.0
 backgroundForChatOnly:true
 hideServerAddress:false
-advancedItemTooltips:false
+advancedItemTooltips:true
 pauseOnLostFocus:false
 overrideWidth:0
 overrideHeight:0

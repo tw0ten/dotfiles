@@ -1,3 +1,4 @@
+assumeExternalAutoTool true
 blockPlacementPenalty 5.0
 jumpPenalty 1.0
 strictLiquidCheck true

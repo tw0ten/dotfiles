@@ -2,7 +2,7 @@
   "automaticallyStart": false,
   "automaticallyFinish": true,
   "showRecordingToasts": true,
-  "quicksave": false,
+  "quicksave": true,
   "hidePauseMenuControls": true,
   "markDimensionChanges": true,
   "recordHotbar": true,
@@ -17,8 +17,10 @@
   "flightLockZ": false,
   "flightLockYaw": false,
   "flightLockPitch": false,
-  "recentReplays": [],
-  "defaultExportFilename": "%date%T%time%",
+  "recentReplays": [
+    "/home/twoten/.local/share/PrismLauncher/instances/2b2t2/minecraft/flashback/replays/2025-05-05T14_52_27.zip"
+  ],
+  "defaultExportFilename": "%date% %time%",
   "defaultInterpolationType": "SMOOTH",
   "disableIncreasedFirstPersonUpdates": false,
   "disableThirdPersonCancel": false,
@@ -43,7 +45,11 @@
   "audioCodec": "AAC",
   "stereoAudio": false,
   "defaultOverrideFov": 70.0,
+  "enableOverrideFovByDefault": false,
   "forceDefaultExportSettings": {},
   "filterUnnecessaryPackets": true,
-  "signedRenderFilter": false
+  "signedRenderFilter": false,
+  "viewedTipsOfTheDay": 2047,
+  "showTipOfTheDay": false,
+  "nextTipOfTheDay": 1746369887241
 }

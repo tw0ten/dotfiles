@@ -12,12 +12,12 @@ mklc() { set -- "$DOTFILES/etc/lc/${1:-.}" "${2:-LICENSE}"
 		-e "0,/{EMAIL}/s//$(git config get user.email)/"
 	head -n 5 "$2"; }
 mktl() { mkdir "$1" && cd "$1" || return
-	mkdir src lib io io/i io/o
+	mkdir src lib .io .io/i .io/o
 	echo "# $1" > README.md
-	echo '/o' > io/.gitignore
-	echo -e > io/build '#!/bin/sh\nset -e'
-	echo -e > io/run '#!/bin/sh\nset -e\n\ncd io'
-	chmod +x io/build io/run
+	echo '/o' > .io/.gitignore
+	echo -e > .io/build '#!/bin/sh\nset -e'
+	echo -e > .io/run '#!/bin/sh\nset -e\n\ncd io'
+	chmod +x .io/build .io/run
 	git init && git add --all && git commit -m '*'; }
 minifetch() { echo "$(tty):$SHLVL '$-'" | fastfetch -C ~/.config/fastfetch/mini.jsonc; }
 ff() { find . -name "*$**" 2>/dev/null | $PAGER; }
@@ -42,8 +42,8 @@ alias \
 	cl='clear' \
 	o='curl -fsL' \
 	oo='o -O' \
-	r='io/run' \
-	rr='io/build' \
+	r='.io/run' \
+	rr='.io/build' \
 	rrr='rr && r' \
 \
 	d='cd' \
