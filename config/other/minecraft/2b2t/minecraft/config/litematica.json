@@ -103,6 +103,9 @@
     "easyPlaceUseKey": {
       "keys": "BUTTON_2"
     },
+    "easyPlaceFirst": {
+      "keys": ""
+    },
     "easyPlaceToggle": {
       "keys": ""
     },
@@ -376,7 +379,6 @@
     "renderSchematicTileEntities": true,
     "renderTranslucentBlockInnerSides": false,
     "schematicOverlayEnableOutlines": true,
-    "schematicOverlayEnableResorting": true,
     "schematicOverlayEnableSides": true,
     "schematicOverlayModelOutline": true,
     "schematicOverlayModelSides": true,
@@ -386,7 +388,6 @@
     "schematicOverlayTypeMissing": true,
     "schematicOverlayTypeWrongBlock": true,
     "schematicOverlayTypeWrongState": true,
-    "schematicVerifierUseBlockModels": false,
     "ghostBlockAlpha": 0.5,
     "placementBoxSideAlpha": 0.2,
     "schematicOverlayOutlineWidth": 1.0,

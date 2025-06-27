@@ -16,7 +16,7 @@ mktl() { mkdir "$1" && cd "$1" || return
 	echo "# $1" > README.md
 	echo '/o' > .io/.gitignore
 	echo -e > .io/build '#!/bin/sh\nset -e'
-	echo -e > .io/run '#!/bin/sh\nset -e\n\ncd io'
+	echo -e > .io/run '#!/bin/sh\nset -e\n\ncd .io'
 	chmod +x .io/build .io/run
 	git init && git add --all && git commit -m '*'; }
 minifetch() { echo "$(tty):$SHLVL '$-'" | fastfetch -C ~/.config/fastfetch/mini.jsonc; }

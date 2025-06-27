@@ -2,7 +2,7 @@ assumeExternalAutoTool true
 blockPlacementPenalty 5.0
 jumpPenalty 1.0
 strictLiquidCheck true
-allowJumpAt256 true
+allowJumpAtBuildLimit true
 allowDiagonalDescend true
 allowDiagonalAscend true
 allowVines true

@@ -1,4 +1,4 @@
-version:4325
+version:4435
 ao:true
 biomeBlendRadius:2
 enableVsync:false
@@ -13,7 +13,7 @@ glintSpeed:0.25704225352112675
 glintStrength:1.0
 prioritizeChunkUpdates:0
 fullscreen:false
-gamma:0.5
+gamma:0.0
 graphicsMode:1
 guiScale:2
 maxFps:250
@@ -23,6 +23,7 @@ narrator:0
 particles:0
 reducedDebugInfo:false
 renderClouds:"true"
+cloudRange:64
 renderDistance:16
 simulationDistance:16
 screenEffectScale:0.0
@@ -51,8 +52,8 @@ damageTiltStrength:0.0
 highContrast:false
 highContrastBlockOutline:true
 narratorHotkey:false
-resourcePacks:["vanilla","fabric","file/qol"]
-incompatibleResourcePacks:["appleskin"]
+resourcePacks:["vanilla","file/qol","fabric"]
+incompatibleResourcePacks:[]
 lastServer:
 lang:en_au
 chatVisibility:0
@@ -90,6 +91,8 @@ telemetryOptInExtra:false
 onboardAccessibility:false
 menuBackgroundBlurriness:0
 startedCleanly:true
+showNowPlayingToast:false
+musicFrequency:"DEFAULT"
 key_key.attack:key.mouse.left
 key_key.use:key.mouse.right
 key_key.forward:key.keyboard.w
@@ -115,6 +118,7 @@ key_key.swapOffhand:key.keyboard.f
 key_key.saveToolbarActivator:key.keyboard.unknown
 key_key.loadToolbarActivator:key.keyboard.unknown
 key_key.advancements:key.keyboard.unknown
+key_key.quickActions:key.keyboard.g
 key_key.hotbar.1:key.keyboard.1
 key_key.hotbar.2:key.keyboard.2
 key_key.hotbar.3:key.keyboard.3
@@ -126,11 +130,11 @@ key_key.hotbar.8:key.keyboard.8
 key_key.hotbar.9:key.keyboard.9
 key_key.meteor-client.open-gui:key.keyboard.f4
 key_key.meteor-client.open-commands:key.keyboard.period
-key_axiom.keybind.context:key.keyboard.c
+key_axiom.keybind.context:key.keyboard.left.alt
 key_axiom.keybind.builder_tool_slot:key.keyboard.0
 key_axiom.keybind.orbit_camera:key.keyboard.unknown
 key_axiom.keybind.jump_to_block:key.keyboard.unknown
-key_axiom.keybind.toggle_editor_ui:key.keyboard.backspace
+key_axiom.keybind.toggle_editor_ui:key.keyboard.right.shift
 key_axiom.keybind.toggle_no_clip_cap:key.keyboard.unknown
 key_axiom.keybind.toggle_angel_placement_cap:key.keyboard.unknown
 key_axiom.keybind.toggle_fast_place_cap:key.keyboard.unknown
@@ -138,20 +142,19 @@ key_axiom.keybind.toggle_infinite_reach_cap:key.keyboard.unknown
 key_axiom.keybind.toggle_tinker_cap:key.keyboard.unknown
 key_axiom.keybind.toggle_no_updates_cap:key.keyboard.unknown
 key_axiom.keybind.toggle_force_place_cap:key.keyboard.unknown
-key_axiom.keybind.toggle_replace_mode_cap:key.keyboard.unknown
+key_axiom.keybind.toggle_replace_mode_cap:key.keyboard.r
 key_axiom.keybind.toggle_bulldozer_cap:key.keyboard.unknown
 key_axiom.keybind.nudge_with_scroll:key.keyboard.unknown
 key_axiom.keybind.nudge_forwards:key.keyboard.unknown
 key_axiom.keybind.nudge_backwards:key.keyboard.unknown
 key_key.modmenu.open_menu:key.keyboard.unknown
-key_key.plasmovoice.settings:key.keyboard.home
 key_iris.keybind.reload:key.keyboard.unknown
-key_iris.keybind.toggleShaders:key.keyboard.right.shift
+key_iris.keybind.toggleShaders:key.keyboard.unknown
 key_iris.keybind.shaderPackSelection:key.keyboard.unknown
 key_iris.keybind.wireframe:key.keyboard.unknown
-soundCategory_master:0.2599337748344371
+soundCategory_master:0.40066225165562913
 soundCategory_music:0.0
-soundCategory_record:0.15845070422535212
+soundCategory_record:0.5
 soundCategory_weather:0.5070422535211268
 soundCategory_block:0.5
 soundCategory_hostile:0.5070422535211268
@@ -159,6 +162,7 @@ soundCategory_neutral:0.5
 soundCategory_player:0.5
 soundCategory_ambient:0.5035211267605634
 soundCategory_voice:0.5
+soundCategory_ui:1.0
 modelPart_cape:false
 modelPart_jacket:true
 modelPart_left_sleeve:true
@@ -166,4 +170,3 @@ modelPart_right_sleeve:true
 modelPart_left_pants_leg:true
 modelPart_right_pants_leg:true
 modelPart_hat:true
-fullscreenResolution:1920x1080@144:24

@@ -65,10 +65,11 @@ return {
 		end
 
 		for _, i in ipairs({
-			"lua_ls",
 			"denols",
-			"rust_analyzer",
 			"jdtls",
+			"lua_ls",
+			"pylsp",
+			"rust_analyzer",
 		}) do
 			require("lspconfig")[i].setup({
 				on_attach = on_attach,
