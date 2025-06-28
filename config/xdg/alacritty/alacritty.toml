@@ -1,0 +1,16 @@
+[general]
+import = [
+ "theme.toml",
+]
+
+[window]
+dynamic_title = false
+title = "terminal"
+
+opacity = 0.85
+
+dynamic_padding = true
+
+[font]
+size = 8.5
+normal = { family = "JetBrains Mono" }

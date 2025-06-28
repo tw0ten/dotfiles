@@ -37,7 +37,7 @@ vim.opt.statusline =
 	"%{&readonly?'-':(&modified?'+':'=')}"
 	.. " {%{mode()}}"
 	.. " [%{expand('%:~:.')}]"
-	.. " %#where is my highlight group#%=%* " ..
+	.. " %#Normal#%=%* " ..
 	"<%l,%c> " ..
 	"(%{&fileformat}|%{&fileencoding}|%{&filetype})"
 	.. " "

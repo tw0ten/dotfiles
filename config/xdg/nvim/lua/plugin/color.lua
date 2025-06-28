@@ -7,11 +7,11 @@ return {
 		config = function()
 			require("rainbow-delimiters.setup").setup({
 				strategy = {
-					[""] = require("rainbow-delimiters").strategy["global"],
+					[""] = require("rainbow-delimiters").strategy.global,
 				},
 				query = {
 					[""] = "rainbow-delimiters",
-					lua = "rainbow-blocks",
+					["lua"] = "rainbow-blocks",
 				},
 				highlight = {
 					"RainbowDelimiterRed",
@@ -21,13 +21,9 @@ return {
 					"RainbowDelimiterViolet",
 				},
 			})
-		end
-	},
-	{
-		"tomasiser/vim-code-dark",
-		config = function()
-			vim.cmd(":colorscheme codedark")
-			vim.api.nvim_set_hl(0, "Normal", { bg = "" })
+
+			vim.cmd(":colorscheme default")
+			vim.api.nvim_set_hl(0, "Normal", { bg = nil })
 		end
 	},
 }

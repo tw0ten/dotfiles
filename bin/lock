@@ -5,7 +5,7 @@ kb="$(xkb-switch)"
 pamixer -m
 xkb-switch -s us
 
-slock
+swaylock || slock
 
 "$mute" || pamixer -u
 xkb-switch -s "$kb"
