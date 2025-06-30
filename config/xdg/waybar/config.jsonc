@@ -1,0 +1,95 @@
+{
+	"position": "bottom",
+
+	"modules-left": [
+	],
+	"modules-center": [
+	],
+	"modules-right": [
+		"memory",
+
+		"cpu",
+		"temperature",
+
+		"custom/gpu",
+
+		"custom/time",
+
+		"battery",
+		"pulseaudio",
+		"backlight",
+		"network",
+
+		"custom/userhost",
+	],
+
+	"memory": {
+		"format": "&lt;RAM:{percentage}%>",
+	},
+	"cpu": {
+		"format": "{{CPU:{usage}%}}",
+		"tooltip": false,
+	},
+	"temperature": {
+		"critical-threshold": 80,
+		"format": "{temperatureC}°C {icon}",
+		"format-icons": ["", "", ""],
+	},
+	"custom/gpu": {
+		"format": "{{GPU:{text}°}}",
+		"exec": "echo \"$(nvidia-smi --format=csv,noheader,nounits --query-gpu=utilization.gpu)%$(nvidia-smi --format=csv,noheader,nounits --query-gpu=temperature.gpu)\"",
+		"interval": 10,
+	},
+	"custom/time": {
+		"format": "[{text}]",
+		"exec": "date +'%Y/%d/%m|%H:%M'",
+		"interval": 10,
+	},
+	"backlight": {
+		"format": "{icon}",
+		"format-icons": ["", "", "", "", "", "", "", "", ""],
+	},
+	"battery": {
+		"states": {
+			"good": 35,
+			"warning": 20,
+			"critical": 10,
+		},
+		"format": "{icon}-",
+		"format-full": "",
+		"format-good": "",
+		"format-charging": "{icon}+",
+		"format-plugged": "{icon}=",
+		"format-icons": ["", "", "", "", ""],
+	},
+	"network": {
+		"format-wifi": "{essid}",
+		"format-ethernet": "{ipaddr}/{cidr} ",
+		"tooltip-format": "{ifname} via {gwaddr} ",
+		"format-linked": "{ifname} (No IP) ",
+		"format-disconnected": "Disconnected ⚠",
+		"format-alt": "{ifname}: {ipaddr}/{cidr}",
+	},
+	"pulseaudio": {
+		"format": "{volume}% {icon} {format_source}",
+		"format-bluetooth": "{volume}% {icon} {format_source}",
+		"format-bluetooth-muted": " {icon} {format_source}",
+		"format-muted": " {format_source}",
+		"format-source": "{volume}% ",
+		"format-source-muted": "",
+		"format-icons": {
+			"headphone": "",
+			"hands-free": "",
+			"headset": "",
+			"phone": "",
+			"portable": "",
+			"car": "",
+			"default": ["", "", ""],
+		},
+		"on-click": "pavucontrol",
+	},
+	"custom/userhost": {
+		"format": "{text}",
+		"exec": "echo \"$USER@$HOSTNAME\"",
+	},
+}

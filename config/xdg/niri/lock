@@ -1,11 +1,8 @@
 #!/bin/sh
 mute="$(pamixer --get-mute)"
-kb="$(xkb-switch)"
 
 pamixer -m
-xkb-switch -s us
 
 swaylock || slock
 
 "$mute" || pamixer -u
-xkb-switch -s "$kb"

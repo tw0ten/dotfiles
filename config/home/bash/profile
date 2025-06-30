@@ -40,10 +40,10 @@ export FILES='lf'
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
 while [[ "$(who | grep -cw "^$USER")" = 1 ]]; do
-	echo -e "$bold$(tput setaf 6)\nstart[x]$(tput setaf 3)\n[p]acman -Syu$(tput setaf 1)\n[e]xit$normal\n[c]ancel"
+	echo -e "$bold$(tput setaf 6)\n[x] desktop$(tput setaf 3)\n[p]acman -Syu$(tput setaf 1)\n[e]xit$normal\n[c]ancel"
 	read -rs -n1 i || break
 	case "$i" in
-		'x') startx ;;
+		'x') niri --session ;;
 		'p') sudo pacman -Syu ;;
 		'e') exit ;;
 		'c') break ;;

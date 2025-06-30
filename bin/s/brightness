@@ -1,17 +1,10 @@
 #!/bin/sh
-i(){ xbacklight -get | sed 's/\..*//'; }
-max(){ echo $(($1 > $2 ? $1 : $2)); }
-min(){ echo $(($1 < $2 ? $1 : $2)); }
+i(){ brightnessctl get; }
+max=$(brightnessctl max)
 
-i=$(dmenu -p "brightness: $(i)/100" &)
-set $(min $(max $(($(max $(i) $i)-$(min $(i) $i))) 0) 100)
+i=$(echo -e "5%-\n$(i)\n+5%\n0\n25\n50\n75\n$max" | dmenu -p "brightness " --select-index 1 --lines 8)
 
-xbacklight -set "$i" -time $(($1 * 10)) -steps $1 &
-set $! $(dunstify -p 'brightness' $(i))
-while kill -0 $1; do
-	dunstify -r $2 'brightness' $(i)
-	sleep 0.01
-done
+brightnessctl set "$i"
 
-dunstify -r $2 'brightness' "set to $(i)"
+notify-send -t 1500 'brightness' "set to $(i)"
 systat-kill 'brightness'

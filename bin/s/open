@@ -2,7 +2,7 @@
 cd "$@"
 while i="$(ls -apL |
 	sed -e 's/^\.\//./' -e 's/^\.\.\//../' |
-	dmenu -p "$PWD"
+	dmenu -p "$PWD "
 )"; do
 	[ -d "$i" ] && [ "$i" != '.' ] ||
 		exec $OPENER "$i"

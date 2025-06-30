@@ -1,11 +1,11 @@
 #!/bin/sh
-[ -z "$*" ] && exec $TERMINAL
-[ "$TERM" = 'linux' ] || unset TERMINAL
+[ -z "$*" ] && exit
+[ "$TERM" = 'linux' ] && i(){ exec $TERMINAL -e "$@"; } || i(){ exec "$@"; }
 for i; do (
-	[ -d "$i" ] && exec $TERMINAL $FILES "$i"
+	[ -d "$i" ] && i $FILES "$i"
 	case "$i" in
 		*://*) exec $BROWSER "$i" ;;
 	esac
-	[ -f "$i" ] || exec $TERMINAL $VISUAL "$i"
+	[ -f "$i" ] || i $VISUAL "$i"
 	exec xdg-open "$i"
 ) done

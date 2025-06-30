@@ -15,7 +15,6 @@ set -ex && export SHELLOPTS
 		i bash/profile .bash_profile
 		i bash/rc .bashrc
 		i ssh/config .ssh/config
-		i xinitrc .xinitrc
 		i inputrc .inputrc )
 
 	sudo -v
@@ -40,8 +39,8 @@ echo )
 	i neovim tmux openssh \
 		lf btop fastfetch ripgrep reflector ufw \
 		jdk-openjdk rust python deno nasm
-	i xorg xorg-xinit pipewire nvidia-open nvidia-settings \
-		feh dunst libnotify picom flameshot \
+	i niri pipewire nvidia-open \
+		feh libnotify \
 		torbrowser-launcher qbittorrent ffmpeg libreoffice-still gimp obs-studio vlc blender \
 		ttf-jetbrains-mono ttf-nerd-fonts-symbols-mono noto-fonts noto-fonts-emoji noto-fonts-cjk
 echo )

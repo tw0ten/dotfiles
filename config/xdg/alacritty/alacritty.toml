@@ -12,5 +12,5 @@ opacity = 0.85
 dynamic_padding = true
 
 [font]
-size = 8.5
+size = 9
 normal = { family = "JetBrains Mono" }

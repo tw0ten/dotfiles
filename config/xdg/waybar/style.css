@@ -1,0 +1,27 @@
+* {
+	font-family: 'JetBrains Mono';
+	font-size: 14px;
+
+	color: #ffffff;
+	background: rgba(32,32,32,0.5);
+}
+
+.module {
+	padding: 0 4px;
+}
+
+#custom-userhost {
+	color: #202020;
+	background: #40e0d0;
+
+	margin-left: 4px;
+	padding-left: 6px;
+	border-radius: 14px 0 0 14px;
+}
+
+#battery,
+#pulseaudio,
+#backlight,
+#network {
+	color: #40e0d0;
+}
