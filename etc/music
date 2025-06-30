@@ -11,23 +11,35 @@ cd "$i" || {
 } && . bin/activate
 
 cd "$(mktemp -d)"
+echo "$PWD"
+
 while IFS= read -r line; do
-	echo "$line"
-	eval "set -- $line"
-	file="$dir/$1"
-	[ -f "$file" ] && continue
-	link="${2:-$(basename "$1")}"
-	case "$link" in
-		'') continue ;;
-		https://*) curl -O "$link" ;;
-		*) python -m yt_dlp \
-			-x --audio-quality 0 --audio-format best \
-			--default-search ytsearch \
-			-- "$link" ;;
-	esac
-	mkdir -p "$(dirname "$file")"
-	ffmpeg -i "$(echo ./*)" \
-		-f wav "$file" \
-		-hide_banner -nostdin
 	rm -rf ./*
+
+	( set -e
+		eval "set -- $line"
+
+		file="$dir/$1"
+		echo "$file"
+		[ -f "$file" ] && exit
+
+		link="${2:-$(basename "$1")}"
+		echo "$link"
+		case "$link" in
+			'') exit ;;
+			https://*) curl -O "$link" ;;
+			*) python -m yt_dlp \
+				-x --audio-quality 0 --audio-format best \
+				--default-search ytsearch \
+				-- "$link" ;;
+		esac
+
+		mkdir -p "$(dirname "$file")"
+		ffmpeg -i "$(echo ./*)" \
+			-f wav "$file" \
+			-hide_banner -nostdin
+	) || true
 done
+
+cd ..
+rm -rfv "$OLDPWD"
