@@ -6,11 +6,10 @@
 	"modules-center": [
 	],
 	"modules-right": [
+		"disk",
 		"memory",
-
 		"cpu",
-		"temperature",
-
+		"custom/cpu-temp",
 		"custom/gpu",
 
 		"custom/time",
@@ -23,21 +22,24 @@
 		"custom/userhost",
 	],
 
+	"disk": {
+		"format": "({free})",
+	},
 	"memory": {
-		"format": "&lt;RAM:{percentage}%>",
+		"format": "&lt;{percentage}+{swapPercentage}%>",
 	},
 	"cpu": {
-		"format": "{{CPU:{usage}%}}",
+		"format": "c={{{usage}%",
 		"tooltip": false,
 	},
-	"temperature": {
-		"critical-threshold": 80,
-		"format": "{temperatureC}°C {icon}",
-		"format-icons": ["", "", ""],
+	"custom/cpu-temp": {
+		"format": "{text}°}}",
+		"exec": "cpu-temp",
+		"interval": 10,
 	},
 	"custom/gpu": {
-		"format": "{{GPU:{text}°}}",
-		"exec": "echo \"$(nvidia-smi --format=csv,noheader,nounits --query-gpu=utilization.gpu)%$(nvidia-smi --format=csv,noheader,nounits --query-gpu=temperature.gpu)\"",
+		"format": "g={{{text}}}",
+		"exec": "echo \"$(nvidia-smi --format=csv,noheader,nounits --query-gpu=utilization.gpu)% $(nvidia-smi --format=csv,noheader,nounits --query-gpu=temperature.gpu)°\"",
 		"interval": 10,
 	},
 	"custom/time": {

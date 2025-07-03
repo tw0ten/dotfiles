@@ -37,11 +37,10 @@ echo )
 	command -v $AUR_HELPER || ( cd "$(mktemp -d)"; git clone "https://aur.archlinux.org/$AUR_HELPER" .; makepkg -si )
 
 	i neovim tmux openssh \
-		lf btop fastfetch ripgrep reflector ufw \
-		jdk-openjdk rust python deno nasm
+		lf btop fastfetch ripgrep reflector ufw ffmpeg
 	i niri pipewire nvidia-open \
-		feh libnotify \
-		torbrowser-launcher qbittorrent ffmpeg libreoffice-still gimp obs-studio vlc blender \
+		mako \
+		torbrowser-launcher qbittorrent libreoffice-still gimp obs-studio vlc blender \
 		ttf-jetbrains-mono ttf-nerd-fonts-symbols-mono noto-fonts noto-fonts-emoji noto-fonts-cjk
 echo )
 

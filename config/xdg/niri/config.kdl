@@ -40,6 +40,8 @@ layout {
 		left 8
 		right 8
 	}
+
+	background-color "#202020"
 }
 
 spawn-at-startup "waybar"
@@ -63,6 +65,12 @@ window-rule {
 	open-floating true
 }
 
+layer-rule {
+	match namespace="^notifications$"
+
+	block-out-from "screencast"
+}
+
 window-rule {
 	geometry-corner-radius 8
 	clip-to-geometry true
@@ -72,18 +80,24 @@ overview {
 	backdrop-color "#101010"
 }
 
+gestures {
+    hot-corners { off; }
+}
+
+hotkey-overlay { skip-at-startup; }
+
 binds {
 	Mod+Shift+Slash { show-hotkey-overlay; }
 
 	Mod+Return hotkey-overlay-title="terminal" { spawn "terminal"; }
-	Mod+X hotkey-overlay-title="run" { spawn "fuzzel"; }
+	Mod+X hotkey-overlay-title="run" { spawn "fuzzel" "--counter"; }
 	Mod+Z hotkey-overlay-title="script" { spawn "smenu"; }
 	Mod+C hotkey-overlay-title="lock" { spawn "~/.config/niri/lock"; }
 
-	XF86AudioRaiseVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
-	XF86AudioLowerVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
-	XF86AudioMute        { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
-	XF86AudioMicMute     { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+	XF86AudioRaiseVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05+"; }
+	XF86AudioLowerVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05-"; }
+	XF86AudioMute { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+	XF86AudioMicMute { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
 
 	Mod+Q repeat=false { toggle-overview; }
 
@@ -152,13 +166,13 @@ binds {
 	Mod+G { center-column; }
 	Mod+Ctrl+G { center-visible-columns; }
 
-	Mod+Minus { set-column-width "-10%"; }
-	Mod+Equal { set-column-width "+10%"; }
+	Mod+Minus { set-column-width "-5%"; }
+	Mod+Equal { set-column-width "+5%"; }
 
-	Mod+Shift+Minus { set-window-height "-10%"; }
-	Mod+Shift+Equal { set-window-height "+10%"; }
+	Mod+Shift+Minus { set-window-height "-5%"; }
+	Mod+Shift+Equal { set-window-height "+5%"; }
 
-	Mod+V       { toggle-window-floating; }
+	Mod+V { toggle-window-floating; }
 	Mod+Shift+V { switch-focus-between-floating-and-tiling; }
 
 	Print { screenshot; }
