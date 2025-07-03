@@ -3,8 +3,13 @@
 
 	"modules-left": [
 	],
+	//	"wlr/taskbar",
+	//"wlr/taskbar": {
+	//},
+
 	"modules-center": [
 	],
+
 	"modules-right": [
 		"disk",
 		"memory",
@@ -35,21 +40,27 @@
 	"custom/cpu-temp": {
 		"format": "{text}°}}",
 		"exec": "cpu-temp",
+		"tooltip": false,
 		"interval": 10,
 	},
 	"custom/gpu": {
 		"format": "g={{{text}}}",
 		"exec": "echo \"$(nvidia-smi --format=csv,noheader,nounits --query-gpu=utilization.gpu)% $(nvidia-smi --format=csv,noheader,nounits --query-gpu=temperature.gpu)°\"",
+		"tooltip": false,
 		"interval": 10,
 	},
 	"custom/time": {
 		"format": "[{text}]",
 		"exec": "date +'%Y/%d/%m|%H:%M'",
+		"tooltip": false,
 		"interval": 10,
 	},
 	"backlight": {
 		"format": "{icon}",
 		"format-icons": ["", "", "", "", "", "", "", "", ""],
+		"tooltip-format": "{percent}%",
+
+		"on-click": "smenu brightness",
 	},
 	"battery": {
 		"states": {
@@ -73,25 +84,18 @@
 		"format-alt": "{ifname}: {ipaddr}/{cidr}",
 	},
 	"pulseaudio": {
-		"format": "{volume}% {icon} {format_source}",
-		"format-bluetooth": "{volume}% {icon} {format_source}",
-		"format-bluetooth-muted": " {icon} {format_source}",
-		"format-muted": " {format_source}",
-		"format-source": "{volume}% ",
-		"format-source-muted": "",
+		"format": "{icon}",
 		"format-icons": {
-			"headphone": "",
-			"hands-free": "",
-			"headset": "",
-			"phone": "",
-			"portable": "",
-			"car": "",
 			"default": ["", "", ""],
 		},
+
 		"on-click": "pavucontrol",
 	},
 	"custom/userhost": {
 		"format": "{text}",
 		"exec": "echo \"$USER@$HOSTNAME\"",
+		"tooltip": false,
+
+		"on-click": "$TERMINAL -e sh -c 'fastfetch; read -n1'",
 	},
 }

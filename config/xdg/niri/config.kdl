@@ -16,6 +16,8 @@ input {
 }
 
 layout {
+	empty-workspace-above-first
+
 	gaps 4
 
 	preset-column-widths {
@@ -24,27 +26,28 @@ layout {
 		proportion 0.66667
 	}
 
-	default-column-width { proportion 0.5; }
-
 	focus-ring { off; }
+
+	background-color "#202020"
 
 	border {
 		width 2
+
 		active-color "#40e0d0"
 		inactive-color "#202020"
-
 		urgent-color "#9b0000"
 	}
+
+	insert-hint { color "#ffffff30"; }
 
 	struts {
 		left 8
 		right 8
 	}
-
-	background-color "#202020"
 }
 
 spawn-at-startup "waybar"
+
 spawn-at-startup "~/.config/niri/init"
 
 spawn-at-startup "xwayland-satellite"
@@ -54,7 +57,7 @@ environment {
 
 prefer-no-csd
 
-screenshot-path "~/temp/screenshot/%Y-%m-%d %H-%M-%S.png"
+screenshot-path "~/temp/screenshot/%Y-%m-%d|%H:%M:%S.png"
 
 animations {
 	slowdown 0.75
@@ -81,7 +84,7 @@ overview {
 }
 
 gestures {
-    hot-corners { off; }
+	hot-corners { off; }
 }
 
 hotkey-overlay { skip-at-startup; }
@@ -128,24 +131,24 @@ binds {
 	Mod+Shift+Page_Down { move-workspace-down; }
 	Mod+Shift+Page_Up   { move-workspace-up; }
 
-	Mod+1 { focus-workspace 1; }
-	Mod+2 { focus-workspace 2; }
-	Mod+3 { focus-workspace 3; }
-	Mod+4 { focus-workspace 4; }
-	Mod+5 { focus-workspace 5; }
-	Mod+6 { focus-workspace 6; }
-	Mod+7 { focus-workspace 7; }
-	Mod+8 { focus-workspace 8; }
-	Mod+9 { focus-workspace 9; }
-	Mod+Ctrl+1 { move-column-to-workspace 1; }
-	Mod+Ctrl+2 { move-column-to-workspace 2; }
-	Mod+Ctrl+3 { move-column-to-workspace 3; }
-	Mod+Ctrl+4 { move-column-to-workspace 4; }
-	Mod+Ctrl+5 { move-column-to-workspace 5; }
-	Mod+Ctrl+6 { move-column-to-workspace 6; }
-	Mod+Ctrl+7 { move-column-to-workspace 7; }
-	Mod+Ctrl+8 { move-column-to-workspace 8; }
-	Mod+Ctrl+9 { move-column-to-workspace 9; }
+	Mod+1 { focus-workspace 2; }
+	Mod+Ctrl+1 { move-column-to-workspace 2; }
+	Mod+2 { focus-workspace 3; }
+	Mod+Ctrl+2 { move-column-to-workspace 3; }
+	Mod+3 { focus-workspace 4; }
+	Mod+Ctrl+3 { move-column-to-workspace 4; }
+	Mod+4 { focus-workspace 5; }
+	Mod+Ctrl+4 { move-column-to-workspace 5; }
+	Mod+5 { focus-workspace 6; }
+	Mod+Ctrl+5 { move-column-to-workspace 6; }
+	Mod+6 { focus-workspace 7; }
+	Mod+Ctrl+6 { move-column-to-workspace 7; }
+	Mod+7 { focus-workspace 8; }
+	Mod+Ctrl+7 { move-column-to-workspace 8; }
+	Mod+8 { focus-workspace 9; }
+	Mod+Ctrl+8 { move-column-to-workspace 9; }
+	Mod+9 { focus-workspace 10; }
+	Mod+Ctrl+9 { move-column-to-workspace 10; }
 
 	Mod+Tab { focus-workspace-previous; }
 

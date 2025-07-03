@@ -1,2 +1,2 @@
 #!/bin/sh
-bemoji -p -c -n -t
+exec bemoji -p -c -n -t
