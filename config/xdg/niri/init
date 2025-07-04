@@ -1,6 +1,4 @@
 #!/bin/sh
-sleep 2
-( exec swww-daemon ) &
 ( exec vesktop ) &
 ( exec Telegram ) &
 ( cd ~/music && exec $TERMINAL -T mousikes -e mousikes -p -v 0.025 ) &

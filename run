@@ -15,6 +15,7 @@ set -ex && export SHELLOPTS
 		i bash/profile .bash_profile
 		i bash/rc .bashrc
 		i ssh/config .ssh/config
+		i icons/ .local/share/icons/default
 		i inputrc .inputrc )
 
 	sudo -v
@@ -39,7 +40,7 @@ echo )
 	i neovim tmux openssh \
 		lf btop fastfetch ripgrep reflector ufw ffmpeg
 	i niri pipewire nvidia-open \
-		mako \
+		mako swww fuzzel alacritty \
 		torbrowser-launcher qbittorrent libreoffice-still gimp obs-studio vlc blender \
 		ttf-jetbrains-mono ttf-nerd-fonts-symbols-mono noto-fonts noto-fonts-emoji noto-fonts-cjk
 echo )

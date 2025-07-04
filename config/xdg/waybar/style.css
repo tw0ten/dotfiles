@@ -1,9 +1,9 @@
-* {
+window {
 	font-family: 'JetBrains Mono';
 	font-size: 14px;
 
 	color: #ffffff;
-	background: rgba(32,32,32,0.5);
+	background: rgba(32, 32, 32, 0.85);
 }
 
 .module {

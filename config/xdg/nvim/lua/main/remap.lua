@@ -13,7 +13,7 @@ vim.keymap.set('n', "<leader>cd", function()
 	print(vim.fn.getcwd())
 end)
 
-vim.keymap.set('n', "<C-_>", function()
+vim.keymap.set('n', "<C-/>", function()
 	vim.cmd.let([[@/ = '']])
 	print("@/ = ''")
 end)

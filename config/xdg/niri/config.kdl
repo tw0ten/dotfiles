@@ -15,6 +15,11 @@ input {
 	}
 }
 
+cursor {
+	xcursor-theme "default"
+	xcursor-size 8
+}
+
 layout {
 	empty-workspace-above-first
 
@@ -47,13 +52,14 @@ layout {
 }
 
 spawn-at-startup "waybar"
-
-spawn-at-startup "~/.config/niri/init"
+spawn-at-startup "swww-daemon"
 
 spawn-at-startup "xwayland-satellite"
 environment {
 	DISPLAY ":0"
 }
+
+spawn-at-startup "~/.config/niri/init"
 
 prefer-no-csd
 
@@ -70,7 +76,6 @@ window-rule {
 
 layer-rule {
 	match namespace="^notifications$"
-
 	block-out-from "screencast"
 }
 

@@ -23,7 +23,7 @@ return {
 					},
 				},
 				keymap = {
-					["<C-f>"] = {},
+					["<Tab"] = {},
 				},
 				cmdline = {
 					enabled = false,
