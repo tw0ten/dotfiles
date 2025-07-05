@@ -1,4 +1,0 @@
-#!/bin/sh
-( exec vesktop ) &
-( exec Telegram ) &
-( cd ~/music && exec $TERMINAL -T mousikes -e mousikes -p -v 0.025 ) &
