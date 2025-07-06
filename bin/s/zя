@@ -1,2 +1,9 @@
 #!/bin/sh
-niri msg action switch-layout "$(niri msg keyboard-layouts | sed '1d' | dmenu -p 'keyboard ' --index)"
+i="$(niri msg keyboard-layouts | sed '1d' | dmenu -p 'keyboard ' --index)"
+
+niri msg action switch-layout "$i"
+
+case "$(niri msg keyboard-layouts | grep '\*')" in
+	*Chinese) fcitx5-remote -s "pinyin" ;;
+	*) fcitx5-remote -s "keyboard-us" ;;
+esac

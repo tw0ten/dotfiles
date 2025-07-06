@@ -32,6 +32,7 @@ layout {
 }
 
 spawn-at-startup "waybar"
+spawn-at-startup "fcitx5"
 spawn-at-startup "swww-daemon"
 
 spawn-at-startup "xwayland-satellite"
