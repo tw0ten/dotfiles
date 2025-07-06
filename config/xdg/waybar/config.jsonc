@@ -1,14 +1,17 @@
 {
 	"position": "bottom",
+	"height": 14,
+	"margin": 2,
 
 	"modules-left": [
 	],
-	//	"wlr/taskbar",
-	//"wlr/taskbar": {
-	//},
-
 	"modules-center": [
 	],
+	"wlr/taskbar": {
+		"active-first": true,
+		"icon-size": 14,
+	},
+
 
 	"modules-right": [
 		"disk",
@@ -23,6 +26,7 @@
 		"pulseaudio",
 		"backlight",
 		"network",
+		"custom/keyboard",
 
 		"custom/userhost",
 	],
@@ -41,18 +45,21 @@
 		"format": "{text}°}}",
 		"exec": "cpu-temp",
 		"tooltip": false,
+
 		"interval": 10,
 	},
 	"custom/gpu": {
 		"format": "g={{{text}}}",
 		"exec": "echo \"$(nvidia-smi --format=csv,noheader,nounits --query-gpu=utilization.gpu)% $(nvidia-smi --format=csv,noheader,nounits --query-gpu=temperature.gpu)°\"",
 		"tooltip": false,
+
 		"interval": 10,
 	},
 	"custom/time": {
 		"format": "[{text}]",
 		"exec": "date +'%Y/%d/%m|%H:%M'",
 		"tooltip": false,
+
 		"interval": 10,
 	},
 	"backlight": {
@@ -90,6 +97,15 @@
 		},
 
 		"on-click": "pavucontrol",
+	},
+	"custom/keyboard": {
+		"format": "{text}",
+		"exec": "niri msg keyboard-layouts | grep '*' | sed 's/.*\\* [[:digit:]] //'",
+		"tooltip": false,
+
+		"interval": 10,
+
+		"on-click": "smenu zя",
 	},
 	"custom/userhost": {
 		"format": "{text}",

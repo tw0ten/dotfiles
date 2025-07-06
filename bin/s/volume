@@ -2,4 +2,3 @@
 i="$(echo -e "$(pamixer --get-volume-human)\n \n10\n20\n30\n40\n50\n60\n70\n80\n90\n100" | dmenu -p "volume " --lines 12)"
 [ "$i" = ' ' ] && pamixer -t || pamixer -u --set-volume "$i"
 notify-send -t 1500 'volume' "$(pamixer --get-volume-human)"
-systat-kill 'volume'

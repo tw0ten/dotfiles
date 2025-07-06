@@ -1,25 +1,3 @@
-input {
-	keyboard {
-		xkb {
-			layout "us,ru,cn"
-			options "grp:win_space_toggle"
-		}
-	}
-
-	touchpad {
-		disabled-on-external-mouse
-	}
-
-	mouse {
-		accel-speed 0.0
-	}
-}
-
-cursor {
-	xcursor-theme "default"
-	xcursor-size 8
-}
-
 layout {
 	empty-workspace-above-first
 
@@ -36,18 +14,20 @@ layout {
 	background-color "#202020"
 
 	border {
-		width 2
+		width 1
 
 		active-color "#40e0d0"
 		inactive-color "#202020"
 		urgent-color "#9b0000"
 	}
 
-	insert-hint { color "#ffffff30"; }
+	insert-hint {
+		color "#ffffff30"
+	}
 
 	struts {
-		left 8
-		right 8
+		left 4
+		right 4
 	}
 }
 
@@ -61,40 +41,34 @@ environment {
 
 spawn-at-startup "~/.config/niri/init"
 
-prefer-no-csd
-
-screenshot-path "~/temp/screenshot/%Y-%m-%d|%H:%M:%S.png"
-
-animations {
-	slowdown 0.75
-}
-
-window-rule {
-	match app-id=r#"firefox$"# title="^Picture-in-Picture$"
-	open-floating true
-}
-
 layer-rule {
 	match namespace="^notifications$"
 	block-out-from "screencast"
 }
 
+prefer-no-csd
+
 window-rule {
+	draw-border-with-background false
 	geometry-corner-radius 8
 	clip-to-geometry true
+}
+
+window-rule {
+	match is-focused=false
+	opacity 0.90
 }
 
 overview {
 	backdrop-color "#101010"
 }
 
-gestures {
-	hot-corners { off; }
+animations {
+	slowdown 0.75
 }
 
-hotkey-overlay { skip-at-startup; }
-
 binds {
+	Mod+Shift+Escape { quit; }
 	Mod+Shift+Slash { show-hotkey-overlay; }
 
 	Mod+Return hotkey-overlay-title="terminal" { spawn "terminal"; }
@@ -133,9 +107,6 @@ binds {
 	Mod+Shift+S { move-workspace-down; }
 	Mod+Ctrl+S { move-column-to-workspace-down; }
 
-	Mod+Shift+Page_Down { move-workspace-down; }
-	Mod+Shift+Page_Up   { move-workspace-up; }
-
 	Mod+1 { focus-workspace 2; }
 	Mod+Ctrl+1 { move-column-to-workspace 2; }
 	Mod+2 { focus-workspace 3; }
@@ -155,20 +126,17 @@ binds {
 	Mod+9 { focus-workspace 10; }
 	Mod+Ctrl+9 { move-column-to-workspace 10; }
 
-	Mod+Tab { focus-workspace-previous; }
+	Mod+Tab { focus-window-previous; }
+	Mod+Grave { focus-workspace-previous; }
 
 	Mod+BracketLeft  { consume-or-expel-window-left; }
 	Mod+BracketRight { consume-or-expel-window-right; }
-
-	Mod+Comma  { consume-window-into-column; }
-	Mod+Period { expel-window-from-column; }
 
 	Mod+R { switch-preset-column-width; }
 	Mod+Shift+R { switch-preset-window-height; }
 	Mod+Ctrl+R { reset-window-height; }
 	Mod+F { maximize-column; }
 	Mod+Shift+F { fullscreen-window; }
-
 	Mod+Ctrl+F { expand-column-to-available-width; }
 
 	Mod+G { center-column; }
@@ -189,7 +157,40 @@ binds {
 
 	Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
-	Mod+Shift+Escape { quit; }
+	Mod+Backspace { power-off-monitors; }
+}
 
-	Mod+Shift+P { power-off-monitors; }
+gestures {
+	hot-corners { off; }
+}
+
+input {
+	keyboard {
+		xkb {
+			layout "us,ru,cn"
+		}
+
+		repeat-delay 200
+		repeat-rate 20
+	}
+
+	touchpad {
+		disabled-on-external-mouse
+	}
+
+	mouse {
+		accel-profile "flat"
+		accel-speed 0.0
+	}
+}
+
+cursor {
+	xcursor-theme "default"
+	xcursor-size 8
+}
+
+screenshot-path "~/temp/screenshot/%Y-%m-%d|%H:%M:%S.png"
+
+hotkey-overlay {
+	skip-at-startup
 }

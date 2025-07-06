@@ -1,9 +1,16 @@
 window {
+	background: transparent;
+	color: #ffffff;
+
 	font-family: 'JetBrains Mono';
 	font-size: 14px;
+}
 
-	color: #ffffff;
-	background: rgba(32, 32, 32, 0.85);
+.modules-right {
+	background: #202020;
+
+	border-radius: 14px;
+	padding-left: 2px;
 }
 
 .module {
@@ -11,17 +18,19 @@ window {
 }
 
 #custom-userhost {
-	color: #202020;
 	background: #40e0d0;
+	color: #202020;
+
+	padding: 0 4px;
+	border-radius: 14px;
 
 	margin-left: 4px;
-	padding-left: 6px;
-	border-radius: 14px 0 0 14px;
 }
 
 #battery,
 #pulseaudio,
 #backlight,
+#custom-keyboard,
 #network {
 	color: #40e0d0;
 }

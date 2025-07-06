@@ -7,4 +7,3 @@ i=$(echo -e "5%-\n$(i)\n+5%\n0\n25%\n50%\n75%\n$max" | dmenu -p "brightness " --
 brightnessctl set "$i"
 
 notify-send -t 1500 'brightness' "set to $(i)"
-systat-kill 'brightness'

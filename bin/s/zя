@@ -1,3 +1,2 @@
 #!/bin/sh
-xkb-switch -s "$(xkb-switch -l | dmenu -p 'keyboard ' --minimal-lines)"
-systat-kill 'keyboard'
+niri msg action switch-layout "$(niri msg keyboard-layouts | sed '1d' | dmenu -p 'keyboard ' --index)"
