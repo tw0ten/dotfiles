@@ -4,13 +4,30 @@ window {
 
 	font-family: 'JetBrains Mono';
 	font-size: 14px;
+	padding: 0 2px;
 }
 
+.modules-left {
+	margin-left: 8px;
+}
+.modules-center {
+	margin: 0 8px;
+}
+.modules-right {
+	margin-right: 8px;
+}
+
+.modules-left,
+#custom-window,
 .modules-right {
 	background: #202020;
 
 	border-radius: 14px;
-	padding-left: 2px;
+}
+
+#custom-window {
+	background: #ffffff;
+	color: #202020;
 }
 
 .module {

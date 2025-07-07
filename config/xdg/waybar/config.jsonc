@@ -4,14 +4,28 @@
 	"margin": 2,
 
 	"modules-left": [
+		"custom/workspaces",
 	],
-	"modules-center": [
-	],
-	"wlr/taskbar": {
-		"active-first": true,
-		"icon-size": 14,
+	"custom/workspaces": {
+		"format": "{text}",
+		"exec": "niri msg workspaces | sed '1d' | tr -d '\\n' | sed -e 's/^/ 0  /' -e 's/\\([0-9]*\\)$//' -e 's/  //g' -e 's/ \\*/\\)/' -e 's/\\([0-9]*\\))/(\\1)/g'",
+		"tooltip": false,
+
+		"interval": 1,
 	},
 
+	"modules-center": [
+		"custom/window-1",
+		"custom/window",
+		"custom/window+1",
+	],
+	"custom/window": {
+		"format": "{text}",
+		"exec": "niri msg focused-window | grep '^  Title:' | sed -e 's/^  Title: .//' -e 's/.$//'",
+		"tooltip": false,
+
+		"interval": 1,
+	},
 
 	"modules-right": [
 		"disk",
@@ -90,8 +104,9 @@
 		"format-wifi": "󰤨",
 		"format-ethernet": "",
 		"format-disconnected": "⚠",
-		"format-alt": "{essid} {ifname}: {ipaddr}/{cidr}",
 		"tooltip": false,
+
+		"on-click": "smenu ping",
 	},
 	"pulseaudio": {
 		"format": "{icon}",
@@ -104,7 +119,7 @@
 	},
 	"custom/keyboard": {
 		"format": "{text}",
-		"exec": "niri msg keyboard-layouts | grep '*' | sed -e 's/.*\\* [[:digit:]] //' -e 's/ .*//' | tr '[:upper:]' '[:lower:]' | head -c 2",
+		"exec": "niri msg keyboard-layouts | grep '*' | sed -e 's/^ \\* \\([0-9]*\\) //' -e 's/ .*//' | tr '[:upper:]' '[:lower:]' | head -c 2",
 		"tooltip": false,
 
 		"interval": 10,

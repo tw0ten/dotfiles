@@ -32,16 +32,16 @@ layout {
 }
 
 spawn-at-startup "waybar"
-spawn-at-startup "fcitx5"
 spawn-at-startup "swww-daemon"
-
+spawn-at-startup "fcitx5"
 spawn-at-startup "xwayland-satellite" ":0"
+
 environment {
 	DISPLAY ":0"
 
 	INPUT_METHOD "fcitx"
-	GTK_IM_MODULE "fcitx"
-	QT_IM_MODULE "fcitx"
+	GTK_IM_MODULE "wayland"
+	QT_IM_MODULE "wayland"
 	XMODIFIERS "@im=fcitx"
 }
 
@@ -62,7 +62,7 @@ window-rule {
 
 window-rule {
 	match is-focused=false
-	opacity 0.90
+	opacity 0.9
 }
 
 overview {
@@ -74,13 +74,13 @@ animations {
 }
 
 binds {
-	Mod+Shift+Escape { quit; }
+	Mod+Shift+Escape { quit skip-confirmation=true; }
 	Mod+Shift+Slash { show-hotkey-overlay; }
 
 	Mod+Return hotkey-overlay-title="terminal" { spawn "terminal"; }
 	Mod+X hotkey-overlay-title="run" { spawn "fuzzel" "--counter"; }
 	Mod+Z hotkey-overlay-title="script" { spawn "smenu"; }
-	Mod+C hotkey-overlay-title="lock" { spawn "~/.config/niri/lock"; }
+	Mod+C allow-inhibiting=false hotkey-overlay-title="lock" { spawn "~/.config/niri/lock"; }
 
 	XF86AudioRaiseVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05+"; }
 	XF86AudioLowerVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05-"; }
@@ -192,7 +192,7 @@ input {
 
 cursor {
 	xcursor-theme "default"
-	xcursor-size 8
+	xcursor-size 0
 
 	hide-after-inactive-ms 5000
 }

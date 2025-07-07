@@ -1,0 +1,3 @@
+include=~/.config/mako/style
+
+default-timeout=5000
