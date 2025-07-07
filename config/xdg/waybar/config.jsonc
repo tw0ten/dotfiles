@@ -33,9 +33,11 @@
 
 	"disk": {
 		"format": "({free})",
+		"tooltip": false,
 	},
 	"memory": {
 		"format": "&lt;{percentage}+{swapPercentage}%>",
+		"tooltip": false,
 	},
 	"cpu": {
 		"format": "c={{{usage}%",
@@ -64,8 +66,9 @@
 	},
 	"backlight": {
 		"format": "{icon}",
-		"format-icons": ["", "", "", "", "", "", "", "", ""],
+		"format-icons": ["󰛩", "󱩎", "󱩏", "󱩐", "󱩑", "󱩒", "󱩓", "󱩔", "󱩕", "󱩖", "󰛨"],
 		"tooltip-format": "{percent}%",
+		"tooltip": false,
 
 		"on-click": "smenu brightness",
 	},
@@ -79,28 +82,29 @@
 		"format-full": "",
 		"format-good": "",
 		"format-charging": "{icon}+",
-		"format-plugged": "{icon}=",
-		"format-icons": ["", "", "", "", ""],
+		"format-plugged": "{icon}",
+		"format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+		"tooltip": false,
 	},
 	"network": {
-		"format-wifi": "{essid}",
-		"format-ethernet": "{ipaddr}/{cidr} ",
-		"tooltip-format": "{ifname} via {gwaddr} ",
-		"format-linked": "{ifname} (No IP) ",
-		"format-disconnected": "Disconnected ⚠",
-		"format-alt": "{ifname}: {ipaddr}/{cidr}",
+		"format-wifi": "󰤨",
+		"format-ethernet": "",
+		"format-disconnected": "⚠",
+		"format-alt": "{essid} {ifname}: {ipaddr}/{cidr}",
+		"tooltip": false,
 	},
 	"pulseaudio": {
 		"format": "{icon}",
 		"format-icons": {
 			"default": ["", "", ""],
 		},
+		"tooltip": false,
 
 		"on-click": "pavucontrol",
 	},
 	"custom/keyboard": {
 		"format": "{text}",
-		"exec": "niri msg keyboard-layouts | grep '*' | sed 's/.*\\* [[:digit:]] //'",
+		"exec": "niri msg keyboard-layouts | grep '*' | sed -e 's/.*\\* [[:digit:]] //' -e 's/ .*//' | tr '[:upper:]' '[:lower:]' | head -c 2",
 		"tooltip": false,
 
 		"interval": 10,

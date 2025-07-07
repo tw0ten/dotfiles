@@ -35,7 +35,7 @@ spawn-at-startup "waybar"
 spawn-at-startup "fcitx5"
 spawn-at-startup "swww-daemon"
 
-spawn-at-startup "xwayland-satellite"
+spawn-at-startup "xwayland-satellite" ":0"
 environment {
 	DISPLAY ":0"
 
@@ -193,6 +193,8 @@ input {
 cursor {
 	xcursor-theme "default"
 	xcursor-size 8
+
+	hide-after-inactive-ms 5000
 }
 
 screenshot-path "~/temp/screenshot/%Y-%m-%d|%H:%M:%S.png"
