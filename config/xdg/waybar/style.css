@@ -7,14 +7,13 @@ window {
 	padding: 0 2px;
 }
 
-.modules-left {
-	margin-left: 8px;
+.module {
+	padding: 0 4px;
 }
-.modules-center {
-	margin: 0 8px;
-}
+
+.modules-left,
 .modules-right {
-	margin-right: 8px;
+	margin: 0 8px;
 }
 
 .modules-left,
@@ -30,8 +29,12 @@ window {
 	color: #202020;
 }
 
-.module {
-	padding: 0 4px;
+#battery,
+#pulseaudio,
+#backlight,
+#network,
+#custom-keyboard {
+	color: #40e0d0;
 }
 
 #custom-userhost {
@@ -42,12 +45,4 @@ window {
 	border-radius: 14px;
 
 	margin-left: 4px;
-}
-
-#battery,
-#pulseaudio,
-#backlight,
-#custom-keyboard,
-#network {
-	color: #40e0d0;
 }

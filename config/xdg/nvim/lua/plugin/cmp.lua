@@ -1,64 +1,31 @@
 return {
-	{ "L3MON4D3/LuaSnip", keys = {} },
-	{
-		"saghen/blink.cmp",
-		dependencies = {
-			"rafamadriz/friendly-snippets",
-		},
-		version = "*",
-		config = function()
-			require("blink.cmp").setup({
-				snippets = { preset = "luasnip" },
-				signature = { enabled = true },
-				appearance = {
-					use_nvim_cmp_as_default = false,
-					nerd_font_variant = "normal",
-				},
-				sources = {
-					default = { "lsp", "path", "snippets", "buffer" },
-					providers = {
-						cmdline = {
-							min_keyword_length = 2,
-						},
-					},
-				},
-				keymap = {
-					["<Tab"] = {},
-				},
-				cmdline = {
-					enabled = false,
-					completion = { menu = { auto_show = true } },
-					keymap = {
-						["<CR>"] = { "accept_and_enter", "fallback" },
-					},
-				},
-				completion = {
-					menu = {
-						border = nil,
-						scrolloff = 1,
-						scrollbar = false,
-						draw = {
-							columns = {
-								{ "kind_icon" },
-								{ "label",      "label_description", gap = 1 },
-								{ "kind" },
-								{ "source_name" },
-							},
-						},
-					},
-					documentation = {
-						window = {
-							border = nil,
-							scrollbar = false,
-							winhighlight = 'Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder,EndOfBuffer:BlinkCmpDoc',
-						},
-						auto_show = true,
-						auto_show_delay_ms = 500,
-					},
-				},
-			})
-
-			require("luasnip.loaders.from_vscode").lazy_load()
-		end,
+	"hrsh7th/nvim-cmp",
+	dependencies = {
+		"L3MON4D3/LuaSnip",
+		'neovim/nvim-lspconfig',
+		'hrsh7th/cmp-nvim-lsp',
+		'hrsh7th/cmp-buffer',
+		'hrsh7th/cmp-path',
+		'hrsh7th/cmp-cmdline',
 	},
+	config = function()
+		local cmp = require("cmp")
+		cmp.setup({
+			snippet = {
+				expand = function(args)
+					require('luasnip').lsp_expand(args.body)
+				end,
+			},
+			mapping = cmp.mapping.preset.insert({
+				['<C-Space>'] = cmp.mapping.complete(),
+				['<Tab>'] = cmp.mapping.confirm({ select = true }),
+			}),
+			sources = cmp.config.sources({
+				{ name = 'nvim_lsp' },
+				{ name = 'luasnip' },
+			}, {
+				{ name = 'buffer' },
+			})
+		})
+	end,
 }

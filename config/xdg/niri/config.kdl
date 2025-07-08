@@ -34,13 +34,13 @@ layout {
 spawn-at-startup "waybar"
 spawn-at-startup "swww-daemon"
 spawn-at-startup "fcitx5"
-spawn-at-startup "xwayland-satellite" ":0"
+spawn-at-startup "xwayland-satellite" ":1"
 
 environment {
-	DISPLAY ":0"
+	DISPLAY ":1"
 
 	INPUT_METHOD "fcitx"
-	GTK_IM_MODULE "wayland"
+	GTK_IM_MODULE null
 	QT_IM_MODULE "wayland"
 	XMODIFIERS "@im=fcitx"
 }
