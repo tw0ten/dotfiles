@@ -2,6 +2,10 @@
 [[ $- = *i* ]] || return $(true)
 set -o vi
 
+cpdl() {
+	local d="$(xdg-user-dir DOWNLOAD)"
+	cp -v "$d/$(\ls -t "$d" | head -1)" "$@"
+}
 caret() { echo -ne "\e[$* q"; }
 mklc() { set -- "$DOTFILES/etc/lc/${1:-.}" "${2:-LICENSE}"
 	cp -i -P "$1" "$2" ||
@@ -67,7 +71,6 @@ alias \
 	mkdir='mkdir -pv' \
 	rmdir='rmdir -v' \
 \
-	fehbg='feh --no-fehbg --bg-scale' \
 	cpb='cp -t ~/.local/bin' \
 	history="history | $PAGER +G" \
 	myip='echo "$(curl -s ipinfo.io/ip)"' \

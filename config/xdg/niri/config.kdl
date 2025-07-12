@@ -48,6 +48,11 @@ environment {
 spawn-at-startup "~/.config/niri/init"
 
 layer-rule {
+	match namespace="^wallpaper$"
+	place-within-backdrop true
+}
+
+layer-rule {
 	match namespace="^notifications$"
 	block-out-from "screencast"
 }
@@ -66,6 +71,8 @@ window-rule {
 }
 
 overview {
+	zoom 0.5
+
 	backdrop-color "#101010"
 }
 
