@@ -73,7 +73,7 @@
 	},
 	"custom/time": {
 		"format": "[{text}]",
-		"exec": "date +'%Y/%d/%m|%H:%M'",
+		"exec": "date +'%Y/%m/%d|%H:%M'",
 		"tooltip": false,
 
 		"interval": 10,

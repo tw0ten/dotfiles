@@ -97,6 +97,7 @@ PS1="$(
 	i "\${__git_ps1+\$__git_ps1$c:$r}$PS1"
 	i "\h $PS1$c"
 	[[ "$(id -u)" = 0 ]] && i "$PS1#" || i "\u$b$c@$r$PS1="
+	[[ "$SHELL" = /nix/store/* ]] && i "nix$c:$r$PS1"
 	[[ -n "$SSH_CONNECTION" ]] && i "ssh$c:$r$PS1"
 	i "$c\$([ \$? = 0 ] && echo + || echo -)$r $PS1"
 echo "$r$PS1$r")"
