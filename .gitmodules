@@ -1,6 +1,3 @@
 [submodule "bin/src/mousikes"]
 	path = bin/src/mousikes
 	url = https://github.com/tw0ten/mousikes
-[submodule "bin/src/systat"]
-	path = bin/src/systat
-	url = https://github.com/tw0ten/systat
