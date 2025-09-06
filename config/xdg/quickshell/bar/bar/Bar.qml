@@ -8,7 +8,7 @@ PanelWindow {
     id: bar
 
     color: `#a0${Theme.color.background}`
-    implicitHeight: 20
+    implicitHeight: Theme.sizing.height
     anchors {
         bottom: true
         left: true
@@ -22,7 +22,7 @@ PanelWindow {
         spacing: Theme.sizing.horizontal
 
         Process {
-            command: ["niri", "msg", "event-stream"]
+            command: ["niri", "msg", "-j", "event-stream"]
             running: true
 
             stdout: SplitParser {
@@ -33,8 +33,10 @@ PanelWindow {
         BarBlock {
             content: RowLayout {
                 id: workspaces
-                property var value: []
                 spacing: Theme.sizing.spacing
+
+                property var value: []
+                property real currentWorkspaceId: 0
 
                 Repeater {
                     model: workspaces.value.length
@@ -43,21 +45,22 @@ PanelWindow {
                         required property int index
 
                         content: BarText {
-                            color: `#${(index === 0 || index === workspaces.value.length - 1) ? "b0" : "ff"}${workspaces.value[index].selected ? Theme.color.accent : Theme.color.foreground}`
-                            text: `${workspaces.value[index].text}`
+                            color: `#${(index === 0 || index === workspaces.value.length - 1) ? "b0" : "ff"}${workspaces.value[index].is_focused ? Theme.color.accent : Theme.color.foreground}`
+                            text: `${index}`
                         }
                     }
                 }
 
                 property var proc: Process {
-                    command: ["niri", "msg", "workspaces"]
+                    command: ["niri", "msg", "-j", "workspaces"]
                     running: true
 
                     stdout: StdioCollector {
-                        onStreamFinished: () => workspaces.value = this.text.split("\n").slice(1, -1).map(i => ({
-                                        selected: i[1] === "*",
-                                        text: `${parseInt(i.substring(3)) - 1}`
-                                    }))
+                        onStreamFinished: () => {
+                            workspaces.value = JSON.parse(this.text).sort((a, b) => a.idx - b.idx);
+                            workspaces.currentWorkspaceId = workspaces.value.filter(i => i.is_focused)[0].id;
+                            layout.proc.running = true;
+                        }
                     }
                 }
             }
@@ -75,14 +78,61 @@ PanelWindow {
                 color: `#ff${Theme.color.background}`
             }
 
-            visible: window.value !== ""
+            visible: window.value.length > 0
 
             property var proc: Process {
-                command: ["niri", "msg", "focused-window"]
+                command: ["niri", "msg", "-j", "focused-window"]
                 running: true
 
                 stdout: StdioCollector {
-                    onStreamFinished: () => window.value = (this.text === "No window is focused." ? "" : this.text.split("\n")[1].slice(10, -1))
+                    onStreamFinished: () => window.value = JSON.parse(this.text)?.title ?? ""
+                }
+            }
+        }
+
+        BarBlock {
+            id: layout
+
+            property var value: []
+            property real valueWidth: 80 - content.spacing * (layout.value.length - 1)
+
+            content: RowLayout {
+                spacing: 2
+
+                Repeater {
+                    model: layout.value.length
+
+                    Rectangle {
+                        required property int index
+                        color: `#ff${layout.value[index].is_focused ? Theme.color.accent : Theme.color.foreground}`
+                        implicitWidth: layout.valueWidth * layout.value[index].size[0]
+                        implicitHeight: bar.height / 4
+                    }
+                }
+            }
+
+            property var proc: Process {
+                command: ["niri", "msg", "-j", "windows"]
+                running: true
+
+                stdout: StdioCollector {
+                    onStreamFinished: () => {
+                        const windows = JSON.parse(this.text).filter(i => i.workspace_id === workspaces.currentWorkspaceId && i.layout.pos_in_scrolling_layout !== null).sort((a, b) => a.layout.pos_in_scrolling_layout[0] - b.layout.pos_in_scrolling_layout[0]);
+                        let columns = {};
+                        let focused;
+                        for (const i of windows) {
+                            const x = i.layout.pos_in_scrolling_layout[0];
+                            if (i.is_focused)
+                                focused = x;
+                            columns[x] = [...(columns[x] ?? []), i];
+                        }
+                        columns = Object.values(columns);
+                        const width = columns.reduce((a, i) => a + i[0].layout.tile_size[0], 0);
+                        return layout.value = columns.map(i => ({
+                                    is_focused: i[0].layout.pos_in_scrolling_layout[0] === focused,
+                                    size: i[0].layout.tile_size.map(i => i / width)
+                                }));
+                    }
                 }
             }
         }

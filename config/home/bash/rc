@@ -36,7 +36,7 @@ alias \
 	s='sudo' \
 	x="$OPENER" \
 	e="$VISUAL" \
-	se="s $VISUAL" \
+	se='sudoedit' \
 	p="$PAGER" \
 	g='git' \
 	f='rg 2>/dev/null -uuL --color=always' \

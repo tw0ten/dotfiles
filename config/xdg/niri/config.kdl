@@ -21,6 +21,14 @@ layout {
 		urgent-color "#40e0d0a0"
 	}
 
+	tab-indicator {
+		place-within-column
+		width 2
+		gap 2
+
+		length total-proportion=0.75
+	}
+
 	insert-hint {
 		color "#ffffff30"
 	}
@@ -30,23 +38,6 @@ layout {
 		right 4
 	}
 }
-
-spawn-at-startup "xwayland-satellite" ":0"
-
-spawn-at-startup "quickshell" "-c" "bar"
-spawn-at-startup "swww-daemon"
-spawn-at-startup "fcitx5"
-
-environment {
-	DISPLAY ":0"
-
-	INPUT_METHOD "fcitx"
-	GTK_IM_MODULE null
-	QT_IM_MODULE "wayland"
-	XMODIFIERS "@im=fcitx"
-}
-
-spawn-at-startup "~/.config/niri/init"
 
 layer-rule {
 	match namespace="^wallpaper$"
@@ -86,7 +77,7 @@ binds {
 	Mod+Shift+Slash { show-hotkey-overlay; }
 
 	Mod+Return hotkey-overlay-title="terminal" { spawn "terminal"; }
-	Mod+X hotkey-overlay-title="run" { spawn "fuzzel" "--counter"; }
+	Mod+X hotkey-overlay-title="run" { spawn "fuzzel"; }
 	Mod+Z hotkey-overlay-title="script" { spawn "smenu"; }
 	Mod+C allow-inhibiting=false hotkey-overlay-title="lock" { spawn "~/.config/niri/lock"; }
 
@@ -98,6 +89,8 @@ binds {
 	Mod+Q repeat=false { toggle-overview; }
 
 	Mod+Shift+C { close-window; }
+
+	Mod+T { toggle-column-tabbed-display; }
 
 	Mod+A { focus-column-left; }
 	Mod+Ctrl+A { move-column-left; }
@@ -166,8 +159,8 @@ binds {
 	Mod+Shift+V { switch-focus-between-floating-and-tiling; }
 
 	Print { screenshot; }
-	Ctrl+Print { screenshot-screen; }
 	Alt+Print { screenshot-window; }
+	Ctrl+Print { screenshot-screen; }
 
 	Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
@@ -210,3 +203,19 @@ screenshot-path "~/temp/screenshot/%Y-%m-%d|%H:%M:%S.png"
 hotkey-overlay {
 	skip-at-startup
 }
+
+
+xwayland-satellite {}
+
+spawn-at-startup "swww-daemon"
+spawn-at-startup "quickshell" "-c" "bar"
+spawn-at-startup "fcitx5"
+
+environment {
+	INPUT_METHOD "fcitx"
+	GTK_IM_MODULE null
+	QT_IM_MODULE "wayland"
+	XMODIFIERS "@im=fcitx"
+}
+
+spawn-at-startup "~/.config/niri/init"
