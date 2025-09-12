@@ -1,5 +1,5 @@
 #!/bin/sh
-i="$(niri msg keyboard-layouts | sed '1d' | dmenu -p 'keyboard ' --index)"
+i="$(niri msg keyboard-layouts | sed '1d' | dmenu -p 'keyboard ' --index --minimal-lines)"
 
 niri msg action switch-layout "$i"
 

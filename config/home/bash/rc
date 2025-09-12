@@ -41,8 +41,6 @@ alias \
 	g='git' \
 	f='rg 2>/dev/null -uuL --color=always' \
 	t="(exec $TERMINAL >/dev/null 2>&1 &)" \
-	c='xsel --clipboard --input' \
-	v='xsel --clipboard --output' \
 	cl='clear' \
 	o='curl -fsL' \
 	oo='o -O' \
@@ -64,6 +62,8 @@ alias \
 	ll='l -a -lh -F' \
 	lf="$FILES" \
 	lt="tree -C | $PAGER" \
+	n='nix' \
+	nd='n develop' \
 	rp='realpath .' \
 	cp='cp -iv' \
 	mv='mv -iv' \
@@ -97,8 +97,9 @@ PS1="$(
 	i "\${__git_ps1+\$__git_ps1$c:$r}$PS1"
 	i "\h $PS1$c"
 	[[ "$(id -u)" = 0 ]] && i "$PS1#" || i "\u$b$c@$r$PS1="
-	[[ "$SHELL" = /nix/store/* ]] && i "nix$c:$r$PS1"
-	[[ -n "$SSH_CONNECTION" ]] && i "ssh$c:$r$PS1"
+	[[ -n "$container" ]] && i "c$c:$r$PS1"
+	[[ "$SHELL" = /nix/store/* ]] && i "n$c:$r$PS1"
+	[[ -n "$SSH_CONNECTION" ]] && i "r$c:$r$PS1"
 	i "$c\$([ \$? = 0 ] && echo + || echo -)$r $PS1"
 echo "$r$PS1$r")"
 

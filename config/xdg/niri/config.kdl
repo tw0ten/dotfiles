@@ -11,7 +11,7 @@ layout {
 
 	focus-ring { off; }
 
-	background-color "#202020"
+	background-color "#00000000"
 
 	border {
 		width 1
@@ -40,7 +40,7 @@ layout {
 }
 
 layer-rule {
-	match namespace="^wallpaper$"
+	match namespace="^swww-daemon$"
 	place-within-backdrop true
 }
 
@@ -59,7 +59,7 @@ window-rule {
 
 window-rule {
 	match is-focused=false
-	opacity 0.9
+	opacity 0.95
 }
 
 overview {
@@ -76,15 +76,13 @@ binds {
 	Mod+Shift+Escape { quit skip-confirmation=true; }
 	Mod+Shift+Slash { show-hotkey-overlay; }
 
-	Mod+Return hotkey-overlay-title="terminal" { spawn "terminal"; }
+	Mod+Return { spawn "terminal"; }
 	Mod+X hotkey-overlay-title="run" { spawn "fuzzel"; }
-	Mod+Z hotkey-overlay-title="script" { spawn "smenu"; }
+	Mod+Z { spawn "smenu"; }
 	Mod+C allow-inhibiting=false hotkey-overlay-title="lock" { spawn "~/.config/niri/lock"; }
 
-	XF86AudioRaiseVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05+"; }
-	XF86AudioLowerVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.05-"; }
-	XF86AudioMute { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
-	XF86AudioMicMute { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+	XF86AudioRaiseVolume { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.025+; notify-send $(wpctl get-volume @DEFAULT_AUDIO_SINK@)"; }
+	XF86AudioLowerVolume { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.025-; notify-send $(wpctl get-volume @DEFAULT_AUDIO_SINK@)"; }
 
 	Mod+Q repeat=false { toggle-overview; }
 
@@ -101,11 +99,6 @@ binds {
 	Mod+Ctrl+Down { move-window-down; }
 	Mod+Up { focus-window-up; }
 	Mod+Ctrl+Up { move-window-up; }
-
-	Mod+Home { focus-column-first; }
-	Mod+End  { focus-column-last; }
-	Mod+Ctrl+Home { move-column-to-first; }
-	Mod+Ctrl+End  { move-column-to-last; }
 
 	Mod+W { focus-workspace-up; }
 	Mod+Shift+W { move-workspace-up; }
@@ -133,8 +126,8 @@ binds {
 	Mod+9 { focus-workspace 10; }
 	Mod+Ctrl+9 { move-column-to-workspace 10; }
 
-	Mod+Tab { focus-window-previous; }
-	Mod+Grave { focus-workspace-previous; }
+	Mod+Tab { focus-workspace-previous; }
+	Mod+Grave { focus-window-previous; }
 
 	Mod+BracketLeft  { consume-or-expel-window-left; }
 	Mod+BracketRight { consume-or-expel-window-right; }
@@ -143,8 +136,9 @@ binds {
 	Mod+Shift+R { switch-preset-window-height; }
 	Mod+Ctrl+R { reset-window-height; }
 	Mod+F { maximize-column; }
-	Mod+Shift+F { fullscreen-window; }
 	Mod+Ctrl+F { expand-column-to-available-width; }
+
+	Mod+Shift+F { fullscreen-window; }
 
 	Mod+G { center-column; }
 	Mod+Ctrl+G { center-visible-columns; }
@@ -159,8 +153,8 @@ binds {
 	Mod+Shift+V { switch-focus-between-floating-and-tiling; }
 
 	Print { screenshot; }
-	Alt+Print { screenshot-window; }
 	Ctrl+Print { screenshot-screen; }
+	Alt+Print { screenshot-window; }
 
 	Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
@@ -174,7 +168,7 @@ gestures {
 input {
 	keyboard {
 		xkb {
-			layout "us,ru,cn"
+			layout "us,ru,cn,lt"
 		}
 
 		repeat-delay 200
@@ -193,7 +187,7 @@ input {
 
 cursor {
 	xcursor-theme "default"
-	xcursor-size 0
+	xcursor-size 1
 
 	hide-after-inactive-ms 5000
 }

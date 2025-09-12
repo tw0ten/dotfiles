@@ -1,13 +1,11 @@
 [window]
-opacity = 0.85
+opacity = 0.9
 
 dynamic_padding = true
 
 [font]
 size = 9
 normal = { family = "JetBrains Mono" }
-#size = 12
-#normal = { family = "art" }
 
 [colors.primary]
 background = "#101010"
