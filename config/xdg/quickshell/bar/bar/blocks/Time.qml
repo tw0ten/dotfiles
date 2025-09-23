@@ -11,7 +11,7 @@ BarBlock {
 
     Process {
         id: proc
-        command: ["date", "+%Y/%m/%d|%w|%H:%M"]
+        command: ["date", "+%Y/%m/%d-%w %H/%M"]
         running: true
 
         stdout: SplitParser {

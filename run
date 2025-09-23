@@ -26,6 +26,7 @@ set -ex && export SHELLOPTS
 		echo "'$1' > '$2'"; }
 
 	( cd etc; i='/etc'
+		i locale locale.conf
 		i sudoers/ sudoers.d
 		i pacman pacman.conf
 		i ssh ssh/sshd_config
@@ -46,6 +47,10 @@ echo )
 echo )
 
 ( cd etc; i() { sudo "$@"; }
+	i cp locale/arttal.locale /usr/share/i18n/locales/arttal
+	i cp locale/locale.gen /etc/locale.gen
+	i locale-gen
+
 	i systemctl enable reflector.timer
 
 	i cp cat.png /boot/grub/bg.png

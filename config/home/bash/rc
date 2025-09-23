@@ -74,7 +74,6 @@ alias \
 	cpb='cp -t ~/.local/bin' \
 	history="history | $PAGER +G" \
 	myip='echo "$(curl -s ipinfo.io/ip)"' \
-	date='date +"[%w.%d/%m|%H:%M]"' \
 	uptime='uptime -p' \
 	..='. ~/.bashrc' \
 	...='. ~/.bash_profile' \
