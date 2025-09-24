@@ -7,7 +7,6 @@ BarBlock {
     property string host
 
     color: `#ff${Theme.color.accent}`
-    radius: bar.height
 
     content: BarText {
         color: `#ff${Theme.color.background}`

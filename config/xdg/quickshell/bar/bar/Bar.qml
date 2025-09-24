@@ -67,30 +67,6 @@ PanelWindow {
         }
 
         BarBlock {
-            id: window
-            property string value
-
-            color: `#ff${Theme.color.foreground}`
-            radius: bar.height
-
-            content: BarText {
-                text: ` ${window.value} `
-                color: `#ff${Theme.color.background}`
-            }
-
-            visible: window.value.length > 0
-
-            property var proc: Process {
-                command: ["niri", "msg", "-j", "focused-window"]
-                running: true
-
-                stdout: StdioCollector {
-                    onStreamFinished: () => window.value = JSON.parse(this.text)?.title ?? ""
-                }
-            }
-        }
-
-        BarBlock {
             id: layout
 
             property var value: []
@@ -137,6 +113,29 @@ PanelWindow {
             }
         }
 
+        BarBlock {
+            id: window
+            property string value
+
+            color: `#ff${Theme.color.foreground}`
+
+            content: BarText {
+                text: ` ${window.value} `
+                color: `#ff${Theme.color.background}`
+            }
+
+            visible: window.value.length > 0
+
+            property var proc: Process {
+                command: ["niri", "msg", "-j", "focused-window"]
+                running: true
+
+                stdout: StdioCollector {
+                    onStreamFinished: () => window.value = JSON.parse(this.text)?.title ?? ""
+                }
+            }
+        }
+
         Item {
             Layout.fillWidth: true
         }
@@ -154,7 +153,6 @@ PanelWindow {
 
                 BarBlock {
                     color: `#ff${Theme.color.background}`
-                    radius: bar.height
 
                     content: RowLayout {
                         spacing: Theme.sizing.spacing

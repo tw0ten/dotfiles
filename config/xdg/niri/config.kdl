@@ -66,6 +66,8 @@ overview {
 	zoom 0.5
 
 	backdrop-color "#101010"
+
+	workspace-shadow { off; }
 }
 
 animations {

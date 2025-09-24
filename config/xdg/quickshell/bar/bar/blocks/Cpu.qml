@@ -4,7 +4,7 @@ import "../"
 
 BarBlock {
     content: BarText {
-        text: `c{${Math.round(valueUsage)}% ${Math.round(valueTemp)}°}`
+        text: `c{${Math.round(valueUsage)}% ${Math.round(valueTemp)}*}`
     }
 
     property real valueUsage

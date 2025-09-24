@@ -4,7 +4,7 @@ import "../"
 
 BarBlock {
     content: BarText {
-        text: `g{${valueUsage}% ${valueTemp}°}`
+        text: `g{${valueUsage}% ${valueTemp}*}`
     }
 
     property string valueUsage
