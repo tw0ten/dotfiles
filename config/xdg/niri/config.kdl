@@ -53,7 +53,7 @@ prefer-no-csd
 
 window-rule {
 	draw-border-with-background false
-	geometry-corner-radius 8
+	geometry-corner-radius 0
 	clip-to-geometry true
 }
 

@@ -17,9 +17,7 @@ PanelWindow {
 
     RowLayout {
         anchors.fill: parent
-        anchors.leftMargin: Theme.sizing.horizontal
-        anchors.rightMargin: Theme.sizing.horizontal
-        spacing: Theme.sizing.horizontal
+        spacing: Theme.sizing.spacing
 
         Process {
             command: ["niri", "msg", "-j", "event-stream"]
@@ -29,6 +27,8 @@ PanelWindow {
                 onRead: i => workspaces.proc.running = window.proc.running = true
             }
         }
+
+        Item {}
 
         BarBlock {
             content: RowLayout {
@@ -70,19 +70,33 @@ PanelWindow {
             id: layout
 
             property var value: []
-            property real valueWidth: 80 - content.spacing * (layout.value.length - 1)
+            property real spacing: 2
+            property real valueWidth: Math.max((bar.height / 9 * 16) - content.spacing * (layout.value.length - 1), (layout.value.length - 1) * spacing * 2)
 
             content: RowLayout {
-                spacing: 2
+                spacing: layout.spacing
 
                 Repeater {
                     model: layout.value.length
 
-                    Rectangle {
+                    Column {
+                        spacing: layout.spacing
+
                         required property int index
-                        color: `#ff${layout.value[index].is_focused ? Theme.color.accent : Theme.color.foreground}`
-                        implicitWidth: layout.valueWidth * layout.value[index].size[0]
-                        implicitHeight: bar.height / 4
+
+                        property var column: layout.value[index]
+
+                        Repeater {
+                            model: column.length
+
+                            Rectangle {
+                                required property int index
+
+                                color: `#ff${column[index].is_focused ? Theme.color.accent : Theme.color.foreground}`
+                                implicitWidth: layout.valueWidth * column[index].size[0]
+                                implicitHeight: (bar.height - layout.spacing * (column.length - 1)) * column[index].size[1]
+                            }
+                        }
                     }
                 }
             }
@@ -95,19 +109,24 @@ PanelWindow {
                     onStreamFinished: () => {
                         const windows = JSON.parse(this.text).filter(i => i.workspace_id === workspaces.currentWorkspaceId && i.layout.pos_in_scrolling_layout !== null).sort((a, b) => a.layout.pos_in_scrolling_layout[0] - b.layout.pos_in_scrolling_layout[0]);
                         let columns = {};
-                        let focused;
+                        let focused = {};
                         for (const i of windows) {
                             const x = i.layout.pos_in_scrolling_layout[0];
                             if (i.is_focused)
-                                focused = x;
-                            columns[x] = [...(columns[x] ?? []), i];
+                                [focused.x, focused.y] = i.layout.pos_in_scrolling_layout;
+                            const column = [...(columns[x] ?? []), i];
+                            column.sort((a, b) => a.layout.pos_in_scrolling_layout[1] - b.layout.pos_in_scrolling_layout[1]);
+                            columns[x] = column;
                         }
                         columns = Object.values(columns);
                         const width = columns.reduce((a, i) => a + i[0].layout.tile_size[0], 0);
-                        return layout.value = columns.map(i => ({
-                                    is_focused: i[0].layout.pos_in_scrolling_layout[0] === focused,
-                                    size: i[0].layout.tile_size.map(i => i / width)
-                                }));
+                        return layout.value = columns.map(column => {
+                            const height = column.map(i => i.layout.tile_size[1]).reduce((a, i) => a + i, 0);
+                            return column.map(i => ({
+                                        is_focused: i.layout.pos_in_scrolling_layout[0] === focused.x && i.layout.pos_in_scrolling_layout[1] === focused.y,
+                                        size: [i.layout.tile_size[0] / width, i.layout.tile_size[1] / height]
+                                    }));
+                        });
                     }
                 }
             }
@@ -174,5 +193,7 @@ PanelWindow {
                 }
             }
         }
+
+        Item {}
     }
 }
