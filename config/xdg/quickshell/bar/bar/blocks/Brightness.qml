@@ -12,9 +12,8 @@ BarBlock {
 
     Process {
         id: proc
-        command: ["brightnessctl", "get"]
         running: true
-
+        command: ["brightnessctl", "get"]
         stdout: SplitParser {
             onRead: i => {
                 const percentage = parseInt(i);

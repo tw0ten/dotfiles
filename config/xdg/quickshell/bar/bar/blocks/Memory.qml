@@ -12,9 +12,8 @@ BarBlock {
 
     Process {
         id: proc
-        command: ["free", "-b"]
         running: true
-
+        command: ["free", "-b"]
         stdout: StdioCollector {
             onStreamFinished: () => [valueMem, valueSwap] = this.text.split("\n").slice(1).map(i => i.split(" ").filter(i => i.length > 0).slice(1, 3)).map(i => i[1] / i[0])
         }

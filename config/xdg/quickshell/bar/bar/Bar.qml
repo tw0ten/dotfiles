@@ -8,6 +8,7 @@ PanelWindow {
     id: bar
 
     color: `#a0${Theme.color.background}`
+
     implicitHeight: Theme.sizing.height
     anchors {
         bottom: true
@@ -15,16 +16,18 @@ PanelWindow {
         right: true
     }
 
+    property var eventStreamSubs: []
+
     RowLayout {
         anchors.fill: parent
         spacing: Theme.sizing.spacing
 
         Process {
-            command: ["niri", "msg", "-j", "event-stream"]
             running: true
 
+            command: ["niri", "msg", "-j", "event-stream"]
             stdout: SplitParser {
-                onRead: i => workspaces.proc.running = window.proc.running = true
+                onRead: i => eventStreamSubs.map(i => i.running = true)
             }
         }
 
@@ -51,15 +54,14 @@ PanelWindow {
                     }
                 }
 
-                property var proc: Process {
-                    command: ["niri", "msg", "-j", "workspaces"]
-                    running: true
+                Process {
+                    Component.onCompleted: bar.eventStreamSubs.push(this)
 
+                    command: ["niri", "msg", "-j", "workspaces"]
                     stdout: StdioCollector {
                         onStreamFinished: () => {
                             workspaces.value = JSON.parse(this.text).sort((a, b) => a.idx - b.idx);
                             workspaces.currentWorkspaceId = workspaces.value.filter(i => i.is_focused)[0].id;
-                            layout.proc.running = true;
                         }
                     }
                 }
@@ -70,7 +72,7 @@ PanelWindow {
             id: layout
 
             property var value: []
-            property real spacing: 2
+            property real spacing: 1
             property real valueWidth: Math.max((bar.height / 9 * 16) - content.spacing * (layout.value.length - 1), (layout.value.length - 1) * spacing * 2)
 
             content: RowLayout {
@@ -101,10 +103,10 @@ PanelWindow {
                 }
             }
 
-            property var proc: Process {
-                command: ["niri", "msg", "-j", "windows"]
-                running: true
+            Process {
+                Component.onCompleted: bar.eventStreamSubs.push(this)
 
+                command: ["niri", "msg", "-j", "windows"]
                 stdout: StdioCollector {
                     onStreamFinished: () => {
                         const windows = JSON.parse(this.text).filter(i => i.workspace_id === workspaces.currentWorkspaceId && i.layout.pos_in_scrolling_layout !== null).sort((a, b) => a.layout.pos_in_scrolling_layout[0] - b.layout.pos_in_scrolling_layout[0]);
@@ -145,10 +147,10 @@ PanelWindow {
 
             visible: window.value.length > 0
 
-            property var proc: Process {
-                command: ["niri", "msg", "-j", "focused-window"]
-                running: true
+            Process {
+                Component.onCompleted: bar.eventStreamSubs.push(this)
 
+                command: ["niri", "msg", "-j", "focused-window"]
                 stdout: StdioCollector {
                     onStreamFinished: () => window.value = JSON.parse(this.text)?.title ?? ""
                 }

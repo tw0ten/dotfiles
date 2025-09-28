@@ -22,9 +22,8 @@ BarBlock {
 
     Process {
         id: procStatus
-        command: ["cat", `${battery}/status`]
         running: true
-
+        command: ["cat", `${battery}/status`]
         stdout: SplitParser {
             onRead: i => valueStatus = i
         }
@@ -32,9 +31,8 @@ BarBlock {
 
     Process {
         id: procCapacity
-        command: ["cat", `${battery}/capacity`]
         running: true
-
+        command: ["cat", `${battery}/capacity`]
         stdout: SplitParser {
             onRead: i => valueCapacity = i
         }

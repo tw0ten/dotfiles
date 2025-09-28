@@ -12,9 +12,8 @@ BarBlock {
 
     Process {
         id: proc
-        command: ["nmcli", "network"]
         running: true
-
+        command: ["nmcli", "network"]
         stdout: SplitParser {
             onRead: i => value = i === "enabled" ? "" : "󰣽"
         }

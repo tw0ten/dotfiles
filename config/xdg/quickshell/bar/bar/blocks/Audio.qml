@@ -19,21 +19,18 @@ BarBlock {
         onObjectsChanged: {
             sink = Pipewire.defaultAudioSink;
             if (sink?.audio) {
-                sink.audio.volumeChanged.connect(updateVolume);
+                sink.audio.volumeChanged.connect(() => {
+                    if (sink?.audio) {
+                        const icon = sink.audio.muted ? "󰖁" : "󰕾";
+                        content.text = `${icon} ${Math.round(sink.audio.volume * 100)}%`;
+                    }
+                });
             }
-        }
-    }
-
-    function updateVolume() {
-        if (sink?.audio) {
-            const icon = sink.audio.muted ? "󰖁" : "󰕾";
-            content.text = `${icon} ${Math.round(sink.audio.volume * 100)}%`;
         }
     }
 
     Process {
         id: pavucontrol
         command: ["pavucontrol"]
-        running: false
     }
 }

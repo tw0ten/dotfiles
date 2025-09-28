@@ -12,18 +12,16 @@ BarBlock {
 
     Process {
         id: procUsage
-        command: ["nvidia-smi", "--format=csv,noheader,nounits", "--query-gpu=utilization.gpu"]
         running: true
-
+        command: ["nvidia-smi", "--format=csv,noheader,nounits", "--query-gpu=utilization.gpu"]
         stdout: SplitParser {
             onRead: i => valueUsage = i
         }
     }
     Process {
         id: procTemp
-        command: ["nvidia-smi", "--format=csv,noheader,nounits", "--query-gpu=temperature.gpu"]
         running: true
-
+        command: ["nvidia-smi", "--format=csv,noheader,nounits", "--query-gpu=temperature.gpu"]
         stdout: SplitParser {
             onRead: i => valueTemp = i
         }

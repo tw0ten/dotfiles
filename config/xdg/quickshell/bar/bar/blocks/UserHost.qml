@@ -14,18 +14,16 @@ BarBlock {
     }
 
     Process {
-        command: ["whoami"]
         running: true
-
+        command: ["whoami"]
         stdout: SplitParser {
             onRead: i => user = i
         }
     }
 
     Process {
-        command: ["uname", "-n"]
         running: true
-
+        command: ["uname", "-n"]
         stdout: SplitParser {
             onRead: i => host = i
         }

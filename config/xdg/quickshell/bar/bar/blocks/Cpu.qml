@@ -12,18 +12,16 @@ BarBlock {
 
     Process {
         id: procUsage
-        command: ["top", "-bn1"]
         running: true
-
+        command: ["top", "-bn1"]
         stdout: StdioCollector {
             onStreamFinished: () => valueUsage = this.text.split("\n")[2].split(" ").filter(i => i.length > 0)[1]
         }
     }
     Process {
         id: procTemp
-        command: ["sensors", "k10temp-pci-00c3"]
         running: true
-
+        command: ["sensors", "k10temp-pci-00c3"]
         stdout: StdioCollector {
             onStreamFinished: () => valueTemp = this.text.split("\n")[2].split(" ").filter(i => i.length > 0)[1].slice(1, -2)
         }
