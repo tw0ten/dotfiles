@@ -1,0 +1,6 @@
+#!/bin/sh
+i="$(niri msg -j windows | jq 'length')"
+while [ "$i" != '0' ]; do
+	niri msg action focus-floating && niri msg action move-window-to-tiling
+	i=$((i - 1))
+done
