@@ -1,45 +1,56 @@
 #!/bin/sh
 set -e
-dir="$1"
 
-i="$HOME/.local/share/python/yt-dlp"
-cd "$i" || {
+temp="$(mktemp -d)"
+cd "$1"
+
+i="$HOME/.cache/python/yt-dlp"
+[ -d "$i" ] || (
 	python -m venv "$i"
 	cd "$i"
 	. bin/activate
 	python -m pip install yt-dlp
-} && . bin/activate
+); . "$i/bin/activate"
 
-cd "$(mktemp -d)"
-echo "$PWD"
+f() { ( set -e; i="$1"
+	[ -d "$i" ] && {
+		for i in "$i"/*; do f "$i"; done
+		exit
+	}
 
-while IFS= read -r line; do
-	rm -rf ./*
+	file="$OLDPWD/$i"
+	[ -f "$file" ] && {
+		echo "$i" | sed 's/^../= /'
+		exit; }
+	source="$(cat "$i")"
+	echo "$i" | sed 's/^../+ /'
 
-	( set -e
-		eval "set -- $line"
-
-		file="$dir/$1"
-		echo "$file"
-		[ -f "$file" ] && exit
-
-		link="${2:-$(basename "$1")}"
-		echo "$link"
-		case "$link" in
+	( set -e; cd "$temp"
+		case "$source" in
 			'') exit ;;
-			https://*) curl -O "$link" ;;
+			https://*) curl -O "$source" ;;
 			*) python -m yt_dlp \
 				-x --audio-quality 0 --audio-format best \
 				--default-search ytsearch \
-				-- "$link" ;;
+				-- "$source" ;;
 		esac
 
 		mkdir -p "$(dirname "$file")"
 		ffmpeg -i "$(echo ./*)" \
-			-f wav "$file" \
-			-hide_banner -nostdin
-	) || true
-done
+			-f 'mp3' \
+			"$file" \
+			-hide_banner -nostdin )
+) || true; }
 
-cd ..
-rm -rfv "$OLDPWD"
+f .
+
+cd "$OLDPWD"
+
+f() { ( set -e; i="$1"
+	[ -d "$i" ] && {
+		for i in "$i"/*; do f "$i"; done
+		exit; }
+	[ -f "$OLDPWD/$i" ] || { rm "$i" && echo "$i" | sed 's/^../- /'; }
+) || true; }
+
+f .

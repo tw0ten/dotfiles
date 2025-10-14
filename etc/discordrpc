@@ -1,5 +1,5 @@
 #!/bin/sh
-i="$HOME/.local/share/python/pypresence"
+i="$HOME/.cache/python/pypresence"
 cd "$i" || {
 	python -m venv "$i"
 	cd "$i"
