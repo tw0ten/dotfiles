@@ -18,7 +18,7 @@ BarBlock {
             onRead: i => {
                 const percentage = parseInt(i);
                 const icons = ["󰛩", "󱩎", "󱩏", "󱩐", "󱩑", "󱩒", "󱩓", "󱩔", "󱩕", "󱩖", "󰛨"];
-                return value = `${icons[Math.floor(percentage / 100 * icons.length)]}`;
+                return value = `${icons[Math.floor(percentage / 100 * (icons.length - 1))]}`;
             }
         }
     }

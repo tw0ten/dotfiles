@@ -62,6 +62,7 @@ PanelWindow {
                         onStreamFinished: () => {
                             workspaces.value = JSON.parse(this.text).sort((a, b) => a.idx - b.idx);
                             workspaces.currentWorkspaceId = workspaces.value.filter(i => i.is_focused)[0].id;
+                            layout.proc.running = true;
                         }
                     }
                 }
@@ -103,9 +104,7 @@ PanelWindow {
                 }
             }
 
-            Process {
-                Component.onCompleted: bar.eventStreamSubs.push(this)
-
+            property var proc: Process {
                 command: ["niri", "msg", "-j", "windows"]
                 stdout: StdioCollector {
                     onStreamFinished: () => {

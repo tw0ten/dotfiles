@@ -11,7 +11,7 @@ BarBlock {
                 "Charging": "+",
                 "Not charging": ""
             }[valueStatus] ?? "-";
-            return `${status}${icons[Math.floor(valueCapacity / 100 * icons.length)]}`;
+            return `${status}${icons[Math.floor(valueCapacity / 100 * (icons.length - 1))]}`;
         }
     }
 

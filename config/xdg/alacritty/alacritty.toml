@@ -1,6 +1,8 @@
 [general]
+live_config_reload = false
 import = [
 	"theme.toml",
+#	"art.toml",
 ]
 
 [window]

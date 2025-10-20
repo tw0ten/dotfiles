@@ -5,7 +5,7 @@ import "../"
 BarBlock {
     content: BarText {
         color: `#ff${Theme.color.accent}`
-        text: value
+        text: value.substring(0, 2)
     }
 
     property string value
@@ -13,9 +13,9 @@ BarBlock {
     Process {
         Component.onCompleted: bar.eventStreamSubs.push(this)
 
-        command: ["niri", "msg", "keyboard-layouts"]
+        command: ["niri", "msg", "-j", "keyboard-layouts"]
         stdout: SplitParser {
-            onRead: i => value = i[1] === "*" ? i.split(" ")[3].substring(0, 2).toLowerCase() : value
+            onRead: i => value = JSON.parse(i)["names"][JSON.parse(i)["current_idx"]]
         }
     }
 }
