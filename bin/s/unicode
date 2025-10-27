@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+mkdir -p "$HOME/.cache/ucd"
+cd "$HOME/.cache/ucd"
+
+[ -f 'UnicodeData.txt' ] ||
+	curl -fsLO 'https://www.unicode.org/Public/UCD/latest/ucd/UnicodeData.txt'
+
+i="$(cat 'UnicodeData.txt' | dmenu -p 'U+')"
+printf "\U$(echo "$i" | sed 's/;.*//')" | wl-copy

@@ -1,0 +1,2 @@
+#!/bin/sh
+brightnessctl -qm set $(echo "$(cat base) + (-c($1 * 2 * 3.14159) * $(cat delta))" | bc -l)

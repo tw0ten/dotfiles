@@ -1,9 +1,11 @@
 #!/bin/sh
-i(){ brightnessctl get; }
+set -e
+cd "$DOTFILES/timer/brightness"
+base=$(cat base)
 max=$(brightnessctl max)
 
-i=$(echo -e "5%-\n$(i)\n+5%\n0\n25%\n50%\n75%\n$max" | dmenu -p "brightness " --select-index 1 --lines 8)
+i=$(echo -e "$(brightnessctl get)\n0\n$base\n$max" | dmenu -p "brightness " --select-index 2 --lines 4)
 
-brightnessctl set "$i"
+echo $i > base
 
-notify-send -t 1500 'brightness' "set to $(i)"
+notify-send -t 1500 'brightness' "base = $i\ndelta = $(cat delta)"

@@ -36,7 +36,6 @@ PanelWindow {
         BarBlock {
             content: RowLayout {
                 id: workspaces
-                spacing: Theme.sizing.spacing
 
                 property var value: []
                 property real currentWorkspaceId: 0

@@ -12,7 +12,7 @@ BarBlock {
     Process {
         id: proc
         running: true
-        command: ["date", "+%Y/%m/%d-%w %H/%M"]
+        command: ["date", "+%Y/%b/%d-%w %H/%M"]
         stdout: SplitParser {
             onRead: i => value = i
         }

@@ -1,2 +1,0 @@
-#!/bin/sh
-exec bemoji -p -c -n -t
