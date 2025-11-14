@@ -1,15 +1,10 @@
 #!/bin/sh
-set -e -- $EPOCHSECONDS
-
-second=1
-minute=$((second * 60))
-hour=$((minute * 60))
-day=$((hour * 24))
-
-day_part=$(echo "i = ($1 + $hour * 3) % $day; scale = 16; i = (i / $day); i" | bc)
-
-echo "$day_part"
-
-( cd brightness; ./run $day_part )
+cd "$DOTFILES/timer"
+for i in */; do (
+	. ./lib
+	cd "$i"
+	. ./run
+) & done
+wait
 
 exec sleep 30

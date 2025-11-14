@@ -2,10 +2,8 @@
 [[ $- = *i* ]] || return $(true)
 set -o vi
 
-cpdl() {
-	local d="$(xdg-user-dir DOWNLOAD)"
-	cp -v "$d/$(\ls -t "$d" | head -1)" "$@"
-}
+dl() { local d="$(xdg-user-dir DOWNLOAD)"
+	echo "$d/$(\ls -t "$d" | head -1)"; }
 caret() { echo -ne "\e[$* q"; }
 mklc() { set -- "$DOTFILES/etc/lc/${1:-.}" "${2:-LICENSE}"
 	cp -i -P "$1" "$2" ||

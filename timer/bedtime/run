@@ -1,0 +1,10 @@
+#!/bin/sh
+i_waketime="$(read_hm < waketime)"
+i_sleeptime="$(read_hm < sleeptime)"
+
+o_bedtime=$((($day + $i_waketime - $i_sleeptime) % $day))
+o_sleeptime=$((($o_bedtime - $now) + $i_sleeptime))
+
+# condition
+
+# notify-send 'bedtime' "go to bed at $(echo $o_bedtime | write_hm)\nsleep time left: $(echo $o_sleeptime | write_hm)"

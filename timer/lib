@@ -1,0 +1,14 @@
+#!/bin/sh
+set -e -- $EPOCHSECONDS
+
+second=1
+minute=$((second * 60))
+hour=$((minute * 60))
+day=$((hour * 24))
+
+offset=$(python -c 'import time; print(-time.timezone)')
+
+now=$((($1 + $offset) % $day))
+
+read_hm(){( set -- $(cat); echo $((($1 * $hour) + ($2 * $minute))); )}
+write_hm(){( set -- $(cat); echo $(($1 / $hour)) $(($1 % $hour / $minute)); )}
