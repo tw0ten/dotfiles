@@ -1,10 +1,13 @@
 #!/bin/sh
-i_waketime="$(read_hm < waketime)"
-i_sleeptime="$(read_hm < sleeptime)"
+i_waketime=$(read_hm < i/waketime)
+i_sleeptime=$(read_hm < i/sleeptime)
 
-o_bedtime=$((($day + $i_waketime - $i_sleeptime) % $day))
-o_sleeptime=$((($o_bedtime - $now) + $i_sleeptime))
+o_bedtime=$(((day + i_waketime - i_sleeptime) % day))
+o_sleeptime=$(((o_bedtime - now) + i_sleeptime))
 
-# condition
+[ $((o_sleeptime)) -lt $((i_sleeptime + (1 * hour))) ] && notify-send \
+	"bedtime: $(printf '%02i/%02i' $(echo $o_bedtime | write_hm))" \
+	"sleeptime left: $(printf '%i/%02i' $(echo $o_sleeptime | write_hm))" \
+	-t $((1000 * minute / 2))
 
-# notify-send 'bedtime' "go to bed at $(echo $o_bedtime | write_hm)\nsleep time left: $(echo $o_sleeptime | write_hm)"
+exec sleep $((5 * minute))

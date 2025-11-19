@@ -1,3 +1,6 @@
 #!/bin/sh
 day_part=$(echo "scale = 16; i = ($now / $day); i" | bc)
-brightnessctl -qm set $(echo "$(cat base) + (-c($day_part * 2 * 3.14159) * $(cat delta))" | bc -l)
+
+brightnessctl -qm set $(echo "$(cat i/base) + (-c($day_part * 2 * 3.14159) * $(cat i/delta))" | bc -l)
+
+exec sleep $((1 * minute))

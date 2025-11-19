@@ -1,9 +1,1 @@
-#!/bin/sh
-cd "$DOTFILES/timer"
-while true; do
-	i="$(exec ./tick 2>&1)" || {
-		notify-send -t 10000 -- "$i"
-		sleep 10 & }
-	echo "$i"
-	wait
-done
+../timer/run

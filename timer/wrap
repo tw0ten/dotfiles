@@ -1,0 +1,26 @@
+#!/bin/sh
+set -e
+cd "$1"
+
+{
+	second=1
+	minute=$((second * 60))
+	hour=$((minute * 60))
+	day=$((hour * 24))
+
+	offset=$(python -c 'import time; print(-time.timezone)')
+
+	read_hm(){( set -- $(cat); echo $((($1 * hour) + ($2 * minute))); )}
+	write_hm(){( set -- $(cat); echo $(($1 / hour)) $(($1 % hour / minute)); )}
+}
+
+while kill -0 "$PPID"; do (
+		set -e -- $EPOCHSECONDS
+		{
+			now=$((($1 + offset) % day))
+		}
+		. ./run
+	) || {
+		notify-send 'timer' "$(basename "$PWD") $?" -t $((10 * 1000))
+		sleep 10; }
+done
