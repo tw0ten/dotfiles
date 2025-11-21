@@ -1,5 +1,5 @@
 #!/bin/sh
-set -e
+set -e && export SHELLOPTS
 cd "$1"
 
 {
@@ -12,15 +12,22 @@ cd "$1"
 
 	read_hm(){( set -- $(cat); echo $((($1 * hour) + ($2 * minute))); )}
 	write_hm(){( set -- $(cat); echo $(($1 / hour)) $(($1 % hour / minute)); )}
+
+	i_date(){ command date --date "@$((epoch))" "$@"; }
 }
 
-while kill -0 "$PPID"; do (
+while kill -0 "$PPID"; do
+	i="$(
 		set -e -- $EPOCHSECONDS
 		{
-			now=$((($1 + offset) % day))
+			epoch=$1
+			now=$(((epoch + offset) % day))
 		}
-		. ./run
-	) || {
-		notify-send 'timer' "$(basename "$PWD") $?" -t $((10 * 1000))
+		. ./run 2>&1
+	)" || {
+		notify-send \
+			"timer/$(basename "$PWD")" \
+			"$?: $i" \
+			-t $((10 * 1000))
 		sleep 10; }
 done

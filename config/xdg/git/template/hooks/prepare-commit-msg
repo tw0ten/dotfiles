@@ -12,9 +12,6 @@ i "0,/{NAME}/s//$(git config get user.name)/"
 i "0,/{EMAIL}/s//$(git config get user.email)/"
 
 [ "$3" = 'HEAD' ] ||
-	i "1i\# $(cat /dev/urandom |
-		tr -d ' ' |
-		tr -dc '[:alnum:][:punct:]' |
-		head -c 2)"
+	i "1i\#$((EPOCHSECONDS))"
 
 i '/^[^#]/ s/^/#/'

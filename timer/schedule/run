@@ -1,0 +1,16 @@
+#!/bin/sh
+interval=$((1 * minute))
+
+last=$(cat '.last' || echo $((epoch)))
+delta=$((epoch - last))
+
+[ $((delta)) -lt $((interval)) ] && exec sleep $((interval))
+
+stamp="$(date --date "@$((last))" +'Y%Y/m%m/d%dw%w/H%HM%M')"
+
+for i in i/*/*/*/*/; do (
+	echo "i/$stamp/" | grep "^$i$" && cd "$i" || exit
+	for i in *; do ( . "./$i") done
+) done
+
+echo $((last + interval)) > '.last'

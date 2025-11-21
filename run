@@ -42,7 +42,7 @@ echo )
 		lf btop fastfetch ripgrep reflector ufw ffmpeg
 	i niri pipewire nvidia-open \
 		mako swww fuzzel alacritty quickshell fcitx5 \
-		torbrowser-launcher qbittorrent libreoffice-still gimp obs-studio vlc blender \
+		torbrowser-launcher qbittorrent-nox libreoffice-still gimp obs-studio vlc blender \
 		ttf-nerd-fonts-symbols-mono noto-fonts noto-fonts-emoji noto-fonts-cjk
 echo )
 
