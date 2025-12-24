@@ -16,7 +16,7 @@ Singleton {
 
     property var color: Item {
         property string foreground: "ffffff"
-        property string background: "202020"
+        property string background: "101010"
         property string accent: "40e0d0"
     }
 }

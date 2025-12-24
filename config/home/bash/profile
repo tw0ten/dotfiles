@@ -37,7 +37,7 @@ export \
 	OPENER='open' \
 	TERMINAL='terminal' \
 	VISUAL='nvim' \
-	EDITOR="$VISUAL" \
+	EDITOR='nvim' \
 	PAGER='less -FXR' \
 	BROWSER='firefox' \
 	FILES='lf' \
