@@ -19,10 +19,13 @@ map ~ cd
 map sa
 map sc
 map sn
+map sb
 map ss set sortby size
 map st set sortby time
 map se set sortby ext
 map s<space> set sortby natural
+
+map sr set reverse!
 
 map zn
 map z<space> set info
