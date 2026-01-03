@@ -1,6 +1,7 @@
 #!/bin/bash
 export DOTFILES="$HOME/dotfiles"
 export PATH="$HOME/.local/bin":"$DOTFILES/bin":"$PATH"
+export LANG='arttal.UTF-8' LANGUAGE='en_US.UTF-8'
 
 export \
 	normal="$(tput sgr0)" \

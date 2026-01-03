@@ -67,6 +67,7 @@ alias \
 	cp='cp -iv' \
 	mv='mv -iv' \
 	rm='rm -v' \
+	ln='ln -n' \
 	mkdir='mkdir -pv' \
 	rmdir='rmdir -v' \
 \
@@ -91,7 +92,7 @@ PS1="$(
 	i() { PS1="$*"; }; i
 
 	i "$b$c\w$r"
-	i "\$([ \"\$(pwd)\" = \"\$(realpath .)\" ] || echo 'r$c:$r')$PS1"
+	i "\$([ \"\$PWD\" = \"\$(realpath .)\" ] || echo 'r$c:$r')$PS1"
 	i "\${__git_ps1+\$__git_ps1$c:$r}$PS1"
 	i "\h $PS1$c"
 	[[ "$(id -u)" = 0 ]] && i "$PS1#" || i "\u$b$c@$r$PS1="

@@ -2,7 +2,7 @@
 live_config_reload = false
 import = [
 	"theme.toml",
-#	"art.toml",
+	"art.toml",
 ]
 
 [window]
