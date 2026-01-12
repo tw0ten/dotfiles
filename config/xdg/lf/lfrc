@@ -12,6 +12,7 @@ set statfmt "\033[32;1m%p\033[0m	|%c	|%u	|%g	|\033[34;1m%S |%t \033[0m|%l "
 set timefmt "2006/01/02 15/04"
 
 cmd e $$EDITOR "$f"
+cmd su $sudo lf
 
 map gh
 map ~ cd
@@ -26,6 +27,8 @@ map se set sortby ext
 map s<space> set sortby natural
 
 map sr set reverse!
+
+map u su
 
 map zn
 map z<space> set info
