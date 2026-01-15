@@ -2,7 +2,7 @@
 git submodule update --init --recursive
 set -ex && export SHELLOPTS
 
-target=arch
+target=android
 
 ( cd config; set +x
 	i() { set -- "$PWD/$1" "$i/$2"

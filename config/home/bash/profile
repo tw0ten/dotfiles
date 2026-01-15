@@ -13,7 +13,7 @@ export \
 	underline="$(tput smul)" \
 	blink="$(tput blink)" \
 	bell="$(tput bel)" \
-	accent="$(tput setaf 6)" \
+	accent="$(tput setaf 2)" \
 ;
 eval "$(dircolors)"
 
@@ -46,7 +46,7 @@ export \
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
-while [[ "$(who | grep -cw "^$USER")" = 1 ]]; do
+command -v who && while [[ "$(who | grep -cw "^$USER")" = 1 ]]; do
 	echo -e "$bold$(tput setaf 6)\n[x] desktop$(tput setaf 3)\n[p]acman -Syu$(tput setaf 1)\n[e]xit$normal\n[c]ancel"
 	read -rs -n1 i || break
 	case "$i" in
@@ -56,4 +56,4 @@ while [[ "$(who | grep -cw "^$USER")" = 1 ]]; do
 		'c') break ;;
 		*) mhm ;;
 	esac
-done
+done || true
