@@ -2,7 +2,7 @@
 i_waketime=$(read_hm < i/waketime)
 i_sleeptime=$(read_hm < i/sleeptime)
 
-o_bedtime=$(((day + i_waketime - i_sleeptime) % day))
+o_bedtime=$((day + i_waketime - i_sleeptime))
 o_sleeptime=$(f_until $((now)) $((i_waketime)) $((day)))
 
 { date --date "@$((epoch + i_sleeptime))" +'%w' | grep "[60]" -q; } && exec sleep $((1 * hour)) || true
@@ -12,4 +12,4 @@ o_sleeptime=$(f_until $((now)) $((i_waketime)) $((day)))
 	"sleeptime left: $(printf '%i/%02i' $(echo $o_sleeptime | write_hm))" \
 	-t $((1000 * minute / 2))
 
-exec sleep $((1 * minute))
+exec sleep $((5 * minute))

@@ -13,7 +13,7 @@ cd "$1"
 	read_hm(){( set -- $(cat); echo $((($1 * hour) + ($2 * minute))); )}
 	write_hm(){( set -- $(cat); echo $(($1 / hour)) $(($1 % hour / minute)); )}
 
-	f_until(){ [ $1 -lt $2 ] && echo $(($2 - $1)) || echo $(($3 - $2 + $1)); }
+	f_until(){ [ $1 -lt $2 ] && echo $(($2 - $1)) || echo $(($3 - $1 + $2)); }
 }
 
 while kill -0 "$PPID"; do
