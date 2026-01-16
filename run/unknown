@@ -1,8 +1,9 @@
 #!/usr/bin/env sh
+export DOTFILES="$PWD"
+. 'config/home/bash/platform/unknown'
+
 git submodule update --init --recursive
 set -ex && export SHELLOPTS
-
-target=android
 
 ( cd config; set +x
 	i() { set -- "$PWD/$1" "$i/$2"
@@ -18,7 +19,7 @@ target=android
 		i bash/rc .bashrc
 		i ssh/config .ssh/config
 		i icons/ .local/share/icons/default
-		[ "$target" = 'android' ] && i termux/ .termux
+		[ "$PLATFORM" = 'android' ] && i termux/ .termux
 		i inputrc .inputrc )
 
 	sudo -v
@@ -35,7 +36,7 @@ target=android
 		i grub default/grub )
 echo )
 
-. "run/$target"
+[ "$PLATFORM" = 'unknown' ] || . "run/$PLATFORM"
 
 ( cd bin/src
 	for i in */; do (

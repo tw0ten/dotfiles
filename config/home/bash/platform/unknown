@@ -1,2 +1,10 @@
 #!/bin/sh
+export PLATFORM="$(
+	command >/dev/null -v pacman && exec echo arch
+	command >/dev/null -v termux-reload-settings && exec echo android
+	exec echo unknown
+)"
+
 export accent="$(tput setaf 5)"
+
+[ "$PLATFORM" = 'unknown' ] || . "$DOTFILES/config/home/bash/platform/$PLATFORM"

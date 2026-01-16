@@ -1,13 +1,10 @@
 #!/bin/bash
 export DOTFILES="$HOME/dotfiles"
+
 export PATH="$HOME/.local/bin":"$DOTFILES/bin":"$PATH"
 export LANG='arttal.UTF-8' LANGUAGE='en_US.UTF-8'
 
-. "$DOTFILES/config/home/bash/platform/$(
-	command >/dev/null -v pacman && exec echo arch
-	command >/dev/null -v termux-reload-settings && exec echo android
-	exec echo unknown
-)"
+. "$DOTFILES/config/home/bash/platform/unknown"
 
 export \
 	normal="$(tput sgr0)" \
@@ -51,7 +48,7 @@ export \
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
-command -v who && while [[ "$(who | grep -cw "^$USER")" = 1 ]]; do
+command >/dev/null -v who && while [[ "$(who | grep -cw "^$USER")" = 1 ]]; do
 	echo -e "$bold$(tput setaf 6)\n[x] desktop$(tput setaf 3)\n[p]acman -Syu$(tput setaf 1)\n[e]xit$normal\n[c]ancel"
 	read -rs -n1 i || break
 	case "$i" in
@@ -61,4 +58,6 @@ command -v who && while [[ "$(who | grep -cw "^$USER")" = 1 ]]; do
 		'c') break ;;
 		*) mhm ;;
 	esac
-done || true
+done
+
+true
