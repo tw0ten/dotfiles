@@ -2,6 +2,7 @@
 export PLATFORM="$(
 	command >/dev/null -v pacman && exec echo arch
 	command >/dev/null -v termux-reload-settings && exec echo android
+	command >/dev/null -v apt && exec echo debian
 	exec echo unknown
 )"
 

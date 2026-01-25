@@ -38,7 +38,7 @@ echo )
 
 [ "$PLATFORM" = 'unknown' ] || . "run/$PLATFORM"
 
-( cd bin/src
+[ -d bin/src ] && ( cd bin/src
 	for i in */; do (
 		cd "$i"
 		sudo ./build
