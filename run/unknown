@@ -38,11 +38,4 @@ echo )
 
 [ "$PLATFORM" = 'unknown' ] || . "run/$PLATFORM"
 
-[ -d bin/src ] && ( cd bin/src
-	for i in */; do (
-		cd "$i"
-		sudo ./build
-	) done
-echo )
-
 git init
