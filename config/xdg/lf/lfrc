@@ -26,6 +26,8 @@ map st set sortby time
 map se set sortby ext
 map s<space> set sortby natural
 
+map c unselect
+
 map sr set reverse!
 
 map u su
