@@ -63,6 +63,7 @@ alias \
 	n='nix' \
 	nd='n develop' \
 	ns='n store' \
+	nsh='nix-shell shell.nix' \
 	rp='realpath .' \
 	cp='cp -iv' \
 	mv='mv -iv' \
