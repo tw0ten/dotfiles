@@ -5,13 +5,13 @@ import Quickshell
 
 Singleton {
     property var sizing: Item {
-        height: 18
+        height: 16
         property real spacing: 8
     }
 
     property var font: Item {
         property string family: "art"
-        property real size: 10
+        property real size: undefined
     }
 
     property var color: Item {

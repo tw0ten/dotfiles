@@ -1,0 +1,19 @@
+gestures {
+	hot-corners { off; }
+}
+
+input {
+	keyboard {
+		repeat-delay 200
+		repeat-rate 20
+	}
+
+	touchpad {
+		disabled-on-external-mouse
+	}
+
+	mouse {
+		accel-profile "flat"
+		accel-speed 0.0
+	}
+}

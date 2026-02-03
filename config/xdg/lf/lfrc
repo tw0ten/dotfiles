@@ -6,17 +6,25 @@ set icons
 set tabstop 4
 set ratios 2:3:3
 
+
 set truncatechar '⃿'
 set promptfmt "%u\033[32;1m@\033[0m%h \033[34;1m%d\033[0m%f"
 set statfmt "\033[32;1m%p\033[0m	|%c	|%u	|%g	|\033[34;1m%S |%t \033[0m|%l "
 set timefmt "2006/01/02 15/04"
 
+
 cmd e $$EDITOR "$f"
 cmd su $sudo lf
 
-map gh
+
 map ~ cd
 
+map <enter> e
+map <backspace2> delete
+map c unselect
+map u su
+
+map sr set reverse!
 map sa
 map sc
 map sn
@@ -26,18 +34,11 @@ map st set sortby time
 map se set sortby ext
 map s<space> set sortby natural
 
-map c unselect
-
-map sr set reverse!
-
-map u su
-
 map zn
 map z<space> set info
 
 map i
 map e
-map <enter> e
-
 map G
+map gh
 map gg

@@ -37,7 +37,7 @@ alias \
 	se='sudoedit' \
 	p="$PAGER" \
 	g='git' \
-	f='rg 2>/dev/null -uuL --color=always' \
+	f='rg -uuL --color=always' \
 	t="(exec $TERMINAL >/dev/null 2>&1 &)" \
 	cl='clear' \
 	o='curl -fsL' \
