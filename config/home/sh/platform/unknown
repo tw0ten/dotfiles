@@ -8,4 +8,4 @@ export PLATFORM="$(
 
 export accent="$(tput setaf 5)"
 
-[ "$PLATFORM" = 'unknown' ] || . "$DOTFILES/config/home/bash/platform/$PLATFORM"
+[ "$PLATFORM" = 'unknown' ] || . "$DOTFILES/config/home/sh/platform/$PLATFORM"

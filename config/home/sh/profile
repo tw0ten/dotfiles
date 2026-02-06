@@ -1,0 +1,47 @@
+#!/bin/sh
+export DOTFILES="$HOME/dotfiles"
+
+export PATH="$HOME/.local/bin":"$DOTFILES/bin":"$PATH"
+export LANG='arttal.UTF-8' LANGUAGE='en_US.UTF-8'
+
+. "$DOTFILES/config/home/sh/platform/unknown"
+
+export \
+	normal="$(tput sgr0)" \
+	bold="$(tput bold)" \
+	dim="$(tput dim)" \
+	reverse="$(tput rev)" \
+	italic="$(tput sitm)" \
+	highlight="$(tput smso)" \
+	underline="$(tput smul)" \
+	blink="$(tput blink)" \
+	bell="$(tput bel)" \
+;
+eval "$(dircolors)"
+
+export PS0=
+export PROMPT_COMMAND=
+export PS1='= '
+export PS2='| '
+export PS3='? '
+export PS4="$PS1"
+export SUDO_PROMPT="%U$bold$accent@$normal%H %p$bold$accent#$normal"
+
+export \
+	HISTSIZE= \
+	HISTFILESIZE= \
+	HISTFILE="$HOME/.local/share/history.bash" \
+	HISTTIMEFORMAT='[%c] ' \
+	HISTCONTROL='ignoredups' \
+	HISTIGNORE='fg:bg' \
+;
+
+export \
+	OPENER='open' \
+	TERMINAL='terminal' \
+	VISUAL='nvim' \
+	EDITOR='nvim' \
+	PAGER='less -FXR' \
+	BROWSER='firefox' \
+	FILES='lf' \
+;

@@ -1,6 +1,5 @@
 #!/usr/bin/env sh
-export DOTFILES="$PWD"
-. 'config/home/bash/platform/unknown'
+. 'config/home/sh/profile'
 
 git submodule update --init --recursive
 set -ex && export SHELLOPTS
