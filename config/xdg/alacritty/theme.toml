@@ -5,7 +5,6 @@ padding = { x = 2, y = 2 }
 
 [font]
 size = 9
-normal = { family = "JetBrains Mono" }
 
 [colors.primary]
 background = "#101010"
