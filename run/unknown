@@ -1,10 +1,11 @@
 #!/usr/bin/env sh
+set -e
+
 . 'config/home/sh/profile'
 
 git submodule update --init --recursive
-set -ex && export SHELLOPTS
 
-( cd config; set +x
+( set -e; cd config
 	i() { set -- "$PWD/$1" "$i/$2"
 		mkdir -p "$(dirname "$2")"
 		ln -sfT "$1" "$2"
@@ -33,7 +34,7 @@ set -ex && export SHELLOPTS
 		i pacman pacman.conf
 		i ssh ssh/sshd_config
 		i grub default/grub )
-echo )
+echo ) || true
 
 [ "$PLATFORM" = 'unknown' ] || . "run/$PLATFORM"
 
