@@ -150,7 +150,7 @@ PanelWindow {
 
                 command: ["niri", "msg", "-j", "focused-window"]
                 stdout: StdioCollector {
-                    onStreamFinished: () => window.value = JSON.parse(this.text)?.title ?? ""
+                    onStreamFinished: () => window.value = (JSON.parse(this.text)?.title ?? "").substring(0, 128)
                 }
             }
         }
