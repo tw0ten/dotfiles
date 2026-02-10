@@ -84,6 +84,7 @@ binds {
 	Mod+Shift+V { switch-focus-between-floating-and-tiling; }
 
 	Print { screenshot; }
+	Shift+Print { spawn "smenu" "zoom"; }
 	Ctrl+Print { screenshot-screen; }
 	Alt+Print { screenshot-window; }
 
