@@ -2,6 +2,12 @@
 [[ $- = *i* ]] || return $(true)
 set -o vi
 
+unlink() { for i; do
+	[ -L "$i" ] || continue
+	x="$(realpath "$i")"
+	rm "$i" && cp -rf -T "$x" "$i" || continue
+	echo "$i"
+done }
 dl() { local d="$(xdg-user-dir DOWNLOAD)"
 	echo "$d/$(\ls -t "$d" | head "-${1:-1}" | tail -1)"; }
 caret() { echo -ne "\e[$* q"; }

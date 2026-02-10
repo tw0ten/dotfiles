@@ -1,0 +1,48 @@
+configuration {
+	font: "art 12";
+	show-icons: true;
+	drun-display-format: "{name}";
+	window-thumbnail: true;
+}
+
+@theme "default"
+* {
+	background: rgba(16, 16, 16, 100%);
+	foreground: rgba(255, 255, 255, 100%);
+
+	lightfg: var(foreground);
+	lightbg: var(background);
+}
+element {
+	padding: 0 0 0 0.25em;
+	spacing: 0.5em;
+}
+window {
+	border-radius: 1em;
+	padding: 0.5em 1em;
+	border: 0;
+}
+listview {
+	padding: 0;
+	spacing: 0;
+	border: 0;
+}
+num-filtered-rows {
+	text-color: var(foreground);
+}
+num-rows {
+	text-color: var(foreground);
+}
+textbox-num-sep {
+	text-color: var(foreground);
+}
+overlay {
+	padding: 0;
+	margin: 0;
+}
+entry {
+	placeholder:"";
+}
+textbox-prompt-colon {
+	margin:0;
+}

@@ -7,7 +7,7 @@ binds {
 	Mod+Shift+Slash { show-hotkey-overlay; }
 
 	Mod+Return { spawn "terminal"; }
-	Mod+X hotkey-overlay-title="run" { spawn "fuzzel"; }
+	Mod+X hotkey-overlay-title="run" { spawn "rofi" "-show" "drun"; }
 	Mod+Z { spawn "smenu"; }
 	Mod+Ctrl+C allow-inhibiting=false hotkey-overlay-title="lock" { spawn "~/.config/niri/lock"; }
 
