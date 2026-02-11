@@ -10,6 +10,10 @@ configuration {
 	background: rgba(16, 16, 16, 100%);
 	foreground: rgba(255, 255, 255, 100%);
 
+	active-foreground: rgba(64, 224, 208, 100%);
+	active-background: var(background);
+	selected-active-background: var(active-foreground);
+
 	lightfg: var(foreground);
 	lightbg: var(background);
 }
@@ -44,5 +48,6 @@ entry {
 	placeholder:"";
 }
 textbox-prompt-colon {
+	str: "";
 	margin:0;
 }

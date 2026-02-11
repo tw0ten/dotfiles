@@ -1,4 +1,4 @@
 #!/bin/sh
-i="$(echo '~' | dmenu -p '? ' --lines 1)"
+i="$(echo '~' | dmenu -p '? ' -l 1)"
 [ "$i" = '~' ] && exec smenu
 exec $BROWSER --search "$i"

@@ -77,6 +77,8 @@ PanelWindow {
 		BarBlock {
 			id: layout
 
+			color: `#a0${Theme.color.background}`
+
 			property var value: []
 			property real spacing: 1
 			property real valueWidth: Math.max((bar.height / 9 * 16) - content.spacing * (layout.value.length - 1), (layout.value.length - 1) * spacing * 2)
@@ -186,8 +188,6 @@ PanelWindow {
 				BarBlock {
 					content: RowLayout {
 						spacing: Theme.sizing.spacing
-
-						Item {}
 
 						RowLayout {
 							spacing: parent.spacing / 2

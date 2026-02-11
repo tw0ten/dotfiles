@@ -1,6 +1,6 @@
 #!/bin/sh
 i="$(niri msg -j keyboard-layouts | jq -r '.names[]' |
-	dmenu -p 'keyboard ' --minimal-lines --index)"
+	dmenu -p 'keyboard ' -format i -a "$(niri msg -j keyboard-layouts | jq .current_idx)")"
 
 niri msg action switch-layout "$i"
 

@@ -4,7 +4,7 @@ cd "$DOTFILES/timer/brightness"
 base=$(cat i/base)
 max=$(brightnessctl max)
 
-i=$(echo -e "$(brightnessctl get)\n0\n$base\n$max" | dmenu -p "brightness " --select-index 2 --lines 4)
+i=$(echo -e "$(brightnessctl get)\n0\n$base\n$max" | dmenu -p "brightness " -a 2 -l 4)
 
 echo $i > i/base
 
