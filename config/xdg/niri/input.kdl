@@ -17,3 +17,7 @@ input {
 		accel-speed 0.0
 	}
 }
+
+cursor {
+	hide-after-inactive-ms 5000
+}

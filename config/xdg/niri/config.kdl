@@ -1,25 +1,18 @@
 layout {
 	empty-workspace-above-first
 
-	gaps 4
-
-	preset-column-widths {
-		proportion 0.33333
-		proportion 0.5
-		proportion 0.66667
+	struts {
+		left 2
+		right 2
 	}
 
-	focus-ring { off; }
-
-	background-color "#00000000"
+	gaps 2
 
 	border {
 		width 1
-
-		active-color "#ffffffa0"
-		inactive-color "#202020a0"
-		urgent-color "#40e0d0a0"
 	}
+
+	focus-ring { off; }
 
 	tab-indicator {
 		place-within-column
@@ -28,40 +21,21 @@ layout {
 
 		length total-proportion=0.75
 	}
-
-	insert-hint {
-		color "#ffffff30"
-	}
-
-	struts {
-		left 4
-		right 4
-	}
 }
-
-include "rules.kdl"
 
 overview {
 	zoom 0.5
 
-	backdrop-color "#101010"
-
 	workspace-shadow { off; }
 }
 
-animations {
-	slowdown 0.75
-}
+include "rules.kdl"
+
+include "animations.kdl"
+include "colors.kdl"
 
 include "binds.kdl"
 
 include "input.kdl"
-
-cursor {
-	xcursor-theme "default"
-	xcursor-size 1
-
-	hide-after-inactive-ms 5000
-}
 
 include "env.kdl"

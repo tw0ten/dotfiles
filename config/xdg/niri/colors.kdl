@@ -1,0 +1,17 @@
+layout {
+	background-color "#00000000"
+
+	border {
+		active-color "#ffffffa0"
+		inactive-color "#202020a0"
+		urgent-color "#40e0d0a0"
+	}
+
+	insert-hint {
+		color "#ffffff30"
+	}
+}
+
+overview {
+	backdrop-color "#101010"
+}

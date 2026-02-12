@@ -1,0 +1,14 @@
+#!/bin/sh
+set -e
+
+cd "$DOTFILES/git"
+
+( set -e
+	i="$(git config get user.name)"
+
+	mkdir -p "github/$i" && cd "github/$i"
+
+	for i in $(curl -s "https://api.github.com/users/$i/repos" | jq '.[].ssh_url'); do
+		i="$(echo $i | sed -e 's/.....//' -e 's/.....$//')"
+		[ -d "$(basename "$i")" ] || git clone "$i"
+	done )
