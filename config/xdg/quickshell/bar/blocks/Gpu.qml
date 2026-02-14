@@ -1,10 +1,21 @@
 import QtQuick
+import QtQuick.Layouts
 import Quickshell.Io
 import "../"
 
 BarBlock {
-	content: BarText {
-		text: `g{${valueUsage}% ${valueTemp}°}`
+	content: RowLayout {
+		spacing: 0
+
+		BarText {
+			text: `g{`
+		}
+		Fraction {
+			value: valueUsage
+		}
+		BarText {
+			text: `${Math.round(valueTemp)}°}`
+		}
 	}
 
 	property string valueUsage
@@ -15,7 +26,7 @@ BarBlock {
 		running: true
 		command: ["nvidia-smi", "--format=csv,noheader,nounits", "--query-gpu=utilization.gpu"]
 		stdout: SplitParser {
-			onRead: i => valueUsage = i
+			onRead: i => valueUsage = i / 100
 		}
 	}
 	Process {

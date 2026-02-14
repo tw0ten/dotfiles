@@ -1,10 +1,27 @@
 import QtQuick
+import QtQuick.Layouts
 import Quickshell.Io
 import "../"
 
 BarBlock {
-	content: BarText {
-		text: `<${Math.floor(valueMem * 100)}+${Math.floor(valueSwap * 100)}%>`
+	content: RowLayout {
+		spacing: 0
+
+		BarText {
+			text: `<`
+		}
+		Fraction {
+			value: valueMem
+		}
+		BarText {
+			text: `+`
+		}
+		Fraction {
+			value: valueSwap
+		}
+		BarText {
+			text: `>`
+		}
 	}
 
 	property real valueMem

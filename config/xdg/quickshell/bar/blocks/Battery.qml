@@ -3,9 +3,7 @@ import Quickshell.Io
 import "../"
 
 BarBlock {
-	content: Fraction {
-		color: `#ff${Theme.color.accent}`
-	}
+	content: Fraction {}
 
 	property string battery: "/sys/class/power_supply/BAT0"
 

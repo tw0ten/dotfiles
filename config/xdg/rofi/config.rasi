@@ -15,6 +15,9 @@ configuration {
 	active-background: var(background);
 	selected-active-background: var(active-foreground);
 
+	alternate-active-foreground: var(active-foreground);
+	alternate-active-background: var(active-background);
+
 	lightfg: var(foreground);
 	lightbg: var(background);
 }

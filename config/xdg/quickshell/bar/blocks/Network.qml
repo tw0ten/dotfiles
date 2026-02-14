@@ -4,7 +4,6 @@ import "../"
 
 BarBlock {
 	content: Fraction {
-		color: `#ff${Theme.color.accent}`
 		prefix: "n"
 	}
 

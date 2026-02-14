@@ -1,10 +1,21 @@
 import QtQuick
+import QtQuick.Layouts
 import Quickshell.Io
 import "../"
 
 BarBlock {
-	content: BarText {
-		text: `c{${Math.round(valueUsage)}% ${Math.round(valueTemp)}°}`
+	content: RowLayout {
+		spacing: 0
+
+		BarText {
+			text: `c{`
+		}
+		Fraction {
+			value: valueUsage
+		}
+		BarText {
+			text: `${Math.round(valueTemp)}°}`
+		}
 	}
 
 	property real valueUsage
@@ -15,7 +26,7 @@ BarBlock {
 		running: true
 		command: ["top", "-bn1"]
 		stdout: StdioCollector {
-			onStreamFinished: () => valueUsage = this.text.split("\n")[2].split(" ").filter(i => i.length > 0)[1]
+			onStreamFinished: () => valueUsage = this.text.split("\n")[2].split(" ").filter(i => i.length > 0)[1] / 100
 		}
 	}
 	Process {
