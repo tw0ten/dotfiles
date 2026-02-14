@@ -4,7 +4,6 @@ configuration {
 	font: "art 12";
 	show-icons: true;
 	drun-display-format: "{name}";
-	window-thumbnail: true;
 }
 
 @theme "default"
@@ -50,6 +49,5 @@ entry {
 	placeholder:"";
 }
 textbox-prompt-colon {
-	str: "";
-	margin:0;
+	enabled: false;
 }
