@@ -3,34 +3,34 @@ import Quickshell.Io
 import "../"
 
 BarBlock {
-    content: BarText {
-        text: `g{${valueUsage}% ${valueTemp}°}`
-    }
+	content: BarText {
+		text: `g{${valueUsage}% ${valueTemp}°}`
+	}
 
-    property string valueUsage
-    property string valueTemp
+	property string valueUsage
+	property string valueTemp
 
-    Process {
-        id: procUsage
-        running: true
-        command: ["nvidia-smi", "--format=csv,noheader,nounits", "--query-gpu=utilization.gpu"]
-        stdout: SplitParser {
-            onRead: i => valueUsage = i
-        }
-    }
-    Process {
-        id: procTemp
-        running: true
-        command: ["nvidia-smi", "--format=csv,noheader,nounits", "--query-gpu=temperature.gpu"]
-        stdout: SplitParser {
-            onRead: i => valueTemp = i
-        }
-    }
+	Process {
+		id: procUsage
+		running: true
+		command: ["nvidia-smi", "--format=csv,noheader,nounits", "--query-gpu=utilization.gpu"]
+		stdout: SplitParser {
+			onRead: i => valueUsage = i
+		}
+	}
+	Process {
+		id: procTemp
+		running: true
+		command: ["nvidia-smi", "--format=csv,noheader,nounits", "--query-gpu=temperature.gpu"]
+		stdout: SplitParser {
+			onRead: i => valueTemp = i
+		}
+	}
 
-    Timer {
-        interval: 5 * 1000
-        running: true
-        repeat: true
-        onTriggered: procUsage.running = procTemp.running = true
-    }
+	Timer {
+		interval: 5 * 1000
+		running: true
+		repeat: true
+		onTriggered: procUsage.running = procTemp.running = true
+	}
 }

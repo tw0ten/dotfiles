@@ -6,31 +6,15 @@ import Quickshell.Io
 import "../"
 
 BarBlock {
-    id: root
-    property var sink: Pipewire.defaultAudioSink
+	property var sink: Pipewire.defaultAudioSink
 
-    content: BarText {
-        color: `#ff${Theme.color.accent}`
-        text: `${sink?.audio?.muted ? "󰖁" : "󰕾"}`
-    }
+	content: Fraction {
+		color: `#ff${Theme.color.accent}`
+		prefix: "v"
+		value: sink?.audio?.muted ? 0 : sink?.audio?.volume
+	}
 
-    PwObjectTracker {
-        objects: [Pipewire.defaultAudioSink]
-        onObjectsChanged: {
-            sink = Pipewire.defaultAudioSink;
-            if (sink?.audio) {
-                sink.audio.volumeChanged.connect(() => {
-                    if (sink?.audio) {
-                        const icon = sink.audio.muted ? "󰖁" : "󰕾";
-                        content.text = `${icon} ${Math.round(sink.audio.volume * 100)}%`;
-                    }
-                });
-            }
-        }
-    }
-
-    Process {
-        id: pavucontrol
-        command: ["pavucontrol"]
-    }
+	PwObjectTracker {
+		objects: [Pipewire.defaultAudioSink]
+	}
 }

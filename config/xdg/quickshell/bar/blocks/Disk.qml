@@ -3,25 +3,25 @@ import Quickshell.Io
 import "../"
 
 BarBlock {
-    content: BarText {
-        text: `(${value})`
-    }
+	content: BarText {
+		text: `(${value})`
+	}
 
-    property string value
+	property string value
 
-    Process {
-        id: proc
-        running: true
-        command: ["df", "/", "-h"]
-        stdout: StdioCollector {
-            onStreamFinished: () => value = this.text.split("\n")[1].split(" ").filter(i => i.length > 0)[3]
-        }
-    }
+	Process {
+		id: proc
+		running: true
+		command: ["df", "/", "-h"]
+		stdout: StdioCollector {
+			onStreamFinished: () => value = this.text.split("\n")[1].split(" ").filter(i => i.length > 0)[3]
+		}
+	}
 
-    Timer {
-        interval: 30 * 1000
-        running: true
-        repeat: true
-        onTriggered: proc.running = true
-    }
+	Timer {
+		interval: 30 * 1000
+		running: true
+		repeat: true
+		onTriggered: proc.running = true
+	}
 }

@@ -3,30 +3,24 @@ import Quickshell.Io
 import "../"
 
 BarBlock {
-    content: BarText {
-        color: `#ff${Theme.color.accent}`
-        text: value
-    }
+	content: Fraction {
+		color: `#ff${Theme.color.accent}`
+		prefix: "b"
+	}
 
-    property string value
+	Process {
+		id: proc
+		running: true
+		command: ["brightnessctl", "get"]
+		stdout: SplitParser {
+			onRead: i => content.value = i / 100
+		}
+	}
 
-    Process {
-        id: proc
-        running: true
-        command: ["brightnessctl", "get"]
-        stdout: SplitParser {
-            onRead: i => {
-                const percentage = parseInt(i);
-                const icons = ["󰛩", "󱩎", "󱩏", "󱩐", "󱩑", "󱩒", "󱩓", "󱩔", "󱩕", "󱩖", "󰛨"];
-                return value = `${icons[Math.floor(percentage / 100 * (icons.length - 1))]}`;
-            }
-        }
-    }
-
-    Timer {
-        interval: 5 * 1000
-        running: true
-        repeat: true
-        onTriggered: proc.running = true
-    }
+	Timer {
+		interval: 5 * 1000
+		running: true
+		repeat: true
+		onTriggered: proc.running = true
+	}
 }

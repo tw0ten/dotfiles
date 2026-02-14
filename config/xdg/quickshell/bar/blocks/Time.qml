@@ -3,25 +3,25 @@ import Quickshell.Io
 import "../"
 
 BarBlock {
-    content: BarText {
-        text: value
-    }
+	content: BarText {
+		text: value
+	}
 
-    property string value
+	property string value
 
-    Process {
-        id: proc
-        running: true
-        command: ["date", "+%Y/%b/%d-%w %H/%M"]
-        stdout: SplitParser {
-            onRead: i => value = i
-        }
-    }
+	Process {
+		id: proc
+		running: true
+		command: ["date", "+%Y/%b/%d-%w %H/%M"]
+		stdout: SplitParser {
+			onRead: i => value = i
+		}
+	}
 
-    Timer {
-        interval: 1000
-        running: true
-        repeat: true
-        onTriggered: proc.running = true
-    }
+	Timer {
+		interval: 1000
+		running: true
+		repeat: true
+		onTriggered: proc.running = true
+	}
 }

@@ -16,6 +16,11 @@ PanelWindow {
 		right: true
 	}
 
+	margins {
+		top: 1
+		bottom: 1
+	}
+
 	property var eventStreamSubs: []
 
 	RowLayout {
@@ -190,7 +195,7 @@ PanelWindow {
 						spacing: Theme.sizing.spacing
 
 						RowLayout {
-							spacing: parent.spacing / 2
+							spacing: parent.spacing
 
 							Blocks.Battery {}
 							Blocks.Audio {}
