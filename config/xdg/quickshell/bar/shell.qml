@@ -46,6 +46,8 @@ PanelWindow {
 			content: RowLayout {
 				id: workspaces
 
+				spacing: Theme.sizing.spacing / 1.5
+
 				property var value: []
 				property real currentWorkspaceId: 0
 

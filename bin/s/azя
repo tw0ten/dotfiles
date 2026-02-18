@@ -6,5 +6,6 @@ niri msg action switch-layout "$i"
 
 case "$(niri msg keyboard-layouts | grep '\*')" in
 	*' Chinese') fcitx5-remote -s 'pinyin' ;;
+	*' Japanese') fcitx5-remote -s 'mozc' ;;
 	*) fcitx5-remote -s 'keyboard-us' ;;
 esac

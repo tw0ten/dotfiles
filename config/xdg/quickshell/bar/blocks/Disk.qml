@@ -12,9 +12,9 @@ BarBlock {
 	Process {
 		id: proc
 		running: true
-		command: ["df", "/", "-h"]
+		command: ["df", "/", "-h", "--output=avail"]
 		stdout: StdioCollector {
-			onStreamFinished: () => value = this.text.split("\n")[1].split(" ").filter(i => i.length > 0)[3]
+			onStreamFinished: () => value = this.text.split("\n")[1].trim()
 		}
 	}
 

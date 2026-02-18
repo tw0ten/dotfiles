@@ -14,7 +14,7 @@ BarBlock {
 			value: valueUsage
 		}
 		BarText {
-			text: `${Math.round(valueTemp)}°}`
+			text: `${Math.ceil(valueTemp)}°}`
 		}
 	}
 
@@ -32,9 +32,9 @@ BarBlock {
 	Process {
 		id: procTemp
 		running: true
-		command: ["sensors", "k10temp-pci-00c3"]
+		command: ["sensors", "-j"]
 		stdout: StdioCollector {
-			onStreamFinished: () => valueTemp = this.text.split("\n")[2].split(" ").filter(i => i.length > 0)[1].slice(1, -2)
+			onStreamFinished: () => valueTemp = JSON.parse(this.text)["k10temp-pci-00c3"]["Tctl"]["temp1_input"]
 		}
 	}
 

@@ -19,7 +19,7 @@ layout {
 		width 2
 		gap 2
 
-		length total-proportion=0.75
+		length total-proportion=1.0
 	}
 }
 

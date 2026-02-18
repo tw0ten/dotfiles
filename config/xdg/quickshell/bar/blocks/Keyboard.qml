@@ -3,7 +3,9 @@ import Quickshell.Io
 import "../"
 
 BarBlock {
-	content: BarText {}
+	content: BarText {
+		font: Theme.font.mono
+	}
 
 	Process {
 		Component.onCompleted: bar.eventStreamSubs.push(this)

@@ -1,8 +1,11 @@
 #!/bin/sh
 mute="$(pamixer --get-mute)"
+keyboard="$(niri msg -j keyboard-layouts | jq '.current_idx')"
 
 pamixer -m
+niri msg action switch-layout 0
 
 swaylock || slock
 
 "$mute" || pamixer -u
+niri msg action switch-layout $keyboard

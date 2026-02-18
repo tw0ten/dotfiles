@@ -8,9 +8,9 @@
 	i neovim tmux openssh \
 		lf btop fastfetch ripgrep reflector ufw ffmpeg
 	i niri pipewire nvidia-open \
-		mako swww fuzzel alacritty quickshell fcitx5 \
+		mako swww rofi alacritty quickshell fcitx5 \
 		torbrowser-launcher qbittorrent-nox libreoffice-still gimp obs-studio vlc blender \
-		ttf-nerd-fonts-symbols-mono noto-fonts noto-fonts-emoji noto-fonts-cjk
+		noto-fonts noto-fonts-emoji noto-fonts-cjk
 echo )
 
 ( cd etc; i() { sudo "$@"; }
