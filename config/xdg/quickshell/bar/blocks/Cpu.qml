@@ -14,7 +14,7 @@ BarBlock {
 			value: valueUsage
 		}
 		BarText {
-			text: `${Math.ceil(valueTemp)}°}`
+			text: `${Math.ceil(valueTemp)}}`
 		}
 	}
 

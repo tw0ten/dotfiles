@@ -14,7 +14,7 @@ BarBlock {
 			value: valueUsage
 		}
 		BarText {
-			text: `${Math.round(valueTemp)}°}`
+			text: `${Math.round(valueTemp)}}`
 		}
 	}
 

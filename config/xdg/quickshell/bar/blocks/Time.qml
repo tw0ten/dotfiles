@@ -4,7 +4,7 @@ import "../"
 
 BarBlock {
 	content: Fraction {
-		prefix: `${valueDate} ${valueTime}`
+		prefix: `${valueDate} ${valueTime}/`
 		value: valuePart
 	}
 

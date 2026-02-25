@@ -26,6 +26,8 @@ element {
 	spacing: 0.5em;
 }
 window {
+	width: 35%;
+
 	border-radius: 1em;
 	padding: 0.5em 1em;
 	border: 0;
