@@ -11,37 +11,21 @@ BarBlock {
 			text: `g{`
 		}
 		Fraction {
-			value: valueUsage
+			value: valueUsage / 100
 		}
 		BarText {
-			text: `${Math.round(valueTemp)}}`
+			text: `${valueTemp}}`
 		}
 	}
 
-	property string valueUsage
-	property string valueTemp
+	property real valueUsage
+	property real valueTemp
 
 	Process {
-		id: procUsage
 		running: true
-		command: ["nvidia-smi", "--format=csv,noheader,nounits", "--query-gpu=utilization.gpu"]
+		command: ["nvidia-smi", "--format=csv,noheader,nounits", "--query-gpu=utilization.gpu,temperature.gpu", `--loop=${5}`]
 		stdout: SplitParser {
-			onRead: i => valueUsage = i / 100
+			onRead: i => [valueUsage, valueTemp] = i.split(", ")
 		}
-	}
-	Process {
-		id: procTemp
-		running: true
-		command: ["nvidia-smi", "--format=csv,noheader,nounits", "--query-gpu=temperature.gpu"]
-		stdout: SplitParser {
-			onRead: i => valueTemp = i
-		}
-	}
-
-	Timer {
-		interval: 5 * 1000
-		running: true
-		repeat: true
-		onTriggered: procUsage.running = procTemp.running = true
 	}
 }

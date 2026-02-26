@@ -12,7 +12,7 @@ Singleton {
 	property var font: Item {
 		property string family: "art"
 		property string mono: "art.mono"
-		property real size: undefined
+		property real size: 9
 	}
 
 	property var color: Item {

@@ -1,1 +1,2 @@
-/usr/bin/rofi
+#!/bin/sh
+exec rofi -dmenu -config dmenu "$@"

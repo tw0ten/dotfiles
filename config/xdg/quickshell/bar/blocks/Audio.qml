@@ -1,8 +1,4 @@
-import QtQuick
-import QtQuick.Controls
-import Quickshell
 import Quickshell.Services.Pipewire
-import Quickshell.Io
 import "../"
 
 BarBlock {
@@ -10,7 +6,7 @@ BarBlock {
 
 	content: Fraction {
 		prefix: "v"
-		value: sink?.audio?.muted ? 0 : sink?.audio?.volume
+		value: sink?.audio?.muted ? 0 : sink?.audio?.volume ?? 0
 	}
 
 	PwObjectTracker {

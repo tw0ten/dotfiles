@@ -22,11 +22,14 @@ BarBlock {
 	property real valueTemp
 
 	Process {
-		id: procUsage
 		running: true
-		command: ["top", "-bn1"]
-		stdout: StdioCollector {
-			onStreamFinished: () => valueUsage = this.text.split("\n")[2].split(" ").filter(i => i.length > 0)[1] / 100
+		command: ["top", "--batch-mode", "--delay", `${5}`]
+		stdout: SplitParser {
+			splitMarker: "\n\n"
+			onRead: i => {
+				if (i.split("\n").length !== 5) return
+				valueUsage = i.split("\n")[2].split(" ").filter(i => i.length > 0)[1] / 100
+			}
 		}
 	}
 	Process {
@@ -42,6 +45,6 @@ BarBlock {
 		interval: 5 * 1000
 		running: true
 		repeat: true
-		onTriggered: procUsage.running = procTemp.running = true
+		onTriggered: procTemp.running = true
 	}
 }

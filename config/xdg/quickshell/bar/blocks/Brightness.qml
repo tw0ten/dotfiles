@@ -10,9 +10,9 @@ BarBlock {
 	Process {
 		id: proc
 		running: true
-		command: ["brightnessctl", "get"]
+		command: ["brightnessctl", "--machine-readable", "info"]
 		stdout: SplitParser {
-			onRead: i => content.value = i / 100
+			onRead: i => content.value = i.split(",")[2] / i.split(",")[4]
 		}
 	}
 

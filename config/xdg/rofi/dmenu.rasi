@@ -1,0 +1,8 @@
+// too many open files error?
+
+@import "config"
+
+@theme "dmenu"
+prompt {
+	enabled: true;
+}
