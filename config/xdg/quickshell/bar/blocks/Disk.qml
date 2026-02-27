@@ -1,20 +1,34 @@
 import QtQuick
+import QtQuick.Layouts
 import Quickshell.Io
 import "../"
 
 BarBlock {
-	content: BarText {
-		text: `(${value})`
+	content: RowLayout {
+		spacing: 0
+
+		BarText {
+			text: "("
+		}
+		Fraction {
+			prefix: `${Math.trunc(valueNumber)}`
+			value: valueNumber % 1
+		}
+		BarText {
+			text: `${valueUnit})`
+		}
 	}
 
-	property string value
+	property real valueNumber
+	property string valueUnit
 
 	Process {
 		id: proc
 		running: true
-		command: ["df", "/", "-h", "--output=avail"]
-		stdout: StdioCollector {
-			onStreamFinished: () => value = this.text.split("\n")[1].trim()
+		command: ["df", "/", "--si", "--output=avail"]
+		stdout: SplitParser {
+			splitMarker: ""
+			onRead: i => [valueNumber, valueUnit] = [i.substring(5, i.length - 2), i[i.length - 2]]
 		}
 	}
 

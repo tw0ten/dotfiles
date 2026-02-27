@@ -29,7 +29,6 @@ PanelWindow {
 
 		Process {
 			running: true
-
 			command: ["niri", "msg", "-j", "event-stream"]
 			stdout: SplitParser {
 				onRead: i => eventStreamSubs.map(i => i.running = true)
@@ -70,9 +69,9 @@ PanelWindow {
 					Component.onCompleted: bar.eventStreamSubs.push(this)
 
 					command: ["niri", "msg", "-j", "workspaces"]
-					stdout: StdioCollector {
-						onStreamFinished: () => {
-							workspaces.value = JSON.parse(this.text).sort((a, b) => a.idx - b.idx);
+					stdout: SplitParser {
+						onRead: i => {
+							workspaces.value = JSON.parse(i).sort((a, b) => a.idx - b.idx);
 							workspaces.currentWorkspaceId = workspaces.value.filter(i => i.is_focused)[0].id;
 							layout.proc.running = true;
 						}
@@ -120,9 +119,9 @@ PanelWindow {
 
 			property var proc: Process {
 				command: ["niri", "msg", "-j", "windows"]
-				stdout: StdioCollector {
-					onStreamFinished: () => {
-						const windows = JSON.parse(this.text).filter(i => i.workspace_id === workspaces.currentWorkspaceId && i.layout.pos_in_scrolling_layout !== null).sort((a, b) => a.layout.pos_in_scrolling_layout[0] - b.layout.pos_in_scrolling_layout[0]);
+				stdout: SplitParser {
+					onRead: i => {
+						const windows = JSON.parse(i).filter(i => i.workspace_id === workspaces.currentWorkspaceId && i.layout.pos_in_scrolling_layout !== null).sort((a, b) => a.layout.pos_in_scrolling_layout[0] - b.layout.pos_in_scrolling_layout[0]);
 						let columns = {};
 						let focused = {};
 						for (const i of windows) {
@@ -166,8 +165,8 @@ PanelWindow {
 				Component.onCompleted: bar.eventStreamSubs.push(this)
 
 				command: ["niri", "msg", "-j", "focused-window"]
-				stdout: StdioCollector {
-					onStreamFinished: () => window.value = (JSON.parse(this.text)?.title ?? "").substring(0, 128)
+				stdout: SplitParser {
+					onRead: i => window.value = (JSON.parse(i)?.title ?? "").substring(0, 128)
 				}
 			}
 		}

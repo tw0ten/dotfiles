@@ -8,7 +8,7 @@ BarBlock {
 		spacing: 0
 
 		BarText {
-			text: `c{`
+			text: "{c"
 		}
 		Fraction {
 			value: valueUsage
@@ -23,11 +23,11 @@ BarBlock {
 
 	Process {
 		running: true
-		command: ["top", "--batch-mode", "--delay", `${5}`]
+		command: ["top", "--batch-mode", "--delay", `${2}`]
 		stdout: SplitParser {
 			splitMarker: "\n\n"
 			onRead: i => {
-				if (i.split("\n").length !== 5) return
+				if (!i.startsWith("top")) return
 				valueUsage = i.split("\n")[2].split(" ").filter(i => i.length > 0)[1] / 100
 			}
 		}
@@ -36,13 +36,13 @@ BarBlock {
 		id: procTemp
 		running: true
 		command: ["sensors", "-j"]
-		stdout: StdioCollector {
-			onStreamFinished: () => valueTemp = JSON.parse(this.text)["k10temp-pci-00c3"]["Tctl"]["temp1_input"]
+		stdout:  SplitParser {
+			onRead: i => valueTemp = JSON.parse(i)["k10temp-pci-00c3"]["Tctl"]["temp1_input"]
 		}
 	}
 
 	Timer {
-		interval: 5 * 1000
+		interval: 2 * 1000
 		running: true
 		repeat: true
 		onTriggered: procTemp.running = true

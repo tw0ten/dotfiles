@@ -8,7 +8,7 @@ BarBlock {
 		spacing: 0
 
 		BarText {
-			text: `g{`
+			text: "{g"
 		}
 		Fraction {
 			value: valueUsage / 100
@@ -23,7 +23,7 @@ BarBlock {
 
 	Process {
 		running: true
-		command: ["nvidia-smi", "--format=csv,noheader,nounits", "--query-gpu=utilization.gpu,temperature.gpu", `--loop=${5}`]
+		command: ["nvidia-smi", "--format=csv,noheader,nounits", "--query-gpu=utilization.gpu,temperature.gpu", `--loop=${2}`]
 		stdout: SplitParser {
 			onRead: i => [valueUsage, valueTemp] = i.split(", ")
 		}

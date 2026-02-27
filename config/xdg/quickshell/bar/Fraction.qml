@@ -11,5 +11,8 @@ RowLayout {
 	BarText {
 		text: `${String.fromCharCode(0xE000 + value * 256)}`
 		color: `#ff${Theme.color.accent}`
+		font: {
+			family: Theme.font.mono
+		}
 	}
 }
