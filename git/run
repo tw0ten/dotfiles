@@ -8,7 +8,11 @@ cd "$DOTFILES/git"
 
 	mkdir -p "github/$i" && cd "github/$i"
 
-	for i in $(curl -s "https://api.github.com/users/$i/repos" | jq '.[].ssh_url'); do
+	for i in $(curl -s "https://api.github.com/users/$i/repos" | jq '.[].ssh_url'); do (
+		set -e
 		i="$(echo $i | sed -e 's/.....//' -e 's/.....$//')"
-		[ -d "$(basename "$i")" ] || git clone "$i"
-	done )
+		j="$(basename "$i")"
+		[ -d "$j" ] || git clone "$i"
+		cd "$j"
+		git pull
+) done )

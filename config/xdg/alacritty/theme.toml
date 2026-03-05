@@ -4,7 +4,8 @@ opacity = 0.9
 padding = { x = 2, y = 2 }
 
 [font]
-size = 9
+normal = { family = "art.mono" }
+size = 12
 
 [colors.primary]
 background = "#101010"

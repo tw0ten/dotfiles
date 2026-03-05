@@ -8,6 +8,8 @@
 	template = ~/.config/git/commit
 [pull]
 	rebase = false
+[color]
+	ui = auto
 
 [alias]
 	i = init
@@ -42,5 +44,3 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-[color]
-	ui = auto

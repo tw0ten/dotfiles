@@ -12,7 +12,7 @@ BarBlock {
 
 		command: ["niri", "msg", "-j", "keyboard-layouts"]
 		stdout: SplitParser {
-			onRead: i => content.text = JSON.parse(i)["names"][JSON.parse(i)["current_idx"]].substring(0, 2)
+			onRead: i => content.text = JSON.parse(i).names[JSON.parse(i).current_idx].substring(0, 2)
 		}
 	}
 }

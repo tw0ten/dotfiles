@@ -15,20 +15,20 @@ BarBlock {
 			value: valueNumber % 1
 		}
 		BarText {
-			text: `${valueUnit})`
+			text: `${valuePrecision})`
 		}
 	}
 
 	property real valueNumber
-	property string valueUnit
+	property int valuePrecision: 6
 
 	Process {
 		id: proc
 		running: true
-		command: ["df", "/", "--si", "--output=avail"]
+		command: ["df", "/", "--output=avail", "--block-size=1000"]
 		stdout: SplitParser {
 			splitMarker: ""
-			onRead: i => [valueNumber, valueUnit] = [i.substring(5, i.length - 2), i[i.length - 2]]
+			onRead: i => valueNumber = i.split("\n")[1] / (10 ** valuePrecision)
 		}
 	}
 

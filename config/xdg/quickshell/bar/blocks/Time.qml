@@ -18,10 +18,10 @@ BarBlock {
 		command: ["date", "+%Y/%b/%d-%w | %H/%M | %S %N"]
 		stdout: SplitParser {
 			onRead: i => {
-				let t
-				[valueDate, valueTime, t] = i.split(" | ")
-				const [secs, nanos] = t.split(" ").map(Number)
-				valuePart = (secs + nanos / 1000000000) / 60
+				let t;
+				[valueDate, valueTime, t] = i.split(" | ");
+				const [secs, nanos] = t.split(" ").map(Number);
+				valuePart = (secs + nanos / 1000000000) / 60;
 			}
 		}
 	}
