@@ -18,7 +18,7 @@ echo )
 
 	i systemctl enable reflector.timer
 
-	i cp cat.png /boot/grub/bg.png
+	i cp -rT config/etc/grub/theme /boot/grub/themes/default
 	i grub-mkconfig -o /boot/grub/grub.cfg
 
 	i ufw reset

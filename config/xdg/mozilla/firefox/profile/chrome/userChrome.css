@@ -1,0 +1,7 @@
+* {
+	line-height: 1.0;
+}
+
+.tabbrowser-tab .tab-close-button,
+.titlebar-buttonbox-container
+{ visibility: collapse !important; }
