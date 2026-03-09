@@ -8,11 +8,17 @@ RowLayout {
 	spacing: 0
 
 	BarText { text: prefix }
-	BarText {
-		text: `${String.fromCharCode(0xE000 + value * 256)}`
-		color: `#ff${Theme.color.accent}`
-		font: {
-			family: Theme.font.mono
+	Item { // todo
+		width: 6
+		height: Theme.sizing.height
+
+		Text {
+			anchors.centerIn: parent
+			text: `${String.fromCharCode(0xE000 + value * (2**8))}`
+			color: `#ff${Theme.color.accent}`
+			font: {
+				family: Theme.font.mono
+			}
 		}
 	}
 }

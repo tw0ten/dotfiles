@@ -6,7 +6,7 @@ cd "$DOTFILES/git"
 ( set -e
 	i="$(git config get user.name)"
 
-	mkdir -p "github/$i" && cd "github/$i"
+	mkdir -p "github.com/$i" && cd "github.com/$i"
 
 	for i in $(curl -s "https://api.github.com/users/$i/repos" | jq '.[].ssh_url'); do (
 		set -e

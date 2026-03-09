@@ -3,5 +3,6 @@
 }
 
 .tabbrowser-tab .tab-close-button,
+#tabs-newtab-button, #new-tab-button,
 .titlebar-buttonbox-container
 { visibility: collapse !important; }

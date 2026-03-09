@@ -1,0 +1,66 @@
+message-font: "art Regular 16"
+terminal-font: "art Regular 16"
+
+message-color: "#000000"
+message-bg-color: "#ffffff"
+
+terminal-box: "terminal-box_*.png"
+desktop-image: "desktop-image.png"
+
++ label {
+	text = "@KEYMAP_MIDDLE@"
+	font = "art Regular 16"
+
+	top = 100%-25
+	left = 0
+	width = 100%
+	height = 20
+	align = "center"
+
+	color = "#ffffff"
+}
+
++ boot_menu {
+	left = 10%
+	width = 80%
+	top = 20%
+	height = 50%
+
+	item_font = "art Regular 16"
+	selected_item_font = "inherit"
+
+	item_color = "#ffffff"
+	selected_item_color = "#40e0d0"
+
+	selected_item_pixmap_style = "selected_item_pixmap_style_*.png"
+	icon_height = 25
+	icon_width = 25
+
+	item_height = 26
+	item_padding = 0
+	item_icon_space = 0
+	item_spacing = 1
+
+	scrollbar = true
+	scrollbar_thumb = "scrollbar_thumb_*.png"
+	scrollbar_width = 20
+
+	menu_pixmap_style = "menu_pixmap_style_*.png"
+}
+
++ progress_bar {
+	id = "__timeout__"
+
+	text = "@TIMEOUT_NOTIFICATION_LONG@"
+	font = "art Regular 16"
+
+	left = 15%
+	top = 80%
+	height = 20
+	width = 70%
+
+	text_color = "#000"
+	fg_color = "#fff"
+	bg_color = "#6ac"
+	border_color = "#fff"
+}
