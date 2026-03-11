@@ -1,7 +1,7 @@
 {
     "discordBranch": "stable",
     "minimizeToTray": false,
-    "arRPC": true,
+    "arRPC": false,
     "splashColor": "rgb(220, 220, 223)",
     "splashBackground": "rgb(0, 0, 0)",
     "audio": {
@@ -10,5 +10,11 @@
         "ignoreDevices": false,
         "onlySpeakers": false,
         "onlyDefaultSpeakers": false
-    }
+    },
+    "customTitleBar": false,
+    "enableMenu": false,
+    "enableSplashScreen": false,
+    "tray": false,
+    "disableMinSize": true,
+    "splashTheming": true
 }
