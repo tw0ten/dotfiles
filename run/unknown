@@ -33,6 +33,7 @@ git submodule update --init --recursive
 		i sudoers/ sudoers.d
 		i pacman pacman.conf
 		i ssh ssh/sshd_config
+		i ly/ ly
 		i grub/default default/grub )
 echo ) || true
 
