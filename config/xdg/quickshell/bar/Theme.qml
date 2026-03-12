@@ -10,8 +10,8 @@ Singleton {
 	}
 
 	property var font: Item {
-		property string family: "art"
-		property string mono: "art.mono"
+		property string family: "system-ui"
+		property string mono: "monospace"
 		property real size: 9
 	}
 

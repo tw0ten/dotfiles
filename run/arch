@@ -5,20 +5,23 @@
 	i() { $AUR_HELPER -S "$@" || true; }
 	command -v $AUR_HELPER || ( cd "$(mktemp -d)"; git clone "https://aur.archlinux.org/$AUR_HELPER" .; makepkg -si )
 
-	i neovim tmux openssh \
-		lf btop fastfetch ripgrep reflector ufw ffmpeg
+	i neovim openssh tmux \
+		lf btop fastfetch ripgrep reflector ufw ffmpeg ly
 	i niri pipewire nvidia-open \
-		mako swww rofi alacritty quickshell fcitx5 \
-		torbrowser-launcher qbittorrent-nox libreoffice-still gimp obs-studio vlc blender \
+		firefox mako swww rofi alacritty quickshell fcitx5 \
+		torbrowser-launcher qbittorrent-nox libreoffice-still gimp obs-studio mpv blender kdenlive \
 		noto-fonts noto-fonts-emoji noto-fonts-cjk
 echo )
 
-( cd etc; i() { sudo "$@"; }
+( set -ex; cd etc; i() { sudo "$@"; }
 	i locale-gen
 
 	i systemctl enable reflector.timer
 
-	i cp -rT config/etc/grub/theme /boot/grub/themes/default
+	i systemctl disable getty@tty1
+	i systemctl enable ly@tty1
+
+	i cp -rT ../config/etc/grub/theme /boot/grub/themes/default
 	i grub-mkconfig -o /boot/grub/grub.cfg
 
 	i ufw reset
@@ -27,4 +30,7 @@ echo )
 	i ufw allow ssh
 	i ufw enable
 	i ufw reload
+
+	gsettings set 'org.gnome.desktop.interface' font-name "$(fc-match sans-serif -f '%{family} %{size}')"
+	gsettings set 'org.gnome.desktop.interface' color-scheme 'prefer-dark'
 echo )

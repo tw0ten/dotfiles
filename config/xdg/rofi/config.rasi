@@ -1,7 +1,7 @@
 configuration {
 	modes: "drun,run";
 	sidebar-mode: true;
-	font: "art 12";
+	font: "system-ui 12";
 	show-icons: true;
 	drun-display-format: "{name}";
 	matching: "fuzzy";
