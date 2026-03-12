@@ -3,8 +3,6 @@ set -e
 
 . 'config/home/sh/profile'
 
-git submodule update --init --recursive
-
 ( set -e; cd config
 	i() { set -- "$PWD/$1" "$i/$2"
 		mkdir -p "$(dirname "$2")"

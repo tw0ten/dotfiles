@@ -1,7 +1,5 @@
 #!/bin/bash
-export DOTFILES="$HOME/dotfiles"
-
-. "$DOTFILES/config/home/sh/profile"
+. "$HOME/dotfiles/config/home/sh/profile"
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 

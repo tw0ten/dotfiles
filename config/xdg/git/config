@@ -38,6 +38,8 @@
 	cf = config
 	cfl = cf list
 	l = log --decorate --numstat --graph
+	su = submodule update --init --recursive
+
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f
