@@ -14,7 +14,7 @@ RowLayout {
 
 		Text {
 			anchors.centerIn: parent
-			text: `${String.fromCharCode(0xE000 + value * (2**8))}`
+			text: `${String.fromCharCode(0xE000 + Math.round(value * (2**8)))}`
 			color: `#ff${Theme.color.accent}`
 			font: {
 				family: Theme.font.mono

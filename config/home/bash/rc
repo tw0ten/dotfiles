@@ -21,7 +21,7 @@ mklc() { set -- "$DOTFILES/etc/lc/${1:-.}" "${2:-LICENSE}"
 	head -n 5 "$2"; }
 mktl() { mkdir "$1" && cd "$1" || return
 	mkdir src lib .io .io/i .io/o
-	echo "# $1" > README.md
+	echo "# $1" > readme
 	echo '/o' > .io/.gitignore
 	echo -e > .io/build '#!/bin/sh\nset -e'
 	echo -e > .io/run '#!/bin/sh\nset -e\n\ncd .io'
