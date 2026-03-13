@@ -2,8 +2,6 @@
 
 pkg update && pkg upgrade
 
-pkg remove bash-auto-completion
-
 pkg install \
 	neovim tmux openssh \
 	lf ripgrep fastfetch

@@ -5,7 +5,7 @@ keyboard="$(niri msg -j keyboard-layouts | jq '.current_idx')"
 pamixer -m
 niri msg action switch-layout 0
 
-swaylock || slock
+swaylock
 
 "$mute" || pamixer -u
 niri msg action switch-layout $keyboard

@@ -21,7 +21,7 @@ echo )
 	i systemctl disable getty@tty1
 	i systemctl enable ly@tty1
 
-	i cp -rT ../config/etc/grub/theme /boot/grub/themes/default
+	i cp -rTL ../config/etc/grub/theme /boot/grub/themes/default
 	i grub-mkconfig -o /boot/grub/grub.cfg
 
 	i ufw reset

@@ -71,7 +71,15 @@
             "enabled": false
         },
         "BetterFolders": {
-            "enabled": false
+            "enabled": false,
+            "sidebar": false,
+            "sidebarAnim": true,
+            "closeAllFolders": true,
+            "closeAllHomeButton": false,
+            "closeOthers": true,
+            "forceOpen": true,
+            "keepIcons": false,
+            "showFolderIcon": 1
         },
         "BetterGifAltText": {
             "enabled": true
@@ -92,7 +100,7 @@
             "enabled": false
         },
         "BetterSettings": {
-            "enabled": true,
+            "enabled": false,
             "disableFade": true,
             "eagerLoad": true,
             "organizeMenu": true
@@ -128,7 +136,8 @@
             "enabled": false
         },
         "CopyEmojiMarkdown": {
-            "enabled": true
+            "enabled": true,
+            "copyUnicode": true
         },
         "CopyFileContents": {
             "enabled": false
@@ -137,7 +146,9 @@
             "enabled": false
         },
         "CrashHandler": {
-            "enabled": true
+            "enabled": false,
+            "attemptToPreventCrashes": true,
+            "attemptToNavigateToHome": false
         },
         "CtrlEnterSend": {
             "enabled": false
@@ -325,7 +336,7 @@
             "enabled": false
         },
         "NoTypingAnimation": {
-            "enabled": true
+            "enabled": false
         },
         "NoUnblockToJump": {
             "enabled": false
@@ -374,7 +385,7 @@
             "enabled": false
         },
         "PlainFolderIcon": {
-            "enabled": true
+            "enabled": false
         },
         "PlatformIndicators": {
             "enabled": false
@@ -463,7 +474,8 @@
             "enabled": true,
             "mode": "user-nick",
             "displayNames": false,
-            "inReplies": false
+            "inReplies": false,
+            "friendNicknames": "dms"
         },
         "ShowTimeoutDuration": {
             "enabled": false,
@@ -559,7 +571,8 @@
             "enabled": false
         },
         "ViewRaw": {
-            "enabled": false
+            "enabled": true,
+            "clickMethod": "Left"
         },
         "VoiceDownload": {
             "enabled": false
@@ -639,6 +652,15 @@
         },
         "MoreQuickReactions": {
             "enabled": false
+        },
+        "ContextMenuAPI": {
+            "enabled": true
+        },
+        "MenuItemDemanglerAPI": {
+            "enabled": true
+        },
+        "NoticesAPI": {
+            "enabled": true
         }
     },
     "notifications": {
@@ -651,7 +673,7 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": true,
-        "settingsSyncVersion": 1773185463574
+        "settingsSyncVersion": 1773401762773
     },
     "uiElements": {
         "chatBarButtons": {},

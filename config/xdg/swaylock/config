@@ -1,4 +1,4 @@
 color=101010
-image=~/.local/share/lock.png
+image=~/.config/swaylock/lock.png
 hide-keyboard-layout
 disable-caps-lock-text
