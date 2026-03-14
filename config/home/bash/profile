@@ -1,4 +1,3 @@
 #!/bin/bash
 . "$HOME/dotfiles/config/home/sh/profile"
-
-[[ -f ~/.bashrc ]] && . ~/.bashrc
+. ~/.bashrc

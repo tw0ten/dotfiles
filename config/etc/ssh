@@ -12,8 +12,6 @@ PubkeyAuthentication yes
 AuthorizedKeysFile .ssh/authorized_keys
 
 PasswordAuthentication no
-PermitEmptyPasswords yes
-
 UsePAM no
 KbdInteractiveAuthentication no
 
@@ -23,5 +21,3 @@ ClientAliveCountMax 3
 PrintLastLog no
 PrintMotd yes
 Banner /etc/ssh/banner
-
-Subsystem sftp /usr/lib/ssh/sftp-server

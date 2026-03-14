@@ -1,18 +1,9 @@
 [options]
-RootDir = /
-DBPath = /var/lib/pacman/
-CacheDir = /var/cache/pacman/pkg/
-LogFile = /var/log/pacman.log
-GPGDir = /etc/pacman.d/gnupg/
-HookDir = /etc/pacman.d/hooks/
-
-DownloadUser = alpm
 ParallelDownloads = 4
 CleanMethod = KeepInstalled
 Architecture = auto
 CheckSpace
 DisableDownloadTimeout
-#XferCommand = /usr/bin/curl -L -C - -f -o %o %u
 
 SigLevel = Required DatabaseOptional
 LocalFileSigLevel = Optional
