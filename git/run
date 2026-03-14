@@ -4,15 +4,25 @@ set -e
 cd "$DOTFILES/git"
 
 ( set -e
-	i="$(git config get user.name)"
+	user="$(git config get user.name)"
 
-	mkdir -p "github.com/$i" && cd "github.com/$i"
+	mkdir -p "github.com/$user" && cd "github.com/$user"
 
-	for i in $(curl -s "https://api.github.com/users/$i/repos" | jq '.[].ssh_url'); do (
+	for repo in $(curl -s "https://api.github.com/users/$user/repos" | jq '.[].ssh_url'); do (
 		set -e
-		i="$(echo $i | sed -e 's/.....//' -e 's/.....$//')"
-		j="$(basename "$i")"
-		[ -d "$j" ] || git clone "$i"
-		cd "$j"
+		repo="$(echo $repo | sed -e 's/.....//' -e 's/.....$//')"
+		i="$(basename "$repo")"
+		[ -d "$i" ] || git clone "$repo"
+		cd "$i"
+
+		echo "$i"
 		git pull
-) done )
+
+		git remote -v | grep -q '^upstream' || {
+			fork="$(curl -s "https://api.github.com/repos/$user/$i" | jq '.source.ssh_url')"
+			[ "$fork" = 'null' ] || git remote add 'upstream' "$fork"; }
+
+		git remote -v
+
+	echo )
+done )
