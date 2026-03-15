@@ -11,6 +11,7 @@ binds {
 	Mod+Z { spawn "smenu"; }
 	Mod+Ctrl+C allow-inhibiting=false hotkey-overlay-title="lock" { spawn "~/.config/niri/lock"; }
 
+	XF86AudioMute { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; notify-send 'volume:' \"$(set -- $(wpctl get-volume @DEFAULT_AUDIO_SINK@) && shift && echo \"$@\")\""; }
 	XF86AudioRaiseVolume { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.025+; notify-send $(wpctl get-volume @DEFAULT_AUDIO_SINK@)"; }
 	XF86AudioLowerVolume { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.025-; notify-send $(wpctl get-volume @DEFAULT_AUDIO_SINK@)"; }
 

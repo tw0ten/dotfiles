@@ -40,7 +40,7 @@ PanelWindow {
 		BarBlock {
 			color: `#a0${Theme.color.background}`
 
-			radius: Theme.sizing.height / 2
+			radius: Theme.sizing.radius
 
 			content: RowLayout {
 				id: workspaces
@@ -159,7 +159,7 @@ PanelWindow {
 
 			visible: window.value.length > 0
 
-			radius: Theme.sizing.height / 2
+			radius: Theme.sizing.radius
 
 			Process {
 				Component.onCompleted: bar.eventStreamSubs.push(this)
@@ -177,7 +177,7 @@ PanelWindow {
 
 		BarBlock {
 			color: `#a0${Theme.color.background}`
-			radius: Theme.sizing.height / 2
+			radius: Theme.sizing.radius
 
 			content: RowLayout {
 				spacing: Theme.sizing.spacing
@@ -206,7 +206,7 @@ PanelWindow {
 						}
 
 						Blocks.UserHost {
-							radius: Theme.sizing.height / 2
+							radius: Theme.sizing.radius
 						}
 					}
 				}

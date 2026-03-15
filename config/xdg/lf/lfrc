@@ -14,7 +14,7 @@ set timefmt "2006/01/02 15/04"
 
 
 cmd e $$EDITOR "$f"
-cmd su $sudo lf
+cmd su $su -c lf
 
 
 map ~ cd

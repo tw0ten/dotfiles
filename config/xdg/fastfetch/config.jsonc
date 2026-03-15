@@ -7,12 +7,12 @@
 		},
 		"bar": {
 			"border": {
-				"left": "[",
-				"right": "]"
+				"left": "<",
+				"right": ">"
 			},
 			"char": {
-				"elapsed": "=",
-				"total": "-"
+				"elapsed": "-",
+				"total": " "
 			},
 			"width": 8
 		}
@@ -32,10 +32,6 @@
 		"wmtheme",
 		"theme",
 		"icons",
-		"font",
-		"cursor",
-		"terminal",
-		"terminalfont",
 		"cpu",
 		"gpu",
 		"memory",
@@ -44,7 +40,6 @@
 		"localip",
 		"battery",
 		"poweradapter",
-		"locale",
 		"break",
 		"colors"
 	]

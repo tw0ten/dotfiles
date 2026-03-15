@@ -5,18 +5,18 @@
 	i() { $AUR_HELPER -S "$@" || true; }
 	command -v $AUR_HELPER || ( cd "$(mktemp -d)"; git clone "https://aur.archlinux.org/$AUR_HELPER" .; makepkg -si )
 
-	i neovim openssh tmux \
-		lf btop fastfetch ripgrep reflector ufw ffmpeg ly
+	i neovim lf \
+		openssh qbittorrent-nox nginx ufw \
+		btop fastfetch ripgrep ly nix tmux ffmpeg
 	i niri pipewire nvidia-open \
-		firefox mako swww rofi alacritty quickshell fcitx5 \
-		torbrowser-launcher qbittorrent-nox libreoffice-still gimp obs-studio mpv blender kdenlive \
+		mako swww rofi quickshell fcitx5 \
+		firefox alacritty \
+		mpv torbrowser-launcher libreoffice-still gimp obs-studio blender kdenlive \
 		noto-fonts noto-fonts-emoji noto-fonts-cjk
 echo )
 
 ( set -ex; cd etc; i() { sudo "$@"; }
 	i locale-gen
-
-	i systemctl enable reflector.timer
 
 	i systemctl disable getty@tty1
 	i systemctl enable ly@tty1
