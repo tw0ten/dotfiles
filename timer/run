@@ -1,5 +1,0 @@
-#!/bin/sh
-set -e
-cd "$DOTFILES/timer"
-for i in */; do ./wrap "$i" & done
-wait

@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 set -e
 
-. 'config/home/sh/profile'
+. 'lib/sh/profile'
 
 ( set -e; cd config
 	i() { set -- "$PWD/$1" "$i/$2"

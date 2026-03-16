@@ -1,12 +1,2 @@
 #!/bin/sh
-set -e
-cd "$DOTFILES/timer/brightness"
-base=$(cat i/base)
-max=$(brightnessctl max)
-
-i=$(echo -e "$(brightnessctl get)\n0\n$base\n$max" | dmenu -p "brightness " -a 2 -l 4)
-
-echo $i > i/base
-brightnessctl set $i
-
-notify-send -t 1500 'brightness' "base = $i\ndelta = $(cat i/delta)"
+brightnessctl set $(echo -e " \n0\n5%-\n$(brightnessctl get)\n5%+\n$(brightnessctl max)" | dmenu -p "brightness " -a 3 -l 6) && notify-send -t 1500 'brightness' "$(brightnessctl get)"

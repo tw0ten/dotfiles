@@ -16,6 +16,8 @@
 echo )
 
 ( set -ex; cd etc; i() { sudo "$@"; }
+	systemctl --user enable brightness.timer
+
 	i systemctl disable getty@tty1
 	i systemctl enable ly@tty1
 

@@ -1,0 +1,10 @@
+[Unit]
+Description=brightness-fluctuator timer
+
+[Timer]
+OnBootSec=0
+OnUnitActiveSec=60
+AccuracySec=1s
+
+[Install]
+WantedBy=timers.target
