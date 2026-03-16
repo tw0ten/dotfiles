@@ -17,8 +17,8 @@ PanelWindow {
 	}
 
 	margins {
-		top: 1
-		bottom: 1
+		top: Theme.sizing.inset
+		bottom: Theme.sizing.inset
 	}
 
 	property var eventStreamSubs: []

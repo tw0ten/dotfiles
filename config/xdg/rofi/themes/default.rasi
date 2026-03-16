@@ -51,4 +51,5 @@ textbox-prompt-colon {
 }
 prompt {
 	enabled: false;
+	text-color: var(active-foreground);
 }

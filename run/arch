@@ -16,8 +16,6 @@
 echo )
 
 ( set -ex; cd etc; i() { sudo "$@"; }
-	i locale-gen
-
 	i systemctl disable getty@tty1
 	i systemctl enable ly@tty1
 
