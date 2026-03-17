@@ -15,22 +15,23 @@
 		noto-fonts noto-fonts-emoji noto-fonts-cjk
 echo )
 
-( set -ex; cd etc; i() { sudo "$@"; }
-	systemctl --user enable brightness.timer
+( set -ex
+	systemctl --user enable \
+		brightness-fluctuator.timer
 
-	i systemctl disable getty@tty1
-	i systemctl enable ly@tty1
+	sudo systemctl disable getty@tty1 && sudo systemctl enable ly@tty1
 
-	i cp -rTL ../config/etc/grub/theme /boot/grub/themes/default
-	i grub-mkconfig -o /boot/grub/grub.cfg
+	sudo ufw reset
+	sudo ufw default deny incoming
+	sudo ufw default allow outgoing
+	sudo ufw allow ssh
+	sudo ufw enable
+	sudo ufw reload
 
-	i ufw reset
-	i ufw default deny incoming
-	i ufw default allow outgoing
-	i ufw allow ssh
-	i ufw enable
-	i ufw reload
+	sudo systemctl enable \
+		sshd \
+		qbittorrent-nox nginx
 
-	gsettings set 'org.gnome.desktop.interface' font-name "$(fc-match sans-serif -f '%{family} %{size}')"
-	gsettings set 'org.gnome.desktop.interface' color-scheme 'prefer-dark'
+	sudo cp -rTL config/etc/grub/theme /boot/grub/themes/default
+	sudo grub-mkconfig -o /boot/grub/grub.cfg
 echo )

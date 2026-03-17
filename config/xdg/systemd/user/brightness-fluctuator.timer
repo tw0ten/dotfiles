@@ -1,6 +1,3 @@
-[Unit]
-Description=brightness-fluctuator timer
-
 [Timer]
 OnBootSec=0
 OnUnitActiveSec=60

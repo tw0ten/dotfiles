@@ -1,6 +1,0 @@
-[Unit]
-Description=brightness-fluctuator
-
-[Service]
-Type=oneshot
-ExecStart=%E/systemd/user/brightness
