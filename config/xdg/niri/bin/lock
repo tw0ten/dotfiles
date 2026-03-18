@@ -1,11 +1,11 @@
 #!/bin/sh
-mute="$(pamixer --get-mute)"
+mute="$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -q ' \[MUTED\]$' && echo true || echo false)"
 keyboard="$(niri msg -j keyboard-layouts | jq '.current_idx')"
 
-pamixer -m
+wpctl set-mute @DEFAULT_AUDIO_SINK@ 1
 niri msg action switch-layout 0
 
 swaylock
 
-"$mute" || pamixer -u
+"$mute" || wpctl set-mute @DEFAULT_AUDIO_SINK@ 0
 niri msg action switch-layout $keyboard

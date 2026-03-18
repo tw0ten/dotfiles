@@ -59,7 +59,7 @@ PanelWindow {
 
 						content: BarText {
 							color: `#${(index === 0 || index === workspaces.value.length - 1) ? "b0" : "ff"}${workspaces.value[index].is_focused ? Theme.color.accent : Theme.color.foreground}`
-							text: `${index}`
+							text: `${index === 0 ? 'c' : index <= 9 ? index : `#${String.fromCharCode(0xE000 + index - 9)}`}`
 						}
 					}
 				}
@@ -87,21 +87,18 @@ PanelWindow {
 
 			property var value: []
 			property real spacing: 1
-			property real valueWidth: Math.max((bar.height / 9 * 16) - content.spacing * (layout.value.length - 1), (layout.value.length - 1) * spacing * 2)
 
 			content: RowLayout {
 				spacing: layout.spacing
-
 				Repeater {
 					model: layout.value.length
 
-					Column {
-						spacing: layout.spacing
-
+					ColumnLayout {
 						required property int index
 
 						property var column: layout.value[index]
 
+						spacing: layout.spacing
 						Repeater {
 							model: column.length
 
@@ -109,8 +106,8 @@ PanelWindow {
 								required property int index
 
 								color: `#ff${column[index].is_focused ? Theme.color.accent : Theme.color.foreground}`
-								implicitWidth: layout.valueWidth * column[index].size[0]
-								implicitHeight: (bar.height - layout.spacing * (column.length - 1)) * column[index].size[1]
+								implicitWidth: column[index].size[0] * (bar.height / 9 * 16)
+								implicitHeight: column[index].size[1] * (bar.height - layout.spacing * (column.length - 1))
 							}
 						}
 					}
