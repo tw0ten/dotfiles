@@ -1,5 +1,6 @@
 /*
 !/profile
+!/profiles.ini
 /profile/*
 !/profile/chrome
 !/profile/user.js

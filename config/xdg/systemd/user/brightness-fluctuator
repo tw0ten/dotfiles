@@ -1,13 +1,17 @@
 #!/bin/sh
+set -e -- $EPOCHSECONDS
+
 second=1
 minute=$((second * 60))
 hour=$((minute * 60))
 day=$((hour * 24))
 
-offset=$(python -c 'import time; print(-time.timezone)')
-
 base=70
 delta=20
 
-brightnessctl -q set \
-	"$(echo "$base - $delta * c($(((EPOCHSECONDS + offset) % day)) / $day * 2 * 3.14159)" | bc -l)"
+f=$(echo "c($((($1 + $(python -c 'import time; print(-time.timezone)')) % day)) / $day * 2 * 3.14159)" | bc -l)
+o="$(echo "$base - $delta * $f" | bc)"
+
+echo "$base - $delta * $f = $o"
+
+brightnessctl -q set $o

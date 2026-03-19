@@ -1,8 +1,10 @@
+@import "common.css";
+
+:root {
+	--newtab-background-color: transparent !important;
+}
+
 html {
 	background-color: #101010;
 	color: #ffffff;
-}
-
-* {
-	line-height: 1.0;
 }

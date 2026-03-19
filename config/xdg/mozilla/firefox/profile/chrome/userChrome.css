@@ -1,8 +1,37 @@
-* {
-	line-height: 1.0;
-}
+@import "common.css";
 
 .tabbrowser-tab .tab-close-button,
 #tabs-newtab-button, #new-tab-button,
 .titlebar-buttonbox-container
 { visibility: collapse !important; }
+
+
+#navigator-toolbox {
+	background-color: #101010 !important;
+}
+
+:root {
+	--arrowpanel-background: #101010 !important;
+	--arrowpanel-border-color: transparent !important;
+
+	--color-accent-primary #40e0d0 !important;
+
+	--tab-selected-bgcolor: #202020 !important;
+
+	--toolbar-bgcolor: #101010 !important;
+	--toolbar-field-background-color: #202020 !important;
+
+	--input-bgcolor: #101010 !important;
+	--toolbar-field-focus-background-color: #101010 !important;
+}
+
+#contentAreaContextMenu {
+	& > * {
+		background-color: #101010 !important;
+		color: #ffffff !important;
+	}
+	& menuitem:hover {
+		background-color: #40e0d0 !important;
+		color: #101010 !important;
+	}
+}

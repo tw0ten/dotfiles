@@ -62,6 +62,5 @@ vim.filetype.add({
 	extension = {
 		['HC'] = "HolyC",
 		['HH'] = "HolyC",
-		['k'] = "komp",
 	},
 })
