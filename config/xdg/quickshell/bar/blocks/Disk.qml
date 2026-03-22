@@ -4,6 +4,10 @@ import Quickshell.Io
 import "../"
 
 BarBlock {
+	id: root
+	property real valueNumber
+	property int valuePrecision: 6
+
 	content: RowLayout {
 		spacing: 0
 
@@ -11,16 +15,13 @@ BarBlock {
 			text: "("
 		}
 		Fraction {
-			prefix: `${Math.trunc(valueNumber)}`
-			value: valueNumber % 1
+			prefix: `${Math.trunc(root.valueNumber)}`
+			value: root.valueNumber % 1
 		}
 		BarText {
-			text: `${valuePrecision})`
+			text: `${root.valuePrecision})`
 		}
 	}
-
-	property real valueNumber
-	property int valuePrecision: 6
 
 	Process {
 		id: proc
@@ -28,7 +29,7 @@ BarBlock {
 		command: ["df", "/", "--output=avail", "--block-size=1000"]
 		stdout: SplitParser {
 			splitMarker: ""
-			onRead: i => valueNumber = i.split("\n")[1] / (10 ** valuePrecision)
+			onRead: i => root.valueNumber = i.split("\n")[1] / (10 ** root.valuePrecision)
 		}
 	}
 

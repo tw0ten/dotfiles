@@ -3,25 +3,32 @@ import Quickshell.Io
 import "../"
 
 BarBlock {
-	content: Fraction {}
-
+	id: root
 	property string battery: "/sys/class/power_supply/BAT0"
+
+	content: Fraction {
+		prefix: "="
+		value: 0
+	}
 
 	Process {
 		id: procStatus
 		running: true
-		command: ["cat", `${battery}/status`]
+		command: ["cat", `${root.battery}/status`]
 		stdout: SplitParser {
-			onRead: i => content.prefix = { "Charging": "+", "Not charging": "=" }[i] ?? "-"
+			onRead: i => root.content.prefix = {
+				"Charging": "+",
+				"Not charging": "="
+			}[i] ?? "-"
 		}
 	}
 
 	Process {
 		id: procCapacity
 		running: true
-		command: ["cat", `${battery}/capacity`]
+		command: ["cat", `${root.battery}/capacity`]
 		stdout: SplitParser {
-			onRead: i => content.value = i / 100
+			onRead: i => root.content.value = i / 100
 		}
 	}
 

@@ -3,14 +3,15 @@ import Quickshell.Io
 import "../"
 
 BarBlock {
-	content: Fraction {
-		prefix: `${valueDate} ${valueTime}/`
-		value: valuePart
-	}
-
+	id: root
 	property string valueDate
 	property string valueTime
 	property real valuePart
+
+	content: Fraction {
+		prefix: `${root.valueDate} ${root.valueTime}/`
+		value: root.valuePart
+	}
 
 	Process {
 		id: proc
@@ -19,9 +20,9 @@ BarBlock {
 		stdout: SplitParser {
 			onRead: i => {
 				let t;
-				[valueDate, valueTime, t] = i.split("|");
+				[root.valueDate, root.valueTime, t] = i.split("|");
 				const [secs, nanos] = t.split(" ").map(Number);
-				valuePart = (secs + nanos / 1000000000) / 60;
+				return root.valuePart = (secs + nanos / 1000000000) / 60;
 			}
 		}
 	}

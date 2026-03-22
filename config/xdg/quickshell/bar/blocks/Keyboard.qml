@@ -3,8 +3,15 @@ import Quickshell.Io
 import "../"
 
 BarBlock {
+	id: root
+	property var value: ({
+		names: [""],
+		current_idx: 0
+	})
+
 	content: BarText {
 		font: Theme.font.mono
+		text: `${root.value.names[root.value.current_idx].substring(0, 2)}`
 	}
 
 	Process {
@@ -12,7 +19,7 @@ BarBlock {
 
 		command: ["niri", "msg", "-j", "keyboard-layouts"]
 		stdout: SplitParser {
-			onRead: i => content.text = JSON.parse(i).names[JSON.parse(i).current_idx].substring(0, 2)
+			onRead: i => root.value = JSON.parse(i)
 		}
 	}
 }

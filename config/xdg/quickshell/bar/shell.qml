@@ -31,7 +31,7 @@ PanelWindow {
 			running: true
 			command: ["niri", "msg", "-j", "event-stream"]
 			stdout: SplitParser {
-				onRead: i => eventStreamSubs.map(i => i.running = true)
+				onRead: i => bar.eventStreamSubs.map(i => i.running = true)
 			}
 		}
 
@@ -73,7 +73,7 @@ PanelWindow {
 						onRead: i => {
 							workspaces.value = JSON.parse(i).sort((a, b) => a.idx - b.idx);
 							workspaces.currentWorkspaceId = workspaces.value.filter(i => i.is_focused)[0].id;
-							layout.proc.running = true;
+							return layout.proc.running = true;
 						}
 					}
 				}
@@ -154,17 +154,19 @@ PanelWindow {
 				Item {}
 				Rectangle {
 					color: "#00000000"
-					height: Theme.sizing.height
-					width: Theme.sizing.height
+					implicitHeight: Theme.sizing.height - 2
+					implicitWidth: this.height
 
-					visible: window.value?.icon !== undefined
+					visible: window.iconFetch.out !== null
 
 					Image {
 						anchors.fill: parent
-						source: window.value?.icon ?? ""
+						source: window.iconFetch.out ?? ""
 					}
 				}
 				BarText {
+					visible: window.value?.title !== ""
+
 					text: (window.value?.title ?? "").substring(0, 128)
 					color: `#ff${Theme.color.background}`
 				}
@@ -181,21 +183,24 @@ PanelWindow {
 				command: ["niri", "msg", "-j", "focused-window"]
 				stdout: SplitParser {
 					onRead: i => {
-						window.value = JSON.parse(i);
-						window.iconFetch.running = true;
+						i = JSON.parse(i);
+
+						if (i !== null) {
+							i.title = i.title ?? "";
+							window.iconFetch.running = true;
+							// i.icon = window.iconFetch.out;
+						}
+
+						return window.value = i;
 					}
 				}
 			}
+
 			property var iconFetch: Process {
-				command: ["find", "/usr/share/icons", "-iname", `${window.value?.app_id}.*`]
-				stdout: SplitParser {
-					splitMarker: ""
-					onRead: i => {
-						const t = window.value;
-						t.icon = i.split("\n")[0];
-						window.value = null;
-						window.value = t;
-					}
+				command: ["find", "/usr/share/icons", "-name", `${window.value?.app_id}.*`]
+				property var out: null
+				stdout: StdioCollector {
+					onStreamFinished: () => window.iconFetch.out = this.text.length === 0 ? null : this.text.split("\n")[0]
 				}
 			}
 		}

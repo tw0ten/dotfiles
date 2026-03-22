@@ -4,6 +4,10 @@ import Quickshell.Io
 import "../"
 
 BarBlock {
+	id: root
+	property real valueUsage
+	property real valueTemp
+
 	content: RowLayout {
 		spacing: 0
 
@@ -11,15 +15,12 @@ BarBlock {
 			text: "{c"
 		}
 		Fraction {
-			value: valueUsage
+			value: root.valueUsage
 		}
 		BarText {
-			text: `${Math.ceil(valueTemp)}}`
+			text: `${Math.ceil(root.valueTemp)}}`
 		}
 	}
-
-	property real valueUsage
-	property real valueTemp
 
 	Process {
 		running: true
@@ -27,8 +28,9 @@ BarBlock {
 		stdout: SplitParser {
 			splitMarker: "\n\n"
 			onRead: i => {
-				if (!i.startsWith("top")) return
-				valueUsage = i.split("\n")[2].split(" ").filter(i => i.length > 0)[1] / 100
+				if (!i.startsWith("top"))
+				return;
+				root.valueUsage = i.split("\n")[2].split(" ").filter(i => i.length > 0)[1] / 100;
 			}
 		}
 	}
@@ -36,8 +38,8 @@ BarBlock {
 		id: procTemp
 		running: true
 		command: ["sensors", "-j"]
-		stdout:  SplitParser {
-			onRead: i => valueTemp = JSON.parse(i)["k10temp-pci-00c3"]["Tctl"]["temp1_input"]
+		stdout: SplitParser {
+			onRead: i => root.valueTemp = JSON.parse(i)["k10temp-pci-00c3"]["Tctl"]["temp1_input"]
 		}
 	}
 

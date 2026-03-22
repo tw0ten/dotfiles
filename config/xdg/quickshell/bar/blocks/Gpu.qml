@@ -4,6 +4,10 @@ import Quickshell.Io
 import "../"
 
 BarBlock {
+	id: root
+	property real valueUsage
+	property real valueTemp
+
 	content: RowLayout {
 		spacing: 0
 
@@ -11,21 +15,18 @@ BarBlock {
 			text: "{g"
 		}
 		Fraction {
-			value: valueUsage / 100
+			value: root.valueUsage / 100
 		}
 		BarText {
-			text: `${valueTemp}}`
+			text: `${root.valueTemp}}`
 		}
 	}
-
-	property real valueUsage
-	property real valueTemp
 
 	Process {
 		running: true
 		command: ["nvidia-smi", "--format=csv,noheader,nounits", "--query-gpu=utilization.gpu,temperature.gpu", `--loop=${2}`]
 		stdout: SplitParser {
-			onRead: i => [valueUsage, valueTemp] = i.split(", ")
+			onRead: i => [root.valueUsage, root.valueTemp] = i.split(", ")
 		}
 	}
 }

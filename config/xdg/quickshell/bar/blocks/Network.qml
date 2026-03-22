@@ -3,8 +3,10 @@ import Quickshell.Io
 import "../"
 
 BarBlock {
+	id: root
 	content: Fraction {
 		prefix: "n"
+		value: 0
 	}
 
 	Process {
@@ -13,7 +15,7 @@ BarBlock {
 		command: ["iwctl", "station", "wlan0", "show"]
 		stdout: SplitParser {
 			splitMarker: ""
-			onRead: i => content.value = Math.min(Math.max(i.split("\n").map(i => i.split(" ").filter(i => i.length > 0)).filter(i => i[0] === "AverageRSSI")[0][1], -100), 0) / 100 + 1
+			onRead: i => root.content.value = Math.min(Math.max(i.split("\n").map(i => i.split(" ").filter(i => i.length > 0)).filter(i => i[0] === "AverageRSSI")[0][1], -100), 0) / 100 + 1
 		}
 	}
 

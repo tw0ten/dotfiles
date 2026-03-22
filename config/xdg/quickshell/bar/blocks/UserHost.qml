@@ -3,6 +3,7 @@ import Quickshell.Io
 import "../"
 
 BarBlock {
+	id: root
 	property string user
 	property string host
 
@@ -10,14 +11,14 @@ BarBlock {
 
 	content: BarText {
 		color: `#ff${Theme.color.background}`
-		text: ` ${user}@${host} `
+		text: ` ${root.user}@${root.host} `
 	}
 
 	Process {
 		running: true
 		command: ["whoami"]
 		stdout: SplitParser {
-			onRead: i => user = i
+			onRead: i => root.user = i
 		}
 	}
 
@@ -25,7 +26,7 @@ BarBlock {
 		running: true
 		command: ["uname", "-n"]
 		stdout: SplitParser {
-			onRead: i => host = i
+			onRead: i => root.host = i
 		}
 	}
 }

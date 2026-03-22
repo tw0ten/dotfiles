@@ -3,8 +3,10 @@ import Quickshell.Io
 import "../"
 
 BarBlock {
+	id: root
 	content: Fraction {
 		prefix: "m"
+		value: 0
 	}
 
 	Process {
@@ -12,7 +14,7 @@ BarBlock {
 		running: true
 		command: ["brightnessctl", "--machine-readable", "info"]
 		stdout: SplitParser {
-			onRead: i => content.value = i.split(",")[2] / i.split(",")[4]
+			onRead: i => root.content.value = i.split(",")[2] / i.split(",")[4]
 		}
 	}
 

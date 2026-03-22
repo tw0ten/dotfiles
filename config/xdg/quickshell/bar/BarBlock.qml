@@ -1,20 +1,18 @@
 import QtQuick
-import QtQuick.Layouts
-import Quickshell
 
 Rectangle {
-	Layout.preferredWidth: contentContainer.implicitWidth
-	Layout.preferredHeight: bar.height
-
+	id: root
+	required property Item content
 	color: "#00000000"
 
-	property Item content
+	implicitWidth: contentContainer.width
+	implicitHeight: Theme.sizing.height
 
 	Item {
 		id: contentContainer
-		implicitWidth: content.implicitWidth
-		implicitHeight: content.implicitHeight
+		implicitWidth: root.content.width
+		implicitHeight: root.content.height
 		anchors.centerIn: parent
-		children: content
+		children: root.content
 	}
 }
