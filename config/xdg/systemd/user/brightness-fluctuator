@@ -6,8 +6,8 @@ minute=$((second * 60))
 hour=$((minute * 60))
 day=$((hour * 24))
 
-base=70
-delta=20
+base=60
+delta=25
 
 f=$(echo "c($((($1 + $(python -c 'import time; print(-time.timezone)')) % day)) / $day * 2 * 3.14159)" | bc -l)
 o="$(echo "$base - $delta * $f" | bc)"

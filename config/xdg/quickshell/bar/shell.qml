@@ -145,16 +145,33 @@ PanelWindow {
 
 		BarBlock {
 			id: window
-			property string value
+			property var value: null
 
 			color: `#ff${Theme.color.foreground}`
 
-			content: BarText {
-				text: ` ${window.value} `
-				color: `#ff${Theme.color.background}`
+			content: RowLayout {
+				spacing: Theme.sizing.spacing / 2
+				Item {}
+				Rectangle {
+					color: "#00000000"
+					height: Theme.sizing.height
+					width: Theme.sizing.height
+
+					visible: window.value?.icon !== undefined
+
+					Image {
+						anchors.fill: parent
+						source: window.value?.icon ?? ""
+					}
+				}
+				BarText {
+					text: (window.value?.title ?? "").substring(0, 128)
+					color: `#ff${Theme.color.background}`
+				}
+				Item {}
 			}
 
-			visible: window.value.length > 0
+			visible: window.value !== null
 
 			radius: Theme.sizing.radius
 
@@ -163,7 +180,22 @@ PanelWindow {
 
 				command: ["niri", "msg", "-j", "focused-window"]
 				stdout: SplitParser {
-					onRead: i => window.value = (JSON.parse(i)?.title ?? "").substring(0, 128)
+					onRead: i => {
+						window.value = JSON.parse(i);
+						window.iconFetch.running = true;
+					}
+				}
+			}
+			property var iconFetch: Process {
+				command: ["find", "/usr/share/icons", "-iname", `${window.value?.app_id}.*`]
+				stdout: SplitParser {
+					splitMarker: ""
+					onRead: i => {
+						const t = window.value;
+						t.icon = i.split("\n")[0];
+						window.value = null;
+						window.value = t;
+					}
 				}
 			}
 		}

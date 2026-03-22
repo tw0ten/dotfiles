@@ -11,7 +11,7 @@
 	i niri pipewire nvidia-open \
 		mako swww rofi quickshell fcitx5 \
 		firefox alacritty \
-		mpv torbrowser-launcher libreoffice-still gimp obs-studio blender kdenlive \
+		mpv libreoffice-still gimp obs-studio \
 		noto-fonts noto-fonts-emoji noto-fonts-cjk
 echo )
 
