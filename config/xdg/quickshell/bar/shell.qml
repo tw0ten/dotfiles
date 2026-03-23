@@ -59,7 +59,7 @@ PanelWindow {
 
 						content: BarText {
 							color: `#${(index === 0 || index === workspaces.value.length - 1) ? "b0" : "ff"}${workspaces.value[index].is_focused ? Theme.color.accent : Theme.color.foreground}`
-							text: `${index === 0 ? 'c' : index <= 9 ? index : `#${String.fromCharCode(0xE000 + index - 9)}`}`
+							text: `${index === 0 ? 'c' : index <= 9 ? index : `#${String.fromCharCode(0xE000 + index - 9)}`}${workspaces.value[index].name ?? ""}`
 						}
 					}
 				}

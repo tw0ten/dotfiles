@@ -2,8 +2,8 @@ layout {
 	background-color "#00000000"
 
 	border {
-		active-color "#ffffffa0"
-		inactive-color "#202020a0"
+		active-color "#ffffff70"
+		inactive-color "#00000000"
 		urgent-color "#40e0d0a0"
 	}
 
