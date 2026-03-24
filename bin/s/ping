@@ -1,3 +1,2 @@
 #!/bin/sh
-notify-send -t 1000 'ping'
-notify-send -t 5000 'pong' "$(ping 'wikipedia.org' -c 2 -q 2>&1)"
+notify-send -r "$(notify-send -pt 0 'ping')" -t 5000 'pong' "$(ping 'wikipedia.org' -c 2 -q 2>&1)"
