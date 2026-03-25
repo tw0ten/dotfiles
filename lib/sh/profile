@@ -31,8 +31,8 @@ export SUDO_PROMPT="%U$bold$accent@$normal%H %p$bold$accent#$normal"
 export \
 	HISTSIZE= \
 	HISTFILESIZE= \
-	HISTFILE="$HOME/.local/share/history.bash" \
-	HISTTIMEFORMAT='[%c] ' \
+	HISTFILE="$HOME/.local/share/history.sh" \
+	HISTTIMEFORMAT='%c ' \
 	HISTCONTROL='ignoredups' \
 	HISTIGNORE='fg:bg' \
 ;
