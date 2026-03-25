@@ -12,9 +12,9 @@ binds {
 
 	Mod+Z { spawn "smenu"; }
 
-	XF86AudioMute { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; notify-send 'volume:' \"$(set -- $(wpctl get-volume @DEFAULT_AUDIO_SINK@) && shift && echo \"$@\")\""; }
-	XF86AudioRaiseVolume { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.025+; notify-send $(wpctl get-volume @DEFAULT_AUDIO_SINK@)"; }
-	XF86AudioLowerVolume { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.025-; notify-send $(wpctl get-volume @DEFAULT_AUDIO_SINK@)"; }
+	XF86AudioMute { spawn "~/.config/niri/bin/volume"; }
+	XF86AudioRaiseVolume { spawn "~/.config/niri/bin/volume" "0.025+"; }
+	XF86AudioLowerVolume { spawn "~/.config/niri/bin/volume" "0.025-"; }
 
 	Mod+Q repeat=false { toggle-overview; }
 
