@@ -1,9 +1,0 @@
-[general]
-live_config_reload = false
-import = [
-	"theme.toml",
-]
-
-[window]
-dynamic_title = false
-title = "terminal"

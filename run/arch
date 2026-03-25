@@ -10,7 +10,7 @@
 		btop fastfetch ripgrep ly nix tmux ffmpeg
 	i niri pipewire nvidia-open \
 		mako swww rofi quickshell fcitx5 \
-		firefox alacritty \
+		firefox foot \
 		mpv libreoffice-still gimp obs-studio \
 		noto-fonts noto-fonts-emoji noto-fonts-cjk
 echo )
