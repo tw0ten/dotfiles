@@ -1,15 +1,17 @@
 #!/bin/sh
-set -e -- $EPOCHSECONDS
+set -e
 
 second=1
 minute=$((second * 60))
 hour=$((minute * 60))
 day=$((hour * 24))
 
+tz_offset=$(python -c 'import time; print(-time.timezone)')
+
 base=60
 delta=25
 
-f=$(echo "c($((($1 + $(python -c 'import time; print(-time.timezone)')) % day)) / $day * 2 * 3.14159)" | bc -l)
+f=$(echo "c($(((EPOCHSECONDS + tz_offset) % day)) / $day * 2 * 3.14159)" | bc -l)
 o="$(echo "$base - $delta * $f" | bc)"
 
 echo "$base - $delta * $f = $o"

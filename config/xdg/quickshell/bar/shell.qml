@@ -11,14 +11,10 @@ PanelWindow {
 
 	implicitHeight: Theme.sizing.height
 	anchors {
-		bottom: true
+		top: Theme.top
+		bottom: !Theme.top
 		left: true
 		right: true
-	}
-
-	margins {
-		top: Theme.sizing.inset
-		bottom: Theme.sizing.inset
 	}
 
 	property var eventStreamSubs: []
@@ -146,6 +142,8 @@ PanelWindow {
 		BarBlock {
 			id: window
 			property var value: null
+
+			anchors.centerIn: parent
 
 			color: `#ff${Theme.color.foreground}`
 

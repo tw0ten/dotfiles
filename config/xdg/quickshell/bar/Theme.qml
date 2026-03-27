@@ -4,10 +4,11 @@ import QtQuick
 import Quickshell
 
 Singleton {
+	property bool top: false
+
 	property var sizing: Item {
 		height: 16
-		property real inset: 0
-		property real radius: 8
+		property real radius: 16 / 2
 		property real spacing: 8
 	}
 

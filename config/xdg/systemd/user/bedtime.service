@@ -1,0 +1,2 @@
+[Service]
+ExecStart=%E/systemd/user/bedtime

@@ -13,6 +13,7 @@ set statfmt "\033[32;1m%p\033[0m	|%c	|%u	|%g	|\033[34;1m%S |%t \033[0m|%l "
 set timefmt "2006/01/02 15/04"
 
 
+cmd x $$OPENER "$f"
 cmd e $$EDITOR "$f"
 cmd su $su -c lf
 
@@ -23,6 +24,7 @@ map <enter> e
 map <backspace2> delete
 map c unselect
 map u su
+map x x
 
 map sr set reverse!
 map sa
