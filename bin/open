@@ -1,5 +1,5 @@
 #!/bin/sh
-[ -z "$*" ] && exit
+set -e
 [ "$TERM" = 'linux' ] && i(){ exec $TERMINAL -e "$@"; } || i(){ exec "$@"; }
 for i; do (
 	[ -d "$i" ] && i $FILES "$i"
@@ -8,4 +8,5 @@ for i; do (
 	esac
 	[ -f "$i" ] || i $VISUAL "$i"
 	exec xdg-open "$i"
+	[ -x "$i" ] && "$(realpath "$i")"
 ) done

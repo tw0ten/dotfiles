@@ -16,6 +16,12 @@ PanelWindow {
 		left: true
 		right: true
 	}
+	margins {
+		left: 2
+		right: 2
+		top: (Theme.top ? 1 : 0) * 1
+		bottom: (Theme.top ? 0 : 1) * 1
+	}
 
 	property var eventStreamSubs: []
 
@@ -31,20 +37,25 @@ PanelWindow {
 			}
 		}
 
-		Item {}
-
 		BarBlock {
 			color: `#a0${Theme.color.background}`
 
 			radius: Theme.sizing.radius
 
+			TapHandler {
+				property var overview: Process {
+					command: ["niri", "msg", "action", "toggle-overview"]
+				}
+				onTapped: overview.running = true
+			}
+
 			content: RowLayout {
+
 				id: workspaces
 
 				spacing: Theme.sizing.spacing / 1.5
 
 				property var value: []
-				property real currentWorkspaceId: 0
 
 				Item {}
 				Repeater {
@@ -68,7 +79,6 @@ PanelWindow {
 					stdout: SplitParser {
 						onRead: i => {
 							workspaces.value = JSON.parse(i).sort((a, b) => a.idx - b.idx);
-							workspaces.currentWorkspaceId = workspaces.value.filter(i => i.is_focused)[0].id;
 							return layout.proc.running = true;
 						}
 					}
@@ -102,8 +112,16 @@ PanelWindow {
 								required property int index
 
 								color: `#ff${column[index].is_focused ? Theme.color.accent : Theme.color.foreground}`
+
 								implicitWidth: column[index].size[0] * (bar.height / 9 * 16)
 								implicitHeight: column[index].size[1] * (bar.height - layout.spacing * (column.length - 1))
+
+								TapHandler {
+									property var focus: Process {
+										command: ["niri", "msg", "action", "focus-window", "--id", `${column[index].id}`]
+									}
+									onTapped: focus.running = true
+								}
 							}
 						}
 					}
@@ -114,23 +132,24 @@ PanelWindow {
 				command: ["niri", "msg", "-j", "windows"]
 				stdout: SplitParser {
 					onRead: i => {
-						const windows = JSON.parse(i).filter(i => i.workspace_id === workspaces.currentWorkspaceId && i.layout.pos_in_scrolling_layout !== null).sort((a, b) => a.layout.pos_in_scrolling_layout[0] - b.layout.pos_in_scrolling_layout[0]);
+						const workspace = workspaces.value.filter(i => i.is_focused)[0];
+						const windows = JSON.parse(i).filter(i => i.workspace_id === workspace.id && i.layout.pos_in_scrolling_layout !== null).sort((a, b) => a.layout.pos_in_scrolling_layout[0] - b.layout.pos_in_scrolling_layout[0]);
+
 						let columns = {};
-						let focused = {};
 						for (const i of windows) {
 							const x = i.layout.pos_in_scrolling_layout[0];
-							if (i.is_focused)
-							[focused.x, focused.y] = i.layout.pos_in_scrolling_layout;
 							const column = [...(columns[x] ?? []), i];
 							column.sort((a, b) => a.layout.pos_in_scrolling_layout[1] - b.layout.pos_in_scrolling_layout[1]);
 							columns[x] = column;
 						}
 						columns = Object.values(columns);
+
 						const width = columns.reduce((a, i) => a + i[0].layout.tile_size[0], 0);
 						return layout.value = columns.map(column => {
 							const height = column.map(i => i.layout.tile_size[1]).reduce((a, i) => a + i, 0);
 							return column.map(i => ({
-								is_focused: i.layout.pos_in_scrolling_layout[0] === focused.x && i.layout.pos_in_scrolling_layout[1] === focused.y,
+								id: i.id,
+								is_focused: i.id === workspace.active_window_id,
 								size: [i.layout.tile_size[0] / width, i.layout.tile_size[1] / height]
 							}));
 						});
@@ -143,9 +162,15 @@ PanelWindow {
 			id: window
 			property var value: null
 
-			anchors.centerIn: parent
+			anchors.centerIn: parent // todo: anchors in layout is undefined behavior
 
 			color: `#ff${Theme.color.foreground}`
+
+			Behavior on implicitWidth {
+				NumberAnimation {
+					duration: 100
+				}
+			}
 
 			content: RowLayout {
 				spacing: Theme.sizing.spacing / 2
@@ -155,11 +180,11 @@ PanelWindow {
 					implicitHeight: Theme.sizing.height - 2
 					implicitWidth: this.height
 
-					visible: window.iconFetch.out !== null
+					visible: window.icon.get() !== null
 
 					Image {
 						anchors.fill: parent
-						source: window.iconFetch.out ?? ""
+						source: window.icon.get() ?? ""
 					}
 				}
 				BarText {
@@ -182,23 +207,26 @@ PanelWindow {
 				stdout: SplitParser {
 					onRead: i => {
 						i = JSON.parse(i);
-
-						if (i !== null) {
+						if (i !== null)
 							i.title = i.title ?? "";
-							window.iconFetch.running = true;
-							// i.icon = window.iconFetch.out;
-						}
-
 						return window.value = i;
 					}
 				}
 			}
 
-			property var iconFetch: Process {
-				command: ["find", "/usr/share/icons", "-name", `${window.value?.app_id}.*`]
-				property var out: null
-				stdout: StdioCollector {
-					onStreamFinished: () => window.iconFetch.out = this.text.length === 0 ? null : this.text.split("\n")[0]
+			property var icon: Item {
+				property var i: window.value?.app_id
+				property var get: () => {
+					if (cache[i] === undefined)
+						window.icon.fetch.running = true;
+					return cache[i];
+				}
+				property var cache: ({})
+				property var fetch: Process {
+					command: ["find", "/usr/share/icons", "-name", `${window.icon.i}.*`]
+					stdout: StdioCollector {
+						onStreamFinished: () => window.icon.cache[window.icon.i] = this.text.length === 0 ? null : this.text.split("\n")[0];
+					}
 				}
 			}
 		}
@@ -244,7 +272,5 @@ PanelWindow {
 				}
 			}
 		}
-
-		Item {}
 	}
 }

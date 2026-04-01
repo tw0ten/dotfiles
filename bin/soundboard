@@ -1,0 +1,15 @@
+#!/bin/sh
+set -e
+
+pactl get-sink-mute soundboard_sink >/dev/null 2>&1 || {
+	pactl load-module module-null-sink sink_name=soundboard_sink
+
+	pactl load-module module-loopback source=soundboard_sink.monitor sink=@DEFAULT_SOURCE@
+
+	pactl load-module module-null-sink sink_name=virtual_mic_sink
+	pactl load-module module-remap-source master=virtual_mic_sink.monitor source_name=virtual_mic
+
+	pactl load-module module-loopback source=soundboard_sink.monitor sink=virtual_mic_sink
+}
+
+exec pw-play --target=soundboard_sink "$@"

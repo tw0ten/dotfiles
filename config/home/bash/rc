@@ -27,7 +27,7 @@ mktl() { mkdir "$1" && cd "$1" || return
 	echo -e > .io/run '#!/bin/sh\nset -e\n\ncd .io'
 	chmod +x .io/build .io/run
 	git init && git add --all && git commit -m '*'; }
-minifetch() { echo "$(tty):$accent$SHLVL$normal '$-'" | fastfetch -C ~/.config/fastfetch/mini.jsonc; }
+minifetch() { echo "$(tty):$accent$SHLVL$normal '$-'" | fastfetch -C mini "$@"; }
 ff() { find . -name "*$**" 2>/dev/null | $PAGER; }
 mhm() { fortune | cowsay -n -f "$(cowsay -l | grep / -v | sed 's/ /\n/g' | shuf -n1)" | lolcat; }
 sign() { $VISUAL "$1" && echo " - $USER, $(\date)" | tee -a "$1"; }

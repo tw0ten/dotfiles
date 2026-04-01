@@ -16,5 +16,6 @@
     "enableSplashScreen": false,
     "tray": false,
     "disableMinSize": true,
-    "splashTheming": true
+    "splashTheming": true,
+    "staticTitle": true
 }

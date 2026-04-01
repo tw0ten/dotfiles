@@ -11,10 +11,8 @@ BarBlock {
 	content: RowLayout {
 		spacing: 0
 
-		BarText {
-			text: "{g"
-		}
 		Fraction {
+			prefix: "{G"
 			value: root.valueUsage / 100
 		}
 		BarText {
