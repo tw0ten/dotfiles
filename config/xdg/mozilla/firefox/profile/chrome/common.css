@@ -1,3 +1,8 @@
 * {
 	line-height: 1.0;
 }
+
+::selection {
+	background: #40e0d0c0;
+	color: #101010;
+}

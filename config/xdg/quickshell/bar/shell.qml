@@ -174,6 +174,7 @@ PanelWindow {
 
 			content: RowLayout {
 				spacing: Theme.sizing.spacing / 2
+
 				Item {}
 				Rectangle {
 					color: "#00000000"
@@ -223,9 +224,12 @@ PanelWindow {
 				}
 				property var cache: ({})
 				property var fetch: Process {
-					command: ["find", "/usr/share/icons", "-name", `${window.icon.i}.*`]
+					command: ["sh", "-c", `set -- '${window.icon.i}' && echo "$1" && find /usr/share/icons -name "$1.*"`]
 					stdout: StdioCollector {
-						onStreamFinished: () => window.icon.cache[window.icon.i] = this.text.length === 0 ? null : this.text.split("\n")[0];
+						onStreamFinished: () => {
+							const i = this.text.split("\n");
+							return window.icon.cache[i[0]] = i[1].length === 0 ? null : i[1];
+						}
 					}
 				}
 			}

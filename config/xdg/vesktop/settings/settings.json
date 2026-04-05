@@ -321,7 +321,7 @@
             "enabled": false
         },
         "NoProfileThemes": {
-            "enabled": false
+            "enabled": true
         },
         "NoReplyMention": {
             "enabled": false
@@ -673,7 +673,7 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": true,
-        "settingsSyncVersion": 1773509898034
+        "settingsSyncVersion": 1775414859619
     },
     "uiElements": {
         "chatBarButtons": {},
