@@ -1,3 +1,20 @@
+vim.pack.add({
+	"https://github.com/williamboman/mason.nvim",
+	"https://github.com/nvim-treesitter/nvim-treesitter",
+	"https://github.com/neovim/nvim-lspconfig",
+	"https://github.com/hrsh7th/nvim-cmp",
+})
+
+require("mason").setup({})
+
+require("nvim-treesitter.config").setup({
+	sync_install = false,
+	auto_install = true,
+	highlight = {
+		enable = true,
+	},
+})
+
 vim.diagnostic.config({
 	float = {
 		style = "minimal",
@@ -18,24 +35,38 @@ vim.lsp.config("*", {
 		vim.keymap.set('n', "]d", vim.diagnostic.goto_next, opts)
 		vim.keymap.set('n', "gd", vim.lsp.buf.definition, opts)
 	end,
-	root_markers = {
-		".git",
-		".io",
-	},
 })
 
-local function ls(path)
-	local handle = io.popen('ls "' .. path .. '" 2> /dev/null')
-	local o = {}
-	if handle then
-		for i in handle:read("*a"):gmatch("[^\r\n]+") do
-			table.insert(o, i)
+do
+	local function ls(path)
+		local handle = io.popen('ls -1 "' .. path .. '" 2> /dev/null')
+		local o = {}
+		if handle then
+			for i in handle:read("*a"):gmatch("[^\r\n]+") do
+				table.insert(o, i)
+			end
+			handle:close()
 		end
-		handle:close()
+		return o
 	end
-	return o
+
+	io.popen('ln -sf "' .. vim.fn.stdpath("data") .. "/site/pack/core/opt/nvim-lspconfig/lsp/" .. '" "' ..vim.fn.stdpath("config") ..'"')
+	for _, i in ipairs(ls(vim.fn.stdpath("config") .. "/lsp")) do
+		vim.lsp.enable(i:sub(1, -5))
+	end
 end
 
-for _, i in ipairs(ls(vim.fn.stdpath("config") .. "/lsp")) do
-	vim.lsp.enable(i:sub(1, -5))
+do
+	local cmp = require("cmp")
+	cmp.setup({
+		mapping = cmp.mapping.preset.insert({
+			['<C-Space>'] = cmp.mapping.complete(),
+			['<Tab>'] = cmp.mapping.confirm({ select = true }),
+		}),
+		sources = cmp.config.sources({
+			{ name = 'nvim_lsp' },
+		}, {
+			{ name = 'buffer' },
+		})
+	})
 end
