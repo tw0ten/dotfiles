@@ -35,22 +35,31 @@ vim.g.netrw_preview = 1
 vim.opt.showmode = false
 vim.opt.laststatus = 2
 vim.opt.statusline =
-	" " ..
-	"%{&readonly?'-':(&modified?'+':'=')}"
-	.. " {%{mode()}}"
-	.. " [%{expand('%:~:.')}]"
-	.. " %#Normal#%=%* " ..
-	"<%l,%c> " ..
-	"(%{&fileformat}|%{&fileencoding}|%{&filetype})"
-	.. " "
+		" " ..
+		"%{&readonly?'-':(&modified?'+':'=')}"
+		.. " {%{mode()}}"
+		.. " [%{expand('%:~:.')}]"
+		.. " %#Normal#%=%* " ..
+		"<%l,%c> " ..
+		"(%{&fileformat}|%{&fileencoding}|%{&filetype})"
+		.. " "
 
 vim.opt.shortmess = "lmrwoOstTAIcCFS"
+
+vim.filetype.add({
+	extension = {
+		['HC'] = "HolyC",
+		['HH'] = "HolyC",
+	},
+})
+
 
 vim.api.nvim_create_autocmd({ "BufEnter", "FileType" }, {
 	callback = function()
 		vim.wo.fillchars = "eob: "
 	end
 })
+
 vim.api.nvim_create_autocmd("FileChangedRO", {
 	callback = function()
 		vim.opt.ro = false
@@ -58,9 +67,20 @@ vim.api.nvim_create_autocmd("FileChangedRO", {
 	end
 })
 
-vim.filetype.add({
-	extension = {
-		['HC'] = "HolyC",
-		['HH'] = "HolyC",
-	},
+vim.api.nvim_create_autocmd("PackChanged", {
+	callback = function(ev)
+		local name, kind = ev.data.spec.name, ev.data.kind
+
+		if kind == 'install' or kind == 'update' then
+			if name == 'LuaSnip' then
+				vim.system({ "make", "install_jsregexp" }, { cwd = ev.data.path })
+			end
+			if name == 'nvim-lspconfig' then
+				vim.system({ "ln", "-sf",
+					vim.fn.stdpath("data") .. "/site/pack/core/opt/nvim-lspconfig/lsp/",
+					vim.fn.stdpath("config")
+				})
+			end
+		end
+	end
 })

@@ -1,5 +1,5 @@
-require("main.set")
-require("main.remap")
+require("set")
+require("remap")
 
 require("main.lsp")
 require("main.files")
