@@ -1,25 +1,28 @@
 layout {
 	empty-workspace-above-first
 
+	gaps 2
+
 	struts {
 		left 2
 		right 2
 	}
 
-	gaps 2
-
 	border {
-		width 1
+		off
+		width 2
 	}
 
-	focus-ring { off; }
+	focus-ring {
+		off
+		width 2
+	}
 
 	tab-indicator {
 		place-within-column
 		width 2
-		gap 2
-
-		length total-proportion=1.0
+		gap 1
+		length total-proportion=0.5
 	}
 }
 
