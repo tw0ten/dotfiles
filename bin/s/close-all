@@ -1,6 +1,0 @@
-#!/bin/sh
-i="$(niri msg -j windows | jq 'length')"
-while [ "$i" != '0' ]; do
-	niri msg action close-window
-	i=$((i - 1))
-done

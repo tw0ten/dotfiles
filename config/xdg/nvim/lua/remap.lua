@@ -1,3 +1,8 @@
+vim.keymap.set('n', "<leader>U", function()
+	vim.pack.update()
+	vim.cmd(":MasonUpdate")
+end)
+
 vim.keymap.set('n', "U", vim.cmd.redo)
 vim.keymap.set('n', "<leader>w", vim.cmd.w)
 

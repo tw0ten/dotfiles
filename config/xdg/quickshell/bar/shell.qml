@@ -38,7 +38,7 @@ PanelWindow {
 		}
 
 		BarBlock {
-			color: `#a0${Theme.color.background}`
+			color: `#c0${Theme.color.background}`
 
 			radius: Theme.sizing.radius
 
@@ -66,7 +66,7 @@ PanelWindow {
 
 						content: BarText {
 							color: `#${(index === 0 || index === workspaces.value.length - 1) ? "b0" : "ff"}${workspaces.value[index].is_focused ? Theme.color.accent : Theme.color.foreground}`
-							text: `${index === 0 ? 'c' : index <= 9 ? index : `#${String.fromCharCode(0xE000 + index - 9)}`}${workspaces.value[index].name ?? ""}`
+							text: `${(workspaces.value[index].is_focused ? workspaces.value[index].name : null) ?? (index === 0 ? 'c' : index <= 9 ? index : `#${String.fromCharCode(0xE000 + index - 9)}`)}`
 						}
 					}
 				}
@@ -89,13 +89,14 @@ PanelWindow {
 		BarBlock {
 			id: layout
 
-			color: `#a0${Theme.color.background}`
+			color: `#ff${Theme.color.background}`
 
 			property var value: []
 			property real spacing: 1
 
 			content: RowLayout {
 				spacing: layout.spacing
+
 				Repeater {
 					model: layout.value.length
 
@@ -240,7 +241,7 @@ PanelWindow {
 		}
 
 		BarBlock {
-			color: `#a0${Theme.color.background}`
+			color: `#c0${Theme.color.background}`
 			radius: Theme.sizing.radius
 
 			content: RowLayout {

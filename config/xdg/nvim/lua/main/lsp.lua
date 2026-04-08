@@ -1,3 +1,21 @@
+vim.api.nvim_create_autocmd("PackChanged", {
+	callback = function(ev)
+		local name, kind = ev.data.spec.name, ev.data.kind
+
+		if kind == 'install' or kind == 'update' then
+			if name == 'LuaSnip' then
+				vim.system({ "make", "install_jsregexp" }, { cwd = ev.data.path })
+			end
+			if name == 'nvim-lspconfig' then
+				vim.system({ "ln", "-sf",
+					vim.fn.stdpath("data") .. "/site/pack/core/opt/nvim-lspconfig/lsp/",
+					vim.fn.stdpath("config")
+				})
+			end
+		end
+	end
+})
+
 vim.pack.add({
 	"https://github.com/williamboman/mason.nvim",
 	"https://github.com/neovim/nvim-lspconfig",
@@ -8,23 +26,18 @@ vim.pack.add({
 
 require("mason").setup({})
 
-vim.diagnostic.config({
-	float = {
-		style = "minimal",
-		header = "",
-	},
-})
+vim.api.nvim_create_autocmd('LspAttach', {
+	callback = function(ev)
+		local o = { buffer = ev.buf }
 
-vim.lsp.config("*", {
-	on_attach = function(e)
-		local opts = { buffer = e.buf }
-		vim.keymap.set('n', "<leader>fmt", vim.lsp.buf.format)
-		vim.keymap.set('n', "<leader>vca", vim.lsp.buf.code_action, opts)
-		vim.keymap.set('n', "<leader>vd", vim.diagnostic.open_float, opts)
-		vim.keymap.set('n', "<leader>vrf", vim.lsp.buf.references, opts)
-		vim.keymap.set('n', "<leader>vrn", vim.lsp.buf.rename, opts)
-		vim.keymap.set('n', "<leader>vws", vim.lsp.buf.workspace_symbol, opts)
-		vim.keymap.set('n', "gd", vim.lsp.buf.definition, opts)
+		vim.keymap.set('n', "fmt", vim.lsp.buf.format)
+
+		vim.keymap.set('n', "vd", vim.diagnostic.open_float, o)
+		vim.keymap.set('n', "vca", vim.lsp.buf.code_action, o)
+		vim.keymap.set('n', "vrf", vim.lsp.buf.references, o)
+		vim.keymap.set('n', "vrn", vim.lsp.buf.rename, o)
+		vim.keymap.set('n', "vws", vim.lsp.buf.workspace_symbol, o)
+		vim.keymap.set('n', "vgd", vim.lsp.buf.definition, o)
 	end,
 })
 
@@ -45,7 +58,7 @@ end
 
 do
 	local cmp = require("cmp")
-	local snip = require('luasnip')
+	local snip = require("luasnip")
 
 	cmp.setup({
 		snippet = {

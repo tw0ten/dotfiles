@@ -22,7 +22,6 @@ layout {
 		place-within-column
 		width 2
 		gap 1
-		length total-proportion=0.5
 	}
 }
 
