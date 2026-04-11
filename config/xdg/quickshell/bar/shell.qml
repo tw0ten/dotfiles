@@ -38,7 +38,7 @@ PanelWindow {
 		}
 
 		BarBlock {
-			color: `#c0${Theme.color.background}`
+			color: `#e0${Theme.color.background}`
 
 			radius: Theme.sizing.radius
 
@@ -89,7 +89,7 @@ PanelWindow {
 		BarBlock {
 			id: layout
 
-			color: `#ff${Theme.color.background}`
+			color: `#ff${Theme.color.foreground}`
 
 			property var value: []
 			property real spacing: 1
@@ -106,15 +106,16 @@ PanelWindow {
 						property var column: layout.value[index]
 
 						spacing: layout.spacing
+
 						Repeater {
 							model: column.length
 
 							Rectangle {
 								required property int index
 
-								color: `#ff${column[index].is_focused ? Theme.color.accent : Theme.color.foreground}`
+								color: `#f0${column[index].is_focused ? Theme.color.accent : Theme.color.background}`
 
-								implicitWidth: column[index].size[0] * (bar.height / 9 * 16)
+								implicitWidth: column[index].size[0] * bar.height
 								implicitHeight: column[index].size[1] * (bar.height - layout.spacing * (column.length - 1))
 
 								TapHandler {
@@ -145,7 +146,7 @@ PanelWindow {
 						}
 						columns = Object.values(columns);
 
-						const width = columns.reduce((a, i) => a + i[0].layout.tile_size[0], 0);
+						const width = 1080; // columns.reduce((a, i) => a + i[0].layout.tile_size[0], 0);
 						return layout.value = columns.map(column => {
 							const height = column.map(i => i.layout.tile_size[1]).reduce((a, i) => a + i, 0);
 							return column.map(i => ({
@@ -241,7 +242,7 @@ PanelWindow {
 		}
 
 		BarBlock {
-			color: `#c0${Theme.color.background}`
+			color: `#e0${Theme.color.background}`
 			radius: Theme.sizing.radius
 
 			content: RowLayout {

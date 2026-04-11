@@ -52,7 +52,7 @@ textbox-prompt-colon {
 	enabled: false;
 }
 inputbar {
-	padding: 0 0 0 1.75em;
+	padding: 0;
 }
 prompt {
 	enabled: false;

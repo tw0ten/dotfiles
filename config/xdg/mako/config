@@ -1,3 +1,12 @@
-include=~/.config/mako/style
-
 default-timeout=5000
+
+font=system-ui 12
+
+background-color=#202020
+text-color=#ffffff
+border-color=#101010
+
+border-size=0
+border-radius=8
+
+height=512
