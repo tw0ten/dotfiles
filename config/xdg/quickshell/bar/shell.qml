@@ -11,16 +11,15 @@ PanelWindow {
 
 	implicitHeight: Theme.sizing.height
 	anchors {
-		top: Theme.top
-		bottom: !Theme.top
+		bottom: true
 		left: true
 		right: true
 	}
 	margins {
 		left: 2
 		right: 2
-		top: (Theme.top ? 1 : 0) * 1
-		bottom: (Theme.top ? 0 : 1) * 1
+		top: 1
+		bottom: 1
 	}
 
 	property var eventStreamSubs: []
