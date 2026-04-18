@@ -5,4 +5,5 @@ cd "$DOTFILES/bin/s"
 i="$(realpath "$1")"
 shift
 cd "$OLDPWD"
+set +e
 . "$i"

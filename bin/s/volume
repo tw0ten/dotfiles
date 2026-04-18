@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 i="$(echo -e " \n0.05-\n$(set -- $(wpctl get-volume @DEFAULT_AUDIO_SINK@) && shift && echo "$@")\n0.05+" | dmenu -p "volume " -l 4 -a 2)"
 [ "$i" = ' ' ] && wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle || {
 	wpctl set-volume @DEFAULT_AUDIO_SINK@ "$i"

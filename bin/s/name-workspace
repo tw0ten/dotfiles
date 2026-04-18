@@ -1,2 +1,3 @@
 #!/bin/sh
+[ -z "$*" ] && exec niri msg action unset-workspace-name
 niri msg action set-workspace-name "$*"

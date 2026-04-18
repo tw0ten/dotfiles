@@ -12,11 +12,15 @@ vim.api.nvim_create_autocmd("PackChanged", {
 					vim.fn.stdpath("config")
 				})
 			end
+			if name == 'nvim-treesitter' then
+				vim.cmd(":TSUpdate")
+			end
 		end
 	end
 })
 
 vim.pack.add({
+	"https://github.com/nvim-treesitter/nvim-treesitter",
 	"https://github.com/williamboman/mason.nvim",
 	"https://github.com/neovim/nvim-lspconfig",
 	"https://github.com/hrsh7th/nvim-cmp",
@@ -24,9 +28,21 @@ vim.pack.add({
 	"https://github.com/saadparwaiz1/cmp_luasnip",
 })
 
+do
+	local ts = require("nvim-treesitter")
+	vim.api.nvim_create_autocmd("FileType", {
+		pattern = ts.get_available(),
+		callback = function(ev)
+			ts.install({ ev.match }):wait()
+
+			vim.treesitter.start()
+		end,
+	})
+end
+
 require("mason").setup({})
 
-vim.api.nvim_create_autocmd('LspAttach', {
+vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(ev)
 		local o = { buffer = ev.buf }
 
