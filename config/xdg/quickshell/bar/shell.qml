@@ -240,39 +240,51 @@ PanelWindow {
 			Layout.fillWidth: true
 		}
 
-		BarBlock {
-			color: `#e0${Theme.color.background}`
-			radius: Theme.sizing.radius
+		RowLayout {
+			spacing: Theme.sizing.spacing / 2
 
-			content: RowLayout {
-				spacing: Theme.sizing.spacing
+			BarBlock {
+				color: `#e0${Theme.color.background}`
+				radius: Theme.sizing.radius
 
-				Item {}
+				content: RowLayout {
+					spacing: Theme.sizing.spacing
 
-				Blocks.Disk {}
-				Blocks.Memory {}
-				Blocks.Cpu {}
-				Blocks.Gpu {}
+					Item {}
+					Blocks.Disk {}
+					Blocks.Memory {}
+					Blocks.Cpu {}
+					Blocks.Gpu {}
+					Item {}
+				}
+			}
+			BarBlock {
+				color: `#e0${Theme.color.background}`
+				radius: Theme.sizing.radius
 
-				Blocks.Time {}
+				content:RowLayout {
+					spacing: Theme.sizing.spacing
 
-				BarBlock {
-					content: RowLayout {
-						spacing: Theme.sizing.spacing
+					Item {}
+					Blocks.Battery {}
+					Blocks.Audio {}
+					Blocks.Brightness {}
+					Blocks.Network {}
+					Blocks.Keyboard {}
+					Item {}
+				}
+			}
+			BarBlock {
+				color: `#e0${Theme.color.background}`
+				radius: Theme.sizing.radius
 
-						RowLayout {
-							spacing: parent.spacing
+				content: RowLayout {
+					spacing: Theme.sizing.spacing
 
-							Blocks.Battery {}
-							Blocks.Audio {}
-							Blocks.Brightness {}
-							Blocks.Network {}
-							Blocks.Keyboard {}
-						}
-
-						Blocks.UserHost {
-							radius: Theme.sizing.radius
-						}
+					Item {}
+					Blocks.Time {}
+					Blocks.UserHost {
+						radius: Theme.sizing.radius
 					}
 				}
 			}
