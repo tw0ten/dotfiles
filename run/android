@@ -2,9 +2,12 @@
 
 pkg update && pkg upgrade
 
+rm -vf ~/../usr/etc/profile
+
 pkg install \
 	neovim tmux openssh \
-	lf ripgrep fastfetch
+	lf ripgrep fastfetch \
+	ncurses-utils clang
 
 termux-setup-storage
 termux-reload-settings

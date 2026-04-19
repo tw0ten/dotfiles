@@ -17,7 +17,6 @@ set -e
 		i bash/rc .bashrc
 		i ssh/config .ssh/config
 		i icons/ .local/share/icons/default
-		[ "$PLATFORM" = 'android' ] && i termux/ .termux
 		i inputrc .inputrc )
 
 	sudo -v || exit
