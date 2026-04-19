@@ -55,6 +55,7 @@ PanelWindow {
 				spacing: Theme.sizing.spacing / 1.5
 
 				property var value: []
+				property int mappedUpTo: 5
 
 				Item {}
 				Repeater {
@@ -65,7 +66,7 @@ PanelWindow {
 
 						content: BarText {
 							color: `#${(index === 0 || index === workspaces.value.length - 1) ? "b0" : "ff"}${workspaces.value[index].is_focused ? Theme.color.accent : Theme.color.foreground}`
-							text: `${(workspaces.value[index].is_focused ? workspaces.value[index].name : null) ?? (index === 0 ? 'c' : index <= 9 ? index : `#${String.fromCharCode(0xE000 + index - 9)}`)}`
+							text: `${(workspaces.value[index].is_focused ? workspaces.value[index].name : null) ?? (index === 0 ? 'c' : index <= workspaces.mappedUpTo ? index : `#${String.fromCharCode(0xE000 + index - workspaces.mappedUpTo)}`)}`
 						}
 					}
 				}

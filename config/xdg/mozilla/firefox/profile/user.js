@@ -7,3 +7,5 @@ user_pref("browser.urlbar.trimHttps", false);
 
 user_pref("devtools.chrome.enabled", true);
 user_pref("devtools.debugger.remote-enabled", true);
+
+user_pref("browser.display.use_document_fonts", 0);

@@ -3,12 +3,15 @@ hotkey-overlay {
 }
 
 binds {
+	Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+
 	Mod+Shift+Escape { quit skip-confirmation=true; }
 	Mod+Shift+Slash { show-hotkey-overlay; }
 
+	Mod+Shift+q allow-inhibiting=false hotkey-overlay-title="lock" { spawn "~/.config/niri/bin/lock"; }
 	Mod+Return { spawn "terminal"; }
 	Mod+X hotkey-overlay-title="run" { spawn "rofi" "-show" "drun"; }
-	Mod+Ctrl+C allow-inhibiting=false hotkey-overlay-title="lock" { spawn "~/.config/niri/bin/lock"; }
+	Mod+Shift+X hotkey-overlay-title="open" { spawn "smenu" "open"; }
 
 	Mod+Z { spawn "smenu"; }
 
@@ -39,28 +42,15 @@ binds {
 	Mod+Shift+S { move-workspace-down; }
 	Mod+Ctrl+S { move-column-to-workspace-down; }
 
-	Mod+C { focus-workspace 1; }
-	Mod+1 { focus-workspace 2; }
-	Mod+Ctrl+1 { move-column-to-workspace 2; }
-	Mod+2 { focus-workspace 3; }
-	Mod+Ctrl+2 { move-column-to-workspace 3; }
-	Mod+3 { focus-workspace 4; }
-	Mod+Ctrl+3 { move-column-to-workspace 4; }
-	Mod+4 { focus-workspace 5; }
-	Mod+Ctrl+4 { move-column-to-workspace 5; }
-	Mod+5 { focus-workspace 6; }
-	Mod+Ctrl+5 { move-column-to-workspace 6; }
-	Mod+6 { focus-workspace 7; }
-	Mod+Ctrl+6 { move-column-to-workspace 7; }
-	Mod+7 { focus-workspace 8; }
-	Mod+Ctrl+7 { move-column-to-workspace 8; }
-	Mod+8 { focus-workspace 9; }
-	Mod+Ctrl+8 { move-column-to-workspace 9; }
-	Mod+9 { focus-workspace 10; }
-	Mod+Ctrl+9 { move-column-to-workspace 10; }
-
 	Mod+Tab { focus-workspace-previous; }
 	Mod+Grave { focus-window-previous; }
+	Mod+C { focus-workspace 1; }
+	Mod+Ctrl+c { move-column-to-workspace 1; }
+	Mod+1 { focus-workspace 2; }
+	Mod+2 { focus-workspace 3; }
+	Mod+3 { focus-workspace 4; }
+	Mod+4 { focus-workspace 5; }
+	Mod+5 { focus-workspace 6; }
 
 	Mod+BracketLeft  { consume-or-expel-window-left; }
 	Mod+BracketRight { consume-or-expel-window-right; }
@@ -68,17 +58,18 @@ binds {
 	Mod+R { switch-preset-column-width; }
 	Mod+Shift+R { switch-preset-window-height; }
 	Mod+Ctrl+R { reset-window-height; }
+
 	Mod+F { maximize-column; }
 	Mod+Ctrl+F { expand-column-to-available-width; }
 
-	Mod+Shift+F { fullscreen-window; }
+	Mod+Shift+F { maximize-window-to-edges; }
+	Mod+Ctrl+Shift+F { fullscreen-window; }
 
 	Mod+G { center-column; }
 	Mod+Ctrl+G { center-visible-columns; }
 
 	Mod+Minus { set-column-width "-5%"; }
 	Mod+Equal { set-column-width "+5%"; }
-
 	Mod+Shift+Minus { set-window-height "-5%"; }
 	Mod+Shift+Equal { set-window-height "+5%"; }
 
@@ -86,11 +77,6 @@ binds {
 	Mod+Shift+V { switch-focus-between-floating-and-tiling; }
 
 	Print { screenshot; }
-	Shift+Print { spawn "smenu" "zoom"; }
-	Ctrl+Print { screenshot-screen; }
-	Alt+Print { screenshot-window; }
-
-	Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
-
-	Mod+Backspace { power-off-monitors; }
+	Ctrl+Print { screenshot-window; }
+	Shift+Print { screenshot-screen; }
 }

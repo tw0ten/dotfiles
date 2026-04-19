@@ -2,7 +2,7 @@
 set -e
 
 i="$(niri msg -j keyboard-layouts | jq -r '.names[]' |
-	dmenu -p 'keyboard ' -format i -a "$(niri msg -j keyboard-layouts | jq .current_idx)")"
+	dmenu -p 'keyboard ' -format i -a "$(niri msg -j keyboard-layouts | jq .current_idx)" -l 4)"
 
 niri msg action switch-layout "$i"
 
