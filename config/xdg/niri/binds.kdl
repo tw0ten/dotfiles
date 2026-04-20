@@ -12,8 +12,8 @@ binds {
 	Mod+Return { spawn "terminal"; }
 	Mod+X hotkey-overlay-title="run" { spawn "rofi" "-show" "drun"; }
 	Mod+Shift+X hotkey-overlay-title="open" { spawn "smenu" "open"; }
-
 	Mod+Z { spawn "smenu"; }
+	Mod+Shift+Z hotkey-overlay-title="keyboard" { spawn "smenu" "keyboard"; }
 
 	XF86AudioMute { spawn "~/.config/niri/bin/volume"; }
 	XF86AudioRaiseVolume { spawn "~/.config/niri/bin/volume" "0.025+"; }

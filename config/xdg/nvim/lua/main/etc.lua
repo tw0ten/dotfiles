@@ -11,7 +11,4 @@ do
 	vim.keymap.set('n', "<leader>fw", pick.builtin.grep_live)
 end
 
-do
-	require("rainbow-delimiters.setup").setup({})
-	vim.api.nvim_set_hl(0, "Normal", { bg = nil })
-end
+require("rainbow-delimiters.setup").setup({})

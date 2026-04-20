@@ -1,5 +1,0 @@
-[Path]
-PathModified=%E/bg.png
-
-[Install]
-WantedBy=default.target
