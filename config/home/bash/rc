@@ -27,16 +27,21 @@ mktl() { mkdir "$1" && cd "$1" || return
 	echo -e > .io/run '#!/bin/sh\nset -e\n\ncd .io'
 	chmod +x .io/build .io/run
 	git init && git add --all && git commit -m '*'; }
-minifetch() { echo "$(tty):$accent$SHLVL$normal '$-'" | fastfetch -C mini "$@"; }
 ff() { find . -name "*$**" 2>/dev/null | $PAGER; }
 mhm() { fortune | cowsay -n -f "$(cowsay -l | grep / -v | sed 's/ /\n/g' | shuf -n1)" | lolcat; }
-sign() { $VISUAL "$1" && echo " - $USER, $(\date)" | tee -a "$1"; }
+sign() { ( LANG=C && echo " - $USER, $(\date)" | tee -a -- "$@"; ) }
+
+minifetch() { echo "$(tty):$accent$SHLVL$normal '$-'" | fastfetch -C mini "$@"; }
 cd() { command cd "$@" || return
 	git rev-parse --is-inside-work-tree >/dev/null 2>&1 \
 		&& __git_ps1='g' || unset __git_ps1
 }; cd .
 
 alias \
+	..='. ~/.bashrc' \
+	...='. ~/.bash_profile' \
+	....="exec '$SHELL'" \
+\
 	s='sudo' \
 	x="$OPENER" \
 	e="$VISUAL" \
@@ -45,7 +50,6 @@ alias \
 	g='git' \
 	f='rg -uuL --color=always' \
 	t="(exec $TERMINAL >/dev/null 2>&1 &)" \
-	cl='clear' \
 	o='curl -fsL' \
 	oo='o -O' \
 	r='.io/run' \
@@ -65,31 +69,23 @@ alias \
 	la='l -A' \
 	ll='l -a -lh -F' \
 	lf="$FILES" \
-	lt="tree -C | $PAGER" \
+	lt='tree -C' \
 	n='nix' \
 	nd='n develop' \
 	ns='n store' \
 	nsh='nix-shell shell.nix' \
-	rp='realpath .' \
-	cp='cp -iv' \
-	mv='mv -iv' \
+	cp='cp -vi' \
+	mv='mv -vi' \
 	rm='rm -v' \
-	ln='ln -n' \
-	mkdir='mkdir -pv' \
+	ln='ln -vn' \
+	mkdir='mkdir -vp' \
 	rmdir='rmdir -v' \
 \
-	cpb='cp -t ~/.local/bin' \
 	history="history | $PAGER +G" \
-	myip='echo "$(curl -s ipinfo.io/ip)"' \
 	uptime='uptime -p' \
-	..='. ~/.bashrc' \
-	...='. ~/.bash_profile' \
-	....="exec '$SHELL'" \
 	diff='diff --color=always' \
 	+x='chmod +x' \
 	filesize='du -shc ./.* ./* 2>/dev/null' \
-	sshs='eval "$(ssh-agent -s)"' \
-	shellcheck='shellcheck -s sh --color' \
 ;
 
 PS1="$(
