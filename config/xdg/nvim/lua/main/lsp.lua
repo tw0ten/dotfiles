@@ -42,7 +42,6 @@ do
 	end):wait()
 	vim.lsp.enable(o)
 	vim.api.nvim_create_autocmd("FileType", {
-		pattern = '*',
 		callback = function() vim.cmd.lsp("enable") end,
 	})
 end

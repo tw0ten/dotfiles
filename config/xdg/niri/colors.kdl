@@ -25,5 +25,5 @@ layout {
 }
 
 overview {
-	backdrop-color "#101010"
+	backdrop-color "#00000000"
 }

@@ -1,7 +1,7 @@
 require("set")
-require("remap")
 
-require("main.lsp")
-require("main.files")
-require("main.undo")
 require("main.etc")
+require("main.files")
+require("main.lsp")
+
+require("remap")
