@@ -1,6 +1,7 @@
 #!/bin/sh
 
 pkg update && pkg upgrade
+apt autoremove
 
 rm -vf ~/../usr/etc/profile
 

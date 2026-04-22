@@ -1,9 +1,12 @@
 @import "common.css";
 
 .tabbrowser-tab .tab-close-button,
-#tabs-newtab-button, #new-tab-button,
-.titlebar-buttonbox-container
-{ visibility: collapse !important; }
+#tabs-newtab-button,
+#new-tab-button,
+.titlebar-spacer,
+.titlebar-buttonbox-container {
+	visibility: collapse !important;
+}
 
 
 #navigator-toolbox {
@@ -14,7 +17,7 @@
 	--arrowpanel-background: #101010 !important;
 	--arrowpanel-border-color: transparent !important;
 
-	--color-accent-primary #40e0d0 !important;
+	--color-accent-primary: #40e0d0 !important;
 
 	--tab-selected-bgcolor: #202020 !important;
 
@@ -25,13 +28,13 @@
 	--toolbar-field-focus-background-color: #101010 !important;
 }
 
-#contentAreaContextMenu {
-	& > * {
-		background-color: #101010 !important;
-		color: #ffffff !important;
-	}
+menupopup {
 	& menuitem:hover {
 		background-color: #40e0d0 !important;
 		color: #101010 !important;
 	}
+}
+
+arrowscrollbox {
+	background: #101010 !important;
 }

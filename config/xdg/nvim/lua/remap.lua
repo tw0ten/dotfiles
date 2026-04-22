@@ -5,7 +5,6 @@ vim.keymap.set('n', "<leader>U", function()
 	vim.pack.update()
 end)
 
-vim.keymap.set('n', "U", vim.cmd.redo)
 vim.keymap.set('n', "<leader>u", vim.cmd.UndotreeToggle)
 
 vim.keymap.set('n', "<leader>w", vim.cmd.w)
@@ -15,10 +14,14 @@ vim.keymap.set('n', "<leader>cd", function()
 	print(vim.fn.getcwd())
 end)
 
+vim.keymap.set('n', "<leader>ex", vim.cmd.NvimTreeToggle)
+
 vim.keymap.set('n', "<C-/>", function()
 	vim.cmd.let([[@/ = '']])
 	print("@/ = ''")
 end)
+
+vim.keymap.set('n', "U", vim.cmd.redo)
 
 vim.keymap.set('v', "<C-Down>", [[:m '>+1<CR>gv=gv]])
 vim.keymap.set('v', "<C-Up>", [[:m '<-2<CR>gv=gv]])
@@ -38,5 +41,3 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set('n', "vws", vim.lsp.buf.workspace_symbol, o)
 	end,
 })
-
-vim.keymap.set('n', "<leader>ex", vim.cmd.NvimTreeToggle)

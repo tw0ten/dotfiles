@@ -1,5 +1,5 @@
 #!/bin/sh
-set -e
+set -ex
 
 epoch=$EPOCHSECONDS
 
@@ -28,4 +28,5 @@ date --date "@$((epoch + i_sleeptime))" +'%w' | grep "[60]" -q && exit
 [ $((o_sleeptime)) -lt $((i_sleeptime + (1 * hour))) ] && notify-send \
 	"bedtime: $(printf '%02i/%02i' $(echo $o_bedtime | write_hm))" \
 	"sleeptime left: $(printf '%i/%02i' $(echo $o_sleeptime | write_hm))" \
-	-t $((1000 * minute / 2))
+	-t $((1000 * minute / 2)) \
+	|| true

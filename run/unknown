@@ -3,11 +3,10 @@ set -e
 
 . 'lib/sh/profile'
 
-( set -e; cd config
+( cd config
 	i() { set -- "$PWD/$1" "$i/$2"
 		mkdir -p "$(dirname "$2")"
-		ln -sfT "$1" "$2"
-		echo "'$2' < '$1'"; }
+		ln -vsfT "$1" "$2"; }
 
 	( cd xdg; i="$XDG_CONFIG_HOME"
 		for f in *; do i "$f" "$f"; done )
@@ -21,10 +20,9 @@ set -e
 
 	sudo -v || exit
 
-	i() { set -- "$PWD/$1" "$i/$2"
+	i() { set -- "$1" "$i/$2"
 		sudo mkdir -p "$(dirname "$2")"
-		sudo cp -rT "$1" "$2"
-		echo "'$1' > '$2'"; }
+		sudo cp -vrT "$1" "$2"; }
 
 	( cd etc; i='/etc'
 		i sudoers/ sudoers.d
@@ -32,7 +30,7 @@ set -e
 		i ssh ssh/sshd_config
 		i ly/ ly
 		i grub/default default/grub )
-echo ) || true
+) || true
 
 [ "$PLATFORM" = 'unknown' ] || . "run/$PLATFORM"
 
