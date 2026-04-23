@@ -1,10 +1,10 @@
 #!/bin/sh
+set -e
 cd "$@"
-while i="$(ls -apL |
+while i="$(ls -apL1 |
 	sed -e 's/^\.\//./' -e 's/^\.\.\//../' |
 	dmenu -p "$PWD "
 )"; do
-	[ -d "$i" ] && [ "$i" != '.' ] ||
-		exec $OPENER "$i"
+	[ -d "$i" ] && [ "$i" != '.' ] || exec "$OPENER" "$i"
 	cd "$i" || continue
 done

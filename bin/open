@@ -1,12 +1,13 @@
 #!/bin/sh
 set -e
-[ "$TERM" = 'linux' ] && i(){ exec $TERMINAL -e "$@"; } || i(){ exec "$@"; }
+i(){ exec "$@"; }
+[ "$TERM" = 'linux' ] && i(){ exec $TERMINAL -e "$@"; }
 for i; do (
-	[ -d "$i" ] && i $FILES "$i"
+	[ -d "$i" ] && i "$FILES" "$i"
 	case "$i" in
 		*://*) exec $BROWSER "$i" ;;
 	esac
-	[ -f "$i" ] || i $VISUAL "$i"
+	[ -f "$i" ] || i "$VISUAL" "$i"
 	exec xdg-open "$i"
 	[ -x "$i" ] && "$(realpath "$i")"
 ) done

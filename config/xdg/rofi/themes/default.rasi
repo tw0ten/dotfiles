@@ -63,6 +63,12 @@ num-rows {
 	text-color: var(foreground);
 }
 
+message {
+	margin: 0.25em 0;
+	padding: 0;
+	border: 0;
+}
+
 scrollbar {
 	handle-width: 0.75em;
 }

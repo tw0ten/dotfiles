@@ -1,2 +1,2 @@
 #!/bin/sh
-brightnessctl set $(echo -e " \n0\n5%-\n$(brightnessctl get)\n5%+\n$(brightnessctl max)" | dmenu -p "brightness " -a 3 -l 6) && notify-send -t 1500 'brightness' "$(brightnessctl get)"
+brightnessctl set "$(printf " \n%s\n%s\n%s\n%s\n%s" '0' '5%-' "$(brightnessctl get)" '5%+' "$(brightnessctl max)" | dmenu -p "brightness " -a 3 -l 6)" && notify-send -t 1500 'brightness' "$(brightnessctl get)"

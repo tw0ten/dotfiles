@@ -4,7 +4,7 @@ configuration {
 	font: "system-ui 12";
 	show-icons: true;
 	drun-display-format: "{name}";
-	matching: "fuzzy";
+	matching: "normal,regex";
 }
 
 @import "themes/default"

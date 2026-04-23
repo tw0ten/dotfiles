@@ -1,3 +1,2 @@
 #!/bin/sh
-i="$(curl -fsL 'https://www.unicode.org/Public/UCD/latest/ucd/UnicodeData.txt' | sed -e 's/;/ /' -e 's/;.*//' -e 's/.*/\L&/' | dmenu -p 'U+')"
-wl-copy -- "$(printf "\U$(echo "$i" | sed 's/ .*//')")"
+wl-copy -- "$(printf "\U$(curl -fsL 'https://www.unicode.org/Public/UCD/latest/ucd/UnicodeData.txt' | sed -e 's/;/ /' -e 's/;.*//' -e 's/.*/\L&/' | dmenu -p 'U+' | sed 's/ .*//')")"

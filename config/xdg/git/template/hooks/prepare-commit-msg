@@ -12,6 +12,6 @@ i "0,/{NAME}/s//$(git config get user.name)/"
 i "0,/{EMAIL}/s//$(git config get user.email)/"
 
 [ "$3" = 'HEAD' ] ||
-	i "1i\#$((EPOCHSECONDS))"
+	i "1i\#$(date +%s)"
 
 i '/^[^#]/ s/^/#/'

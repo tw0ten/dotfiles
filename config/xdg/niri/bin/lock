@@ -8,4 +8,4 @@ niri msg action switch-layout 0
 swaylock
 
 "$mute" || wpctl set-mute @DEFAULT_AUDIO_SINK@ 0
-niri msg action switch-layout $keyboard
+niri msg action switch-layout "$keyboard"

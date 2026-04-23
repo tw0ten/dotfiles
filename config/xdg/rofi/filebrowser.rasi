@@ -1,0 +1,9 @@
+@import "config"
+
+configuration {
+	modes: "filebrowser";
+}
+
+button {
+	enabled: false;
+}
