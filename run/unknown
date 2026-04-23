@@ -3,33 +3,47 @@ set -e
 
 . 'lib/sh/profile'
 
-( cd config
-	i() { set -- "$PWD/$1" "$i/$2"
+(
+	cd config
+
+	i() {
+		set -- "$PWD/$1" "$i/$2"
 		mkdir -p "$(dirname "$2")"
-		ln -vsfT "$1" "$2"; }
+		ln -vsfT "$1" "$2"
+	}
 
-	( cd xdg; i="$XDG_CONFIG_HOME"
-		for f in *; do i "$f" "$f"; done )
+	(
+		cd xdg && i="$XDG_CONFIG_HOME"
+		for f in *; do i "$f" "$f"; done
+	)
 
-	( cd home; i="$HOME"
+	(
+		cd home && i="$HOME"
+
 		i bash/profile .bash_profile
 		i bash/rc .bashrc
 		i ssh/config .ssh/config
 		i icons/ .local/share/icons/default
-		i inputrc .inputrc )
+		i inputrc .inputrc
+	)
 
 	sudo -v || exit
 
-	i() { set -- "$1" "$i/$2"
+	i() {
+		set -- "$1" "$i/$2"
 		sudo mkdir -p "$(dirname "$2")"
-		sudo cp -vrT "$1" "$2"; }
+		sudo cp -vrT "$1" "$2"
+	}
 
-	( cd etc; i='/etc'
+	(
+		cd etc && i='/etc'
+
 		i sudoers/ sudoers.d
 		i pacman pacman.conf
 		i ssh ssh/sshd_config
 		i ly/ ly
-		i grub/default default/grub )
+		i grub/default default/grub
+	)
 ) || true
 
 [ "$PLATFORM" = 'unknown' ] || . "run/$PLATFORM"

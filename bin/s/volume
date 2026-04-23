@@ -1,7 +1,9 @@
 #!/bin/sh
 set -e
-i="$(echo -e " \n0.05-\n$(set -- $(wpctl get-volume @DEFAULT_AUDIO_SINK@) && shift && echo "$@")\n0.05+" | dmenu -p "volume " -l 4 -a 2)"
-[ "$i" = ' ' ] && wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle || {
+i="$(printf " \n%s\n%s\n%s" '0.05-' "$(set -- $(wpctl get-volume @DEFAULT_AUDIO_SINK@) && shift && echo "$@")" '0.05+' | dmenu -p "volume " -l 4 -a 2)"
+[ "$i" = ' ' ] && wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+[ "$i" = ' ' ] || {
 	wpctl set-volume @DEFAULT_AUDIO_SINK@ "$i"
-	wpctl set-mute @DEFAULT_AUDIO_SINK@ 0; }
+	wpctl set-mute @DEFAULT_AUDIO_SINK@ 0
+}
 notify-send -t 1500 'volume' "$(set -- $(wpctl get-volume @DEFAULT_AUDIO_SINK@) && shift && echo "$@")"

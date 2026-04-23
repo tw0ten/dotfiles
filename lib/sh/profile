@@ -29,8 +29,8 @@ export PS4="$PS1"
 export SUDO_PROMPT="%U$bold$accent@$normal%H %p$bold$accent#$normal"
 
 export \
-	HISTSIZE= \
-	HISTFILESIZE= \
+	HISTSIZE='' \
+	HISTFILESIZE='' \
 	HISTFILE="$HOME/.local/share/history.sh" \
 	HISTTIMEFORMAT='%c ' \
 	HISTCONTROL='ignoredups' \

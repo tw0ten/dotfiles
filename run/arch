@@ -1,8 +1,14 @@
 #!/bin/sh
 
-( sudo pacman -Syu
+(
+	sudo pacman -Syu
+
 	AUR_HELPER=paru
-	command -v "$AUR_HELPER" || ( cd "$(mktemp -d)"; git clone "https://aur.archlinux.org/$AUR_HELPER" .; makepkg -si )
+	command -v "$AUR_HELPER" || (
+		cd "$(mktemp -d)"
+		git clone "https://aur.archlinux.org/$AUR_HELPER" .
+		makepkg -si
+	)
 
 	i() { "$AUR_HELPER" -S "$@"; }
 	set +e
@@ -14,9 +20,13 @@
 		pipewire mako awww rofi quickshell fcitx5 \
 		mpv libreoffice-still gimp obs-studio \
 		noto-fonts noto-fonts-emoji noto-fonts-cjk
-true )
 
-( set -x
+	true
+)
+
+(
+	set -x
+
 	systemctl --user enable \
 		brightness-fluctuator.timer
 

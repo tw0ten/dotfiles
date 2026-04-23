@@ -3,14 +3,13 @@ set -e
 
 cd "$DOTFILES/git"
 
-( set -e
+(
 	user="$(git config get user.name)"
 
 	mkdir -p "github.com/$user" && cd "github.com/$user"
 
 	for repo in $(curl -s "https://api.github.com/users/$user/repos" | jq '.[].ssh_url'); do (
-		set -e
-		repo="$(echo $repo | sed -e 's/.....//' -e 's/.....$//')"
+		repo="$(echo "$repo" | sed -e 's/.....//' -e 's/.....$//')"
 		i="$(basename "$repo")"
 		[ -d "$i" ] || git clone "$repo"
 		cd "$i"
@@ -20,9 +19,11 @@ cd "$DOTFILES/git"
 
 		git remote -v | grep -q '^upstream' || {
 			fork="$(curl -s "https://api.github.com/repos/$user/$i" | jq '.source.ssh_url')"
-			[ "$fork" = 'null' ] || git remote add 'upstream' "$fork"; }
+			[ "$fork" = 'null' ] || git remote add 'upstream' "$fork"
+		}
 
 		git remote -v
 
-	echo )
-done )
+		echo
+	); done
+)
