@@ -46,3 +46,12 @@ window-rule {
 		inactive-color "#ff0000ff"
 	}
 }
+
+window-rule {
+	match app-id="^terminal\\.mini$"
+
+	open-floating true
+	default-floating-position x=0 y=0 relative-to="bottom"
+	default-column-width { proportion 0.3; }
+	default-window-height { proportion 0.25; }
+}

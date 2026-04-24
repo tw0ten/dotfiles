@@ -11,6 +11,7 @@ binds {
 	Mod+Shift+q allow-inhibiting=false hotkey-overlay-title="lock" { spawn "~/.config/niri/bin/lock"; }
 	Mod+Return { spawn "terminal"; }
 	Mod+Shift+Return { spawn "open" "."; }
+	Mod+Ctrl+Return { spawn "terminal" "--app-id" "terminal.mini"; }
 	Mod+X hotkey-overlay-title="run" { spawn "rofi" "-show" "drun"; }
 	Mod+Shift+X hotkey-overlay-title="open" { spawn "rofi" "-show" "filebrowser" "-config" "filebrowser"; }
 	Mod+Z { spawn "smenu"; }

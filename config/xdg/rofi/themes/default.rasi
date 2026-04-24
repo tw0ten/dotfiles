@@ -18,10 +18,12 @@
 }
 window {
 	width: 35%;
-
-	border-radius: 1em;
-	padding: 0.5em 0.75em;
 	border: 0;
+	padding: 0;
+	border-radius: 1em;
+}
+mainbox {
+	padding: 0.5em 1em;
 }
 
 listview {

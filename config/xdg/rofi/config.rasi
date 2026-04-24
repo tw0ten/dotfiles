@@ -1,7 +1,6 @@
 configuration {
 	modes: "drun,run";
 	sidebar-mode: true;
-	font: "system-ui 12";
 	show-icons: true;
 	drun-display-format: "{name}";
 	matching: "normal,regex";
