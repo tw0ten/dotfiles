@@ -11,24 +11,29 @@ layer-rule {
 }
 
 
-prefer-no-csd
-
 window-rule {
 	draw-border-with-background false
 	geometry-corner-radius 8
 	clip-to-geometry true
+	opacity 0.95
 }
 
 window-rule {
-	match app-id="^com\\.obsproject\\.Studio$"
+	match is-floating=true
 
-	block-out-from "screencast"
+	opacity 0.75
 }
 
 window-rule {
-	match is-focused=false
+	match is-focused=true
 
-	opacity 0.925
+	opacity 1.0
+}
+
+window-rule {
+	match is-floating=true is-focused=true
+
+	opacity 0.9
 }
 
 window-rule {
@@ -45,6 +50,13 @@ window-rule {
 		active-color "#ff0000ff"
 		inactive-color "#ff0000ff"
 	}
+}
+
+
+window-rule {
+	match app-id="^com\\.obsproject\\.Studio$"
+
+	block-out-from "screencast"
 }
 
 window-rule {

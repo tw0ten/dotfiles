@@ -24,6 +24,13 @@ layout {
 	}
 }
 
+recent-windows {
+	highlight {
+		active-color "#ffffffa0"
+		urgent-color "#40e0d0ff"
+	}
+}
+
 overview {
 	backdrop-color "#00000000"
 }

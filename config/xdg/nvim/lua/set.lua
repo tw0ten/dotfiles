@@ -2,6 +2,9 @@ vim.opt.swapfile = false
 vim.opt.undofile = true
 
 
+vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+vim.api.nvim_set_hl(0, "StatusLineGap", { bg = "black" })
+
 vim.cmd.aunmenu("PopUp.-1-")
 vim.cmd.aunmenu("PopUp.-2-")
 vim.cmd.aunmenu("PopUp.How-to\\ disable\\ mouse")
@@ -33,7 +36,7 @@ vim.opt.statusline =
 		"%{&readonly?'-':(&modified?'+':'=')}"
 		.. " {%{mode()}}"
 		.. " [%{expand('%:~:.')}]"
-		.. " %#Normal#%=%* " ..
+		.. " %#StatuslineGap#%=%* " ..
 		"<%l,%c> " ..
 		"(%{&fileformat}|%{&fileencoding}|%{&filetype})"
 		.. " "
@@ -42,8 +45,8 @@ vim.opt.shortmess = "lmrwoOstTAIcCFS"
 
 vim.filetype.add({
 	extension = {
-		['HC'] = "HolyC",
-		['HH'] = "HolyC",
+		["HH"] = "HolyC",
+		["HC"] = "HolyC",
 	},
 })
 

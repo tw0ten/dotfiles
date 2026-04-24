@@ -26,6 +26,17 @@ layout {
 	}
 }
 
+recent-windows {
+	debounce-ms 0
+
+	open-delay-ms 0
+
+	highlight {
+		padding 30
+		corner-radius 8
+	}
+}
+
 overview {
 	zoom 0.5
 
@@ -42,3 +53,7 @@ include "binds.kdl"
 include "input.kdl"
 
 include "env.kdl"
+
+
+workspace "co"
+workspace "wa"

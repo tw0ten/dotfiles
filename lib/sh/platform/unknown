@@ -1,5 +1,5 @@
 #!/bin/sh
-export PLATFORM="$(
+PLATFORM="$(
 	command >/dev/null -v pacman && exec echo arch
 	command >/dev/null -v termux-reload-settings && exec echo android
 	command >/dev/null -v apt && exec echo debian
@@ -9,3 +9,5 @@ export PLATFORM="$(
 export accent="$(tput setaf 5)"
 
 [ "$PLATFORM" = 'unknown' ] || . "$DOTFILES/lib/sh/platform/$PLATFORM"
+
+export PLATFORM

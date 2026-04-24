@@ -10,14 +10,14 @@ vim.keymap.set('n', "<leader>u", vim.cmd.UndotreeToggle)
 vim.keymap.set('n', "<leader>w", vim.cmd.w)
 
 vim.keymap.set('n', "<leader>cd", function()
-	vim.cmd.cd([[%:p:h]])
+	vim.cmd.cd("%:p:h")
 	print(vim.fn.getcwd())
 end)
 
 vim.keymap.set('n', "<leader>ex", vim.cmd.NvimTreeToggle)
 
 vim.keymap.set('n', "<C-/>", function()
-	vim.cmd.let([[@/ = '']])
+	vim.cmd.let("@/ = ''")
 	print("@/ = ''")
 end)
 
@@ -26,7 +26,7 @@ vim.keymap.set('n', "U", vim.cmd.redo)
 vim.keymap.set('v', "<C-Down>", [[:m '>+1<CR>gv=gv]])
 vim.keymap.set('v', "<C-Up>", [[:m '<-2<CR>gv=gv]])
 
-vim.keymap.set('v', "<C-c>", [["+y]])
+vim.keymap.set('v', "<C-c>", "\"+y")
 
 vim.keymap.set('n', "fmt", vim.lsp.buf.format)
 
@@ -41,3 +41,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set('n', "vws", vim.lsp.buf.workspace_symbol, o)
 	end,
 })
+
+vim.keymap.set('n', "<leader>ff", require("mini.pick").builtin.files)
+vim.keymap.set('n', "<leader>fw", require("mini.pick").builtin.grep_live)

@@ -2,6 +2,13 @@ hotkey-overlay {
 	skip-at-startup
 }
 
+recent-windows {
+	binds {
+		Mod+grave { next-window scope="workspace"; }
+		Mod+Shift+grave { previous-window; }
+	}
+}
+
 binds {
 	Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
@@ -23,7 +30,7 @@ binds {
 
 	Mod+Q repeat=false { toggle-overview; }
 
-	Mod+Shift+C { close-window; }
+	Mod+Shift+C repeat=false { close-window; }
 
 	Mod+T { toggle-column-tabbed-display; }
 
@@ -45,7 +52,6 @@ binds {
 	Mod+Ctrl+S { move-column-to-workspace-down; }
 
 	Mod+Tab { focus-workspace-previous; }
-	Mod+Grave { focus-window-previous; }
 	Mod+C { focus-workspace 1; }
 	Mod+Ctrl+c { move-column-to-workspace 1; }
 	Mod+1 { focus-workspace 2; }
@@ -54,7 +60,7 @@ binds {
 	Mod+4 { focus-workspace 5; }
 	Mod+5 { focus-workspace 6; }
 
-	Mod+BracketLeft  { consume-or-expel-window-left; }
+	Mod+BracketLeft { consume-or-expel-window-left; }
 	Mod+BracketRight { consume-or-expel-window-right; }
 
 	Mod+R { switch-preset-column-width; }
@@ -75,8 +81,8 @@ binds {
 	Mod+Shift+Minus { set-window-height "-5%"; }
 	Mod+Shift+Equal { set-window-height "+5%"; }
 
-	Mod+V { toggle-window-floating; }
-	Mod+Shift+V { switch-focus-between-floating-and-tiling; }
+	Mod+V { switch-focus-between-floating-and-tiling; }
+	Mod+Shift+V { toggle-window-floating; }
 
 	Print { screenshot; }
 	Ctrl+Print { screenshot-window; }
