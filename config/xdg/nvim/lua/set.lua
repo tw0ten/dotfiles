@@ -1,6 +1,4 @@
-vim.opt.swapfile = false
-vim.opt.undofile = true
-
+require("vim._core.ui2").enable({})
 
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "StatusLineGap", { bg = "black" })
@@ -11,6 +9,7 @@ vim.cmd.aunmenu("PopUp.How-to\\ disable\\ mouse")
 
 vim.opt.relativenumber = true
 vim.opt.number = true
+vim.opt.signcolumn = "yes"
 
 vim.opt.list = true
 vim.opt.listchars = "tab:> "
@@ -19,12 +18,13 @@ vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
 vim.opt.shiftwidth = 2
 
+vim.opt.autocomplete = true
+
 vim.opt.smartindent = true
 
 vim.opt.scrolloff = 8
-vim.opt.signcolumn = "yes"
 
-vim.opt.winborder = "rounded"
+vim.opt.winborder = { '-', '-', '-', '=', '-', '-', '-', '=' }
 
 vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
@@ -36,19 +36,12 @@ vim.opt.statusline =
 		"%{&readonly?'-':(&modified?'+':'=')}"
 		.. " {%{mode()}}"
 		.. " [%{expand('%:~:.')}]"
-		.. " %#StatuslineGap#%=%* " ..
+		.. " %#StatusLineGap#%=%* " ..
 		"<%l,%c> " ..
 		"(%{&fileformat}|%{&fileencoding}|%{&filetype})"
 		.. " "
 
 vim.opt.shortmess = "lmrwoOstTAIcCFS"
-
-vim.filetype.add({
-	extension = {
-		["HH"] = "HolyC",
-		["HC"] = "HolyC",
-	},
-})
 
 vim.api.nvim_create_autocmd({ "BufEnter", "FileType" }, {
 	callback = function()
@@ -58,7 +51,7 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FileType" }, {
 
 vim.api.nvim_create_autocmd("FileChangedRO", {
 	callback = function()
-		vim.opt.ro = false
+		vim.opt.readonly = false
 		print("- > =")
 	end
 })

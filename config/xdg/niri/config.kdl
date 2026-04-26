@@ -15,8 +15,7 @@ layout {
 	}
 
 	focus-ring {
-		off
-		width 2
+		width 1
 	}
 
 	tab-indicator {
@@ -33,13 +32,11 @@ recent-windows {
 
 	highlight {
 		padding 30
-		corner-radius 8
+		corner-radius 10
 	}
 }
 
 overview {
-	zoom 0.5
-
 	workspace-shadow { off; }
 }
 

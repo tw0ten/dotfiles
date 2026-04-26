@@ -1,7 +1,11 @@
+vim.opt.swapfile = false
+vim.opt.undofile = true
+
+
 require("set")
 
-require("main.files")
-require("main.lsp")
-require("main.etc")
+require("opt.files")
+require("opt.lsp")
+require("opt.etc")
 
 require("remap")

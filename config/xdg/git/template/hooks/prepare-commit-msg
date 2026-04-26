@@ -3,8 +3,8 @@ set -e
 [ "$2" = 'message' ] && exit
 i="$1"
 
-echo >> "$i"
-echo >> "$i" "## $*"
+echo >>"$i"
+echo >>"$i" "## $*"
 
 i() { sed "$@" -i "$i"; }
 

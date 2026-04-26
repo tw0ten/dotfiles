@@ -5,7 +5,7 @@ vim.keymap.set('n', "<leader>U", function()
 	vim.pack.update()
 end)
 
-vim.keymap.set('n', "<leader>u", vim.cmd.UndotreeToggle)
+vim.keymap.set('n', "<leader>u", vim.cmd.Undotree)
 
 vim.keymap.set('n', "<leader>w", vim.cmd.w)
 

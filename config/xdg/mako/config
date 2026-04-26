@@ -2,9 +2,8 @@ default-timeout=5000
 
 font=system-ui 12
 
-background-color=#202020
+background-color=#101010a0
 text-color=#ffffff
-border-color=#101010
 
 border-size=0
 border-radius=8

@@ -3,14 +3,12 @@ layout {
 
 	border {
 		active-color "#ffffffa0"
-		urgent-color "#40e0d0ff"
+		urgent-color "#40e0d0f0"
 		inactive-color "#00000000"
 	}
 
 	focus-ring {
-		active-color "#ffffffa0"
-		urgent-color "#40e0d0ff"
-		inactive-color "#00000000"
+		active-color "#00000000"
 	}
 
 	tab-indicator {

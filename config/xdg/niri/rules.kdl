@@ -10,12 +10,17 @@ layer-rule {
 	block-out-from "screencast"
 }
 
+layer-rule {
+	match layer="overlay"
+
+	opacity 0.9
+}
+
 
 window-rule {
-	draw-border-with-background false
-	geometry-corner-radius 8
+	geometry-corner-radius 10
 	clip-to-geometry true
-	opacity 0.95
+	opacity 0.9
 }
 
 window-rule {
@@ -39,13 +44,13 @@ window-rule {
 window-rule {
 	match is-urgent=true
 
-	focus-ring { on; }
+	border { on; }
 }
 
 window-rule {
 	match is-window-cast-target=true
 
-	focus-ring {
+	border {
 		on
 		active-color "#ff0000ff"
 		inactive-color "#ff0000ff"
