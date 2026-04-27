@@ -277,7 +277,7 @@ PanelWindow {
 			}
 			BarBlock {
 				color: `#e0${Theme.color.background}`
-				radius: Theme.sizing.radius
+				radius: Theme.sizing.height / 2
 
 				content: RowLayout {
 					spacing: Theme.sizing.spacing
@@ -285,7 +285,7 @@ PanelWindow {
 					Item {}
 					Blocks.Time {}
 					Blocks.UserHost {
-						radius: Theme.sizing.radius
+						radius: Theme.sizing.height / 2
 					}
 				}
 			}

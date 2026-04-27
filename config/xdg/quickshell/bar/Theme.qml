@@ -6,7 +6,7 @@ import Quickshell
 Singleton {
 	property var sizing: Item {
 		height: 16
-		property real radius: 16 / 2
+		property real radius: 0
 		property real spacing: 8
 	}
 

@@ -1,5 +1,8 @@
 require("vim._core.ui2").enable({})
 
+vim.cmd.packadd("nvim.undotree")
+
+
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "StatusLineGap", { bg = "black" })
 

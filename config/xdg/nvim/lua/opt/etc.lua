@@ -1,6 +1,5 @@
 vim.pack.add({
 	"https://github.com/echasnovski/mini.pick",
-	"https://github.com/HiPhish/rainbow-delimiters.nvim",
 })
 
 require("mini.pick").setup({
@@ -9,4 +8,9 @@ require("mini.pick").setup({
 	},
 })
 
-vim.cmd.packadd("nvim.undotree")
+
+vim.filetype.add({
+	extension = {
+		["k"] = "komptal"
+	}
+})

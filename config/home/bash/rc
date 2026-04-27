@@ -11,14 +11,6 @@ done }
 dl() { local d="$(xdg-user-dir DOWNLOAD)"
 	echo "$d/$(\ls -t "$d" | head "-${1:-1}" | tail -1)"; }
 caret() { echo -ne "\e[$* q"; }
-mklc() { set -- "$DOTFILES/share/lc/${1:-.}" "${2:-LICENSE}"
-	cp -i -P "$1" "$2" ||
-		{ ls "$(dirname "$1")"; return $(false); }
-	sed -i "$2" \
-		-e "0,/{YEAR}/s//$(command date +'%Y')/" \
-		-e "0,/{NAME}/s//$(git config get user.name)/" \
-		-e "0,/{EMAIL}/s//$(git config get user.email)/"
-	head -n 5 "$2"; }
 mktl() { mkdir "$1" && cd "$1" || return
 	mkdir src lib .io .io/i .io/o
 	echo "# $1" > readme

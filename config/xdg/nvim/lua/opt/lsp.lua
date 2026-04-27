@@ -1,7 +1,8 @@
 vim.pack.add({
+	"https://github.com/neovim/nvim-lspconfig",
+	"https://github.com/HiPhish/rainbow-delimiters.nvim",
 	"https://github.com/nvim-treesitter/nvim-treesitter",
 	"https://github.com/williamboman/mason.nvim",
-	"https://github.com/neovim/nvim-lspconfig",
 	"https://github.com/nvim-mini/mini.completion",
 })
 
@@ -18,8 +19,9 @@ end
 
 require("mason").setup({})
 
+require("mini.completion").setup({})
+
+
 vim.api.nvim_create_autocmd("FileType", {
 	callback = function() vim.cmd.lsp("enable") end,
 })
-
-require("mini.completion").setup({})
