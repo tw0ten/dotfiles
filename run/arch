@@ -42,6 +42,6 @@
 		sshd \
 		qbittorrent-nox nginx
 
-	sudo cp -rTL config/etc/grub/theme /boot/grub/themes/default
+	sudo cp -rTL etc/root/grub/theme /boot/grub/themes/default
 	sudo grub-mkconfig -o /boot/grub/grub.cfg
 )
