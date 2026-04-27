@@ -4,45 +4,46 @@ set -e
 . 'lib/sh/profile'
 
 (
-	cd config
+	cd etc
 
 	i() {
-		set -- "$PWD/$1" "$i/$2"
+		set -- "$PWD/$1" "$2"
 		mkdir -p "$(dirname "$2")"
 		ln -vsfT "$1" "$2"
 	}
 
 	(
-		cd xdg && i="$XDG_CONFIG_HOME"
-		for f in *; do i "$f" "$f"; done
+		cd xdg
+		for f in *; do
+			i "$f" "$XDG_CONFIG_HOME/$f"
+		done
 	)
 
 	(
-		cd home && i="$HOME"
+		cd home
 
-		i bash/profile .bash_profile
-		i bash/rc .bashrc
-		i ssh/config .ssh/config
-		i icons/ .local/share/icons/default
-		i inputrc .inputrc
+		i bash/profile ~/.bash_profile
+		i bash/rc ~/.bashrc
+		i inputrc ~/.inputrc
+		i ssh/config ~/.ssh/config
+		i icons/ ~/.local/share/icons/default
 	)
 
 	sudo -v || exit
 
 	i() {
-		set -- "$1" "$i/$2"
 		sudo mkdir -p "$(dirname "$2")"
 		sudo cp -vrT "$1" "$2"
 	}
 
 	(
-		cd etc && i='/etc'
+		cd root
 
-		i sudoers/ sudoers.d
-		i pacman pacman.conf
-		i ssh ssh/sshd_config
-		i ly/ ly
-		i grub/default default/grub
+		i ssh /etc/ssh/sshd_config
+		i sudoers/ /etc/sudoers.d
+		i ly/ /etc/ly
+		i grub/default /etc/default/grub
+		i pacman /etc/pacman.conf
 	)
 ) || true
 
