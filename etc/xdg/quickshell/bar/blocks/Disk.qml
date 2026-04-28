@@ -19,7 +19,7 @@ BarBlock {
 			value: root.valueNumber % 1
 		}
 		BarText {
-			text: `${root.valuePrecision})`
+			text: `)`
 		}
 	}
 

@@ -38,7 +38,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set('n', "vgd", vim.lsp.buf.definition, o)
 		vim.keymap.set('n', "vrf", vim.lsp.buf.references, o)
 		vim.keymap.set('n', "vrn", vim.lsp.buf.rename, o)
-		vim.keymap.set('n', "vws", vim.lsp.buf.workspace_symbol, o)
+		vim.keymap.set('n', "vs", vim.lsp.buf.workspace_symbol, o)
 	end,
 })
 

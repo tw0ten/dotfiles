@@ -1,6 +1,7 @@
 require("vim._core.ui2").enable({})
 
 vim.cmd.packadd("nvim.undotree")
+vim.cmd.packadd("nvim.difftool")
 
 
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
@@ -15,7 +16,7 @@ vim.opt.number = true
 vim.opt.signcolumn = "yes"
 
 vim.opt.list = true
-vim.opt.listchars = "tab:> "
+vim.opt.listchars = { tab = "> " }
 
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
@@ -46,11 +47,7 @@ vim.opt.statusline =
 
 vim.opt.shortmess = "lmrwoOstTAIcCFS"
 
-vim.api.nvim_create_autocmd({ "BufEnter", "FileType" }, {
-	callback = function()
-		vim.wo.fillchars = "eob: "
-	end
-})
+vim.opt.fillchars = { eob = ' ' }
 
 vim.api.nvim_create_autocmd("FileChangedRO", {
 	callback = function()
