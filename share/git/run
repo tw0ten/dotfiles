@@ -1,12 +1,10 @@
 #!/bin/sh
 set -e
 
-cd "$DOTFILES/git"
+cd "$DOTFILES/share/git"
 
 (
 	user="$(git config get user.name)"
-
-	mkdir -p "github.com/$user" && cd "github.com/$user"
 
 	for repo in $(curl -s "https://api.github.com/users/$user/repos" | jq '.[].ssh_url'); do (
 		repo="$(echo "$repo" | sed -e 's/.....//' -e 's/.....$//')"
