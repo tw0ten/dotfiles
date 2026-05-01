@@ -42,12 +42,6 @@ window-rule {
 }
 
 window-rule {
-	match is-urgent=true
-
-	border { on; }
-}
-
-window-rule {
 	match is-window-cast-target=true
 
 	border {

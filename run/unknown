@@ -29,11 +29,11 @@ set -e
 		i icons/ ~/.local/share/icons/default
 	)
 
-	sudo -v || exit
+	[ "$(id -u)" = 0 ] || exit
 
 	i() {
-		sudo mkdir -p "$(dirname "$2")"
-		sudo cp -vrT "$1" "$2"
+		mkdir -p "$(dirname "$2")"
+		cp -vrT "$1" "$2"
 	}
 
 	(

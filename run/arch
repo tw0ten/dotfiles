@@ -1,17 +1,18 @@
 #!/bin/sh
 
 (
+	set +e
 	sudo pacman -Syu
 
 	AUR_HELPER=paru
 	command -v "$AUR_HELPER" || (
+		set -e
 		cd "$(mktemp -d)"
 		git clone "https://aur.archlinux.org/$AUR_HELPER" .
 		makepkg -si
 	)
 
 	i() { "$AUR_HELPER" -S "$@"; }
-	set +e
 
 	i neovim lf \
 		openssh qbittorrent-nox nginx ufw \
@@ -30,18 +31,20 @@
 	systemctl --user enable \
 		brightness-fluctuator.timer
 
-	sudo systemctl disable getty@tty1 && sudo systemctl enable ly@tty1
+	[ "$(id -u)" = 0 ]
 
-	sudo ufw reset
-	sudo ufw default deny incoming
-	sudo ufw default allow outgoing
-	sudo ufw allow ssh
-	sudo ufw enable
+	systemctl disable getty@tty1 && systemctl enable ly@tty1
 
-	sudo systemctl enable \
+	ufw reset
+	ufw default deny incoming
+	ufw default allow outgoing
+	ufw allow ssh
+	ufw enable
+
+	systemctl enable \
 		sshd \
 		qbittorrent-nox nginx
 
-	sudo cp -rTL etc/root/grub/theme /boot/grub/themes/default
-	sudo grub-mkconfig -o /boot/grub/grub.cfg
+	cp -rTL etc/root/grub/theme /boot/grub/themes/default
+	grub-mkconfig -o /boot/grub/grub.cfg
 )

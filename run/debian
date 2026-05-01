@@ -1,9 +1,9 @@
 #!/bin/sh
 
-sudo apt update && sudo apt upgrade
+apt update && apt upgrade
 
-sudo apt install \
+apt install \
 	neovim tmux ssh \
 	lf ripgrep fastfetch
 
-sudo apt autoremove
+apt autoremove
