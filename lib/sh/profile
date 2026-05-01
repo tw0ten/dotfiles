@@ -20,8 +20,8 @@ export \
 ;
 eval "$(dircolors)"
 
-export PS0=
-export PROMPT_COMMAND=
+export PS0=''
+export PROMPT_COMMAND=''
 export PS1='= '
 export PS2='| '
 export PS3='? '

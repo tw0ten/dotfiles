@@ -7,7 +7,7 @@ require("oil").setup({})
 
 require("nvim-tree").setup({
 	renderer = {
-		root_folder_modifier = ":~:s?$?/",
+		root_folder_modifier = ":~",
 		indent_width = 1,
 		symlink_destination = false,
 		icons = {
@@ -27,12 +27,12 @@ require("nvim-tree").setup({
 					ignored = '',
 				},
 				folder = {
-					default = '>',
-					open = '-',
-					empty = ' ',
+					default = '/',
+					open = '/',
+					empty = '/',
 					empty_open = '-',
-					symlink = '<',
-					symlink_open = '-',
+					symlink = '@',
+					symlink_open = '@',
 				},
 			},
 		},

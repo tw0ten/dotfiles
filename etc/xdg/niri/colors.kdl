@@ -7,14 +7,10 @@ layout {
 		inactive-color "#00000000"
 	}
 
-	focus-ring {
-		active-color "#00000000"
-	}
-
 	tab-indicator {
 		active-color "#ffffffa0"
-		urgent-color "#40e0d0ff"
-		inactive-color "#000000ff"
+		urgent-color "#40e0d0f0"
+		inactive-color "#000000f0"
 	}
 
 	insert-hint {
@@ -25,7 +21,7 @@ layout {
 recent-windows {
 	highlight {
 		active-color "#ffffffa0"
-		urgent-color "#40e0d0ff"
+		urgent-color "#40e0d0f0"
 	}
 }
 

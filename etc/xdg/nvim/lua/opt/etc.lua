@@ -14,6 +14,6 @@ require("mini.notify").setup({})
 
 vim.filetype.add({
 	extension = {
-		["k"] = "komptal"
-	}
+		["k"] = "komptal",
+	},
 })

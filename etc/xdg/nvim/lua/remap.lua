@@ -3,30 +3,25 @@ vim.g.mapleader = ' '
 
 vim.keymap.set('n', "<leader>U", function()
 	vim.pack.update()
-end)
+end, { desc = "update" })
 
-vim.keymap.set('n', "<leader>u", vim.cmd.Undotree)
+vim.keymap.set('n', "<leader>u", vim.cmd.Undotree, { desc = ":Undotree" })
 
-vim.keymap.set('n', "<leader>w", vim.cmd.w)
+vim.keymap.set('n', "<leader>w", vim.cmd.write, { desc = ":write" })
 
 vim.keymap.set('n', "<leader>cd", function()
 	vim.cmd.cd("%:p:h")
 	print(vim.fn.getcwd())
-end)
+end, { desc = "cd ." })
 
-vim.keymap.set('n', "<leader>ex", vim.cmd.NvimTreeToggle)
+vim.keymap.set('n', "<leader>ex", vim.cmd.NvimTreeToggle, { desc = ":NvimTreeToggle" })
 
-vim.keymap.set('n', "<C-/>", function()
-	vim.cmd.let("@/ = ''")
-	print("@/ = ''")
-end)
+vim.keymap.set('n', "<C-/>", function() vim.cmd.let("@/ = ''") end, { desc = ":let @l = ''" })
 
 vim.keymap.set('n', "U", vim.cmd.redo)
+vim.keymap.set('n', "<C-r>", function() end)
 
-vim.keymap.set('v', "<C-Down>", [[:m '>+1<CR>gv=gv]])
-vim.keymap.set('v', "<C-Up>", [[:m '<-2<CR>gv=gv]])
-
-vim.keymap.set('v', "<C-c>", "\"+y")
+vim.keymap.set('v', "<C-c>", "\"+y", { desc = "copy" })
 
 vim.keymap.set('n', "fmt", vim.lsp.buf.format)
 
@@ -42,5 +37,5 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
-vim.keymap.set('n', "<leader>ff", require("mini.pick").builtin.files)
-vim.keymap.set('n', "<leader>fw", require("mini.pick").builtin.grep_live)
+vim.keymap.set('n', "<leader>ff", function() vim.cmd.Pick("files") end, { desc = ":Pick files" })
+vim.keymap.set('n', "<leader>fw", function() vim.cmd.Pick("grep_live") end, { desc = ":Pick grep_live" })

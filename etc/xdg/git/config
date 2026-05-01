@@ -23,7 +23,6 @@
 	pl = pull
 	ps = push
 	g = clone
-	gd = g --depth 1
 	b = branch
 	d = diff
 	dh = d HEAD
