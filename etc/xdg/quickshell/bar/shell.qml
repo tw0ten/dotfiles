@@ -178,18 +178,6 @@ PanelWindow {
 				spacing: Theme.sizing.spacing / 2
 
 				Item {}
-				Rectangle {
-					color: "#00000000"
-					implicitHeight: Theme.sizing.height - 2
-					implicitWidth: this.height
-
-					visible: window.icon.get() !== null
-
-					Image {
-						anchors.fill: parent
-						source: window.icon.get() ?? ""
-					}
-				}
 				BarText {
 					visible: window.value?.title !== ""
 
@@ -213,25 +201,6 @@ PanelWindow {
 						if (i !== null)
 							i.title = i.title ?? "";
 						return window.value = i;
-					}
-				}
-			}
-
-			property var icon: Item {
-				property var i: window.value?.app_id
-				property var get: () => {
-					if (cache[i] === undefined)
-						window.icon.fetch.running = true;
-					return cache[i];
-				}
-				property var cache: ({})
-				property var fetch: Process {
-					command: ["sh", "-c", `set -- '${window.icon.i}' && echo "$1" && find /usr/share/icons -name "$1.*"`]
-					stdout: StdioCollector {
-						onStreamFinished: () => {
-							const i = this.text.split("\n");
-							return window.icon.cache[i[0]] = i[1].length === 0 ? null : i[1];
-						}
 					}
 				}
 			}

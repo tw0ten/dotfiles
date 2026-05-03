@@ -3,7 +3,7 @@ set hidden
 set info size
 set dircounts
 set icons
-set tabstop 4
+set tabstop 1
 set ratios 2:3:3
 
 
@@ -17,14 +17,16 @@ cmd x $$OPENER "$f"
 cmd e $$EDITOR "$f"
 cmd su $su -c lf
 
+map <enter> e
+map u su
+map x x
+
 
 map ~ cd
 
-map <enter> e
 map <backspace2> delete
 map c unselect
-map u su
-map x x
+map C clear
 
 map sr set reverse!
 map sa
@@ -41,6 +43,4 @@ map z<space> set info
 
 map i
 map e
-map G
 map gh
-map gg

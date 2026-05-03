@@ -39,6 +39,7 @@ set -e
 	(
 		cd root
 
+		i locale /usr/share/i18n/locales/custom
 		i ssh /etc/ssh/sshd_config
 		i sudoers/ /etc/sudoers.d
 		i ly/ /etc/ly

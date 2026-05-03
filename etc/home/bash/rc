@@ -46,7 +46,7 @@ alias \
 	oo='o -O' \
 	r='.io/run' \
 	rr='.io/build' \
-	rrr='rr && r' \
+	rrr='rr && echo && r' \
 \
 	d='cd' \
 	dd='mkdir' \
