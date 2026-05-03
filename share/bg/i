@@ -1,0 +1,56 @@
+#!/bin/python
+
+from PIL import Image, ImageDraw
+import json
+import math
+import subprocess
+import sys
+
+
+bgc = "#10101000"
+fgc = "ffffff"
+acc = "40e0d0"
+
+
+def is_prime(n):
+    i = 2
+    while i * i <= n:
+        if n % i == 0:
+            return False
+        i += 1
+    return True
+
+
+primes = [2]
+for _ in range(2**14):
+    o = primes[len(primes) - 1] + 1
+    while not is_prime(o):
+        o += 1
+    primes += [o]
+
+outputs = json.JSONDecoder().decode(sys.stdin.read())
+
+for name in outputs:
+    print(name)
+    assert name == outputs[name]["name"]
+
+    w = outputs[name]["logical"]["width"]
+    h = outputs[name]["logical"]["height"]
+    d = math.sqrt((w / 2) ** 2 + (h / 2) ** 2)
+    last = primes[len(primes) - 1]
+
+    o = Image.new("RGBA", (w, h))
+    draw = ImageDraw.Draw(o)
+    draw.rectangle((0, 0, w, h), fill=bgc)
+
+    for i in range(len(primes) - 1):
+        n = primes[i]
+        f = n * d / last
+        draw.circle((w / 2 + math.cos(n) * f,
+                     h / 2 + math.sin(n) * f),
+                    0.5,
+                    fill=f"#{acc if primes[i + 1] - n == 2 else fgc}ff")
+
+    file = f"o/{name}.png"
+    o.save(file)
+    subprocess.run(["awww", "img", file, "--outputs", name])
