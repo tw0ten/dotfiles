@@ -46,10 +46,9 @@ for name in outputs:
     for i in range(len(primes) - 1):
         n = primes[i]
         f = n * d / last
-        draw.circle((w / 2 + math.cos(n) * f,
-                     h / 2 + math.sin(n) * f),
-                    0.5,
-                    fill=f"#{acc if primes[i + 1] - n == 2 else fgc}ff")
+        xy = (w / 2 + math.cos(n) * f, h / 2 + math.sin(n) * f)
+        color = f"#{acc if primes[i + 1] - n == 2 else fgc}ff"
+        draw.circle(xy, 0.5, fill=color)
 
     file = f"o/{name}.png"
     o.save(file)

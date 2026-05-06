@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+mime="$(xdg-mime query filetype "$1")"
+
+tput setaf 2
+echo "$mime"
+tput setaf 15
+echo
+
+case "$mime" in
+image/*) jp2a --colors "$1" ;;
+*) cat "$1" ;;
+esac
