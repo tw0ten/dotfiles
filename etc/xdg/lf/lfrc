@@ -17,13 +17,13 @@ set timefmt "2006/01/02 15/04/05"
 set previewer "~/.config/lf/previewer"
 
 
-cmd x $$OPENER "$f"
-cmd e $$EDITOR "$f"
+cmd open $"$OPENER" "$f"
+
+cmd e $"$EDITOR" "$f"
 cmd su $su -c lf
 
-map <enter> e
+map e e
 map u su
-map x x
 
 
 map ~ cd
@@ -48,5 +48,4 @@ map za
 map zd set dirfirst!
 
 map i
-map e
 map gh

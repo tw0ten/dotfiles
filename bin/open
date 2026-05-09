@@ -1,13 +1,16 @@
 #!/bin/sh
 set -e
 i() { exec "$@"; }
-[ "$TERM" = 'linux' ] && i() { exec $TERMINAL -e "$@"; }
+[ "$TERM" = 'linux' ] && i() { exec "$TERMINAL" -e "$@"; }
+
 for i; do (
-	[ -d "$i" ] && i "$FILES" "$i"
-	case "$i" in
-	*://*) exec $BROWSER "$i" ;;
-	esac
-	[ -f "$i" ] || i "$VISUAL" "$i"
+	[ -e "$i" ] && {
+		[ -d "$i" ] && i "$FILES" "$i"
+		[ -f "$i" ] && grep -Iq . "$i" &&
+			case "$(xdg-mime query filetype "$i")" in
+			'inode'/'x-empty' | 'application'/* | 'text'/*) i "$VISUAL" "$i" ;;
+			esac || true
+	}
+
 	exec xdg-open "$i"
-	[ -x "$i" ] && "$(realpath "$i")"
 ); done
