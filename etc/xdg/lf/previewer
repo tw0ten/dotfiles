@@ -1,6 +1,6 @@
 #!/bin/sh
-set -e
-mime="$(xdg-mime query filetype "$1")"
+set +e
+mime="$(xdg-mime query filetype "$1" || echo '*/*')"
 
 tput setaf 2
 echo "$mime"
@@ -8,6 +8,11 @@ tput setaf 15
 echo
 
 case "$mime" in
-image/*) jp2a --colors "$1" ;;
-*) cat "$1" ;;
-esac
+'image'/*) jp2a --colors "$1" ;;
+*) false ;;
+esac && exit
+
+grep -Iq . "$1" && exec cat "$1"
+
+tput rev
+echo 'binary'

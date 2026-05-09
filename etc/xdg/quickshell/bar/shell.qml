@@ -168,12 +168,6 @@ PanelWindow {
 
 			color: `#ff${Theme.color.foreground}`
 
-			Behavior on implicitWidth {
-				NumberAnimation {
-					duration: 100
-				}
-			}
-
 			content: RowLayout {
 				spacing: Theme.sizing.spacing / 2
 
