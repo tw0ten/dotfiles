@@ -1,6 +1,7 @@
 #!/bin/sh
 set -e
 cd "$@"
+
 while i="$(
 	ls -apL1 |
 		sed -e 's/^\.\//./' -e 's/^\.\.\//../' |

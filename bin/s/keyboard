@@ -1,13 +1,12 @@
 #!/bin/sh
 set -e
 
-i="$(niri msg -j keyboard-layouts | jq -r '.names[]' |
-	dmenu -p 'keyboard ' -format i -a "$(niri msg -j keyboard-layouts | jq .current_idx)" -l 4)"
+i="$(niri msg -j keyboard-layouts | jq -r '.names[]' | dmenu -p 'keyboard ' -format i -a "$(niri msg -j keyboard-layouts | jq -r '.current_idx')" -l 4)"
 
 niri msg action switch-layout "$i"
 
-case "$(niri msg keyboard-layouts | grep '\*')" in
-*' Chinese') fcitx5-remote -s 'pinyin' ;;
-*' Japanese') fcitx5-remote -s 'mozc' ;;
+case "$(niri msg -j keyboard-layouts | jq -r '.names[.current_idx]')" in
+'Chinese') fcitx5-remote -s 'pinyin' ;;
+'Japanese') fcitx5-remote -s 'mozc' ;;
 *) fcitx5-remote -s 'keyboard-us' ;;
 esac

@@ -1,11 +1,8 @@
 #!/bin/sh
 set -e
-
 sink='@DEFAULT_AUDIO_SINK@'
-notification="$HOME/.cache/notification-volume"
 
-[ "$*" = '' ] && wpctl set-mute "$sink" toggle
-[ "$*" = '' ] || wpctl set-volume "$sink" "$1"
-
-i="$(notify-send -p -r "$(cat "$notification" || echo 0)" 'volume' "$(set -- $(wpctl get-volume "$sink") && shift && echo "$@")")"
-echo "$i" >"$notification"
+case "$*" in
+'') wpctl set-mute "$sink" toggle ;;
+*) wpctl set-volume "$sink" "$1" ;;
+esac
