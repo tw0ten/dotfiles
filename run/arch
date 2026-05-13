@@ -19,7 +19,7 @@
 		btop fastfetch ripgrep ly nix tmux ffmpeg
 	i niri firefox foot \
 		pipewire mako awww rofi quickshell fcitx5 \
-		mpv libreoffice-still gimp obs-studio \
+		mpv libreoffice-fresh gimp obs-studio \
 		noto-fonts noto-fonts-emoji noto-fonts-cjk
 
 	true

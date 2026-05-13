@@ -6,8 +6,10 @@ i() { exec "$@"; }
 for i; do (
 	[ -e "$i" ] && {
 		[ -d "$i" ] && i "$FILES" "$i"
-		[ -f "$i" ] && grep -Iq . "$i" &&
-			case "$(xdg-mime query filetype "$i")" in
+
+		[ -f "$i" ] &&
+			{ grep -Iq . "$i" || [ ! -s "$i" ]; } &&
+			case "$(file -bL --mime-type "$i")" in
 			'inode'/'x-empty' | 'application'/* | 'text'/*) i "$VISUAL" "$i" ;;
 			esac || true
 	}

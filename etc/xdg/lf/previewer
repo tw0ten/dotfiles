@@ -1,14 +1,13 @@
 #!/bin/sh
 set +e
-mime="$(xdg-mime query filetype "$1" || echo '*/*')"
 
 tput setaf 2
-echo "$mime"
+file -bL "$1" | fold -s -w "$2"
 tput setaf 15
 echo
 
-case "$mime" in
-'image'/*) jp2a --colors "$1" ;;
+case "$(file -bL --mime-type "$1")" in
+'image'/*) jp2a --width="$2" --colors "$1" ;;
 *) false ;;
 esac && exit
 
