@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 i() { exec "$@"; }
-[ "$TERM" = 'linux' ] && i() { exec "$TERMINAL" -e "$@"; }
+[ ! "$XDG_SESSION_TYPE" = 'tty' ] && [ "$TERM" = 'linux' ] && i() { exec "$TERMINAL" -e "$@"; }
 
 for i; do (
 	[ -e "$i" ] && {
