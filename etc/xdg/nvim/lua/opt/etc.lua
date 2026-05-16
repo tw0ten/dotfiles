@@ -1,6 +1,6 @@
 vim.pack.add({
-	"https://github.com/echasnovski/mini.pick",
-	"https://github.com/echasnovski/mini.notify",
+	{ src = "https://github.com/echasnovski/mini.pick" },
+	{ src = "https://github.com/echasnovski/mini.notify" },
 })
 
 require("mini.pick").setup({

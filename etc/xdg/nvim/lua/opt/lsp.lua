@@ -1,9 +1,9 @@
 vim.pack.add({
-	"https://github.com/neovim/nvim-lspconfig",
-	"https://github.com/HiPhish/rainbow-delimiters.nvim",
-	"https://github.com/nvim-treesitter/nvim-treesitter",
-	"https://github.com/williamboman/mason.nvim",
-	"https://github.com/nvim-mini/mini.completion",
+	{ src = "https://github.com/neovim/nvim-lspconfig" },
+	{ src = "https://github.com/HiPhish/rainbow-delimiters.nvim" },
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
+	{ src = "https://github.com/williamboman/mason.nvim" },
+	{ src = "https://github.com/nvim-mini/mini.completion" },
 })
 
 do
@@ -12,7 +12,7 @@ do
 		pattern = ts.get_available(),
 		callback = function(ev)
 			ts.install({ ev.match }):wait()
-			vim.treesitter.start()
+			vim.treesitter.start(ev.buf)
 		end,
 	})
 end

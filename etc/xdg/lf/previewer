@@ -1,5 +1,10 @@
 #!/bin/sh
-set +e
+set -e
+
+[ -e "$1" ] || {
+	tput rev
+	exec echo 'no such file'
+}
 
 tput setaf 2
 file -bL "$1" | fold -s -w "$2"
@@ -14,4 +19,6 @@ esac && exit
 [ -f "$1" ] && grep -Iq . "$1" && exec cat "$1"
 
 tput rev
+[ -s "$1" ] || exec echo 'empty'
+[ -r "$1" ] || exec echo 'permission denied'
 echo 'binary'

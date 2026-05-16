@@ -1,6 +1,6 @@
 vim.pack.add({
-	"https://github.com/stevearc/oil.nvim",
-	"https://github.com/nvim-tree/nvim-tree.lua",
+	{ src = "https://github.com/stevearc/oil.nvim" },
+	{ src = "https://github.com/nvim-tree/nvim-tree.lua" },
 })
 
 require("oil").setup({})
