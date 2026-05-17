@@ -1,9 +1,7 @@
 #!/bin/sh
 set -e
 cd "$DOTFILES/bin/s"
-[ "$*" = '' ] && set -- $(ls -1 | dmenu -p '~ ')
-i="$(realpath "$1")"
-shift
+[ "$*" = '' ] && set -- "$(find . -type f | sed 's/..//' | dmenu -p '~ ')"
 cd "$OLDPWD"
 set +e
-. "$i"
+. "$OLDPWD/$1"

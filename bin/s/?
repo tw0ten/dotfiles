@@ -1,7 +1,4 @@
 #!/bin/sh
-set -e
-
-i="$(echo '~' | dmenu -p '? ' -l 1)"
-
-[ "$i" = '~' ] && exec smenu
-exec "$BROWSER" --search "$i"
+set -eu -- "$(echo '~' | dmenu -p '? ' -l 1)"
+[ "$1" = '~' ] && exec smenu
+exec "$BROWSER" --search "$1"

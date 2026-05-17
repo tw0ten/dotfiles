@@ -1,5 +1,5 @@
 #!/bin/sh
-set -e
+set -eu
 i() { exec "$@"; }
 [ ! "$XDG_SESSION_TYPE" = 'tty' ] && [ "$TERM" = 'linux' ] && i() { exec "$TERMINAL" -e "$@"; }
 

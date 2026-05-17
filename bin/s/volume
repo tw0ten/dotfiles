@@ -1,12 +1,12 @@
 #!/bin/sh
 set -e
 
-i="$(printf " \n%s\n%s\n%s" '0.05-' "$(set -- $(wpctl get-volume @DEFAULT_AUDIO_SINK@) && shift && echo "$@")" '0.05+' | dmenu -p "volume " -l 4 -a 2)"
+set -- "$(printf " \n%s\n%s\n%s" '0.05-' "$(set -- $(wpctl get-volume @DEFAULT_AUDIO_SINK@) && shift && echo "$@")" '0.05+' | dmenu -p "volume " -l 4 -a 2)"
 
-case "$i" in
+case "$1" in
 ' ') wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle ;;
 *)
-	wpctl set-volume @DEFAULT_AUDIO_SINK@ "$i"
+	wpctl set-volume @DEFAULT_AUDIO_SINK@ "$1"
 	wpctl set-mute @DEFAULT_AUDIO_SINK@ 0
 	;;
 esac

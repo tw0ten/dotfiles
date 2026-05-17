@@ -1,3 +1,4 @@
 #!/bin/sh
-[ -z "$*" ] && exec niri msg action unset-workspace-name
-niri msg action set-workspace-name "$*"
+set -- "$(dmenu -p 'name-workspace ' -l 0)"
+[ -z "$1" ] && exec niri msg action unset-workspace-name
+niri msg action set-workspace-name "$1"

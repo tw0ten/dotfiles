@@ -35,7 +35,7 @@ alias \
 	..='. ~/.bashrc' \
 	...='. ~/.bash_profile' \
 	....='exec "$SHELL"' \
-\
+	\
 	s='sudo' \
 	x='"$OPENER"' \
 	e='"$VISUAL"' \
@@ -49,7 +49,7 @@ alias \
 	r='.io/run' \
 	rr='.io/build' \
 	rrr='rr && echo && r' \
-\
+	\
 	d='cd' \
 	dd='mkdir' \
 	ddd='d "$(mktemp -d)"' \
@@ -74,13 +74,13 @@ alias \
 	ln='ln -vn' \
 	mkdir='mkdir -vp' \
 	rmdir='rmdir -v' \
-\
+	\
 	history='history | $PAGER +G' \
 	uptime='uptime -p' \
 	diff='diff --color=always' \
 	+x='chmod +x' \
 	filesize='du -shc ./.* ./* 2>/dev/null' \
-;
+	;
 
 PS1="$(
 	b="\[$bold\]"
@@ -93,8 +93,7 @@ PS1="$(
 	i "\$([ \"\$PWD\" = \"\$(realpath .)\" ] || echo 'r$c:$r')$PS1"
 	i "\${__git_ps1+\$__git_ps1$c:$r}$PS1"
 	i "\h $PS1$c"
-	[[ "$(id -u)" = 0 ]] && i "$PS1#"
-	[[ "$(id -u)" = 0 ]] || i "\u$b$c@$r$PS1="
+	[ "$(id -u)" = 0 ] && i "$PS1#" || i "\u$b$c@$r$PS1="
 	[[ -n "$container" ]] && i "c$c:$r$PS1"
 	[[ "$SHELL" = /nix/store/* ]] && i "n$c:$r$PS1"
 	[[ -n "$SSH_CONNECTION" ]] && i "r$c:$r$PS1"
@@ -103,6 +102,6 @@ PS1="$(
 )"
 
 minifetch() { echo "$(tty):$accent$SHLVL$normal '$-'" | fastfetch -C mini "$@"; }
-minifetch
+minifetch ''
 
 [[ -f ~/.config/bashrc ]] && . ~/.config/bashrc

@@ -1,9 +1,9 @@
 #!/bin/sh
 set -e
 
-i="$(niri msg -j keyboard-layouts | jq -r '.names[]' | dmenu -p 'keyboard ' -format i -a "$(niri msg -j keyboard-layouts | jq -r '.current_idx')" -l 4)"
+set -- "$(niri msg -j keyboard-layouts | jq -r '.names[]' | dmenu -p 'keyboard ' -format i -a "$(niri msg -j keyboard-layouts | jq -r '.current_idx')" -l 4)"
 
-niri msg action switch-layout "$i"
+niri msg action switch-layout "$1"
 
 case "$(niri msg -j keyboard-layouts | jq -r '.names[.current_idx]')" in
 'Chinese') fcitx5-remote -s 'pinyin' ;;
