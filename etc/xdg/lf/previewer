@@ -8,8 +8,7 @@ set -e
 
 tput setaf 2
 file -bL "$1" | fold -s -w "$2"
-tput setaf 15
-[ "$XDG_SESSION_TYPE" = 'tty' ] && tput sgr0
+tput sgr0 | sed 's/(B//'
 echo
 
 case "$(file -bL --mime-type "$1")" in
