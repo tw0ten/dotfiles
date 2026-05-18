@@ -17,7 +17,7 @@ export \
 	underline="$(tput smul)" \
 	blink="$(tput blink)" \
 	bell="$(tput bel)" \
-;
+	;
 eval "$(dircolors)"
 
 export PS0=''
@@ -35,7 +35,7 @@ export \
 	HISTTIMEFORMAT='%c ' \
 	HISTCONTROL='ignoredups' \
 	HISTIGNORE='fg:bg' \
-;
+	;
 
 export \
 	OPENER='open' \
@@ -45,4 +45,4 @@ export \
 	PAGER='less -FXR' \
 	BROWSER='firefox' \
 	FILES='lf' \
-;
+	;
