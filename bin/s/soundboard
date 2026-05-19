@@ -1,0 +1,4 @@
+#!/bin/sh
+set -e
+cd "$HOME/media/audio/sound"
+exec soundboard "$(find . -type f -not -path '*/.*' | sed 's/..//' | dmenu -p 'soundboard ')"

@@ -16,6 +16,10 @@ echo
 		tput rev
 		exec echo 'permission denied'
 	}
+	[ "$(find -L "$1" -maxdepth 1 | wc -l)" = 1 ] && {
+		tput rev
+		exec echo 'empty'
+	}
 
 	cd "$1"
 	tree . -L 2 -F -C --noreport --dirsfirst --compress -2 |
