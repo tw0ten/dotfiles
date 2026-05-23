@@ -10,11 +10,6 @@ day=$((hour * 24))
 
 tz_offset=$(python -c 'import time; print(-time.timezone)')
 
-write_hm() { (
-	set -- $(cat)
-	echo $(($1 / hour)) $(($1 % hour / minute))
-); }
-
 now=$(((epoch + tz_offset) % day))
 
 i_waketime=$((6 * hour + 30 * minute))
@@ -26,8 +21,10 @@ o_sleeptime=$(set -- $((now)) $((i_waketime)) $((day)) && [ "$1" -lt "$2" ] && e
 
 date --date "@$((epoch + i_sleeptime))" +'%w' | grep "[60]" -q && exit
 
+printf_hm() { printf "$1" $(($2 / hour)) $(($2 % hour / minute)); }
+
 [ $((o_sleeptime)) -lt $((i_sleeptime + (1 * hour))) ] && notify-send \
-	"bedtime: $(printf '%02i/%02i' $(echo $o_bedtime | write_hm))" \
-	"sleeptime left: $(printf '%i/%02i' $(echo $o_sleeptime | write_hm))" \
+	"bedtime: $(printf_hm '%02i/%02i' $((o_bedtime)))" \
+	"sleeptime left: $(printf_hm '%i/%02i' $((o_sleeptime)))" \
 	-t $((1000 * minute / 2)) ||
 	true

@@ -1,6 +1,5 @@
 vim.g.mapleader = ' '
 
-
 vim.keymap.set('n', "<leader>U", function()
 	vim.pack.update()
 end, { desc = "update" })
@@ -22,6 +21,16 @@ vim.keymap.set('n', "U", vim.cmd.redo)
 vim.keymap.set('n', "<C-r>", function() end)
 
 vim.keymap.set('v', "<C-c>", "\"+y", { desc = "copy" })
+
+vim.keymap.set('n', "todo", function()
+	vim.cmd.normal("o")
+	vim.cmd.normal("0D")
+	vim.cmd.normal("itodo")
+	vim.cmd.normal("gcc")
+	vim.cmd("s/todo/#todo /")
+	vim.cmd.normal("==")
+	vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("A", true, false, true), "n", false)
+end, { desc = "todo" })
 
 vim.keymap.set('n', "fmt", vim.lsp.buf.format)
 

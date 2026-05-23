@@ -1,4 +1,0 @@
-#!/bin/sh
-set -eu -- "$(echo '~' | dmenu -p '? ' -l 1)"
-[ "$1" = '~' ] && exec smenu
-exec "$BROWSER" --search "$1"

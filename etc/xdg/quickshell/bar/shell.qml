@@ -18,8 +18,8 @@ PanelWindow {
 	margins {
 		left: 2
 		right: 2
-		top: 1
-		bottom: 1
+		top: 2
+		bottom: 2
 	}
 
 	property var eventStreamSubs: []
@@ -155,46 +155,6 @@ PanelWindow {
 								size: [i.layout.tile_size[0] / width, i.layout.tile_size[1] / height]
 							}));
 						});
-					}
-				}
-			}
-		}
-
-		BarBlock {
-			id: window
-			property var value: null
-
-			anchors.centerIn: parent // todo: anchors in layout is undefined behavior
-
-			color: `#ff${Theme.color.foreground}`
-
-			content: RowLayout {
-				spacing: Theme.sizing.spacing / 2
-
-				Item {}
-				BarText {
-					visible: window.value?.title !== ""
-
-					text: (window.value?.title ?? "").substring(0, 128)
-					color: `#ff${Theme.color.background}`
-				}
-				Item {}
-			}
-
-			visible: window.value !== null
-
-			radius: Theme.sizing.radius
-
-			Process {
-				Component.onCompleted: bar.eventStreamSubs.push(this)
-
-				command: ["niri", "msg", "-j", "focused-window"]
-				stdout: SplitParser {
-					onRead: i => {
-						i = JSON.parse(i);
-						if (i !== null)
-							i.title = i.title ?? "";
-						return window.value = i;
 					}
 				}
 			}

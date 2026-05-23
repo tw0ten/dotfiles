@@ -1,0 +1,3 @@
+#!/bin/sh
+set -eu
+exec "$BROWSER" --new-window "https://chatgpt.com/?q=$(dmenu -p 'chatgpt.com ' -l 0)"

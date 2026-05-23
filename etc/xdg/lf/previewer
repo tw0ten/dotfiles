@@ -9,9 +9,9 @@ set -e
 tput setaf 2
 file -bL "$1" | fold -s -w "$2"
 tput sgr0 | sed 's/(B//'
-echo
 
 [ -d "$1" ] && {
+	echo
 	[ -r "$1" ] || {
 		tput rev
 		exec echo 'permission denied'
@@ -27,7 +27,12 @@ echo
 	exit
 }
 
-case "$(file -bL --mime-type "$1")" in
+mime="$(file -bL --mime-type "$1")"
+
+echo "$mime $(xdg-mime query default "$mime")"
+echo
+
+case "$mime" in
 'image'/*) jp2a --width="$2" --colors "$1" ;;
 *) false ;;
 esac && exit
