@@ -6,8 +6,10 @@ set -e
 	exec echo 'no such file'
 }
 
+file="$(file -bL "$1")"
+
 tput setaf 2
-file -bL "$1" | fold -s -w "$2"
+echo "$file" | fold -s -w "$2"
 tput sgr0 | sed 's/(B//'
 
 [ -d "$1" ] && {
@@ -22,8 +24,7 @@ tput sgr0 | sed 's/(B//'
 	}
 
 	cd "$1"
-	tree . -L 2 -F -C --noreport --dirsfirst --compress -2 |
-		tail -n +2 | sed 's/..//'
+	tree . -L 2 -F -C --noreport --dirsfirst --compress -2 | tail -n +2 | sed 's/..//'
 	exit
 }
 

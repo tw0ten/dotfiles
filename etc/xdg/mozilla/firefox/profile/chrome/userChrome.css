@@ -14,18 +14,7 @@
 }
 
 :root {
-	--arrowpanel-background: #101010 !important;
-	--arrowpanel-border-color: transparent !important;
-
-	--color-accent-primary: #40e0d0 !important;
-
-	--tab-selected-bgcolor: #202020 !important;
-
-	--toolbar-bgcolor: #101010 !important;
-	--toolbar-field-background-color: #202020 !important;
-
 	--input-bgcolor: #101010 !important;
-	--toolbar-field-focus-background-color: #101010 !important;
 }
 
 menupopup {
