@@ -7,9 +7,10 @@ import subprocess
 import sys
 
 
-bgc = "#10101000"
 fgc = "ffffff"
 acc = "40e0d0"
+
+mask = Image.open("i/mask.png")
 
 
 def is_prime(n):
@@ -22,11 +23,19 @@ def is_prime(n):
 
 
 primes = [2]
-for _ in range(2**14):
+for _ in range(2**15):
     o = primes[len(primes) - 1] + 1
     while not is_prime(o):
         o += 1
     primes += [o]
+
+
+def is_masked(x, y):
+    (x, y) = (x + mask.width / 2, y + mask.height / 2)
+    if x >= 0 and y >= 0 and x < mask.width and y < mask.height:
+        return not mask.getpixel((x, y)) == (255, 255, 255, 255)
+    return True
+
 
 outputs = json.JSONDecoder().decode(sys.stdin.read())
 
@@ -41,14 +50,14 @@ for name in outputs:
 
     o = Image.new("RGBA", (w, h))
     draw = ImageDraw.Draw(o)
-    draw.rectangle((0, 0, w, h), fill=bgc)
 
     for i in range(len(primes) - 1):
         n = primes[i]
         f = n * d / last
-        xy = (w / 2 + math.cos(n) * f, h / 2 + math.sin(n) * f)
-        color = f"#{acc if primes[i + 1] - n == 2 else fgc}ff"
-        draw.circle(xy, 0.5, fill=color)
+        (x, y) = (w / 2 + math.cos(n) * f, h / 2 + math.sin(n) * f)
+        color = f"#{acc if primes[i + 1] - n == 2 else fgc
+                    }ff" if is_masked(x - w / 2, y - h / 2) else "#00000000"
+        draw.circle((x, y), 0.5, fill=color)
 
     file = f"o/{name}.png"
     o.save(file)

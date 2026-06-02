@@ -6,8 +6,8 @@ cd "$DOTFILES/share/git"
 (
 	user="$(git config get user.name)"
 
-	for repo in $(curl -s "https://api.github.com/users/$user/repos" | jq '.[].ssh_url'); do (
-		repo="$(echo "$repo" | sed -e 's/.....//' -e 's/.....$//')"
+	for repo in $(curl -s "https://api.github.com/users/$user/repos" | jq -r '.[].ssh_url'); do (
+		repo="$(echo "$repo" | sed -e 's/....//' -e 's/....$//')"
 		i="$(basename "$repo")"
 		[ -d "$i" ] || git clone "$repo"
 		cd "$i"
@@ -16,7 +16,7 @@ cd "$DOTFILES/share/git"
 		git pull
 
 		git remote -v | grep -q '^upstream' || {
-			fork="$(curl -s "https://api.github.com/repos/$user/$i" | jq '.source.clone_url')"
+			fork="$(curl -s "https://api.github.com/repos/$user/$i" | jq -r '.source.clone_url')"
 			[ "$fork" = 'null' ] || git remote add 'upstream' "$fork"
 		}
 

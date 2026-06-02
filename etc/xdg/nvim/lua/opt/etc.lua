@@ -10,10 +10,3 @@ require("mini.pick").setup({
 })
 
 require("mini.notify").setup({})
-
-
-vim.filetype.add({
-	extension = {
-		["k"] = "komptal",
-	},
-})
