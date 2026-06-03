@@ -1,11 +1,12 @@
 #!/bin/sh
 set -eu
 
-while i="$(
-	find -L . -maxdepth 1 \( -type d -printf '%f/\n' -o -printf '%f\n' \) |
-		sed 's/^\.\/$/.\n../' |
-		dmenu -p "$PWD "
-)"; do
-	[ -d "$i" ] && [ "$i" != '.' ] || exec "$OPENER" "$i"
-	cd "$i" || continue
-done
+rofi -show filebrowser -config filebrowser -auto-select ||
+	while i="$(
+		find -L . -maxdepth 1 \( -type d -printf '%f/\n' -o -printf '%f\n' \) |
+			sed 's/^\.\/$/.\n../' |
+			dmenu -p "$PWD " -auto-select
+	)"; do
+		[ -d "$i" ] && [ "$i" != '.' ] || exec "$OPENER" "$i"
+		cd "$i" || continue
+	done
