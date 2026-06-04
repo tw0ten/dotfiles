@@ -67,6 +67,7 @@ alias \
 	nd='n develop' \
 	ns='n store' \
 	nsh='nix-shell shell.nix' \
+	np='nix-shell -p' \
 	cp='cp -vi' \
 	mv='mv -vi' \
 	rm='rm -v' \

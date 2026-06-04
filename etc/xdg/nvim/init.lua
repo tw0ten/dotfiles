@@ -10,8 +10,8 @@ vim.cmd.packadd("nvim.difftool")
 
 require("set")
 
-require("opt.files")
-require("opt.lsp")
+require("opt.fs")
+require("opt.ls")
 require("opt.etc")
 
 require("remap")

@@ -1,8 +1,17 @@
 vim.pack.add({
-	{ src = "https://github.com/neovim/nvim-lspconfig" },
+	{
+		name = "ls-lspconfig",
+		src = "https://github.com/neovim/nvim-lspconfig"
+	},
 	{ src = "https://github.com/HiPhish/rainbow-delimiters.nvim" },
-	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" },
-	{ src = "https://github.com/williamboman/mason.nvim" },
+	{
+		name = "ls-treesitter",
+		src = "https://github.com/nvim-treesitter/nvim-treesitter"
+	},
+	{
+		name = "ls-mason",
+		src = "https://github.com/williamboman/mason.nvim"
+	},
 	{ src = "https://github.com/nvim-mini/mini.completion" },
 })
 

@@ -1,2 +1,0 @@
-#!/bin/sh
-notify-send -t 0 'pick-color' "$(niri msg pick-color)"

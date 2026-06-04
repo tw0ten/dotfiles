@@ -1,2 +1,0 @@
-#!/bin/sh
-notify-send -t 0 'pick-window' "$(niri msg pick-window)"

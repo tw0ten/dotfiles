@@ -1,6 +1,12 @@
 vim.pack.add({
-	{ src = "https://github.com/stevearc/oil.nvim" },
-	{ src = "https://github.com/nvim-tree/nvim-tree.lua" },
+	{
+		name = "fs-editor",
+		src = "https://github.com/stevearc/oil.nvim"
+	},
+	{
+		name = "fs-tree",
+		src = "https://github.com/nvim-tree/nvim-tree.lua"
+	},
 })
 
 require("oil").setup({})
