@@ -1,9 +1,16 @@
 configuration {
 	modes: "drun,run";
+
 	sidebar-mode: true;
 	show-icons: true;
 	drun-display-format: "{name}";
+
 	matching: "normal,regex";
+	case-smart: true;
+
+	fixed-num-lines: false;
+
+	location: 6;
 }
 
 @import "themes/default"

@@ -2,6 +2,8 @@
 
 configuration {
 	modes: "dmenu";
+
+	show-icons: false;
 }
 
 prompt {

@@ -25,6 +25,7 @@ window {
 }
 mainbox {
 	border-radius: 0;
+	children: [ listview, inputbar, message, mode-switcher ];
 }
 
 listview {
@@ -45,7 +46,7 @@ overlay {
 
 inputbar {
 	padding: 0;
-	margin: 0 0 0.25em 0;
+	margin: 0.25em 0;
 	border-radius: 0;
 }
 prompt {
