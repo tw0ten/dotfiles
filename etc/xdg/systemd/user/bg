@@ -1,5 +1,5 @@
 #!/bin/sh
-set -e
+set -eu
 cd "$DOTFILES/share/bg"
 mkdir -p o
 niri msg -j outputs | python i/run

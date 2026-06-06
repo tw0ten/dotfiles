@@ -22,8 +22,7 @@ def run(file, output):
     return subprocess.run([
         "awww", "img", file,
         "--outputs", output["name"],
-        "--transition-fps", f"{int(list(output["modes"])
-                                   [0]["refresh_rate"] / 1000)}",
+        "--transition-fps", f"{120}",
         "--transition-type", "center",
         "--transition-step", f"{64}",
         "--transition-bezier", f"{0.0},{0.0},{1.0},{1.0}"
@@ -70,9 +69,9 @@ for name in outputs:
         n = primes[i]
         f = n * d / last
         (x, y) = (w / 2 + math.cos(a0 + n) * f, h / 2 + math.sin(a0 + n) * f)
-        color = f"#{acc if primes[i + 1] - n == 2 else fgc
-                    }ff" if is_masked(x - w / 2, y - h / 2) else "#00000000"
-        draw.circle((x, y), 0.5, fill=color)
+        color = f"#{acc if primes[i + 1] - n == 2 else fgc}ff"
+        if is_masked(x - w / 2, y - h / 2):
+            draw.circle((x, y), 0.5, fill=color)
 
     file = f"o/{name}.png"
     o.save(file)

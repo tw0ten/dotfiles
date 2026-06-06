@@ -1,5 +1,5 @@
 #!/bin/sh
-set -e
+set -eu
 
 pkill -0 '^swaylock$' && niri msg action power-off-monitors || true
 
@@ -10,8 +10,8 @@ day=$((hour * 24))
 
 tz_offset=$(python -c 'import time; print(-time.timezone)')
 
-base=60
-delta=25
+base="$(cat "$DOTFILES/share/brightness/base")"
+delta="$(cat "$DOTFILES/share/brightness/delta")"
 
 f=$(echo "c($((($(date +%s) + tz_offset) % day)) / $day * 2 * 3.14159)" | bc -l)
 o="$(echo "$base - $delta * $f" | bc)"

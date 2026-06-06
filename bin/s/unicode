@@ -1,2 +1,5 @@
 #!/bin/sh
-wl-copy -- "$(printf "\U$(curl -fsL 'https://www.unicode.org/Public/UCD/latest/ucd/UnicodeData.txt' | sed -e 's/;/ /' -e 's/;.*//' -e 's/.*/\L&/' | dmenu -p 'U+' | sed 's/ .*//')")"
+set -e
+set -- "$(curl -fsL 'https://www.unicode.org/Public/UCD/latest/ucd/UnicodeData.txt' | sed -e 's/;/ /' -e 's/;.*//' -e 's/.*/\L&/' | dmenu -p 'U+' -only-match | sed 's/ .*//')"
+# #todo proper
+python -c "import sys; print(chr(int(\"$1\".split()[0], 16)), end='')" | wl-copy
