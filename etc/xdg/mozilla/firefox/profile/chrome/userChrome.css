@@ -8,22 +8,6 @@
 	visibility: collapse !important;
 }
 
-
-#navigator-toolbox {
-	background-color: #101010 !important;
-}
-
-:root {
-	--input-bgcolor: #101010 !important;
-}
-
-menupopup {
-	& menuitem:hover {
-		background-color: #40e0d0 !important;
-		color: #101010 !important;
-	}
-}
-
 arrowscrollbox {
 	background: #101010d0 !important;
 }

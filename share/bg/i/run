@@ -1,17 +1,17 @@
 #!/bin/python
 
 from PIL import Image, ImageDraw
+from random import random
 import json
 import math
 import subprocess
 import sys
-import time
 
 
 fgc = "ffffff"
 acc = "40e0d0"
 
-a0 = time.time()
+a0 = math.pi * 2 * random()
 
 mask = Image.open("i/mask.png")
 

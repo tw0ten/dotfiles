@@ -1,9 +1,5 @@
 @import "common.css";
 
-:root {
-	--newtab-background-color: transparent !important;
-}
-
 html {
 	background-color: #00000000;
 }
