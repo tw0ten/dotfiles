@@ -1,3 +1,4 @@
 #!/bin/sh
 set -eu
-exec "$BROWSER" --search "$(dmenu -p "$BROWSER " -l 0)"
+i="$(dmenu -p "$BROWSER " -l 0)"
+exec "$BROWSER" --search "$i"

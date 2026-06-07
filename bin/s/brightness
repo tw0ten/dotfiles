@@ -5,7 +5,7 @@ set -- "$(cat 'base')" "$(cat 'delta')"
 
 max="$(brightnessctl max)"
 
-set -- $(printf '%s\n%s\n%s\n%s' "$1 $2" '65 25' "$((max / 2)) $((max / 2))" "$((max)) 0" | dmenu -p "brightness " -a 0 -l 4)
+set -- $(printf '%s\n%s\n%s\n%s' "$1 $2 #$(brightnessctl get)" '65 25' "$((max / 2)) $((max / 2))" "$((max)) 0" | dmenu -p "brightness " -a 0 -l 4)
 
 echo $(($1)) >'base'
 set +u

@@ -60,6 +60,12 @@ window-rule {
 }
 
 window-rule {
+	match app-id="^steam$"
+
+	open-floating false
+}
+
+window-rule {
 	match app-id="^terminal\\.mini$"
 
 	open-floating true
