@@ -1,2 +1,14 @@
 #!/bin/sh
-brightnessctl set "$(printf " \n%s\n%s\n%s\n%s\n%s" '0' '5%-' "$(brightnessctl get)" '5%+' "$(brightnessctl max)" | dmenu -p "brightness " -a 3 -l 6)"
+set -eu
+cd "$DOTFILES/share/brightness"
+set -- "$(cat 'base')" "$(cat 'delta')"
+
+max="$(brightnessctl max)"
+
+set -- $(printf '%s\n%s\n%s\n%s' "$1 $2" '65 25' "$((max / 2)) $((max / 2))" "$((max)) 0" | dmenu -p "brightness " -a 0 -l 4)
+
+echo $(($1)) >'base'
+set +u
+[ "$2" = '' ] || echo $(($2)) >'delta'
+
+systemctl --user start --wait 'brightness'.service

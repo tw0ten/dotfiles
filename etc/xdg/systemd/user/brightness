@@ -10,12 +10,12 @@ day=$((hour * 24))
 
 tz_offset=$(python -c 'import time; print(-time.timezone)')
 
-base="$(cat "$DOTFILES/share/brightness/base")"
-delta="$(cat "$DOTFILES/share/brightness/delta")"
+cd "$DOTFILES/share/brightness"
+set -- "$(cat base)" "$(cat delta)"
 
 f=$(echo "c($((($(date +%s) + tz_offset) % day)) / $day * 2 * 3.14159)" | bc -l)
-o="$(echo "$base - $delta * $f" | bc)"
+o="$(echo "$1 - $2 * $f" | bc)"
 
-echo "$base - $delta * $f = $o"
+echo "$1 - $2 * $f = $o"
 
 brightnessctl -q set "$o"
