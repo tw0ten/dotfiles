@@ -3,5 +3,7 @@ set -eu
 cd "$DOTFILES/bin/s"
 [ "$*" = '' ] && set -- "$(find . -type f | sort | sed 's/..//' | dmenu -p '~ ' -auto-select)"
 cd "$OLDPWD"
+i="$1"
+shift
 set +eu
-. "$OLDPWD/$1"
+. "$OLDPWD/$i"

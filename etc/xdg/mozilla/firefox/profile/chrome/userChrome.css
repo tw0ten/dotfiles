@@ -1,5 +1,9 @@
 @import "common.css";
 
+* {
+	border-radius: 0 !important;
+}
+
 .tabbrowser-tab .tab-close-button,
 #tabs-newtab-button,
 #new-tab-button,
