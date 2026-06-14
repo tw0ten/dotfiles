@@ -1,0 +1,6 @@
+#!/bin/sh
+set -e
+cd "$HOME/media/audio/sound"
+
+i="$(find . -type f -not -path '*/.*' | sed 's/..//' | dmenu -p 'soundboard ' -auto-select)"
+exec soundboard "$i"

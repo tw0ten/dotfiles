@@ -1,4 +1,2 @@
 #!/bin/sh
-set -eu
-
-echo "$id"
+echo "$@"

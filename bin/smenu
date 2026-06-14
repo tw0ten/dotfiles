@@ -1,6 +1,7 @@
 #!/bin/sh
 set -eu
 cd "$DOTFILES/bin/s"
+mkdir -p "$HOME/.cache/s"
 [ "$*" = '' ] && set -- "$(find . -type f | sort | sed 's/..//' | dmenu -p '~ ' -auto-select)"
 cd "$OLDPWD"
 i="$1"

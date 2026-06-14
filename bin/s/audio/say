@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+cd "$HOME/.cache/s"
+
+i="$(dmenu -p 'say ' -l 0)"
+
+echo "$i" | flite -o say.wav
+exec soundboard say.wav
