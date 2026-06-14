@@ -1,0 +1,44 @@
+#!/bin/sh
+set -eu
+cd "$DOTFILES/share/git/mail"
+
+.io/run
+
+notification_timeout=$((60))
+icon="$PWD/share/icon.png"
+
+cd .io/o/mail
+
+for i in */; do
+	(
+		cd "$i"
+		i() { cat mail.json | jq -r "$@"; }
+
+		o="$(
+			notify-send \
+				-A 'default=open' \
+				-t $((notification_timeout * 1000)) \
+				-i "$icon" \
+				-- 'mail' \
+				"$(
+					printf '%s\n' \
+						"$(date --date="@$(i '.timestamp')" +%c)" \
+						"$(i '.from') > $(i '.to')" \
+						'' \
+						"$(i '.content.subject')" \
+						"$(i '.content.snippet')" \
+						;
+				)"
+		)"
+
+		case "$o" in
+		'default')
+			touch read
+			xdg-open payload
+			;;
+		*) ;;
+		esac
+	) &
+done
+
+wait

@@ -69,7 +69,7 @@ window-rule {
 	match app-id="^terminal\\.mini$"
 
 	open-floating true
-	default-floating-position x=0 y=0 relative-to="bottom"
+	default-floating-position x=0 y=0 relative-to="bottom-left"
 	default-column-width { proportion 0.3; }
 	default-window-height { proportion 0.25; }
 }

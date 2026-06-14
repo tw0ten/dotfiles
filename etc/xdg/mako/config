@@ -1,14 +1,23 @@
-default-timeout=5000
+default-timeout=10000
 
 font=system-ui 12
 
 background-color=#101010a0
 text-color=#ffffff
 
+icon-location=top
+
 border-size=0
-border-radius=8
+border-radius=0
+
+padding=4
+margin=4,0
+outer-margin=2
+
+anchor=bottom-right
 
 height=512
+width=304
 
 
 on-button-middle=exec . "$XDG_CONFIG_HOME/mako/bin/copy"
