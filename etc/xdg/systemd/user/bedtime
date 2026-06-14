@@ -24,7 +24,7 @@ date --date "@$((epoch + i_sleeptime))" +'%w' | grep "[60]" -q && exit
 printf_hm() { printf "$1" $(($2 / hour)) $(($2 % hour / minute)); }
 
 [ $((o_sleeptime)) -lt $((i_sleeptime + (1 * hour))) ] && notify-send \
-	"bedtime: $(printf_hm '%02i/%02i' $((o_bedtime)))" \
-	"sleeptime left: $(printf_hm '%i/%02i' $((o_sleeptime)))" \
-	-t $((1000 * minute / 2)) ||
+	-t $((1000 * minute / 2)) \
+	-- 'bedtime' \
+	"@$(printf_hm '%02i/%02i' $((o_bedtime))) -$(printf_hm '%i/%02i' $((o_sleeptime)))" ||
 	true

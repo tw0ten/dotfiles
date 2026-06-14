@@ -21,6 +21,7 @@ window {
 	width: 30%;
 	border: 0;
 	padding: 4;
+	margin: 2;
 }
 mainbox {
 	border-radius: 0;

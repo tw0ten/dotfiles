@@ -8,11 +8,16 @@ for i; do (
 	[ -e "$i" ] && {
 		[ -d "$i" ] && i "$FILES" "$i"
 
-		[ -f "$i" ] &&
+		[ -f "$i" ] && {
+			case "$i" in
+			*'.ttf' | *'.otf' | *'.ttc') exec fontforge "$i" ;;
+			esac
+
 			{ grep -Iq . "$i" || [ ! -s "$i" ]; } &&
-			case "$(file -bL --mime-type "$i")" in
-			'inode'/'x-empty' | 'application'/* | 'text'/*) i "$VISUAL" "$i" ;;
-			esac || true
+				case "$(file -bL --mime-type "$i")" in
+				'inode'/'x-empty' | 'application'/* | 'text'/*) i "$VISUAL" "$i" ;;
+				esac || true
+		}
 	}
 
 	exec xdg-open "$i"

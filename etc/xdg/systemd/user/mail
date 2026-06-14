@@ -36,7 +36,6 @@ for i in */; do
 			touch read
 			xdg-open payload
 			;;
-		*) ;;
 		esac
 	) &
 done
