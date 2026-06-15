@@ -22,7 +22,7 @@ for i in */; do
 				-- 'mail' \
 				"$(
 					printf '%s\n' \
-						"$(date --date="@$(i '.timestamp')" +%c)" \
+						"$(date --date="@$(i '.date')" +%c)" \
 						"$(i '.from') > $(i '.to')" \
 						'' \
 						"$(i '.content.subject')" \

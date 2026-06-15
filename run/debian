@@ -3,7 +3,11 @@
 apt update && apt upgrade
 
 apt install \
-	neovim tmux ssh \
-	lf ripgrep fastfetch
+	neovim tmux \
+	lf ripgrep fastfetch \
+	ssh ufw postfix
+
+ufw allow ssh
+ufw allow mail
 
 apt autoremove

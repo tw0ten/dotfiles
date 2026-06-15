@@ -39,12 +39,15 @@ set -e
 	(
 		cd root
 
-		i locale /usr/share/i18n/locales/custom
-		i ssh /etc/ssh/sshd_config
-		i sudoers/ /etc/sudoers.d
+		i ssh/ /etc/ssh
+		i sudoers.d/ /etc/sudoers.d
 		i ly/ /etc/ly
+		i postfix/ /etc/postfix
+
+		i pacman.conf /etc/pacman.conf
 		i grub/default /etc/default/grub
-		i pacman /etc/pacman.conf
+
+		i locale /usr/share/i18n/locales/custom
 	)
 ) || true
 
