@@ -1,0 +1,44 @@
+#!/bin/python
+import sys
+import os
+import json
+from email import policy
+from email.parser import BytesParser
+from email.utils import parsedate_to_datetime
+
+
+def info(i): return {
+    "subject": i["subject"],
+    "date": int(parsedate_to_datetime(i["date"]).timestamp()),
+    "from": i["from"],
+    "to": i["to"],
+}
+
+
+def content(i): return [
+    i.get_body(preferencelist=("plain",)).get_content(),
+    [
+        {
+            "filename": i.get_filename(),
+            "content_type": i.get_content_type(),
+            "payload": i.get_payload(decode=True),
+        }
+        for i in i.iter_attachments()
+    ]
+]
+
+
+[source, target] = sys.argv[1:]
+
+os.mkdir(target)
+i = BytesParser(policy=policy.default).parse(open(source, "rb"))
+
+open(f"{target}/info.json", "w").write(json.dumps(info(i)))
+
+[body, attachments] = content(i)
+open(f"{target}/body", "w").write(body)
+
+path = f"{target}/attachments"
+os.mkdir(path)
+for i in attachments:
+    open(f"{path}/{i["filename"]}", "wb").write(i["payload"])

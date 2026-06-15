@@ -15,7 +15,7 @@
 	i() { "$AUR_HELPER" -S "$@"; }
 
 	i neovim lf \
-		openssh qbittorrent-nox nginx ufw \
+		openssh qbittorrent-nox ufw \
 		btop fastfetch ripgrep ly nix tmux ffmpeg
 	i niri firefox foot \
 		pipewire mako awww rofi quickshell fcitx5 \
@@ -43,7 +43,7 @@
 
 	systemctl enable \
 		sshd \
-		qbittorrent-nox nginx
+		qbittorrent-nox
 
 	cp -rTL etc/root/grub/theme /boot/grub/themes/default
 	grub-mkconfig -o /boot/grub/grub.cfg

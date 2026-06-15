@@ -1,0 +1,14 @@
+#!/bin/sh
+set -e
+
+cd .io
+i="$(cat i)"
+
+rsync -rz --delete -- "$i/" o
+
+for mail in o/*; do
+	id="$(basename "$mail")"
+	o="$OLDPWD/$id"
+	[ -e "$o" ] || ./parse "$mail" "$o"
+	# #todo if read, remove upstream
+done
