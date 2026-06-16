@@ -1,43 +1,5 @@
 #!/bin/sh
 set -eu
 cd "$DOTFILES/share/mail"
-
 .io/fetch
-
-notification_timeout=$((60))
-icon="$PWD/.io/icon.png"
-
-for mail in */; do
-	(
-		cd "$mail"
-
-		[ -e read ] && exit
-
-		i() { cat info.json | jq -r "$@"; }
-
-		o="$(
-			notify-send \
-				-A 'default=open' \
-				-t $((notification_timeout * 1000)) \
-				-i "$icon" \
-				-- 'mail' \
-				"$(
-					printf '%s\n' \
-						"$(date --date="@$(i '.date')" +%c)" \
-						"$(i '.from') > $(i '.to')" \
-						'' \
-						"$(i '.subject')" \
-						;
-				)"
-		)"
-
-		case "$o" in
-		'default')
-			xdg-open body
-			touch read
-			;;
-		esac
-	) &
-done
-
-wait
+exec .io/notify
