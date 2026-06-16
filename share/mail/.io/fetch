@@ -3,12 +3,12 @@ set -e
 
 cd .io
 i="$(cat i)"
+echo "$i"
 
-rsync -rz --delete -- "$i/" o
+rsync -rz --delete -- "$i/new/" o
 
-for mail in o/*; do
+for mail in o/*; do (
 	id="$(basename "$mail")"
 	o="$OLDPWD/$id"
 	[ -e "$o" ] || ./parse "$mail" "$o"
-	# #todo if read, remove upstream
-done
+); done

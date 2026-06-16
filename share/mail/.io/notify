@@ -23,18 +23,19 @@ for mail in */; do
 						"$(date --date="@$(i '.date')" +%c)" \
 						"$(i '.from') > $(i '.to')" \
 						'' \
-						"$(i '.subject')" \
-						;
+						"$(i '.subject')"
 				)"
 		)"
 
 		case "$o" in
 		'default')
-			xdg-open body
 			date +%s >'read'
+			exec xdg-open body
 			;;
 		esac
 	) &
 done
 
 wait
+
+echo 'done'

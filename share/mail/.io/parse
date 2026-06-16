@@ -23,7 +23,7 @@ i = BytesParser(policy=policy.default).parse(open(source, "rb"))
 open(f"{target}/info.json", "w").write(
     json.dumps(info(i)))
 open(f"{target}/body", "w").write(
-    i.get_body(preferencelist=("plain",)).get_content())
+    i.get_body(preferencelist=("plain", "html",)).get_content())
 
 path = f"{target}/attachments"
 os.mkdir(path)
