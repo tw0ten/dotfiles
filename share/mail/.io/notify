@@ -1,5 +1,5 @@
 #!/bin/sh
-set -e
+set -eu
 
 notification_timeout=$((60))
 icon="$PWD/.io/icon.png"
@@ -9,6 +9,7 @@ for mail in */; do
 		cd "$mail"
 
 		[ -e 'read' ] && exit
+		echo 'notify' "$(basename "$mail")"
 
 		i() { cat info.json | jq -r "$@"; }
 
@@ -30,12 +31,10 @@ for mail in */; do
 		case "$o" in
 		'default')
 			date +%s >'read'
-			exec xdg-open body
+			exec "$FILES" body
 			;;
 		esac
 	) &
 done
 
 wait
-
-echo 'done'

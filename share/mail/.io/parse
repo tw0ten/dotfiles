@@ -7,21 +7,17 @@ from email.parser import BytesParser
 from email.utils import parsedate_to_datetime
 
 
-def info(i): return {
-    "subject": i["subject"],
-    "date": int(parsedate_to_datetime(i["date"]).timestamp()),
-    "from": i["from"],
-    "to": i["to"],
-}
-
-
 [source, target] = sys.argv[1:]
 
 os.mkdir(target)
 i = BytesParser(policy=policy.default).parse(open(source, "rb"))
 
-open(f"{target}/info.json", "w").write(
-    json.dumps(info(i)))
+open(f"{target}/info.json", "w").write(json.dumps({
+    "subject": i["subject"],
+    "date": int(parsedate_to_datetime(i["date"]).timestamp()),
+    "from": i["from"],
+    "to": i["to"],
+}, indent=1))
 open(f"{target}/body", "w").write(
     i.get_body(preferencelist=("plain", "html",)).get_content())
 

@@ -1,14 +1,22 @@
 #!/bin/sh
 set -e
 
+o="$PWD"
 cd .io
 i="$(cat i)"
-echo "$i"
 
-rsync -rz --delete -- "$i/new/" o
+rsync -rvz --delete -- "$i:maildir/new/" o
 
-for mail in o/*; do (
-	id="$(basename "$mail")"
-	o="$OLDPWD/$id"
-	[ -e "$o" ] || ./parse "$mail" "$o"
-); done
+for file in o/*; do (
+	[ -e "$file" ] || exec echo 'empty'
+
+	mail="$(basename "$file")"
+	o="$o/$mail"
+
+	[ -e "$o" ] || {
+		ssh "$i" -- mv -- "maildir/new/$mail" 'maildir/cur/'
+		./parse "$file" "$o"
+		mv -- "$file" "$o/src"
+		exec echo 'new' "$mail"
+	}
+) || true; done
