@@ -31,7 +31,7 @@ for mail in */; do
 		case "$o" in
 		'default')
 			date +%s >'read'
-			exec "$FILES" body
+			exec "$TERMINAL" -e "$FILES" body
 			;;
 		esac
 	) &

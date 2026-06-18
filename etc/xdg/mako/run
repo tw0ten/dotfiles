@@ -1,9 +1,8 @@
 #!/bin/sh
 set -eu
-echo "$@"
+echo "$@" "$id"
 
 i="$1"
-export id
 set -- "$(makoctl list -j | jq -r ".[] | select(.id == $id)")"
 
 cd "$XDG_CONFIG_HOME/mako"
