@@ -1,0 +1,36 @@
+#!/bin/sh
+set -eu
+
+icon="$PWD/.io/icon.png"
+
+cd "$1"
+
+[ -e 'read' ] && exit
+echo 'notify' "$(basename "$PWD")"
+
+i() { cat info.json | jq -r "$@"; }
+
+o="$(
+	notify-send \
+		-A 'ignore=mark read' \
+		-A 'default=open' \
+		-t $((60 * 1000)) \
+		-i "$icon" \
+		-- 'mail' \
+		"$(
+			printf '%s\n' \
+				"$(date --date="@$(i '.date')" +%c)" \
+				"$(i '.from') > $(i '.to')" \
+				'' \
+				"$(i '.subject')"
+		)"
+)"
+
+case "$o" in
+'ignore') ;;
+'default') "$TERMINAL" -e "$FILES" body ;;
+'') exit ;;
+*) false ;;
+esac
+
+date +%s >'read'

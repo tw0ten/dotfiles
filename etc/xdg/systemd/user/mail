@@ -3,4 +3,4 @@ set -eu
 cd "$DOTFILES/share/mail"
 .io/fetch
 .io/clean
-exec .io/notify
+.io/notify

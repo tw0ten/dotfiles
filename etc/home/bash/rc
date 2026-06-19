@@ -74,12 +74,13 @@ alias \
 	ln='ln -vn' \
 	mkdir='mkdir -vp' \
 	rmdir='rmdir -v' \
+	diff='diff --color=always' \
 	\
 	history='history | $PAGER +G' \
 	uptime='uptime -p' \
-	diff='diff --color=always' \
 	+x='chmod +x' \
 	filesize='du -shc ./.* ./* 2>/dev/null' \
+	log='journalctl -e' \
 	;
 
 PS1="$(

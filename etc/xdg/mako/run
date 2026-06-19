@@ -3,7 +3,7 @@ set -eu
 echo "$@" "$id"
 
 i="$1"
-set -- "$(makoctl list -j | jq -r ".[] | select(.id == $id)")"
+set -- "$(makoctl list -j | jq -rc ".[] | select(.id == $id)")"
 
 cd "$XDG_CONFIG_HOME/mako"
 . "bin/$i"

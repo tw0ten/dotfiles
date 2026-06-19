@@ -15,7 +15,7 @@ for file in o/*; do (
 
 	[ -e "$o" ] || {
 		ssh "$i" -- mv -- "maildir/new/$mail" 'maildir/cur/'
-		./parse "$file" "$o"
+		bin/parse "$file" "$o"
 		mv -- "$file" "$o/src"
 		exec echo 'new' "$mail"
 	}
