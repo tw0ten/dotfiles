@@ -4,4 +4,6 @@ inet_interfaces = all
 
 smtpd_relay_restrictions = permit_mynetworks, permit_sasl_authenticated, reject_unauth_destination
 
+mydestination = localhost, $mydomain
+
 include_directory = /etc/postfix/cf.d
