@@ -5,32 +5,32 @@ icon="$PWD/.io/icon.png"
 
 cd "$1"
 
-[ -e 'read' ] && exit
-echo 'notify' "$(basename "$PWD")"
-
-i() { cat info.json | jq -r "$@"; }
+[ -e '.m/read' ] && exit
+i="$(basename "$PWD")"
+echo 'notify' "$i"
 
 o="$(
-	notify-send \
+	body="$(
+		printf '%s\n' \
+			"$(date --date="@$(($(cat '.m/date')))" +%c)" \
+			"$(cat -- '-from' || echo '?') > $(cat -- '-to' || echo '?')" \
+			'' \
+			"$(cat '#subject' || echo "$i")"
+	)"
+
+	exec notify-send \
 		-A 'ignore=mark read' \
 		-A 'default=open' \
 		-t $((60 * 1000)) \
 		-i "$icon" \
-		-- 'mail' \
-		"$(
-			printf '%s\n' \
-				"$(date --date="@$(i '.date')" +%c)" \
-				"$(i '.from') > $(i '.to')" \
-				'' \
-				"$(i '.subject')"
-		)"
+		-- 'mail' "$body"
 )"
 
 case "$o" in
 'ignore') ;;
-'default') "$TERMINAL" -e "$FILES" body ;;
+'default') "$TERMINAL" -e "$FILES" '#body' ;;
 '') exit ;;
 *) false ;;
 esac
 
-date +%s >'read'
+date +%s >'.m/read'

@@ -1,8 +1,5 @@
 #!/bin/sh
-set -e
-
 for mail in */; do
 	.io/bin/notify "$mail" &
 done
-
 wait

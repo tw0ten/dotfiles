@@ -1,7 +1,6 @@
 #!/bin/python
 import sys
 import os
-import json
 from email import policy
 from email.parser import BytesParser
 from email.utils import parsedate_to_datetime
@@ -10,19 +9,22 @@ from email.utils import parsedate_to_datetime
 [source, target] = sys.argv[1:]
 
 os.mkdir(target)
+os.mkdir(f"{target}/.m")
 i = BytesParser(policy=policy.default).parse(open(source, "rb"))
 
-open(f"{target}/info.json", "w").write(json.dumps({
-    "subject": i["subject"],
-    "date": int(parsedate_to_datetime(i["date"]).timestamp()),
-    "from": i["from"],
-    "to": i["to"],
-}, indent=1))
-open(f"{target}/body", "w").write(
-    i.get_body(preferencelist=("plain", "html",)).get_content())
+
+def write(i, v):
+    open(f"{target}/{i}", "w").write(v)
+
+
+write("#subject", i["subject"])
+write("-from", i["from"])
+write("-to", i["to"])
+write(".m/date", f"{int(parsedate_to_datetime(i["date"]).timestamp())}")
 
 path = f"{target}/attachments"
 os.mkdir(path)
-for i in i.iter_attachments():
-    open(f"{path}/{i.get_filename()}", "wb").write(
-        i.get_payload(decode=True))
+for v in i.iter_attachments():
+    open(f"{path}/{v.get_filename()}", "wb").write(v.get_payload(decode=True))
+
+write("#body", i.get_body(preferencelist=("plain", "html",)).get_content())

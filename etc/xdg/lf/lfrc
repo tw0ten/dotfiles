@@ -20,9 +20,11 @@ set previewer "~/.config/lf/previewer"
 
 cmd open $"$OPENER" "$f"
 
+cmd x $xdg-open "$f"
 cmd e $"$EDITOR" "$f"
 cmd su $su -c lf
 
+map x x
 map e e
 map u su
 

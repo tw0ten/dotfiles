@@ -7,6 +7,8 @@ i="$(cat i)"
 
 rsync -rvz --delete -- "$i:maildir/new/" o
 
+set +e
+
 for file in o/*; do (
 	[ -e "$file" ] || exec echo 'empty'
 
@@ -14,9 +16,12 @@ for file in o/*; do (
 	o="$o/$mail"
 
 	[ -e "$o" ] || {
-		ssh "$i" -- mv -- "maildir/new/$mail" 'maildir/cur/'
 		bin/parse "$file" "$o"
-		mv -- "$file" "$o/src"
-		exec echo 'new' "$mail"
+		echo 'new' "$mail"
 	}
-) || true; done
+
+	mv -- "$file" "$o/.m/raw"
+	ssh "$i" -- mv -- "maildir/new/$mail" 'maildir/cur/'
+); done
+
+exec true

@@ -1,12 +1,13 @@
 #!/bin/sh
-set -e
 
 for file in */; do (
+	set -e
 	[ -e "$file" ] || exec echo 'clean'
-	[ -f "$file/read" ] || exit
-	time="$(cat "$file/read")"
-	[ "$(date +%s)" -gt "$((time + (60 * 60 * 24 * 7)))" ] && {
+	i="$(cat "$file/.m/read")"
+	[ "$(date +%s)" -gt "$((i + (60 * 60 * 24 * 7)))" ] && {
 		rm -r -- "$file"
 		exec echo 'rm' "$(basename "$file")"
 	}
-) || true; done
+); done
+
+exec true
