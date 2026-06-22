@@ -49,7 +49,7 @@ for _ in range(2**15):
 def is_masked(x, y):
     (x, y) = (x + mask.width / 2, y + mask.height / 2)
     if x >= 0 and y >= 0 and x < mask.width and y < mask.height:
-        return not mask.getpixel((x, y)) == (255, 255, 255, 255)
+        return not mask.getpixel((x, y))[3] == 0
     return True
 
 
