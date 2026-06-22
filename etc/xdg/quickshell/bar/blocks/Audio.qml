@@ -6,8 +6,8 @@ BarBlock {
 	property var sink: Pipewire.defaultAudioSink
 
 	content: Fraction {
-		prefix: "v"
-		value: root.sink?.audio?.muted ? 0 : root.sink?.audio?.volume ?? 0
+		prefix: `v${root.sink?.audio?.muted ? '-' : ""}${((i) => i === 0 ? '' : i)(Math.trunc(root.sink?.audio?.volume ?? 0))}`
+		value: (root.sink?.audio?.volume ?? 0) % 1
 	}
 
 	PwObjectTracker {

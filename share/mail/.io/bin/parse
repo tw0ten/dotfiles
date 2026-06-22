@@ -27,4 +27,13 @@ os.mkdir(path)
 for v in i.iter_attachments():
     open(f"{path}/{v.get_filename()}", "wb").write(v.get_payload(decode=True))
 
-write("#body", i.get_body(preferencelist=("plain", "html",)).get_content())
+f = 2
+try:
+    write("#body", i.get_body(preferencelist=("plain", "html",)).get_content())
+except Exception:
+    f = f - 1
+try:
+    write("#body.html", i.get_body(preferencelist=("html",)).get_content())
+except Exception:
+    f = f - 1
+assert f > 0

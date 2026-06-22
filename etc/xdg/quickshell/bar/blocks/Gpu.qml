@@ -16,7 +16,7 @@ BarBlock {
 			value: root.valueUsage / 100
 		}
 		BarText {
-			text: `${root.valueTemp}}`
+			text: `${root.valueTemp + 273}}`
 		}
 	}
 

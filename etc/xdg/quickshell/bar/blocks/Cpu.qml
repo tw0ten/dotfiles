@@ -37,7 +37,7 @@ BarBlock {
 		running: true
 		command: ["sensors", "-j"]
 		stdout: SplitParser {
-			onRead: i => root.valueTemp = JSON.parse(i)["k10temp-pci-00c3"]["Tctl"]["temp1_input"]
+			onRead: i => root.valueTemp = 273.15 + JSON.parse(i)["k10temp-pci-00c3"]["Tctl"]["temp1_input"]
 		}
 	}
 
