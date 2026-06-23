@@ -12,23 +12,19 @@ BarBlock {
 	}
 
 	Process {
-		id: procStatus
+		id: proc
 		running: true
-		command: ["cat", `${root.battery}/status`]
+		command: ["cat", "--", `${root.battery}/energy_now`, `${root.battery}/energy_full`, `${root.battery}/status`]
 		stdout: SplitParser {
-			onRead: i => root.content.prefix = {
-				"Charging": "+",
-				"Not charging": "="
-			}[i] ?? "-"
-		}
-	}
-
-	Process {
-		id: procCapacity
-		running: true
-		command: ["cat", `${root.battery}/capacity`]
-		stdout: SplitParser {
-			onRead: i => root.content.value = i / 100
+			splitMarker: "\n\n"
+			onRead: i => {
+				const [ enow, efull, status ] = i.split("\n");
+				root.content.value = enow / efull;
+				root.content.prefix = ({
+					"Charging": "+",
+					"Not charging": "="
+				})[status] ?? "-";
+			}
 		}
 	}
 
@@ -36,6 +32,6 @@ BarBlock {
 		interval: 5 * 1000
 		running: true
 		repeat: true
-		onTriggered: procStatus.running = procCapacity.running = true
+		onTriggered: proc.running = true
 	}
 }
