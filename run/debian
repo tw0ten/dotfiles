@@ -1,5 +1,7 @@
 #!/bin/sh
 
+[ "$(id -u)" = 0 ] || exit
+
 apt update && apt upgrade
 
 apt install \
