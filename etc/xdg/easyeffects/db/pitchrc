@@ -1,0 +1,8 @@
+[sie][Pitch#0]
+bypass=true
+cents=1
+octaves=1
+
+[soe][Pitch#0]
+bypass=true
+outputGain=-10

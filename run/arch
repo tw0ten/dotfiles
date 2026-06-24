@@ -18,7 +18,7 @@
 		openssh qbittorrent-nox ufw \
 		btop fastfetch ripgrep ly nix tmux ffmpeg
 	i niri firefox foot \
-		pipewire mako awww rofi quickshell fcitx5 \
+		pipewire mako awww rofi quickshell fcitx5 easyeffects \
 		mpv libreoffice-fresh gimp obs-studio \
 		noto-fonts noto-fonts-emoji noto-fonts-cjk
 

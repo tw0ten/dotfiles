@@ -2,7 +2,7 @@
 set -eu
 cd "$DOTFILES/bin/s"
 mkdir -p "$HOME/.cache/s"
-[ "$*" = '' ] && set -- "$(find . -type f | sort | sed 's/..//' | dmenu -p '~ ' -auto-select)"
+[ "$*" = '' ] && set -- "$(find . -type f | sed 's/..//' | sort | dmenu -p '~ ' -auto-select)"
 cd "$OLDPWD"
 i="$1"
 shift
