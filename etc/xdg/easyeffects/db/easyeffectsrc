@@ -1,20 +1,20 @@
-[Audio]
-enableLevelMetersAnimation=false
-
 [EffectsPipelines]
 inactivityTimerEnable=false
 processAllInputs=false
 processAllOutputs=false
+
+[NativePluginWindow]
+showNativePluginUi=true
 
 [Spectrum]
 spectrumShape=lines
 
 [StreamInputs]
 inputDevice=alsa_input.pci-0000_05_00.6.analog-stereo
-plugins=rnnoise#0,pitch#0,autogain#0
+plugins=rnnoise#0
 useDefaultInputDevice=false
 visiblePage=pluginsPage
-visiblePlugin=pitch#0
+visiblePlugin=rnnoise#0
 
 [StreamOutputs]
 outputDevice=alsa_output.pci-0000_05_00.6.analog-stereo
@@ -26,5 +26,7 @@ forceBreezeTheme=false
 [Window]
 autostartOnLogin=true
 height=1058
+visiblePage=inputPage
+visiblePipeWirePage=clientsPage
 visiblePresetSheetPage=autoloadingPage
-width=1912
+width=955

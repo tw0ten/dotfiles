@@ -28,7 +28,7 @@ BarBlock {
 	}
 
 	Timer {
-		interval: 1000 / 256
+		interval: 60 * 1000 / 256
 		running: true
 		repeat: true
 		onTriggered: proc.running = true
