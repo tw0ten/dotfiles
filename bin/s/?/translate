@@ -1,0 +1,4 @@
+#!/bin/sh
+set -eu
+i="$(dmenu -p "translate.google.com " -l 0)"
+exec "$BROWSER" --new-window "https://translate.google.com/?sl=auto&tl=en&op=translate&text=$i"
