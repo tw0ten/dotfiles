@@ -55,6 +55,7 @@ window-rule {
 
 window-rule {
 	match app-id="^com\\.obsproject\\.Studio$"
+	match app-id="^org\\.telegram\\.desktop$"
 
 	block-out-from "screencast"
 }

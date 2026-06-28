@@ -3,7 +3,7 @@
 for file in */; do (
 	set -e
 	[ -e "$file" ] || exec echo 'clean'
-	i="$(cat "$file/.m/read")"
+	i="$(cat -- "$file/.m/read" 2>/dev/null)"
 	[ "$(date +%s)" -gt "$((i + (60 * 60 * 24 * 7)))" ] && {
 		rm -r -- "$file"
 		exec echo 'rm' "$(basename "$file")"
