@@ -57,8 +57,9 @@ for name in outputs:
     output = outputs[name]
     assert name == output["name"]
 
-    w = output["logical"]["width"]
-    h = output["logical"]["height"]
+    scale = float(output["logical"]["scale"])
+    w = int(output["logical"]["width"] * scale)
+    h = int(output["logical"]["height"] * scale)
     d = math.sqrt((w / 2) ** 2 + (h / 2) ** 2)
     last = primes[len(primes) - 1]
 

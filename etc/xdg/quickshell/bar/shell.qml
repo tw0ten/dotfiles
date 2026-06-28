@@ -78,7 +78,8 @@ PanelWindow {
 					command: ["niri", "msg", "-j", "workspaces"]
 					stdout: SplitParser {
 						onRead: i => {
-							workspaces.value = JSON.parse(i).sort((a, b) => a.idx - b.idx);
+							// #todo eDP-1 -> monitor on which qs is running
+							workspaces.value = JSON.parse(i).filter((i) => i.output === "eDP-1").sort((a, b) => a.idx - b.idx);
 							return layout.proc.running = true;
 						}
 					}

@@ -57,3 +57,8 @@ include "env.kdl"
 
 workspace "co"
 workspace "wa"
+
+output "HDMI-A-1" {
+	scale 2
+	position x=1920 y=0
+}

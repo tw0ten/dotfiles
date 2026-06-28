@@ -4,8 +4,9 @@ set -e
 o="$PWD"
 cd .io
 i="$(cat i)"
+echo "$i"
 
-rsync -rvz --delete -- "$i:maildir/new/" o
+rsync -rz --delete -- "$i:maildir/new/" o
 
 set +e
 

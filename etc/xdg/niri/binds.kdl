@@ -47,6 +47,9 @@ binds {
 	Mod+D { focus-column-right; }
 	Mod+Ctrl+D { move-column-right; }
 
+	Mod+Shift+a { focus-monitor-left; }
+	Mod+Shift+d { focus-monitor-right; }
+
 	Mod+Down { focus-window-down; }
 	Mod+Ctrl+Down { move-window-down; }
 	Mod+Up { focus-window-up; }
