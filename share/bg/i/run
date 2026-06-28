@@ -1,19 +1,22 @@
 #!/bin/python
 
 from PIL import Image, ImageDraw
-from random import random
+import random
 import json
 import math
 import subprocess
 import sys
+import os
 
 
 fgc = "ffffff"
 acc = "40e0d0"
 
-a0 = math.pi * 2 * random()
+a0 = math.pi * 2 * random.random()
 
-mask = Image.open("i/mask.png")
+masks = "i/mask"
+masks = [Image.open(f"{masks}/{i}") for i in os.listdir(masks)]
+random.shuffle(masks)
 
 outputs = json.JSONDecoder().decode(sys.stdin.read())
 
@@ -46,13 +49,6 @@ for _ in range(2**15):
     primes += [o]
 
 
-def is_masked(x, y):
-    (x, y) = (x + mask.width / 2, y + mask.height / 2)
-    if x >= 0 and y >= 0 and x < mask.width and y < mask.height:
-        return not mask.getpixel((x, y))[3] == 0
-    return True
-
-
 for name in outputs:
     output = outputs[name]
     assert name == output["name"]
@@ -65,6 +61,15 @@ for name in outputs:
 
     o = Image.new("RGBA", (w, h))
     draw = ImageDraw.Draw(o)
+
+    mask = masks.pop()
+    masks = [mask] + masks
+
+    def is_masked(x, y):
+        (x, y) = (x + mask.width / 2, y + mask.height / 2)
+        if x >= 0 and y >= 0 and x < mask.width and y < mask.height:
+            return not mask.getpixel((x, y))[3] == 0
+        return True
 
     for i in range(len(primes) - 1):
         n = primes[i]

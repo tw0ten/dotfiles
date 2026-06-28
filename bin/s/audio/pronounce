@@ -1,6 +1,0 @@
-#!/bin/sh
-set -e
-cd "$HOME/.cache/s"
-
-wl-paste | flite -o pronounce.wav
-exec pw-play pronounce.wav
