@@ -16,6 +16,7 @@
 	a = add
 	au = a --update
 	aa = a --all
+	ap = a --patch
 	c = commit
 	ca = c --amend
 	cm = c -m

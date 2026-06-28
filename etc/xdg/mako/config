@@ -20,5 +20,4 @@ height=512
 width=304
 
 
-on-button-middle=exec . "$XDG_CONFIG_HOME/mako/run" middle
 on-notify=exec . "$XDG_CONFIG_HOME/mako/run" open

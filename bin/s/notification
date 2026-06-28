@@ -1,0 +1,23 @@
+#!/bin/sh
+set -e
+
+json="$(makoctl list -j | jq -r '.[0]')"
+[ "$json" = 'null' ] && exit
+
+title="$(echo "$json" | jq '.summary')"
+id="$(echo "$json" | jq -r '.id')"
+
+i="${1:-$(printf '%s\n' 'open' 'act' 'close' 'copy' | dmenu -p "$title /" -no-custom)}"
+
+case "$i" in
+'open') makoctl invoke -n "$id" 'default' ;;
+'close') makoctl dismiss -n "$id" ;;
+'act')
+	i="$(echo "$json" | jq -r '.actions.[]' | dmenu -p "$title /act " -format i)"
+	makoctl invoke -n "$id" "$(echo "$json" | jq -r ".actions | to_entries[$i].key")"
+	;;
+'copy')
+	echo "$json" | jq -r "\"\(.summary)\n\(.body // \"\")\"" | wl-copy
+	;;
+*) false ;;
+esac
