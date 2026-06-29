@@ -5,26 +5,34 @@ import "../"
 
 BarBlock {
 	id: root
-	property real valueUsage
-	property real valueTemp
+	property var value: Item {
+		property real usage
+		property real temp
+		property real memory_used
+		property real memory
+	}
 
 	content: RowLayout {
 		spacing: 0
 
 		Fraction {
 			prefix: "{G"
-			value: root.valueUsage / 100
+			value: root.value.usage / 100
+		}
+		Fraction {
+			prefix: `${root.value.temp + 273}`
+			value: root.value.memory_used / root.value.memory
 		}
 		BarText {
-			text: `${root.valueTemp + 273}}`
+			text: "}"
 		}
 	}
 
 	Process {
 		running: true
-		command: ["nvidia-smi", "--format=csv,noheader,nounits", "--query-gpu=utilization.gpu,temperature.gpu", `--loop=${2}`]
+		command: ["nvidia-smi", "--format=csv,noheader,nounits", "--query-gpu=utilization.gpu,temperature.gpu,memory.used,memory.total", `--loop=${2}`]
 		stdout: SplitParser {
-			onRead: i => [root.valueUsage, root.valueTemp] = i.split(", ")
+			onRead: i => [root.value.usage, root.value.temp, root.value.memory_used, root.value.memory] = i.split(", ")
 		}
 	}
 }

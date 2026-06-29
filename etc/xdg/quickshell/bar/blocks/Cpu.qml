@@ -5,18 +5,20 @@ import "../"
 
 BarBlock {
 	id: root
-	property real valueUsage
-	property real valueTemp
+	property var value: Item {
+		property real usage
+		property real temp
+	}
 
 	content: RowLayout {
 		spacing: 0
 
 		Fraction {
 			prefix: "{C"
-			value: root.valueUsage
+			value: root.value.usage
 		}
 		BarText {
-			text: `${Math.ceil(root.valueTemp)}}`
+			text: `${Math.ceil(root.value.temp)}}`
 		}
 	}
 
@@ -28,16 +30,16 @@ BarBlock {
 			onRead: i => {
 				if (!i.startsWith("top"))
 				return;
-				root.valueUsage = i.split("\n")[2].split(" ").filter(i => i.length > 0)[1] / 100;
+				root.value.usage = i.split("\n")[2].split(" ").filter(i => i.length > 0)[1] / 100;
 			}
 		}
 	}
 	Process {
-		id: procTemp
+		id: proc
 		running: true
 		command: ["sensors", "-j"]
 		stdout: SplitParser {
-			onRead: i => root.valueTemp = 273.15 + JSON.parse(i)["k10temp-pci-00c3"]["Tctl"]["temp1_input"]
+			onRead: i => root.value.temp = 273.15 + JSON.parse(i)["k10temp-pci-00c3"]["Tctl"]["temp1_input"]
 		}
 	}
 
@@ -45,6 +47,6 @@ BarBlock {
 		interval: 2 * 1000
 		running: true
 		repeat: true
-		onTriggered: procTemp.running = true
+		onTriggered: proc.running = true
 	}
 }

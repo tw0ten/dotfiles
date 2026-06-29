@@ -4,13 +4,15 @@ import "../"
 
 BarBlock {
 	id: root
-	property string valueDate
-	property string valueTime
-	property real valuePart
+	property var value: Item {
+		property string date
+		property string time
+		property real part
+	}
 
 	content: Fraction {
-		prefix: `${root.valueDate} ${root.valueTime}/`
-		value: root.valuePart
+		prefix: `${root.value.date} ${root.value.time}/`
+		value: root.value.part
 	}
 
 	Process {
@@ -20,9 +22,9 @@ BarBlock {
 		stdout: SplitParser {
 			onRead: i => {
 				let t;
-				[root.valueDate, root.valueTime, t] = i.split("|");
+				[root.value.date, root.value.time, t] = i.split("|");
 				const [secs, nanos] = t.split(" ").map(Number);
-				return root.valuePart = (secs + nanos / 1000000000) / 60;
+				return root.value.part = (secs + nanos / 1000000000) / 60;
 			}
 		}
 	}

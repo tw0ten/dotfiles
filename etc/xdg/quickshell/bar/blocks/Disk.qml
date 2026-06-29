@@ -5,8 +5,7 @@ import "../"
 
 BarBlock {
 	id: root
-	property real valueNumber
-	property int valuePrecision: 6
+	property real value
 
 	content: RowLayout {
 		spacing: 0
@@ -15,11 +14,11 @@ BarBlock {
 			text: "("
 		}
 		Fraction {
-			prefix: `${Math.trunc(root.valueNumber)}`
-			value: root.valueNumber % 1
+			prefix: `${Math.trunc(root.value)}`
+			value: root.value % 1
 		}
 		BarText {
-			text: `)`
+			text: ")"
 		}
 	}
 
@@ -29,7 +28,7 @@ BarBlock {
 		command: ["df", "/", "--output=avail", "--block-size=1000"]
 		stdout: SplitParser {
 			splitMarker: ""
-			onRead: i => root.valueNumber = i.split("\n")[1] / (10 ** root.valuePrecision)
+			onRead: i => root.value = i.split("\n")[1] / (10 ** 6)
 		}
 	}
 

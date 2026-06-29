@@ -5,22 +5,24 @@ import "../"
 
 BarBlock {
 	id: root
-	property real valueMem
-	property real valueSwap
+	property var value: Item {
+		property real mem
+		property real swap
+	}
 
 	content: RowLayout {
 		spacing: 0
 
 		Fraction {
-			prefix: `<`
-			value: root.valueMem
+			prefix: "<"
+			value: root.value.mem
 		}
 		Fraction {
-			prefix: `+`
-			value: root.valueSwap
+			prefix: "+"
+			value: root.value.swap
 		}
 		BarText {
-			text: `>`
+			text: ">"
 		}
 	}
 
@@ -29,7 +31,7 @@ BarBlock {
 		command: ["free", "--seconds", `${2}`]
 		stdout: SplitParser {
 			splitMarker: "\n\n"
-			onRead: i => [root.valueMem, root.valueSwap] = i.split("\n").slice(1).map(i => i.split(" ").filter(i => i.length > 0)).map(i => i[2] / i[1])
+			onRead: i => [root.value.mem, root.value.swap] = i.split("\n").slice(1).map(i => i.split(" ").filter(i => i.length > 0)).map(i => i[2] / i[1])
 		}
 	}
 }

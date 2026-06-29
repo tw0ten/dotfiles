@@ -47,17 +47,18 @@ for _ in range(2**15):
     while not is_prime(o):
         o += 1
     primes += [o]
+last = primes[len(primes) - 1]
 
 
 for name in outputs:
     output = outputs[name]
     assert name == output["name"]
 
+    a0 = a0 + math.pi * 2 / len(outputs)
     scale = float(output["logical"]["scale"])
     w = int(output["logical"]["width"] * scale)
     h = int(output["logical"]["height"] * scale)
     d = math.sqrt((w / 2) ** 2 + (h / 2) ** 2)
-    last = primes[len(primes) - 1]
 
     o = Image.new("RGBA", (w, h))
     draw = ImageDraw.Draw(o)
