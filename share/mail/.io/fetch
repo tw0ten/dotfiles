@@ -3,10 +3,11 @@ set -e
 
 o="$PWD"
 cd .io
-i="$(cat i)"
+i="$(head -n1 i)"
 echo "$i"
 
-rsync -rz --delete -- "$i:maildir/new/" o
+rsync -rz --delete -- "$i:maildir/new/" o ||
+	exec notify-send 'mail' 'pull failed'
 
 set +e
 

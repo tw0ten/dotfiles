@@ -24,11 +24,8 @@ outputs = json.JSONDecoder().decode(sys.stdin.read())
 def run(file, output):
     return subprocess.run([
         "awww", "img", file,
+        "--resize", "no",
         "--outputs", output["name"],
-        "--transition-fps", f"{120}",
-        "--transition-type", "center",
-        "--transition-step", f"{64}",
-        "--transition-bezier", f"{0.0},{0.0},{1.0},{1.0}"
     ])
 
 
