@@ -1,0 +1,2 @@
+#!/bin/sh
+printf '{%s}' "\"date\":$(date +'"%Y%B%d %H/%M"'),\"sec\":$(date +%S | sed 's/^0//'),\"nano\":$(date +%N | sed 's/0*//')"

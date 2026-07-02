@@ -1,0 +1,2 @@
+#!/bin/sh
+printf '{%s}' "\"get\":$(($(brightnessctl -qm get))),\"max\":$(($(brightnessctl -qm max)))"

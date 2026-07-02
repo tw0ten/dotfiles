@@ -1,0 +1,10 @@
+#!/bin/sh
+niri msg -j event-stream |
+	while read -r _; do
+		workspaces="$(niri msg -j workspaces | jq -rc 'sort_by(.idx)')"
+		keyboard_layouts="$(niri msg -j keyboard-layouts)"
+		#windows="$(niri msg -j windows)"
+		windows='{}'
+		focused_window="$(niri msg -j focused-window)"
+		printf '{%s}\n' "\"workspaces\":$workspaces,\"keyboard-layouts\":$keyboard_layouts,\"windows\":$windows,\"focused-window\":$focused_window"
+	done

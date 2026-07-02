@@ -1,0 +1,3 @@
+#!/bin/sh
+i='/sys/class/power_supply/BAT0'
+printf '{%s}' "\"status\":\"$(cat "$i/status")\",\"now\":$(cat "$i/energy_now"),\"full\":$(cat "$i/energy_full")"

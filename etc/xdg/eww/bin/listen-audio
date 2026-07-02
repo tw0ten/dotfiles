@@ -1,0 +1,13 @@
+#!/bin/sh
+poll() {
+	volume="$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | sed 's/.*: //')"
+	printf '{%s}\n' "\"mute\":\"\",\"volume\":$volume"
+}
+
+poll
+pactl subscribe |
+	while read -r i; do
+		case "$i" in
+		"Event 'change' on sink"*) poll ;;
+		esac
+	done

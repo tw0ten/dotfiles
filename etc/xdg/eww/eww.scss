@@ -1,0 +1,35 @@
+* {
+  all: unset;
+}
+
+.monospace {
+  font-family: monospace;
+}
+
+.highlight {
+  color: #40e0d0;
+}
+
+.background {
+  padding: 2;
+  background-color: #101010;
+}
+
+.reverse {
+  background-color: #ffffff;
+  color: #101010;
+}
+
+.bar {
+  background-color: transparent;
+  color: #ffffff;
+
+  padding: 2;
+  font-size: 12;
+}
+
+.userathost {
+  padding: 2;
+  background-color: #40e0d0;
+  color: #101010;
+}

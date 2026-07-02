@@ -1,0 +1,2 @@
+#!/bin/sh
+iwctl station wlan0 show | grep '^ *AverageRSSI' | sed -e 's/ *dBm.*//' -e 's/.* //'

@@ -17,8 +17,9 @@
 	i neovim lf \
 		openssh qbittorrent-nox ufw \
 		btop fastfetch ripgrep ly nix tmux ffmpeg
-	i niri firefox foot \
-		pipewire mako awww rofi quickshell fcitx5 easyeffects \
+	i niri firefox alacritty \
+		mako awww eww rofi \
+		fcitx5 easyeffects \
 		mpv libreoffice-fresh gimp obs-studio \
 		noto-fonts noto-fonts-emoji noto-fonts-cjk
 

@@ -2,7 +2,7 @@
 set -e
 
 json="$(makoctl list -j | jq -r '.[0]')"
-[ "$json" = 'null' ] && exit
+[ "$json" = 'null' ] && exec makoctl restore
 
 title="$(echo "$json" | jq '.summary')"
 id="$(echo "$json" | jq -r '.id')"

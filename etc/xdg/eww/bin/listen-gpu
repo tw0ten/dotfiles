@@ -1,0 +1,3 @@
+#!/bin/sh
+nvidia-smi --format=csv,noheader,nounits --query-gpu=utilization.gpu,temperature.gpu,memory.used,memory.total --loop=2 |
+	sed -e 's/^/[/' -e 's/$/]/' -u

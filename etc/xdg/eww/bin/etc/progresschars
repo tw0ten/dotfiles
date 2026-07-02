@@ -1,0 +1,5 @@
+#!/bin/sh
+set -e
+python <<EOF
+print("".join([chr(0xe000 + i) for i in range(256)]))
+EOF

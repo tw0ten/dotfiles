@@ -1,0 +1,121 @@
+(defwindow bar
+ :monitor 0
+ :geometry (geometry
+	 :width "100%"
+	 :anchor "bottom center")
+ :exclusive true
+ (centerbox
+	(workspaces)
+	(windows)
+	(status)))
+
+
+(defwidget workspaces []
+ (box
+	:halign "start"
+	:space-evenly false
+	:spacing 10
+	:class "background"
+	(for i in {status-niri.workspaces}
+	 (button
+		:onclick "niri msg action focus-workspace ${i.idx}"
+		:class "${i.is_focused ? "highlight" : ""}"
+		(label :text "${i.idx == 1 ? "c" : i.is_focused ? i.name ?: i.idx - 1 : i.idx - 1}")))))
+
+(defwidget windows []
+ (box
+	:visible {status-niri.focused-window != "null"}
+	:class "background"
+	(button
+	 (row
+		(label :text "${status-niri.focused-window?.title ?: ""}")))))
+
+(defwidget status []
+ (box
+	:halign "end"
+	:space-evenly false
+	:spacing 16
+	(row
+	 :class "background"
+	 :spacing 10
+	 (button
+		(row
+		 (label :text "(")
+		 (fraction :value {EWW_DISK["/"].used / EWW_DISK["/"].total})
+		 (label :text ")")))
+	 (button
+		(row
+		 (label :text "<")
+		 (fraction :value {(EWW_RAM.total_mem - EWW_RAM.free_mem) / EWW_RAM.total_mem})
+		 (label :text "+")
+		 (fraction :value {(EWW_RAM.total_swap - EWW_RAM.free_swap) / EWW_RAM.total_swap})
+		 (label :text ">")))
+	 (button
+		(row
+		 (label :text "{c")
+		 (fraction :value {EWW_CPU.avg / 100})
+		 (label :text "${round(EWW_TEMPS.K10TEMP_TCTL, 0)}")
+		 (label :text "}")))
+	 (button
+		(row
+		 (label :text "{g")
+		 (fraction :value {status-gpu[0] / 100})
+		 (label :text "${status-gpu[1]}")
+		 (fraction :value {status-gpu[2] / status-gpu[3]})
+		 (label :text "}"))))
+	(row
+	 :class "background"
+	 :spacing 10
+	 (button
+		(row
+		 (label :text "${status-battery.status == "Not charging" ? "=" : status-battery.status == "Charging" ? "+" : "-"}")
+		 (fraction :value {status-battery.now / status-battery.full})))
+	 (button
+		:onclick "smenu audio/volume &"
+		(row
+		 (label :text "v${status-audio.mute}")
+		 (fraction :value {status-audio.volume})))
+	 (button
+		:onclick "smenu brightness &"
+		(row
+		 (label :text "m")
+		 (fraction :value {status-brightness.get / status-brightness.max})))
+	 (button
+		(row
+		 (label :text "n")
+		 (fraction :value {status-network / 100 + 1})))
+	 (button
+		:class "monospace"
+		 :onclick "smenu keyboard &"
+		(label :text "${substring(status-niri.keyboard-layouts.names[status-niri.keyboard-layouts.current_idx], 0, 2)}")))
+		(button
+		 :class "background"
+		(row
+		 (label :text "${status-time.date}/")
+		 (fraction :value {(status-time.sec + status-time.nano / 1000000000) / 60})))
+	 (button :class "userathost" "${userathost}")))
+
+
+(defwidget row [?spacing ?class]
+ (box
+	:class class
+	:space-evenly false
+	:spacing {spacing ?: 0}
+	(children)))
+
+
+(defwidget fraction [value]
+(label :class "highlight" :text "${substring(fraction-chars, round((value ?: 0) * 255, 0), 1)}"))
+
+
+(deflisten status-niri "bin/listen-niri")
+
+(deflisten status-gpu "bin/listen-gpu")
+(defpoll status-battery :interval "10s" "bin/poll-battery")
+(deflisten status-audio "bin/listen-audio")
+(defpoll status-brightness :interval "10s" "bin/poll-brightness")
+(defpoll status-network :interval "10s" "bin/poll-network")
+(defpoll status-time :interval "${60 / 256}s" "bin/poll-time")
+
+(defpoll userathost :interval "1024s" "echo $USER@$HOSTNAME")
+(defpoll fraction-chars :interval "1024s" "bin/etc/progresschars")
