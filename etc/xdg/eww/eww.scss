@@ -10,26 +10,24 @@
   color: #40e0d0;
 }
 
-.background {
-  padding: 2;
-  background-color: #101010;
+.dim {
+  opacity: 0.5;
 }
 
-.reverse {
-  background-color: #ffffff;
-  color: #101010;
+.background {
+  padding: 0px 4px;
+  background-color: #101010;
 }
 
 .bar {
   background-color: transparent;
   color: #ffffff;
 
-  padding: 2;
-  font-size: 12;
+  padding: 2px 4px;
+  font-size: 12px;
 }
 
 .userathost {
-  padding: 2;
   background-color: #40e0d0;
   color: #101010;
 }

@@ -1,7 +1,8 @@
 #!/bin/sh
 poll() {
-	volume="$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | sed 's/.*: //')"
-	printf '{%s}\n' "\"mute\":\"\",\"volume\":$volume"
+	wpctl get-volume @DEFAULT_AUDIO_SINK@ |
+		sed -e 's/.*: /"volume":/' -e 's/ .*/,"muted":true/' \
+			-e 's/^/{/' -e 's/$/}/'
 }
 
 poll
