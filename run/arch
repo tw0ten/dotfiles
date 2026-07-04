@@ -30,7 +30,7 @@
 	set -x
 
 	systemctl --user enable \
-		'brightness'.timer 'bg'.timer
+		'brightness'.timer
 
 	[ "$(id -u)" = 0 ]
 

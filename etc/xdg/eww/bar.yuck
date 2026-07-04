@@ -26,11 +26,11 @@
  (box
 	:height 22 ; #todo if i dont set it high enough the bar grows. is there no overflow hidden?
 	(button
+	 :class "background"
 	 :visible {status-niri.focused-window != "null"}
 	 :onclick "niri msg action toggle-overview"
 	 :valign "fill"
 	 (row
-		:class "background"
 		:spacing 8
 		(image :icon {status-niri.focused-window?.app_id})
 		(label :text "${status-niri.focused-window?.title ?:status-niri.focused-window?.app_id ?: ""}")))))
@@ -40,34 +40,32 @@
 	:halign "end"
 	:space-evenly false
 	:spacing 16
-	(row
+	(box
 	 :class "background"
-	 :spacing 10
 	 (button
 		(row
-		 (label :text "(")
-		 (fraction :value {EWW_DISK["/"].used / EWW_DISK["/"].total})
-		 (label :text ")")))
-	 (button
-		(row
-		 (label :text "<")
-		 (fraction :value {(EWW_RAM.total_mem - EWW_RAM.free_mem) / EWW_RAM.total_mem})
-		 (label :text "+")
-		 (fraction :value {(EWW_RAM.total_swap - EWW_RAM.free_swap) / EWW_RAM.total_swap})
-		 (label :text ">")))
-	 (button
-		(row
-		 (label :text "{c")
-		 (fraction :value {EWW_CPU.avg / 100})
-		 (label :text "${round(EWW_TEMPS.K10TEMP_TCTL, 0)}")
-		 (label :text "}")))
-	 (button
-		(row
-		 (label :text "{g")
-		 (fraction :value {status-gpu[0] / 100})
-		 (label :text "${status-gpu[1]}")
-		 (fraction :value {status-gpu[2] / status-gpu[3]})
-		 (label :text "}"))))
+		 :spacing 10
+		 (row
+			(label :text "(")
+			(fraction :value {EWW_DISK["/"].used / EWW_DISK["/"].total})
+			(label :text ")"))
+		 (row
+			(label :text "<")
+			(fraction :value {(EWW_RAM.total_mem - EWW_RAM.free_mem) / EWW_RAM.total_mem})
+			(label :text "+")
+			(fraction :value {(EWW_RAM.total_swap - EWW_RAM.free_swap) / EWW_RAM.total_swap})
+			(label :text ">"))
+		 (row
+			(label :text "{c")
+			(fraction :value {EWW_CPU.avg / 100})
+			(label :text "${round(EWW_TEMPS.K10TEMP_TCTL, 0)}")
+			(label :text "}"))
+		 (row
+			(label :text "{g")
+			(fraction :value {status-gpu[0] / 100})
+			(label :text "${status-gpu[1]}")
+			(fraction :value {status-gpu[2] / status-gpu[3]})
+			(label :text "}")))))
 	(row
 	 :class "background"
 	 :spacing 10
@@ -75,11 +73,25 @@
 		(row
 		 (label :text "${status-battery.status == "Not charging" ? "=" : status-battery.status == "Charging" ? "+" : "-"}")
 		 (fraction :value {status-battery.now / status-battery.full})))
-	 (button
-		:onclick "smenu audio/volume &"
+	 (eventbox
+		:onhoverlost "${EWW_CMD} update state-audio=false"
 		(row
-		 (label :text "v${status-audio.muted ?: false ? "-" : ""}")
-		 (fraction :value {status-audio.volume})))
+		 (revealer
+			:reveal {false && state-audio}
+			:transition "slideright"
+			(scale
+			 :flipped {true}
+			 :value {status-audio.volume * 100}
+			 :min {0}
+			 :max {100}
+			 :onchange "smenu audio/volume"))
+		 (eventbox
+			:onhover "${EWW_CMD} update state-audio=true"
+			(button
+			 :onclick "smenu audio/volume &"
+			 (row
+				(label :text "v${status-audio.muted ?: false ? "-" : ""}")
+				(fraction :value {status-audio.volume}))))))
 	 (button
 		:onclick "smenu brightness &"
 		(row
@@ -112,6 +124,8 @@
 (defwidget fraction [value]
  (label :class "highlight" :text "${substring(fraction-chars, round((value ?: 0) * 255, 0), 1)}"))
 
+
+(defvar state-audio false)
 
 (deflisten status-niri "bin/listen-niri")
 (deflisten status-gpu "bin/listen-gpu")

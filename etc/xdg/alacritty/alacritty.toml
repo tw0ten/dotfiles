@@ -6,4 +6,3 @@ import = [
 
 [window]
 dynamic_title = false
-title = "terminal"

@@ -24,9 +24,13 @@ tput sgr0 | sed 's/(B//'
 	}
 
 	cd "$1"
-	command -v tree >/dev/null && {
-		tree . -L 2 -F -C --noreport --dirsfirst --compress -2 | tail -n +2 | sed 's/..//'
-	} || ls -1 -F --color --group-directories-first
+	case "$(
+		command -v tree >/dev/null
+		exec echo $?
+	)" in
+	0) tree . -L 2 -F -C --noreport --dirsfirst --compress -2 | tail -n +2 | sed 's/..//' ;;
+	*) ls -1 -F --color --group-directories-first ;;
+	esac
 	exit
 }
 
@@ -36,7 +40,7 @@ echo "$mime $(xdg-mime query default "$mime")"
 echo
 
 case "$mime" in
-'image'/*) jp2a --width="$2" --colors "$1" ;;
+'image'/*) jp2a --chars=' -=#{nwk~' --width="$2" --colors "$1" ;;
 *) false ;;
 esac && exit
 
