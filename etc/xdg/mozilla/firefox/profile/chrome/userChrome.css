@@ -15,3 +15,12 @@
 arrowscrollbox {
 	background: #101010d0 !important;
 }
+
+
+#navigator-toolbox {
+	order: 1 !important;
+}
+
+.searchmode-switcher {
+	display: none !important;
+}

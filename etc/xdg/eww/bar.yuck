@@ -14,8 +14,7 @@
  (box
 	:halign "start"
 	:space-evenly false
-	:spacing 8
-	:class "background"
+	:class "spaced background"
 	(for i in {status-niri.workspaces}
 	 (button
 		:onclick "niri msg action focus-workspace ${i.idx}"
@@ -67,31 +66,16 @@
 			(fraction :value {status-gpu[2] / status-gpu[3]})
 			(label :text "}")))))
 	(row
-	 :class "background"
-	 :spacing 10
+	 :class "spaced background"
 	 (button
 		(row
 		 (label :text "${status-battery.status == "Not charging" ? "=" : status-battery.status == "Charging" ? "+" : "-"}")
 		 (fraction :value {status-battery.now / status-battery.full})))
-	 (eventbox
-		:onhoverlost "${EWW_CMD} update state-audio=false"
+	 (button
+		:onclick "smenu audio/volume &"
 		(row
-		 (revealer
-			:reveal {false && state-audio}
-			:transition "slideright"
-			(scale
-			 :flipped {true}
-			 :value {status-audio.volume * 100}
-			 :min {0}
-			 :max {100}
-			 :onchange "smenu audio/volume"))
-		 (eventbox
-			:onhover "${EWW_CMD} update state-audio=true"
-			(button
-			 :onclick "smenu audio/volume &"
-			 (row
-				(label :text "v${status-audio.muted ?: false ? "-" : ""}")
-				(fraction :value {status-audio.volume}))))))
+		 (label :text "v${status-audio.muted ?: false ? "-" : ""}")
+		 (fraction :value {status-audio.volume})))
 	 (button
 		:onclick "smenu brightness &"
 		(row
@@ -103,7 +87,7 @@
 		 (fraction :value {status-network / 100 + 1})))
 	 (button
 		:class "monospace"
-		 :onclick "smenu keyboard &"
+		:onclick "smenu keyboard &"
 		(label :text "${substring(status-niri.keyboard-layouts.names[status-niri.keyboard-layouts.current_idx], 0, 2)}")))
 	(button
 	 :class "background"
@@ -124,8 +108,6 @@
 (defwidget fraction [value]
  (label :class "highlight" :text "${substring(fraction-chars, round((value ?: 0) * 255, 0), 1)}"))
 
-
-(defvar state-audio false)
 
 (deflisten status-niri "bin/listen-niri")
 (deflisten status-gpu "bin/listen-gpu")

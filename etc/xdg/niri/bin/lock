@@ -1,5 +1,5 @@
 #!/bin/sh
-set -u
+set -eu
 lock='hyprlock'
 
 pkill -0 "^${lock}$" && exit
@@ -10,9 +10,8 @@ keyboard="$(niri msg -j keyboard-layouts | jq '.current_idx')"
 wpctl set-mute @DEFAULT_AUDIO_SINK@ 1
 niri msg action switch-layout 0
 
-"$lock" &
-niri msg action focus-workspace 0
-wait
+"$XDG_CONFIG_HOME/niri/bin/bg" &
+"$lock" || true
 
 "$mute" || wpctl set-mute @DEFAULT_AUDIO_SINK@ 0
 niri msg action switch-layout "$keyboard"
