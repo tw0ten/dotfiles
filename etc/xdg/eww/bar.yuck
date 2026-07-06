@@ -23,6 +23,7 @@
 
 (defwidget windows []
  (box
+	:class "center"
 	:height 22 ; #todo if i dont set it high enough the bar grows. is there no overflow hidden?
 	(button
 	 :class "background"
@@ -38,39 +39,41 @@
  (box
 	:halign "end"
 	:space-evenly false
-	:spacing 16
-	(box
+	:spacing 10
+	(button
+	 :onclick "\"$TERMINAL\" -e btop &"
 	 :class "background"
-	 (button
+	 (row
+		:class "spaced"
 		(row
-		 :spacing 10
-		 (row
-			(label :text "(")
-			(fraction :value {EWW_DISK["/"].used / EWW_DISK["/"].total})
-			(label :text ")"))
-		 (row
-			(label :text "<")
-			(fraction :value {(EWW_RAM.total_mem - EWW_RAM.free_mem) / EWW_RAM.total_mem})
-			(label :text "+")
-			(fraction :value {(EWW_RAM.total_swap - EWW_RAM.free_swap) / EWW_RAM.total_swap})
-			(label :text ">"))
-		 (row
-			(label :text "{c")
-			(fraction :value {EWW_CPU.avg / 100})
-			(label :text "${round(EWW_TEMPS.K10TEMP_TCTL, 0)}")
-			(label :text "}"))
-		 (row
-			(label :text "{g")
-			(fraction :value {status-gpu[0] / 100})
-			(label :text "${status-gpu[1]}")
-			(fraction :value {status-gpu[2] / status-gpu[3]})
-			(label :text "}")))))
+		 (label :text "(")
+		 (fraction :value {EWW_DISK["/"].used / EWW_DISK["/"].total})
+		 (label :text ")"))
+		(row
+		 (label :text "<")
+		 (fraction :value {(EWW_RAM.total_mem - EWW_RAM.free_mem) / EWW_RAM.total_mem})
+		 (label :text "+")
+		 (fraction :value {(EWW_RAM.total_swap - EWW_RAM.free_swap) / EWW_RAM.total_swap})
+		 (label :text ">"))
+		(row
+		 (label :text "{c")
+		 (fraction :value {EWW_CPU.avg / 100})
+		 (label :text "${round(EWW_TEMPS.K10TEMP_TCTL, 0)} ")
+		 (label :text "g")
+		 (fraction :value {status-gpu[0] / 100})
+		 (label :text "${status-gpu[1]}")
+		 (fraction :value {status-gpu[2] / status-gpu[3]})
+		 (label :text "}"))))
 	(row
 	 :class "spaced background"
-	 (button
+	 (box
 		(row
 		 (label :text "${status-battery.status == "Not charging" ? "=" : status-battery.status == "Charging" ? "+" : "-"}")
 		 (fraction :value {status-battery.now / status-battery.full})))
+	 (box
+		(row
+		 (label :text "n")
+		 (fraction :value {status-network / 100 + 1})))
 	 (button
 		:onclick "smenu audio/volume &"
 		(row
@@ -82,19 +85,18 @@
 		 (label :text "m")
 		 (fraction :value {status-brightness.get / status-brightness.max})))
 	 (button
-		(row
-		 (label :text "n")
-		 (fraction :value {status-network / 100 + 1})))
-	 (button
 		:class "monospace"
 		:onclick "smenu keyboard &"
 		(label :text "${substring(status-niri.keyboard-layouts.names[status-niri.keyboard-layouts.current_idx], 0, 2)}")))
 	(button
+	 :onclick "notify-send 'time' \"$(date +%X)\\n$(cal)\""
 	 :class "background"
 	 (row
 		(label :text "${status-time.date}/")
 		(fraction :value {(status-time.sec + status-time.nano / 1000000000) / 60})))
-	(button :class "background userathost" "${userathost}")))
+	(button
+	 :onclick "\"$TERMINAL\" -e sh -c 'fastfetch; read -n1' &"
+	 :class "background userathost" "${userathost}")))
 
 
 (defwidget row [?spacing ?class]
