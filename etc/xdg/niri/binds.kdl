@@ -4,98 +4,98 @@ hotkey-overlay {
 
 recent-windows {
 	binds {
-		Mod+grave { next-window scope="workspace"; }
+		mod+grave { next-window scope="workspace"; }
 	}
 }
 
 binds {
-	Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+	mod+escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
-	Mod+Shift+Escape { quit skip-confirmation=true; }
-	Mod+Shift+Slash { show-hotkey-overlay; }
-
-
-	Mod+Shift+q allow-inhibiting=false hotkey-overlay-title="lock" { spawn "~/.config/niri/bin/lock"; }
-
-	Mod+Return { spawn "terminal"; }
-	Mod+Shift+Return { spawn "open" "."; }
-	Mod+Ctrl+Return { spawn "terminal" "--class" "terminal.mini"; }
-
-	Mod+X hotkey-overlay-title="run" { spawn "rofi" "-show" "drun"; }
-	Mod+Shift+X hotkey-overlay-title="open" { spawn "smenu" "open"; }
-
-	Mod+Z { spawn "smenu"; }
-	Mod+Shift+Z hotkey-overlay-title="keyboard" { spawn "smenu" "keyboard"; }
-
-	Mod+I { spawn "smenu" "notification"; }
-	Mod+Shift+I { spawn "smenu" "notification" "open"; }
-	Mod+Ctrl+I { spawn "smenu" "notification" "close"; }
+	mod+shift+escape { quit skip-confirmation=true; }
+	mod+shift+slash { show-hotkey-overlay; }
 
 
-	XF86AudioMute { spawn "~/.config/niri/bin/volume"; }
-	XF86AudioRaiseVolume { spawn "~/.config/niri/bin/volume" "0.025+"; }
-	XF86AudioLowerVolume { spawn "~/.config/niri/bin/volume" "0.025-"; }
+	mod+shift+q allow-inhibiting=false hotkey-overlay-title="lock" { spawn "~/.config/niri/bin/lock"; }
 
-	Mod+Q repeat=false { toggle-overview; }
+	mod+return { spawn "terminal"; }
+	mod+shift+return { spawn "open" "."; }
+	mod+ctrl+return { spawn "terminal" "--class" "terminal.mini"; }
 
-	Mod+Shift+C repeat=false { close-window; }
+	mod+x hotkey-overlay-title="run" { spawn "rofi" "-show" "drun"; }
+	mod+shift+x hotkey-overlay-title="open" { spawn "smenu" "open"; }
 
-	Mod+T { toggle-column-tabbed-display; }
+	mod+z { spawn "smenu"; }
+	mod+shift+z hotkey-overlay-title="keyboard" { spawn "smenu" "keyboard"; }
 
-	Mod+A { focus-column-left; }
-	Mod+Ctrl+A { move-column-left; }
-	Mod+D { focus-column-right; }
-	Mod+Ctrl+D { move-column-right; }
+	mod+i { spawn "smenu" "notification"; }
+	mod+shift+i { spawn "smenu" "notification" "open"; }
+	mod+ctrl+i { spawn "smenu" "notification" "close"; }
 
-	Mod+Shift+a { focus-monitor-left; }
-	Mod+Shift+d { focus-monitor-right; }
 
-	Mod+Down { focus-window-down; }
-	Mod+Ctrl+Down { move-window-down; }
-	Mod+Up { focus-window-up; }
-	Mod+Ctrl+Up { move-window-up; }
+	xf86audiomute { spawn "~/.config/niri/bin/volume"; }
+	xf86audioraisevolume { spawn "~/.config/niri/bin/volume" "0.025+"; }
+	xf86audiolowervolume { spawn "~/.config/niri/bin/volume" "0.025-"; }
 
-	Mod+W { focus-workspace-up; }
-	Mod+Shift+W { move-workspace-up; }
-	Mod+Ctrl+W { move-column-to-workspace-up; }
-	Mod+S { focus-workspace-down; }
-	Mod+Shift+S { move-workspace-down; }
-	Mod+Ctrl+S { move-column-to-workspace-down; }
+	mod+q repeat=false { toggle-overview; }
 
-	Mod+Tab { focus-workspace-previous; }
-	Mod+C { focus-workspace 1; }
-	Mod+Ctrl+c { move-column-to-workspace 1; }
-	Mod+1 { focus-workspace 2; }
-	Mod+2 { focus-workspace 3; }
-	Mod+3 { focus-workspace 4; }
-	Mod+4 { focus-workspace 5; }
-	Mod+5 { focus-workspace 6; }
+	mod+shift+c repeat=false { close-window; }
 
-	Mod+BracketLeft { consume-or-expel-window-left; }
-	Mod+BracketRight { consume-or-expel-window-right; }
+	mod+t { toggle-column-tabbed-display; }
 
-	Mod+R { switch-preset-column-width; }
-	Mod+Shift+R { switch-preset-window-height; }
-	Mod+Ctrl+R { reset-window-height; }
+	mod+a { focus-column-left; }
+	mod+ctrl+a { move-column-left; }
+	mod+d { focus-column-right; }
+	mod+ctrl+d { move-column-right; }
 
-	Mod+F { maximize-column; }
-	Mod+Ctrl+F { expand-column-to-available-width; }
+	mod+shift+a { focus-monitor-left; }
+	mod+shift+d { focus-monitor-right; }
 
-	Mod+Shift+F { maximize-window-to-edges; }
-	Mod+Ctrl+Shift+F { fullscreen-window; }
+	mod+down { focus-window-down; }
+	mod+ctrl+down { move-window-down; }
+	mod+up { focus-window-up; }
+	mod+ctrl+up { move-window-up; }
 
-	Mod+G { center-column; }
-	Mod+Ctrl+G { center-visible-columns; }
+	mod+w { focus-workspace-up; }
+	mod+shift+w { move-workspace-up; }
+	mod+ctrl+w { move-column-to-workspace-up; }
+	mod+s { focus-workspace-down; }
+	mod+shift+s { move-workspace-down; }
+	mod+ctrl+s { move-column-to-workspace-down; }
 
-	Mod+Minus { set-column-width "-5%"; }
-	Mod+Equal { set-column-width "+5%"; }
-	Mod+Shift+Minus { set-window-height "-5%"; }
-	Mod+Shift+Equal { set-window-height "+5%"; }
+	mod+tab { focus-workspace-previous; }
+	mod+c { focus-workspace 1; }
+	mod+ctrl+c { move-column-to-workspace 1; }
+	mod+1 { focus-workspace 2; }
+	mod+2 { focus-workspace 3; }
+	mod+3 { focus-workspace 4; }
+	mod+4 { focus-workspace 5; }
+	mod+5 { focus-workspace 6; }
 
-	Mod+V { switch-focus-between-floating-and-tiling; }
-	Mod+Shift+V { toggle-window-floating; }
+	mod+bracketleft { consume-or-expel-window-left; }
+	mod+bracketright { consume-or-expel-window-right; }
 
-	Print { screenshot; }
-	Ctrl+Print { screenshot-window; }
-	Shift+Print { screenshot-screen; }
+	mod+r { switch-preset-column-width; }
+	mod+shift+r { switch-preset-window-height; }
+	mod+ctrl+r { reset-window-height; }
+
+	mod+f { maximize-column; }
+	mod+ctrl+f { expand-column-to-available-width; }
+
+	mod+shift+f { maximize-window-to-edges; }
+	mod+ctrl+shift+f { fullscreen-window; }
+
+	mod+g { center-column; }
+	mod+ctrl+g { center-visible-columns; }
+
+	mod+minus { set-column-width "-5%"; }
+	mod+equal { set-column-width "+5%"; }
+	mod+shift+minus { set-window-height "-5%"; }
+	mod+shift+equal { set-window-height "+5%"; }
+
+	mod+v { switch-focus-between-floating-and-tiling; }
+	mod+shift+v { toggle-window-floating; }
+
+	print { screenshot; }
+	ctrl+print { screenshot-window; }
+	shift+print { screenshot-screen; }
 }

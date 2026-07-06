@@ -6,5 +6,6 @@ niri msg -j event-stream |
 		windows='{}'
 		focused_window="$(niri msg -j focused-window)"
 		#windows="$(niri msg -j windows | jq -rc 'sort_by(.layout.pos_in_scrolling_layout[0])')"
-		printf '{%s}\n' "\"workspaces\":$workspaces,\"keyboard-layouts\":$keyboard_layouts,\"windows\":$windows,\"focused-window\":$focused_window"
+		casts="$(niri msg -j casts)"
+		printf '{%s}\n' "\"workspaces\":$workspaces,\"keyboard-layouts\":$keyboard_layouts,\"windows\":$windows,\"focused-window\":$focused_window,\"casts\":$casts"
 	done

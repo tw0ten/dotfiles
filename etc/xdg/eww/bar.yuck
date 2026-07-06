@@ -29,11 +29,17 @@
 	 :class "background"
 	 :visible {status-niri.focused-window != "null"}
 	 :onclick "niri msg action toggle-overview"
-	 :valign "fill"
 	 (row
-		:spacing 8
-		(image :icon {status-niri.focused-window?.app_id})
-		(label :text "${status-niri.focused-window?.title ?:status-niri.focused-window?.app_id ?: ""}")))))
+		(box
+		 :space-evenly false
+		 (for i in {status-niri.casts}
+			(box
+			 :class "indicator"
+			 :visible {i.target.Window?.id == status-niri.focused-window?.id})))
+		(row
+		 :spacing 8
+		 (image :icon {status-niri.focused-window?.app_id})
+		 (label :text "${status-niri.focused-window?.title ?:status-niri.focused-window?.app_id ?: ""}"))))))
 
 (defwidget status []
  (box

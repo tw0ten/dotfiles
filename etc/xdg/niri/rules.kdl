@@ -42,16 +42,6 @@ window-rule {
 	opacity 0.9
 }
 
-window-rule {
-	match is-window-cast-target=true
-
-	border {
-		on
-		active-color "#ff0000ff"
-		inactive-color "#ff0000ff"
-	}
-}
-
 
 window-rule {
 	match app-id="^com\\.obsproject\\.Studio$"

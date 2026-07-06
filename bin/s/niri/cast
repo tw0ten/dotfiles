@@ -1,2 +1,17 @@
 #!/bin/sh
-niri msg action set-dynamic-cast-window
+set -eu
+
+[ "$(niri msg -j casts)" = '[]' ] && exec notify-send 'niri/cast' 'not streaming'
+
+i="$(niri msg -j focused-window)"
+
+case "$i" in
+'null')
+	niri msg action clear-dynamic-cast-target
+	exec notify-send 'niri/cast' 'cast unset'
+	;;
+*)
+	niri msg action set-dynamic-cast-window --id "$(echo "$i" | jq '.id')"
+	exec notify-send 'niri/cast' "casting $(echo "$i" | jq '(.app_id,.title)')"
+	;;
+esac

@@ -20,8 +20,8 @@ layout {
 
 recent-windows {
 	highlight {
-		active-color "#ffffffa0"
-		urgent-color "#40e0d0f0"
+		active-color "#ffffff00"
+		urgent-color "#40e0d000"
 	}
 }
 
