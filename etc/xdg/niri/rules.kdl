@@ -6,14 +6,23 @@ layer-rule {
 
 layer-rule {
 	match layer="overlay"
+	match layer="top"
 
-	opacity 0.9
+	opacity 0.95
 }
 
 layer-rule {
 	match namespace="^notifications$"
 
 	block-out-from "screencast"
+}
+
+layer-rule {
+	match namespace="^rofi$"
+
+	background-effect {
+		xray true
+	}
 }
 
 

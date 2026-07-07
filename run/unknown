@@ -26,7 +26,6 @@ set -e
 		i bash/rc ~/.bashrc
 		i inputrc ~/.inputrc
 		i ssh/config ~/.ssh/config
-		i icons/ ~/.local/share/icons/default
 	)
 
 	[ "$(id -u)" = 0 ] || exit

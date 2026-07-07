@@ -20,7 +20,7 @@
 window {
 	width: 30%;
 	padding: 4;
-	margin: 2;
+	margin: 1em 1em 0 1em;
 	border: 0;
 }
 mainbox {

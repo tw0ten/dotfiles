@@ -4,6 +4,7 @@
 	 :width "100%"
 	 :anchor "bottom center")
  :exclusive true
+ :namespace "bar"
  (centerbox
 	(workspaces)
 	(windows)
