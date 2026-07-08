@@ -1,4 +1,4 @@
 #!/bin/sh
-set -e
-i="$(curl -fsL 'https://www.unicode.org/Public/UCD/latest/ucd/UnicodeData.txt' | sed -e 's/;/ /' -e 's/;.*//' -e 's/.*/\L&/' | dmenu -p 'U+' -no-custom | sed 's/ .*//')"
+set -eu
+i="${1:-$(curl -fsL 'https://www.unicode.org/Public/UCD/latest/ucd/UnicodeData.txt' | sed -e 's/;/ /' -e 's/;.*//' -e 's/.*/\L&/' | dmenu -p 'U+' -no-custom | sed 's/ .*//')}"
 python -c "import sys; print(chr(int(\"$i\".split()[0], 16)), end='')" | wl-copy

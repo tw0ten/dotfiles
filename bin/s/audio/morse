@@ -1,0 +1,224 @@
+#!/bin/sh
+set -eux
+cd "$HOME/.cache/s"
+
+ffmpeg -f lavfi -i "sine=frequency=0:duration=0.05" -y -- 'sleep.wav'
+ffmpeg -f lavfi -i "sine=frequency=1000:duration=0.05" -y -- 'dot.wav'
+ffmpeg -f lavfi -i "sine=frequency=1000:duration=0.15" -y -- 'dash.wav'
+
+i="${1:-$(dmenu -p 'morse ' -l 0)}"
+i="$(echo "$i" | fold -w1)"
+
+play() { pw-play --target=soundboard_sink -- "$@"; }
+dot() { play 'dot.wav'; }
+dash() { play 'dash.wav'; }
+_sleep() { play 'sleep.wav'; }
+
+IFS='
+'
+for c in $i; do
+	case "$c" in
+	'a')
+		dot
+		_sleep
+		dash
+		;;
+	'b')
+		dash
+		_sleep
+		dot
+		_sleep
+		dot
+		_sleep
+		dot
+		;;
+	'c')
+		dash
+		_sleep
+		dot
+		_sleep
+		dash
+		_sleep
+		dot
+		;;
+	'd')
+		dash
+		_sleep
+		dot
+		_sleep
+		dot
+		;;
+	'e')
+		dot
+		;;
+	'f')
+		dot
+		_sleep
+		dot
+		_sleep
+		dash
+		_sleep
+		dot
+		;;
+	'g')
+		dash
+		_sleep
+		dot
+		_sleep
+		dot
+		;;
+	'h')
+		dot
+		_sleep
+		dot
+		_sleep
+		dot
+		_sleep
+		dot
+		;;
+	'i')
+		dot
+		_sleep
+		dot
+		;;
+	'j')
+		dot
+		_sleep
+		dash
+		_sleep
+		dash
+		_sleep
+		dash
+		;;
+	'k')
+		dash
+		_sleep
+		dot
+		_sleep
+		dash
+		;;
+	'l')
+		dot
+		_sleep
+		dash
+		_sleep
+		dot
+		_sleep
+		dot
+		;;
+	'm')
+		dash
+		_sleep
+		dash
+		;;
+	'n')
+		dash
+		_sleep
+		dot
+		;;
+	'o')
+		dash
+		_sleep
+		dash
+		_sleep
+		dash
+		;;
+	'p')
+		dot
+		_sleep
+		dash
+		_sleep
+		dash
+		_sleep
+		dot
+		;;
+	'q')
+		dash
+		_sleep
+		dash
+		_sleep
+		dot
+		_sleep
+		dash
+		;;
+	'r')
+		dot
+		_sleep
+		dash
+		_sleep
+		dot
+		;;
+	's')
+		dot
+		_sleep
+		dot
+		_sleep
+		dot
+		;;
+	't')
+		dash
+		;;
+	'u')
+		dot
+		_sleep
+		dot
+		_sleep
+		dash
+		;;
+	'v')
+		dot
+		_sleep
+		dot
+		_sleep
+		dot
+		_sleep
+		dash
+		;;
+	'w')
+		dot
+		_sleep
+		dash
+		_sleep
+		dash
+		;;
+	'x')
+		dash
+		_sleep
+		dot
+		_sleep
+		dot
+		_sleep
+		dash
+		;;
+	'y')
+		dash
+		_sleep
+		dot
+		_sleep
+		dash
+		_sleep
+		dash
+		;;
+	'z')
+		dash
+		_sleep
+		dash
+		_sleep
+		dot
+		_sleep
+		dot
+		;;
+	' ')
+		# word gap 7 time units
+		_sleep
+		_sleep
+		_sleep
+		_sleep
+		;;
+	*) notify-send 'morse' "invalid character '$c'" ;;
+	esac
+	# letter gap 3 time units
+	_sleep
+	_sleep
+	_sleep
+done

@@ -1,5 +1,5 @@
 #!/bin/sh
-set -e
+set -eu
 
 json="$(makoctl list -j | jq -r '.[0]')"
 [ "$json" = 'null' ] && exec makoctl restore

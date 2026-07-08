@@ -3,7 +3,7 @@ set -e
 
 pactl get-sink-mute soundboard_sink >/dev/null 2>&1 || {
 	pactl load-module module-null-sink sink_name=soundboard_sink
-	pactl load-module module-loopback source=soundboard_sink.monitor sink=@DEFAULT_SOURCE@
+	pactl load-module module-loopback source=soundboard_sink.monitor sink=@default_source@
 
 	pactl load-module module-null-sink sink_name=mixed_mic_sink
 	pactl load-module module-remap-source master=mixed_mic_sink.monitor source_name=mixed_mic

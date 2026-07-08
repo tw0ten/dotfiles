@@ -1,5 +1,5 @@
 #!/bin/sh
-set -e
-i="$(dmenu -p 'name-workspace ' -l 0)"
+set -eu
+i="${1:-$(dmenu -p 'name-workspace ' -l 0)}"
 [ "$i" = '' ] && exec niri msg action unset-workspace-name
 niri msg action set-workspace-name "$i"

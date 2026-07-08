@@ -1,4 +1,5 @@
 #!/bin/sh
+set -eu
 for i in $(niri msg -j windows | jq '.[].id'); do
 	niri msg action move-window-to-tiling --id "$i"
 done

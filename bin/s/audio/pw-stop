@@ -1,3 +1,2 @@
 #!/bin/sh
-set -e
-pkill -x 'pw-play' # --target=soundboard_sink
+exec pkill -x 'pw-play' # --target=soundboard_sink

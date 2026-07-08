@@ -1,4 +1,4 @@
 #!/bin/sh
 set -eu
-i="$(dmenu -p 'chatgpt.com ' -l 0)"
+i="${1:-$(dmenu -p 'chatgpt.com ' -l 0)}"
 exec "$BROWSER" --new-window "https://chatgpt.com/?q=$i"

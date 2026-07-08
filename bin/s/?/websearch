@@ -1,4 +1,4 @@
 #!/bin/sh
 set -eu
-i="$(dmenu -p "$BROWSER " -l 0)"
+i="${1:-$(dmenu -p "$BROWSER " -l 0)}"
 exec "$BROWSER" --search "$i"

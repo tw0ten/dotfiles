@@ -17,10 +17,6 @@ arrowscrollbox {
 }
 
 
-#navigator-toolbox {
-	order: 1 !important;
-}
-
 .searchmode-switcher {
 	display: none !important;
 }

@@ -58,11 +58,11 @@ include "env.kdl"
 workspace "co"
 workspace "wa"
 
-output "eDP-1" {
+output "edp-1" {
 	focus-at-startup
 }
 
-output "HDMI-A-1" {
+output "hdmi-a-1" {
 	scale 2
 	position x=1920 y=0
 

@@ -6,8 +6,7 @@ cd .io
 i="$(head -n1 i)"
 echo "$i"
 
-rsync -rz --delete -- "$i:maildir/new/" o ||
-	exec notify-send 'mail' 'pull failed'
+rsync -rz --delete -- "$i:maildir/new/" o
 
 set +e
 

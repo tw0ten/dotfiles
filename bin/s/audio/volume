@@ -1,5 +1,5 @@
 #!/bin/sh
-set -e
+set -eu
 
 i="${1:-$(printf " \n%s\n%s\n%s" '0.05-' "$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | sed 's/.*: //')" '0.05+' | dmenu -p "volume " -l 4 -a 2)}"
 

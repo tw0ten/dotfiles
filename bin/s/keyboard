@@ -1,5 +1,5 @@
 #!/bin/sh
-set -e
+set -eu
 
 i="${1:-$(niri msg -j keyboard-layouts | jq -r '.names[]' | dmenu -p 'keyboard ' -format i -a "$(niri msg -j keyboard-layouts | jq -r '.current_idx')" -l 4)}"
 niri msg action switch-layout "$i"
