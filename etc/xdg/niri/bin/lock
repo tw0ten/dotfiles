@@ -2,7 +2,7 @@
 set -eu
 lock='hyprlock'
 
-pkill -0 "^${lock}$" && exit
+pidof "$lock" && exit
 
 mute="$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -q ' \[MUTED\]$' && echo true || echo false)"
 keyboard="$(niri msg -j keyboard-layouts | jq '.current_idx')"

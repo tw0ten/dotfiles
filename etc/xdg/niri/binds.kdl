@@ -15,7 +15,7 @@ binds {
 	mod+shift+slash { show-hotkey-overlay; }
 
 
-	mod+shift+q allow-inhibiting=false hotkey-overlay-title="lock" { spawn "~/.config/niri/bin/lock"; }
+	mod+shift+q allow-inhibiting=false hotkey-overlay-title="lock" { spawn "loginctl" "lock-session"; }
 
 	mod+return { spawn "terminal"; }
 	mod+shift+return { spawn "open" "."; }
