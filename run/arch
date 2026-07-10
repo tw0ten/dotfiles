@@ -29,9 +29,6 @@
 (
 	set -x
 
-	systemctl --user enable \
-		'brightness'.timer
-
 	ln -vsfT "$PWD/share/icons/" "$HOME/.local/share/icons/custom"
 
 	[ "$(id -u)" = 0 ]
