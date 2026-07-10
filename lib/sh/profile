@@ -30,7 +30,7 @@ export SUDO_PROMPT="%U$bold$accent@$normal%H %p$bold$accent#$normal"
 
 export \
 	HISTSIZE='' \
-	HISTFILESIZE='' \
+	HISTFILESIZE=$((32768 * 2)) \
 	HISTFILE="$HOME/.local/share/history.sh" \
 	HISTTIMEFORMAT='%c ' \
 	HISTCONTROL='ignoredups' \
