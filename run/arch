@@ -47,7 +47,4 @@
 	systemctl enable \
 		sshd \
 		qbittorrent-nox
-
-	cp -rTL etc/root/grub/theme /boot/grub/themes/default
-	grub-mkconfig -o /boot/grub/grub.cfg
 )

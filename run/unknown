@@ -45,7 +45,6 @@ set -e
 		i postfix/ /etc/postfix
 
 		i pacman.conf /etc/pacman.conf
-		i grub/default /etc/default/grub
 
 		i locale /usr/share/i18n/locales/custom
 	)
