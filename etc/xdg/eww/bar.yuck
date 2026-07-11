@@ -102,7 +102,7 @@
 		(label :text "${status-time.date}/")
 		(fraction :value {(status-time.sec + status-time.nano / 1000000000) / 60})))
 	(button
-	 :onclick "\"$TERMINAL\" -e sh -c 'fastfetch; read -n1' &"
+	 :onclick "niri msg action show-hotkey-overlay"
 	 :class "background userathost" "${userathost}")))
 
 

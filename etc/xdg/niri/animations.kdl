@@ -1,3 +1,22 @@
 animations {
 	slowdown 1.0
+
+
+	workspace-switch {
+		spring damping-ratio=1.0 stiffness=500 epsilon=0.0001
+	}
+
+	horizontal-view-movement {
+		spring damping-ratio=1.0 stiffness=500 epsilon=0.0001
+	}
+
+
+	overview-open-close {
+		spring damping-ratio=1.0 stiffness=1000 epsilon=0.0001
+	}
+
+
+	recent-windows-close {
+		duration-ms 0
+	}
 }
