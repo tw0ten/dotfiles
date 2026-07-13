@@ -7,5 +7,6 @@ niri msg action switch-layout "$i"
 case "$(niri msg -j keyboard-layouts | jq -r '.names[.current_idx]')" in
 'Chinese') fcitx5-remote -s 'pinyin' ;;
 'Japanese') fcitx5-remote -s 'mozc' ;;
+'Korean') fcitx5-remote -s 'hangul' ;;
 *) fcitx5-remote -s 'keyboard-us' ;;
 esac
