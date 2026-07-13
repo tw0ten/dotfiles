@@ -6,6 +6,7 @@ cd .io
 i="$(head -n1 i)"
 echo "$i"
 
+# todo: sftp?
 rsync -rz --delete -- "$i:maildir/new/" o
 
 set +e
