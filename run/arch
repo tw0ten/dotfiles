@@ -16,11 +16,10 @@
 
 	i neovim lf \
 		openssh qbittorrent-nox ufw \
-		btop fastfetch ripgrep ly nix tmux ffmpeg
-	i niri firefox alacritty \
+		ly nix \
+		btop fastfetch tmux
+	i niri alacritty firefox \
 		mako awww eww rofi \
-		fcitx5 easyeffects \
-		mpv libreoffice-fresh gimp obs-studio \
 		noto-fonts noto-fonts-emoji noto-fonts-cjk
 
 	true
