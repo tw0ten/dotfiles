@@ -1,14 +1,14 @@
 #!/bin/sh
 set -eu
 volume="${1:-1.0}"
-target="${2:-default_sink}"
+target="${2:-@default_audio_sink@}"
 
 cd "$DOTFILES/share/snd/morse"
 
 mkdir -p o
 [ -e 'o/sleep' ] || ffmpeg -f lavfi -i "sine=frequency=0:duration=0.05" -f wav -y -- 'o/sleep'
-[ -e 'o/dot' ] || ffmpeg -f lavfi -i "sine=frequency=1000:duration=0.05" -f wav -y -- 'o/dot'
-[ -e 'o/dash' ] || ffmpeg -f lavfi -i "sine=frequency=1000:duration=0.15" -f wav -y -- 'o/dash'
+[ -e 'o/dot' ] || ffmpeg -f lavfi -i "sine=frequency=600:duration=0.05" -f wav -y -- 'o/dot'
+[ -e 'o/dash' ] || ffmpeg -f lavfi -i "sine=frequency=600:duration=0.15" -f wav -y -- 'o/dash'
 
 i="$(cat | fold -w1)"
 
