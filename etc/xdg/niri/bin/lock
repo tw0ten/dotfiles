@@ -10,7 +10,6 @@ keyboard="$(niri msg -j keyboard-layouts | jq '.current_idx')"
 wpctl set-mute @DEFAULT_AUDIO_SINK@ 1
 niri msg action switch-layout 0
 
-"$XDG_CONFIG_HOME/niri/bin/bg" &
 "$lock" || true
 
 "$mute" || wpctl set-mute @DEFAULT_AUDIO_SINK@ 0

@@ -11,4 +11,4 @@ pactl get-sink-mute soundboard_sink >/dev/null 2>&1 || {
 	pactl load-module module-loopback source=soundboard_sink.monitor sink=mixed_mic_sink
 }
 
-exec pw-play --volume 0.5 --target=soundboard_sink -- "$@"
+exec pw-play --target=soundboard_sink --volume 0.5 "$@"

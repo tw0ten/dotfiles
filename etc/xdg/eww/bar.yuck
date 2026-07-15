@@ -77,7 +77,8 @@
 		(row
 		 (label :text "${status-battery.status == "Not charging" ? "=" : status-battery.status == "Charging" ? "+" : "-"}")
 		 (fraction :value {status-battery.now / status-battery.full})))
-	 (box
+	 (button
+		:onclick "smenu ping &"
 		(row
 		 (label :text "n")
 		 (fraction :value {status-network / 100 + 1})))
