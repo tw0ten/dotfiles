@@ -42,7 +42,6 @@ set -e
 		i sudoers.d/ /etc/sudoers.d
 		i sysctl.d/ /etc/sysctl.d
 		i ly/ /etc/ly
-		i postfix/ /etc/postfix
 
 		i pacman.conf /etc/pacman.conf
 
