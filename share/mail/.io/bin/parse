@@ -14,12 +14,12 @@ i = BytesParser(policy=policy.default).parse(open(source, "rb"))
 
 
 def write(i, v):
-    open(f"{target}/{i}", "w").write(v)
+    open(f"{target}/{i}", "w").write(v or "")
 
 
-write("#subject", i["subject"])
-write("-from", i["from"])
-write("-to", i["to"])
+write("#subject", f"{i["subject"] or "no subject"}")
+write("-from", f"{i["from"]}")
+write("-to", f"{i["to"] or i["X-Original-To"]}")
 write(".m/date", f"{int(parsedate_to_datetime(i["date"]).timestamp())}")
 
 path = f"{target}/attachments"

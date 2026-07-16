@@ -84,8 +84,8 @@ alias \
 	;
 
 PS1="$(
-	b="\[$bold\]"
-	r="\[$normal\]"
+	b="\[$(tput bold)\]"
+	r="\[$(tput sgr0)\]"
 	c="\[$accent\]"
 	i() { PS1="$*"; }
 	i
@@ -102,7 +102,7 @@ PS1="$(
 	echo "$r$PS1$r"
 )"
 
-minifetch() { echo "$(tty):$accent$SHLVL$normal '$-'" | fastfetch -C mini "$@"; }
+minifetch() { echo "$(tty):$accent$SHLVL$(tput sgr0) '$-'" | fastfetch -C mini "$@"; }
 minifetch ''
 
 [[ -f ~/.config/bashrc ]] && . ~/.config/bashrc

@@ -49,6 +49,6 @@ set -e
 	)
 ) || true
 
-[ "$PLATFORM" = 'unknown' ] || . "run/$PLATFORM"
+[ -e "run/$PLATFORM" ] && . "run/$PLATFORM"
 
 git init

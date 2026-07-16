@@ -1,0 +1,13 @@
+#!/bin/sh
+PLATFORM="$(
+	. /etc/os-release
+	echo "$ID"
+)"
+
+accent="$(case "$PLATFORM" in
+	'nixos') tput setaf 4 ;;
+	'arch') tput setaf 6 ;;
+	*) tput setaf 5 ;;
+	esac)"
+
+export PLATFORM accent

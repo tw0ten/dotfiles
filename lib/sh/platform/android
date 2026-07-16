@@ -1,2 +1,0 @@
-#!/bin/sh
-export accent="$(tput setaf 2)"
