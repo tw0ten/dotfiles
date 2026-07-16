@@ -15,23 +15,23 @@
 			"format": ""
 		},
 		{
-			"type": "os",
 			"key": "os",
+			"type": "os",
 			"format": "{name}"
 		},
 		{
-			"type": "kernel",
 			"key": "kernel",
+			"type": "kernel",
 			"format": "{release}"
 		},
 		{
-			"type": "shell",
 			"key": "shell",
-			"format": "{exe-path}"
+			"type": "shell",
+			"format": "{pretty-name}"
 		},
 		{
-			"type": "command",
 			"key": " ",
+			"type": "command",
 			"text": "cat"
 		}
 	]
