@@ -1,16 +1,15 @@
 fi	' '
 ex	'*'
 di	'/'
-
 ln	'@'
 or	'@'
+so	'='
+pi	'|'
 
 tw	'tw'
 ow	'ow'
 st	'st'
 
-pi	'pi'
-so	'so'
 bd	'bd'
 cd	'cd'
 su	'su'
