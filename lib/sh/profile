@@ -8,6 +8,9 @@ export XDG_CONFIG_HOME="$HOME/.config"
 . "$DOTFILES/lib/sh/platform"
 
 eval "$(dircolors)"
+LS_COLORS_0="$LS_COLORS"
+eval "$(dircolors "$DOTFILES/etc/home/dircolors")"
+export LS_COLORS="$LS_COLORS_0$LS_COLORS"
 
 normal="$(tput sgr0)"
 bold="$(tput bold)"
