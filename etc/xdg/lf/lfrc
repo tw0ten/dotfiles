@@ -34,6 +34,7 @@ map u su
 
 map ~ cd
 
+map <backspace> delete
 map <backspace2> delete
 map c unselect
 map C clear

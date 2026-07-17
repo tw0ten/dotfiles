@@ -17,12 +17,12 @@
 		{
 			"key": "os",
 			"type": "os",
-			"format": "{name}"
+			"format": "{id}"
 		},
 		{
 			"key": "kernel",
 			"type": "kernel",
-			"format": "{release}"
+			"format": "{sysname}"
 		},
 		{
 			"key": "shell",
