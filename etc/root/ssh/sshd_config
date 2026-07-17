@@ -1,6 +1,8 @@
 Include /etc/ssh/sshd_config.d/*.conf
 
 PasswordAuthentication no
+KbdInteractiveAuthentication no
+PubkeyAuthentication yes
 
 PrintMotd yes
 Banner /etc/ssh/banner
